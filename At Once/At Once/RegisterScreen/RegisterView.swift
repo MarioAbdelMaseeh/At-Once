@@ -25,17 +25,7 @@ struct RegisterView: View {
     var body: some View {
         ScrollView{
             VStack(alignment: .leading, spacing: 16){
-                HStack(){
-                    Button(action: {
-                        
-                    }) {
-                        Image(systemName: "chevron.backward").foregroundStyle(Color.black)
-                    }
-                    Spacer()
-                    Text("Register New Account").font(.title2)
-                    Spacer()
-                }
-                Spacer().frame(height: 8)
+                
                 TextFieldComponent(title: "Username", text: $username)
                 TextFieldComponent(title: "PharacyName", text: $pharmacyName)
                 PasswordFieldComponent(title: "Password",isPasswordVisible: $isPasswordVisible, password: $password)
@@ -51,7 +41,8 @@ struct RegisterView: View {
                     
                 }
             }.padding()
-        }
+        }.navigationTitle("Register New Account")
+            .navigationBarTitleDisplayMode(.inline)
     }
 }
 

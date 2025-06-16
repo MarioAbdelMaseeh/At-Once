@@ -15,60 +15,64 @@ struct LoginView: View {
     let buttonLabel = "Login"
 
     var body: some View {
-        VStack/*(spacing: 20)*/ {
-            //Spacer(minLength: 10)
+        NavigationStack {
+            VStack/*(spacing: 20)*/ {
+                //Spacer(minLength: 10)
 
-            // Circle logo
-            Image(.icon)
-                .resizable()
-                .frame(width: 120,height: 120,alignment: .center)
-                .shadow(color: .green, radius: 10)
-                .clipShape(.circle)
-//                .padding(.top,40)
+                // Circle logo
+                Image(.icon)
+                    .resizable()
+                    .frame(width: 120,height: 120,alignment: .center)
+                    .shadow(color: .green, radius: 10)
+                    .clipShape(.circle)
+    //                .padding(.top,40)
 
-            VStack(spacing: 4) {
-                Text("Welcome to")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                Text("At Once Pharma")
-                    .font(.title2)
-                    .fontWeight(.bold)
-            }.padding(.bottom,32)
+                VStack(spacing: 4) {
+                    Text("Welcome to")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                    Text("At Once Pharma")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                }.padding(.bottom,32)
 
-            // Email Field
-            TextFieldComponent(title: "Email", text: $email).padding(.bottom, 16)
-            
-            // Password Field
-            PasswordFieldComponent(title: "Password",isPasswordVisible: $isPasswordVisible, password: $password)
+                // Email Field
+                TextFieldComponent(title: "Email", text: $email).padding(.bottom, 16)
+                
+                // Password Field
+                PasswordFieldComponent(title: "Password",isPasswordVisible: $isPasswordVisible, password: $password)
 
-            // Forgot password
-            HStack {
-                Spacer()
-                Button("Forgot Password ?") {
-                    // action
-                }
-                .foregroundColor(.primaryTeal)
-                .font(.footnote)
-            }.padding(.bottom, 32)
+                // Forgot password
+                HStack {
+                    Spacer()
+                    Button("Forgot Password ?") {
+                        // action
+                    }
+                    .foregroundColor(.primaryTeal)
+                    .font(.footnote)
+                }.padding(.bottom, 32)
 
-            
-            LargeButtonComponent(label: buttonLabel){
-                //login action
-            }
-
-            Spacer().frame(height: 80)
-
-            HStack(spacing: 4) {
-                Text("Don’t have an account yet ?")
-                Button("Register here") {
+                
+                LargeButtonComponent(label: buttonLabel){
                     
                 }
-                .foregroundColor(.primaryTeal)
-                .fontWeight(.semibold)
+
+                Spacer().frame(height: 80)
+
+                HStack(spacing: 4) {
+                    Text("Don’t have an account yet ?")
+                
+                    NavigationLink(destination: RegisterView()) {
+                        Text("Register here")
+                            .foregroundColor(.primaryTeal)
+                            .fontWeight(.semibold)
+                    }
+                }
+                .font(.footnote)
             }
-            .font(.footnote)
+            .padding()
         }
-        .padding()
+        
     }
 }
 
