@@ -39,7 +39,7 @@ struct LoginView: View {
             TextFieldComponent(title: "Email", text: $email).padding(.bottom, 16)
             
             // Password Field
-            PasswordFieldComponent(isPasswordVisible: $isPasswordVisible, password: $password)
+            PasswordFieldComponent(title: "Password",isPasswordVisible: $isPasswordVisible, password: $password)
 
             // Forgot password
             HStack {
