@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct PasswordFieldComponent: View {
+    var title: String
     @Binding var isPasswordVisible: Bool
     @Binding var password: String
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Password")
+            Text(title)
                 .fontWeight(.semibold)
             
             HStack {
@@ -37,6 +38,6 @@ struct PasswordFieldComponent: View {
 }
 
 #Preview {
-    PasswordFieldComponent(isPasswordVisible:.constant(false), password: .constant(""))
+    PasswordFieldComponent(title: "Password",isPasswordVisible:.constant(false), password: .constant(""))
 }
 
