@@ -19,12 +19,11 @@ struct HorizontalCollectionView: View {
                         
                     } label: {
                         Image(.icon).resizable()
-                            .frame(width: 350, height: 150)
+                            .frame(width: 360, height: 150)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                 }
             }
-            .padding()
         }
     }
 }

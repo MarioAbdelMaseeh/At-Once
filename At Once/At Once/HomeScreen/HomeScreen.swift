@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct HomeScreen: View {
+    let items = Array(1...10)
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading){
+                VStack(alignment: .leading, spacing: 8){
                     HStack{
                         Button {
                             
@@ -49,7 +50,13 @@ struct HomeScreen: View {
                         .background(Color(.systemGray6))
                         .cornerRadius(6)
                     })
-                    
+                    Spacer().frame(height: 4)
+                    VStack(spacing: 16){
+                        ForEach(items,id: \.self){
+                            item in
+                            StoreCell()
+                        }
+                    }
                     Spacer()
                 }.padding()
             }
