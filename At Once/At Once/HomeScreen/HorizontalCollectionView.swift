@@ -22,8 +22,6 @@ struct HorizontalCollectionView: View {
                             .frame(width: 350, height: 150)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
-
-                    
                 }
             }
             .padding()
