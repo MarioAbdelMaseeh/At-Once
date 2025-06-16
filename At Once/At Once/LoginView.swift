@@ -12,21 +12,29 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var isPasswordVisible = false
+    let buttonLabel = "Login"
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack/*(spacing: 20)*/ {
             Spacer(minLength: 50)
 
             // Circle logo
-            Circle()
-                .fill(Color.teal)
-                .frame(width: 120, height: 120)
+            Image(.icon)
+                .resizable()
+                .frame(width: 120,height: 120,alignment: .center)
+                .shadow(color: .green, radius: 10)
+                .clipShape(.circle)
+//                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+            
+//            Circle()
+//                .fill(Color.teal)
+//                .frame(width: 120, height: 120)
 
             // Title
             VStack(spacing: 4) {
                 Text("Welcome to")
                     .font(.title2)
-                    .fontWeight(.medium)
+                    .fontWeight(.bold)
                 Text("At Once Pharma")
                     .font(.title2)
                     .fontWeight(.bold)
@@ -44,21 +52,13 @@ struct LoginView: View {
                 Button("Forgot Password ?") {
                     // action
                 }
-                .foregroundColor(.teal)
+                .foregroundColor(.primaryTeal)
                 .font(.footnote)
             }
 
             
-            Button(action: {
-               
-            }) {
-                Text("Login")
-                    .foregroundColor(.white)
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.teal)
-                    .cornerRadius(10)
+            LargeButtonComponent(label: buttonLabel){
+                //login action
             }
 
             Spacer()
@@ -68,7 +68,7 @@ struct LoginView: View {
                 Button("Register here") {
                     
                 }
-                .foregroundColor(.teal)
+                .foregroundColor(.primaryTeal)
                 .fontWeight(.semibold)
             }
             .font(.footnote)

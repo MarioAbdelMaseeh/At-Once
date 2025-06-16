@@ -16,7 +16,7 @@ struct TextFieldComponent: View {
                 .fontWeight(.semibold)
             TextField(title, text: $text)
                 .padding()
-                .background(Color(UIColor.systemGray6))
+                .background(Color.lightGray)
                 .cornerRadius(10)
         }
     }

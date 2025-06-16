@@ -30,7 +30,7 @@ struct PasswordFieldComponent: View {
                 }
             }
             .padding()
-            .background(Color(UIColor.systemGray6))
+            .background(Color.lightGray)
             .cornerRadius(10)
         }
     }
