@@ -26,11 +26,16 @@ struct RegisterView: View {
         ScrollView{
             VStack(alignment: .leading, spacing: 16){
                 HStack(){
-                    Image(systemName: "chevron.backward")
-                    Text("Register New Account")
+                    Button(action: {
+                        
+                    }) {
+                        Image(systemName: "chevron.backward").foregroundStyle(Color.black)
+                    }
+                    Spacer()
+                    Text("Register New Account").font(.title2)
                     Spacer()
                 }
-                Spacer().frame(height: 16)
+                Spacer().frame(height: 8)
                 TextFieldComponent(title: "Username", text: $username)
                 TextFieldComponent(title: "PharacyName", text: $pharmacyName)
                 PasswordFieldComponent(title: "Password",isPasswordVisible: $isPasswordVisible, password: $password)
@@ -41,6 +46,10 @@ struct RegisterView: View {
                 DropDownComponent(title: "Area", selectedOption: $selectedArea, options: areas)
                 TextFieldComponent(title: "Address Details", text: $addressDetails)
                 QRCodeComponent(title: "Invitation Code", qrCode: $qrCode)
+                Spacer().frame(height: 16)
+                LargeButtonComponent(label: "Register") {
+                    
+                }
             }.padding()
         }
     }
