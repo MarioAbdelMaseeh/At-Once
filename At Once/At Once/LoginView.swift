@@ -16,7 +16,7 @@ struct LoginView: View {
 
     var body: some View {
         VStack/*(spacing: 20)*/ {
-            Spacer(minLength: 50)
+            //Spacer(minLength: 10)
 
             // Circle logo
             Image(.icon)
@@ -24,13 +24,8 @@ struct LoginView: View {
                 .frame(width: 120,height: 120,alignment: .center)
                 .shadow(color: .green, radius: 10)
                 .clipShape(.circle)
-//                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-            
-//            Circle()
-//                .fill(Color.teal)
-//                .frame(width: 120, height: 120)
+//                .padding(.top,40)
 
-            // Title
             VStack(spacing: 4) {
                 Text("Welcome to")
                     .font(.title2)
@@ -38,10 +33,10 @@ struct LoginView: View {
                 Text("At Once Pharma")
                     .font(.title2)
                     .fontWeight(.bold)
-            }
+            }.padding(.bottom,32)
 
             // Email Field
-            TextFieldComponent(title: "Email", text: $email)
+            TextFieldComponent(title: "Email", text: $email).padding(.bottom, 16)
             
             // Password Field
             PasswordFieldComponent(isPasswordVisible: $isPasswordVisible, password: $password)
@@ -54,14 +49,14 @@ struct LoginView: View {
                 }
                 .foregroundColor(.primaryTeal)
                 .font(.footnote)
-            }
+            }.padding(.bottom, 32)
 
             
             LargeButtonComponent(label: buttonLabel){
                 //login action
             }
 
-            Spacer()
+            Spacer().frame(height: 80)
 
             HStack(spacing: 4) {
                 Text("Don’t have an account yet ?")
