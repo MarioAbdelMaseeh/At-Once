@@ -31,7 +31,7 @@ struct MainTabView: View {
             RegisterView()
                 .tabItem {
                     Image(systemName: "list.bullet.rectangle.portrait")
-                    Text("Cart")
+                    Text("Orders")
                 }
         }
     }
