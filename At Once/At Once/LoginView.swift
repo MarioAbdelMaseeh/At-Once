@@ -23,7 +23,7 @@ struct LoginView: View {
                 Image(.icon)
                     .resizable()
                     .frame(width: 120,height: 120,alignment: .center)
-                    .shadow(color: .green, radius: 10)
+                   // .shadow(color: .green, radius: 10)
                     .clipShape(.circle)
     //                .padding(.top,40)
 
@@ -45,11 +45,12 @@ struct LoginView: View {
                 // Forgot password
                 HStack {
                     Spacer()
-                    Button("Forgot Password ?") {
+                    Button("Forget Password ?") {
                         // action
                     }
                     .foregroundColor(.primaryTeal)
-                    .font(.footnote)
+                    .bold()
+                    .font(.callout)
                 }.padding(.bottom, 32)
 
                 
@@ -68,7 +69,18 @@ struct LoginView: View {
                             .fontWeight(.semibold)
                     }
                 }
-                .font(.footnote)
+                .font(.callout)
+                
+            
+                    
+                    
+                   
+                    
+                    
+                    
+                    
+                    
+                
             }
             .padding()
         }
