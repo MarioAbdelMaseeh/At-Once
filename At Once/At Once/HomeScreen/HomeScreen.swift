@@ -50,7 +50,7 @@ struct HomeScreen: View {
                         .background(Color(.systemGray6))
                         .cornerRadius(6)
                     })
-                    Spacer().frame(height: 4)
+                  
                     VStack(spacing: 16){
                         ForEach(items,id: \.self){
                             item in
