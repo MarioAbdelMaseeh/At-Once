@@ -14,25 +14,15 @@ struct HomeScreen: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16){
                     HStack{
-                        Button {
+                        RoundedIconButton(iconName: "phone.fill") {
                             
-                        } label: {
-                            Image(systemName: "phone.fill").resizable()
-                                .frame(width: 20,height: 20)
-                                .tint(.black)
-                                .background(Circle().frame(width: 50,height: 50).tint(Color(.systemGray6)))
-                        }.padding(.leading,8)
+                        }
                         Spacer()
                         Text("Home").font(.title)
                         Spacer()
-                        Button {
+                        RoundedIconButton(iconName: "person.fill", action: {
                             
-                        } label: {
-                            Image(systemName: "person.fill").resizable()
-                                .frame(width: 20,height: 20)
-                                .tint(.black)
-                                .background(Circle().frame(width: 50,height: 50).tint(Color(.systemGray6)))
-                        }.padding(.trailing,8)
+                        }).padding(.trailing,8)
                     }
                     
                     HorizontalCollectionView()

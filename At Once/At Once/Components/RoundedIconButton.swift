@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct RoundedIconButton: View {
+
+    var iconName: String
+    var action: ()->Void
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            action()
+        } label: {
+            Image(systemName: iconName).resizable()
+                .frame(width: 20,height: 20)
+                .tint(.primary)
+                .background(Circle().frame(width: 50,height: 50).tint(Color(.systemGray5)))
+        }.padding(.leading,8)
+
     }
 }
 
 #Preview {
-    RoundedIconButton()
+    RoundedIconButton(iconName: "phone.fill"){
+        
+    }
+
 }

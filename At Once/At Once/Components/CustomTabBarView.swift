@@ -1,3 +1,13 @@
+
+
+//
+//  CustomTabBarView.swift
+//  At Once
+//
+//  Created by mac on 17/06/2025.
+//
+import SwiftUI
+
 struct CustomTabBarView: View {
     @Binding var selectedTab: Tab
 
@@ -6,7 +16,8 @@ struct CustomTabBarView: View {
             tabItem(icon: "house.fill", tab: .home, color: .orange)
             tabItem(icon: "basket.fill", tab: .cart)
             tabItem(icon: "person.fill", tab: .profile)
-            tabItem(icon: "bell.fill", tab: .notifications, showBadge: true, badgeCount: 4)
+            tabItem(icon: "bell.fill", tab: .notifications)
+
         }
         .padding()
         .background(
