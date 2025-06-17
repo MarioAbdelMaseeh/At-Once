@@ -39,7 +39,7 @@ struct StoreCell: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.secondarySystemBackground)) // better adaptive bg
+                .fill(Color(.customBackground)) 
         )
         .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
     }

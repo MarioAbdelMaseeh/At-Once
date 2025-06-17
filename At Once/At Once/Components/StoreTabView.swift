@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct Store: Identifiable {
-    let id = UUID()
-    let name: String
-    let orders: [String] // Or your own Order model
+    var id = UUID()
+    var name: String
+    var orders: [String]
 }
 
 struct StoreTabView: View {
@@ -19,8 +19,11 @@ struct StoreTabView: View {
     @Binding var selectedIndex: Int
 
     var body: some View {
+        let maxVisibleTabs = 3
+        let tabWidth = (UIScreen.main.bounds.width  - 32) / CGFloat(maxVisibleTabs)
+
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
+            HStack(spacing: 0) {
                 ForEach(stores.indices, id: \.self) { index in
                     Button(action: {
                         withAnimation {
@@ -31,13 +34,13 @@ struct StoreTabView: View {
                             Text(stores[index].name)
                                 .foregroundColor(selectedIndex == index ? .black : .gray)
                                 .fontWeight(.medium)
+                                .frame(maxWidth: .infinity)
 
                             Capsule()
                                 .fill(selectedIndex == index ? Color.teal : Color.clear)
                                 .frame(height: 3)
-                                .frame(maxWidth: .infinity)
                         }
-                        .padding(.horizontal)
+                        .frame(width: tabWidth)
                     }
                 }
             }

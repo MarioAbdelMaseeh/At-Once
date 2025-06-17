@@ -22,7 +22,7 @@ struct CustomTabBarView: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 30)
-                .fill(Color(.systemGray6))
+                .fill(Color(.customBackground))
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 4)
         )
         .padding(.horizontal, 16)

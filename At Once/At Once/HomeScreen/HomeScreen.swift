@@ -47,9 +47,9 @@ struct HomeScreen: View {
                             StoreCell()
                         }
                     }
-                    Spacer().frame(height: 40)
                 }.padding()
             }
+            Spacer().frame(height: 40)
         }
     }
 }
