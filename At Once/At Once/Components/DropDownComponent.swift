@@ -25,7 +25,7 @@ struct DropDownComponent: View {
             } label: {
                 HStack {
                     Text(selectedOption)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                     Spacer()
                     Image(systemName: "chevron.down")
                         .foregroundColor(.black)

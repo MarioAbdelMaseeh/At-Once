@@ -31,7 +31,7 @@ struct PasswordFieldComponent: View {
                 }
             }
             .padding()
-            .background(Color.lightGray)
+            .background(Color(.systemGray6))
             .cornerRadius(10)
         }
     }
