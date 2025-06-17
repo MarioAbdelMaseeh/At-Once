@@ -25,7 +25,7 @@ struct CustomTabBarView: View {
                 .fill(Color(.systemGray6))
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 4)
         )
-        .padding(.horizontal, 24)
+        .padding(.horizontal, 16)
     }
 
     @ViewBuilder
