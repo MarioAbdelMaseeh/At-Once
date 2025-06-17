@@ -9,6 +9,8 @@ import SwiftUI
 
 struct StoreView: View {
     
+    @State private var searchText: String = ""
+    
     let columns = [
             GridItem(.flexible()),
             GridItem(.flexible())
@@ -17,6 +19,12 @@ struct StoreView: View {
     var body: some View {
         
         VStack{
+            
+            SearchBarComponents(searchText: $searchText) .padding(.horizontal, 16)
+                .padding(.top, 16)
+                .padding(.bottom, 8)
+            
+            
             ScrollView {
                 
                 LazyVGrid(columns: columns, spacing: 16) {
@@ -27,21 +35,6 @@ struct StoreView: View {
                 .padding()
             }
             
-            VStack(spacing: 6) {
-                            Text("Add 700 EGP to Complete the minimum")
-                                .foregroundColor(.red)
-                                .font(.footnote)
-
-                            HStack {
-                                Text("Total: 0.0 EGP")
-                                Spacer()
-                                Text("minimum: 700 EGP")
-                            }
-                            .font(.footnote)
-                            .padding(.horizontal)
-                        }
-                        .padding(.vertical, 8)
-                        .background(Color(.systemGray6))
         }
         .background(Color.white.edgesIgnoringSafeArea(.all))
         
