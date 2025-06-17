@@ -1,0 +1,27 @@
+//
+//  TextFieldComponent.swift
+//  At Once
+//
+//  Created by mac on 16/06/2025.
+//
+
+import SwiftUI
+
+struct TextFieldComponent: View {
+    var title: String
+    @Binding var text: String
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8 ){
+            Text(title)
+                .fontWeight(.semibold)
+            TextField(title, text: $text)
+                .padding()
+                .background(Color.lightGray)
+                .cornerRadius(10)
+        }
+    }
+}
+
+#Preview {
+    TextFieldComponent(title: "Email", text: .constant("Mario"))
+}
