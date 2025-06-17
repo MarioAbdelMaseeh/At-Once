@@ -13,7 +13,7 @@ struct CustomTabBarView: View {
 
     var body: some View {
         HStack(spacing: 40) {
-            tabItem(icon: "house.fill", tab: .home, color: .orange)
+            tabItem(icon: "house.fill", tab: .home)
             tabItem(icon: "basket.fill", tab: .cart)
             tabItem(icon: "person.fill", tab: .profile)
             tabItem(icon: "bell.fill", tab: .notifications)
@@ -29,7 +29,7 @@ struct CustomTabBarView: View {
     }
 
     @ViewBuilder
-    func tabItem(icon: String, tab: Tab, color: Color = .gray, showBadge: Bool = false, badgeCount: Int = 0) -> some View {
+    func tabItem(icon: String, tab: Tab, color: Color = .primaryTeal, showBadge: Bool = false, badgeCount: Int = 0) -> some View {
         VStack(spacing: 4) {
             ZStack(alignment: .topTrailing) {
                 Image(systemName: icon)
@@ -37,15 +37,6 @@ struct CustomTabBarView: View {
                     .scaledToFit()
                     .frame(height: 24)
                     .foregroundColor(selectedTab == tab ? color : .gray)
-
-                if showBadge && badgeCount > 0 {
-                    Text("\(badgeCount)")
-                        .font(.caption2)
-                        .foregroundColor(.white)
-                        .padding(5)
-                        .background(Circle().fill(Color.yellow))
-                        .offset(x: 12, y: -10)
-                }
             }
 
             Rectangle()
