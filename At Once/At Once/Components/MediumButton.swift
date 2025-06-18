@@ -10,19 +10,18 @@ import SwiftUI
 struct MediumButton: View {
     let buttonLabel: String
     let buttonIcon: String
+    let action: () -> Void
     
     var body: some View {
         
         Button(action: {
-          
+            action()
         }) {
             
             HStack(alignment: .center) {
                 Text(buttonLabel)
                     .font(.footnote)
                     .foregroundColor(.white)
-                
-                                      
                     //.padding(.horizontal)
                 Image(systemName: buttonIcon)
                     .foregroundColor(.white)
@@ -42,5 +41,5 @@ struct MediumButton: View {
 }
 
 #Preview {
-    MediumButton(buttonLabel: "Add to cart", buttonIcon: "cart")
+    MediumButton(buttonLabel: "Add to cart", buttonIcon: "cart", action: { })
 }

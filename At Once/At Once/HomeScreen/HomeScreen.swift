@@ -47,8 +47,8 @@ struct HomeScreen: View {
                         }
                         .padding(.horizontal)
                         .frame(height: 50)
-                        .background(Color(.systemGray6))
-                        .cornerRadius(6)
+                        .background(Color.lightGray)
+                        .cornerRadius(12)
                     })
                     Spacer().frame(height: 4)
                     VStack(spacing: 16){

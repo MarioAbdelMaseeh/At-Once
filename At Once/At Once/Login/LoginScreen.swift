@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct LoginScreen: View {
     @State private var email = ""
     @State private var password = ""
     @State private var isPasswordVisible = false
@@ -19,7 +19,7 @@ struct LoginView: View {
             VStack/*(spacing: 20)*/ {
                 //Spacer(minLength: 10)
 
-                // Circle logo
+                
                 Image(.icon)
                     .resizable()
                     .frame(width: 120,height: 120,alignment: .center)
@@ -36,13 +36,13 @@ struct LoginView: View {
                         .fontWeight(.bold)
                 }.padding(.bottom,32)
 
-                // Email Field
+              
                 TextFieldComponent(title: "Email", text: $email).padding(.bottom, 16)
                 
-                // Password Field
+               
                 PasswordFieldComponent(title: "Password",isPasswordVisible: $isPasswordVisible, password: $password)
 
-                // Forgot password
+               
                 HStack {
                     Spacer()
                     Button("Forget Password ?") {
@@ -89,5 +89,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    LoginScreen()
 }

@@ -40,10 +40,10 @@ struct ProductCard: View {
 
                 .padding(.top,4)
             
-            MediumButton(buttonLabel: "Add to Cart", buttonIcon: "cart").padding(.top)
+            MediumButton(buttonLabel: "Add to Cart", buttonIcon: "cart",action: {
+                
+            }).padding(.top)
             
-            
-              
             
             
             

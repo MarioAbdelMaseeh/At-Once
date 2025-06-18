@@ -17,7 +17,7 @@ struct MainTabView: View {
                     Text("Home")
                 }
 
-            LoginView()
+            LoginScreen()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("Search")
@@ -28,11 +28,14 @@ struct MainTabView: View {
                     Image(systemName: "cart.fill")
                     Text("Cart")
                 }
-            RegisterView()
+            NavigationStack {
+                OrdersScreen()
+            }
                 .tabItem {
                     Image(systemName: "list.bullet.rectangle.portrait")
                     Text("Orders")
                 }
+                
         }
     }
 }

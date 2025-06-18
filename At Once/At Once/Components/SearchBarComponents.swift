@@ -15,12 +15,13 @@ struct SearchBarComponents: View {
                 .foregroundColor(.gray)
             
             TextField("Search...", text: $searchText)
+                .frame(height: 50)
                 .textFieldStyle(PlainTextFieldStyle())
                 .padding(8)
         }
         .padding(.horizontal)
-        .background(Color(.systemGray6))
-        .cornerRadius(6)
+        .background(Color.lightGray)
+        .cornerRadius(12)
     }
 }
 
