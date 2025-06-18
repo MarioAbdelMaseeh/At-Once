@@ -44,7 +44,11 @@ struct HomeScreen: View {
                     VStack(spacing: 16){
                         ForEach(items,id: \.self){
                             item in
-                            StoreCell()
+                            NavigationLink {
+                                StoreView()
+                            } label: {
+                                StoreCell()
+                            }
                         }
                     }
                 }.padding()
