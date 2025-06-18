@@ -95,7 +95,7 @@ struct CartScreen: View {
                     LargeButtonComponent(label: "Checkout \(String(format: "%.2f", total)) EGP") {
                         
                     }
-                    Spacer().frame(height: 70)
+                    
                 }.padding(.horizontal)
             }.navigationBarTitleDisplayMode(.inline)
             .toolbar {

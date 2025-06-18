@@ -18,7 +18,7 @@ struct RoundedIconButton: View {
             Image(systemName: iconName).resizable()
                 .frame(width: 20,height: 20)
                 .tint(.primary)
-                .background(Circle().frame(width: 50,height: 50).tint(Color(.systemGray5)))
+                .background(Circle().frame(width: 40,height: 40).tint(Color(.systemGray5)))
         }.padding(.leading,8)
 
     }

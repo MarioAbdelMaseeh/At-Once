@@ -13,17 +13,7 @@ struct HomeScreen: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16){
-                    HStack{
-                        RoundedIconButton(iconName: "phone.fill") {
-                            
-                        }
-                        Spacer()
-                        Text("Home").font(.title)
-                        Spacer()
-                        RoundedIconButton(iconName: "person.fill", action: {
-                            
-                        }).padding(.trailing,8)
-                    }
+                    
                     
                     HorizontalCollectionView()
                     NavigationLink(destination: RegisterView(), label: {
@@ -52,8 +42,23 @@ struct HomeScreen: View {
                         }
                     }
                 }.padding()
-            }
-            Spacer().frame(height: 40)
+            }.navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal){
+                        HStack{
+                            RoundedIconButton(iconName: "phone.fill") {
+                                
+                            }
+                            Spacer()
+                            Text("Home").font(.title).fontWeight(.semibold)
+                            Spacer()
+                            RoundedIconButton(iconName: "person.fill", action: {
+                                
+                            }).padding(.trailing,8)
+                        }
+                    }
+                }
+            
         }
     }
 }
