@@ -8,15 +8,9 @@
 import SwiftUI
 
 struct CartCell: View {
-//    var medecinName: String = "My Medecin"
     var medecinDiscount: Int = 28
-//    var itemCost: Double = 200.9
     @Binding var order: CartOrder
     var delete: ()->Void = {}
-//    @State var itemCount: Int = 3
-//    var totalCost: Double {
-//        Double(itemCount) * itemCost
-//    }
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center) {
