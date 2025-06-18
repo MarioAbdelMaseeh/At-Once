@@ -27,15 +27,15 @@ struct HomeScreen: View {
                         }
                         .padding(.horizontal)
                         .frame(height: 50)
-                        .background(Color(.systemGray6))
-                        .cornerRadius(6)
+                        .background(Color.lightGray)
+                        .cornerRadius(12)
                     })
                   
                     VStack(spacing: 16){
                         ForEach(items,id: \.self){
                             item in
                             NavigationLink {
-                                StoreView()
+                                StoreScreen()
                             } label: {
                                 StoreCell()
                             }
