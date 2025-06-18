@@ -74,8 +74,8 @@ struct OrdersScreen: View {
                     Text("Orders")
                         .font(.title)
                         .fontWeight(.semibold)
-                        .padding(16)
                 }
+        
             }
             
             

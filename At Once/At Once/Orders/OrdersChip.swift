@@ -14,9 +14,9 @@ struct OrdersChip: View {
     var body: some View {
         
         Text(title)
-            .padding(12)
-//            .padding(.horizontal, 12)
-//            .padding(.vertical, 6)
+           // .padding(12)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
             .background(isSelected ? Color.primaryTeal : Color.gray.opacity(0.2))
             .foregroundColor(isSelected ? .white : .black)
             .cornerRadius(8)
