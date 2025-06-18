@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct CartCell: View {
-    var medecinName: String = "My Medecin"
+//    var medecinName: String = "My Medecin"
     var medecinDiscount: Int = 28
-    var itemCost: Double = 200.9
+//    var itemCost: Double = 200.9
+    @Binding var order: CartOrder
     var delete: ()->Void = {}
-    @State var itemCount: Int = 3
-    var totalCost: Double {
-        Double(itemCount) * itemCost
-    }
+//    @State var itemCount: Int = 3
+//    var totalCost: Double {
+//        Double(itemCount) * itemCost
+//    }
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center) {
@@ -27,7 +28,7 @@ struct CartCell: View {
                     .padding(.trailing, 2)
                 
                 VStack(alignment: .leading, spacing: 6) {
-                    Text(medecinName)
+                    Text(order.name)
                         .font(.headline)
                         .fontWeight(.bold)
                         .foregroundColor(.primary)
@@ -36,11 +37,11 @@ struct CartCell: View {
                         .font(.caption)
                         .foregroundColor(.primaryTeal)
                     
-                    Text("Cost per item: \(String(format:"%.2f", itemCost)) EGP")
+                    Text("Cost per item: \(String(format:"%.2f", order.pricePerItem)) EGP")
                         .font(.caption2)
                         .foregroundColor(.secondary)
                     
-                    Text("Total: \(String(format:"%.2f", totalCost)) EGP")
+                    Text("Total: \(String(format:"%.2f", order.total)) EGP")
                         .font(.callout)
                         .foregroundColor(.red)
                 }
@@ -57,47 +58,45 @@ struct CartCell: View {
                     Spacer()
                     HStack(spacing: 8) {
                         Button {
-                            if itemCount > 1 {
-                                itemCount -= 1
+                            if order.quantity > 1 {
+                                order.quantity -= 1
                             }
                         } label: {
                             Image(systemName: "minus")
                                 .foregroundColor(.red)
                                 .padding(8)
-                                .background(Color.white)
+                                .background(Color(.customBackground))
                                 
                         }
                         
-                        Text("\(itemCount)")
+                        Text("\(order.quantity)")
                 
                         Button {
-                            itemCount += 1
+                            order.quantity += 1
                         } label: {
                             Image(systemName: "plus")
                                 .foregroundColor(.red)
                                 .padding(8)
-                                .background(Color.white)
+                                .background(Color(.customBackground))
                         }
                     }
-                    .background(Color.white)
-                    .cornerRadius(12)
+                    .background(Color(.customBackground))
+                    .cornerRadius(8)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.primaryTeal, lineWidth: 2)
                     )
                 }.padding(.bottom)
             }
-            .padding(.horizontal,16)
+            .padding(.horizontal,8)
             .padding(.vertical, 16)
             .background(
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color(.customBackground))
+                    .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
             )
-            .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
             .frame(height: 140)
         }
     }
 }
-#Preview {
-    CartCell()
-}
+
