@@ -11,7 +11,17 @@ import SwiftUI
 struct Store: Identifiable {
     var id = UUID()
     var name: String
-    var orders: [String]
+    var orders: [CartOrder]
+}
+struct CartOrder: Identifiable {
+    let id = UUID()
+    var name: String
+    var quantity: Int
+    var pricePerItem: Double
+    
+    var total: Double {
+        Double(quantity) * pricePerItem
+    }
 }
 
 struct StoreTabView: View {
@@ -20,8 +30,7 @@ struct StoreTabView: View {
 
     var body: some View {
         let maxVisibleTabs = 3
-        let tabWidth = (UIScreen.main.bounds.width  - 32) / CGFloat(maxVisibleTabs)
-
+        let tabWidth = (UIScreen.main.bounds.width) / CGFloat(maxVisibleTabs)
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 0) {
                 ForEach(stores.indices, id: \.self) { index in
@@ -32,9 +41,12 @@ struct StoreTabView: View {
                     }) {
                         VStack(spacing: 6) {
                             Text(stores[index].name)
-                                .foregroundColor(selectedIndex == index ? .black : .gray)
+                                .foregroundColor(selectedIndex == index ? .primary : Color(.systemGray))
                                 .fontWeight(.medium)
                                 .frame(maxWidth: .infinity)
+                                .padding(.horizontal)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
 
                             Capsule()
                                 .fill(selectedIndex == index ? Color.teal : Color.clear)

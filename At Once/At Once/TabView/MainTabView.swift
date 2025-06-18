@@ -8,7 +8,7 @@
 
 import SwiftUI
 enum Tab {
-    case home, cart, profile, notifications
+    case home, search, cart, orders
 }
 struct MainTabView: View {
     @State private var selectedTab: Tab = .home
@@ -19,11 +19,11 @@ struct MainTabView: View {
                     switch selectedTab {
                     case .home:
                         HomeScreen()
-                    case .cart:
-                        LoginView()
-                    case .profile:
+                    case .search:
                         RegisterView()
-                    case .notifications:
+                    case .cart:
+                        CartScreen()
+                    case .orders:
                         RegisterView()
                     }
                 }

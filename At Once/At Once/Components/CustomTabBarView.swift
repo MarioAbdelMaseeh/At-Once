@@ -14,9 +14,9 @@ struct CustomTabBarView: View {
     var body: some View {
         HStack(spacing: 40) {
             tabItem(icon: "house.fill", tab: .home)
+            tabItem(icon: "magnifyingglass", tab: .search)
             tabItem(icon: "basket.fill", tab: .cart)
-            tabItem(icon: "person.fill", tab: .profile)
-            tabItem(icon: "bell.fill", tab: .notifications)
+            tabItem(icon: "list.bullet.rectangle.portrait", tab: .orders)
 
         }
         .padding()
