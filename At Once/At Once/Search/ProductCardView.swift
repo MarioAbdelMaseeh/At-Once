@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProductCardView: View {
     let isSuppliers: Bool
+    @State private var showSheet = false 
  
 
     var body: some View {
@@ -27,12 +28,13 @@ struct ProductCardView: View {
                         
                     Text("Discount : 26 %")
                         .foregroundColor(.primaryTeal)
-                       // .font(.callout)
+                        .font(.subheadline)
                         .padding(.vertical, 4)
 
                     Text("Price : \(String(format: "%.2f", 35.6788)) EGP")
                         .padding(.bottom, 6)
-                      //  .font(.callout)
+                        .font(.subheadline)
+                        .font(.callout)
                        
                 
                     
@@ -47,7 +49,9 @@ struct ProductCardView: View {
                     MediumButton(buttonLabel: "Add to cart", buttonIcon: "cart",color: Color.primaryTeal,
                                  action: {}).padding(.trailing,4)
                     
-                    MediumButton(buttonLabel: "Suppliers", buttonIcon: "storefront",color: Color.darkGray, action: {}).padding(.leading,4)
+                    MediumButton(buttonLabel: "Suppliers", buttonIcon: "storefront",color: Color.darkGray, action: {
+                        showSheet.toggle()
+                    }).padding(.leading,4)
                     
                    
                 }else{
@@ -70,6 +74,15 @@ struct ProductCardView: View {
         .background(Color.white)
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        
+        
+        .sheet(isPresented: $showSheet) {
+            SupplierSheetView().padding(.top)
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+                .presentationCornerRadius(20)
+        }
+                   
         
 //        .padding()
 //        .background(Color.white)

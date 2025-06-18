@@ -15,7 +15,7 @@ struct SearchBarComponents: View {
                 .foregroundColor(.gray)
             
             TextField("Search...", text: $searchText)
-                .frame(height: 50)
+                .frame(height: 40)
                 .textFieldStyle(PlainTextFieldStyle())
                 .padding(8)
         }

@@ -29,4 +29,5 @@ struct Order: Identifiable {
     let date: String
     let location: String
     let items: [OrderItem]
+    let status: OrderStatus
 }

@@ -17,13 +17,13 @@ struct MainTabView: View {
                     Text("Home")
                 }
 
-            LoginScreen()
+            SearchScreen()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("Search")
                 }
 
-            RegisterView()
+            StoreScreen()
                 .tabItem {
                     Image(systemName: "cart.fill")
                     Text("Cart")

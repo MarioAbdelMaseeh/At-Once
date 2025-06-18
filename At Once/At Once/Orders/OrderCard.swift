@@ -60,7 +60,7 @@ struct OrderCard: View {
                         Text(item.name)
                         Spacer()
                         Text("\(item.quantity) items").padding(.trailing,8)
-                        Text("\(Int(item.price)) EGP")
+                        Text("\(String(format: "%.1f",item.price)) EGP")
                             .foregroundColor(.primaryTeal)
                             .bold()
                     }
@@ -71,7 +71,7 @@ struct OrderCard: View {
 
                 HStack {
                     Spacer()
-                    Text("Total : \(Int(order.items.reduce(0) { $0 + $1.price })) EGP")
+                    Text("Total : \(String(format: "%.2f",order.items.reduce(0) { $0 + $1.price })) EGP")
                         .font(.callout)
                         .foregroundColor(.red)
                         .bold()
@@ -88,5 +88,5 @@ struct OrderCard: View {
 
 
 #Preview {
-    OrderCard(order:Order(id: "12345", pharmacyName: "UM Pharma", date: "25/05/2024 - 18:00 PM", location: "Zefta, Gharbia", items: Array(repeating: OrderItem(id: "5678",name: "Panadol Extra 600mg", quantity: 3, price: 150), count: 4)), isExpanded: true, toggleExpand: {})
+    OrderCard(order:Order(id: "12345", pharmacyName: "UM Pharma", date: "25/05/2024 - 18:00 PM", location: "Zefta, Gharbia", items: Array(repeating: OrderItem(id: "5678",name: "Panadol Extra 600mg", quantity: 3, price: 150), count: 4), status: .preparing), isExpanded: true, toggleExpand: {})
 }

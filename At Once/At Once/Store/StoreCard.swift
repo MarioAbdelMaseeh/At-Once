@@ -27,7 +27,7 @@ struct StoreCard: View {
             
             Text("Discount: 26%")
                 .font(.caption)
-                .font(.title3)
+               // .font(.title3)
                 .fontWeight(.bold)
                 .foregroundColor(Color.primaryTeal)
                 .padding(.vertical,2)
