@@ -21,7 +21,7 @@ struct MediumButton: View {
             
             HStack(alignment: .center) {
                 Text(buttonLabel)
-                    .font(.footnote)
+                    .font(.callout)
                     .foregroundColor(.white)
                     //.padding(.horizontal)
                 Image(systemName: buttonIcon)
@@ -29,7 +29,7 @@ struct MediumButton: View {
                     
                     
                 
-            }.padding(.vertical)
+            }.padding(.vertical,8)
             
             
           
