@@ -1,9 +1,3 @@
-//
-//  StoreCell.swift
-//  At Once
-//
-//  Created by mac on 17/06/2025.
-//
 import SwiftUI
 
 struct StoreCell: View {
@@ -17,18 +11,19 @@ struct StoreCell: View {
                 Image(.icon)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 80, height: 80)
                     .clipShape(Circle())
                     .padding(.trailing, 12)
 
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 6) {
                     Text(storeName)
                         .font(.headline)
                         .fontWeight(.bold)
+                        .foregroundColor(.primary)
 
                     Text(storeAddress)
                         .font(.caption)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
 
                     Text("Minimum: \(mini) EGP")
                         .font(.subheadline)
@@ -44,14 +39,23 @@ struct StoreCell: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.systemBackground))
+                .fill(Color(.customBackground)) 
         )
-        .shadow(color: Color.black.opacity(0.1), radius: 6, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
     }
 }
 
 #Preview {
-    StoreCell()
-        .padding()
-        .background(Color(.systemGray6))
+    Group {
+        StoreCell()
+            .padding()
+            .background(Color(.systemGroupedBackground))
+            .previewDisplayName("Light Mode")
+
+        StoreCell()
+            .padding()
+            .background(Color(.systemGroupedBackground))
+            .preferredColorScheme(.dark)
+            .previewDisplayName("Dark Mode")
+    }
 }

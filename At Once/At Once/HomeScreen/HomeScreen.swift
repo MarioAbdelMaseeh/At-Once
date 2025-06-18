@@ -13,28 +13,6 @@ struct HomeScreen: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16){
-                    HStack{
-                        Button {
-                            
-                        } label: {
-                            Image(systemName: "phone.fill").resizable()
-                                .frame(width: 20,height: 20)
-                                .tint(.black)
-                                .background(Circle().frame(width: 50,height: 50).tint(Color(.systemGray6)))
-                        }.padding(.leading,8)
-                        Spacer()
-                        Text("Home").font(.title)
-                        Spacer()
-                        Button {
-                            
-                        } label: {
-                            Image(systemName: "person.fill").resizable()
-                                .frame(width: 20,height: 20)
-                                .tint(.black)
-                                .background(Circle().frame(width: 50,height: 50).tint(Color(.systemGray6)))
-                        }.padding(.trailing,8)
-                    }
-                    
                     HorizontalCollectionView()
                     NavigationLink(destination: RegisterView(), label: {
                         HStack {
@@ -47,20 +25,46 @@ struct HomeScreen: View {
                         }
                         .padding(.horizontal)
                         .frame(height: 50)
-                        .background(Color(.systemGray6))
-                        .cornerRadius(6)
+                        .background(Color.lightGray)
+                        .cornerRadius(12)
                     })
-                    Spacer().frame(height: 4)
+                  
                     VStack(spacing: 16){
                         ForEach(items,id: \.self){
                             item in
-                            StoreCell()
+                            NavigationLink {
+                                StoreScreen()
+                            } label: {
+                                StoreCell()
+                            }
                         }
                     }
-                    Spacer()
                 }.padding()
-            }
-        }
+            }.navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        NavigationLink {
+                            ProfileView()
+                        } label: {
+                            Image(systemName: "phone.fill").resizable()
+                                .frame(width: 20,height: 20)
+                                .tint(.primary)
+                        }
+                    }
+                    ToolbarItem(placement: .principal){
+                            Text("Home").font(.title).fontWeight(.semibold)
+                        }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink {
+                            ProfileView()
+                        } label: {
+                            Image(systemName: "person.fill").resizable()
+                                .frame(width: 20,height: 20)
+                                .tint(.primary)
+                        }
+                    }
+                }
+        }.tint(.primary)
     }
 }
 

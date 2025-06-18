@@ -13,7 +13,12 @@ struct At_OnceApp: App {
 
     var body: some Scene {
         WindowGroup {
-            StoreView()
+
+            MainTabView()
+            
+         //  StoreScreen()
+          //  HomeScreen()
+
             
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)

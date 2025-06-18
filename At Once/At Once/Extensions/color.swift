@@ -9,7 +9,9 @@ import SwiftUI
 
 extension Color {
     static let primaryTeal = Color(hex: "#1A998E")
-    static let lightGray = Color(hex: "#F2F2F2")
+    static let lightGray = Color(hex: "#F2F2F2") 
+    static let darkGray = Color(hex: "#403C3D")
+    
 }
 
 extension Color {
