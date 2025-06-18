@@ -45,14 +45,14 @@ struct MainTabView: View {
 //                    Image(systemName: "house.fill")
 //                    Text("Home")
 //                }
-//
+//            
 //            LoginView()
 //                .tabItem {
 //                    Image(systemName: "magnifyingglass")
 //                    Text("Search")
 //                }
-//
-//            RegisterView()
+//            
+//            CartScreen()
 //                .tabItem {
 //                    Image(systemName: "cart.fill")
 //                    Text("Cart")

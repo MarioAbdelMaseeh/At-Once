@@ -15,13 +15,13 @@ struct CustomTabBarView: View {
         HStack(spacing: 40) {
             tabItem(icon: "house.fill", tab: .home)
             tabItem(icon: "magnifyingglass", tab: .search)
-            tabItem(icon: "basket.fill", tab: .cart)
+            tabItem(icon: "cart.fill", tab: .cart)
             tabItem(icon: "list.bullet.rectangle.portrait", tab: .orders)
 
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 30)
+            RoundedRectangle(cornerRadius: 20)
                 .fill(Color(.customBackground))
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 4)
         )
