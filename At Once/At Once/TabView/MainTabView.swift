@@ -13,25 +13,31 @@ enum Tab {
 struct MainTabView: View {
     @State private var selectedTab: Tab = .home
 
-        var body: some View {
-            VStack() {
-                Group {
-                    switch selectedTab {
-                    case .home:
-                        HomeScreen()
-                    case .search:
-                        RegisterView()
-                    case .cart:
-                        CartScreen()
-                    case .orders:
-                        RegisterView()
-                    }
-                }
-                .ignoresSafeArea()
 
+    var body: some View {
+        VStack() {
+            Group {
+                switch selectedTab {
+                case .home:
+                    HomeScreen()
+                case .search:
+                    SearchScreen()
+                case .cart:
+                    CartScreen()
+                case .orders:
+                    OrdersScreen()
+                }
+                
+                
+                
                 CustomTabBarView(selectedTab: $selectedTab)
             }
+            
+            
+            
+            
         }
+    }
 //    var body: some View {
 //        TabView {
 //            HomeScreen()
