@@ -15,7 +15,7 @@ struct OrderCard: View {
     var body: some View {
         VStack(alignment: .leading,spacing: 12) {
             HStack {
-                Image(systemName: "building.2")
+                Image(systemName: "storefront")
                     .foregroundColor(.primaryTeal)
                     .font(.system(size: 24))
                 Text(order.pharmacyName)

@@ -28,9 +28,9 @@ struct MainTabView: View {
                     Image(systemName: "cart.fill")
                     Text("Cart")
                 }
-            NavigationStack {
+         
                 OrdersScreen()
-            }
+        
                 .tabItem {
                     Image(systemName: "list.bullet.rectangle.portrait")
                     Text("Orders")

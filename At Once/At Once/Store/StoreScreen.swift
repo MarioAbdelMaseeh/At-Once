@@ -29,7 +29,7 @@ struct StoreScreen: View {
                 
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(0..<10, id: \.self) { _ in
-                        ProductCard()
+                        StoreCard()
                     }
                 }
                 .padding()

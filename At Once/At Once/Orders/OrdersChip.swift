@@ -17,16 +17,22 @@ struct OrdersChip: View {
            // .padding(12)
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
-            .background(isSelected ? Color.primaryTeal : Color.gray.opacity(0.2))
+            .background(isSelected ? Color.primaryTeal : Color.gray.opacity(0.2)/*Color.white*/)
             .foregroundColor(isSelected ? .white : .black)
             .cornerRadius(8)
+//            .overlay(
+//                RoundedRectangle(cornerRadius: 8)
+//                    .stroke(Color.primaryTeal )
+//                   
+//                )
+            
         
       
     }
 }
 
 #Preview {
-    OrdersChip(title: "Ordered", isSelected: true)
+    OrdersChip(title: "Ordered", isSelected: false)
 }
 
 

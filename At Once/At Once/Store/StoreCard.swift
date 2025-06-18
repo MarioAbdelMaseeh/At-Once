@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProductCard: View {
+struct StoreCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8){
             Image(.icon)
@@ -19,7 +19,7 @@ struct ProductCard: View {
 
             
             Text("Product Name name")
-                .font(.subheadline)
+                .font(.headline)
                 .fontWeight(.semibold)
 //                .font(.title2)
 //                .fontWeight(.bold)
@@ -40,7 +40,8 @@ struct ProductCard: View {
 
                 .padding(.top,4)
             
-            MediumButton(buttonLabel: "Add to Cart", buttonIcon: "cart",action: {
+            MediumButton(buttonLabel: "Add to Cart",
+                         buttonIcon: "cart", color: Color.primaryTeal,action: {
                 
             }).padding(.top)
             
@@ -57,5 +58,5 @@ struct ProductCard: View {
 }
 
 #Preview {
-    ProductCard()
+    StoreCard()
 }

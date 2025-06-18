@@ -25,6 +25,8 @@ struct OrdersScreen: View {
 
     var body: some View {
     
+        NavigationStack {
+            
             
             VStack(spacing: 16) {
                 
@@ -34,7 +36,10 @@ struct OrdersScreen: View {
                             
                             OrdersChip(title: status.rawValue, isSelected: selectedStatus == status)
                                 .onTapGesture {
-                                    selectedStatus = status
+                                    withAnimation {
+                                        selectedStatus = status
+                                    }
+                                   
                                 }
                             
                         }
@@ -68,6 +73,7 @@ struct OrdersScreen: View {
                 
                 Spacer()
             }
+            
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -75,8 +81,9 @@ struct OrdersScreen: View {
                         .font(.title)
                         .fontWeight(.semibold)
                 }
-        
+                
             }
+        }
             
             
     }
