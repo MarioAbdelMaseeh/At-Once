@@ -25,7 +25,7 @@ struct HomeScreen: View {
                         }
                         .padding(.horizontal)
                         .frame(height: 50)
-                        .background(Color.lightGray)
+                        .background(Color(.systemGray6))
                         .cornerRadius(12)
                     })
                   
