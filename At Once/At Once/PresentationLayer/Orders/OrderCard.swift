@@ -60,7 +60,7 @@ struct OrderCard: View {
                         Text(item.name)
                         Spacer()
                         Text("\(item.quantity) items").padding(.trailing,8)
-                        Text("\(String(format: "%.1f",item.price)) EGP")
+                        Text(item.price, format: .currency(code: Locale.current.currency?.identifier ?? "EGP"))
                             .foregroundColor(.primaryTeal)
                             .bold()
                     }

@@ -18,9 +18,9 @@ struct PasswordFieldComponent: View {
             
             HStack {
                 if isPasswordVisible {
-                    TextField("Password", text: $password)
+                    TextField("password", text: $password)
                 } else {
-                    SecureField("Password", text: $password)
+                    SecureField("password", text: $password)
                 }
                 
                 Button(action: {
