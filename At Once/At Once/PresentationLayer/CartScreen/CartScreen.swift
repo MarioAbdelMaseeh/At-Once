@@ -52,12 +52,6 @@ struct CartScreen: View {
     var body: some View {
         NavigationStack{
             VStack{
-//                HStack{
-//                    Spacer()
-//                    Text("Cart").font(.title)
-//                    Spacer()
-//                }.padding(.horizontal)
-//                    .padding(.top)
                 StoreTabView(stores: stores, selectedIndex: $selectedIndex).padding(.horizontal)
                 Spacer().frame(height: 16)
                 ScrollView{

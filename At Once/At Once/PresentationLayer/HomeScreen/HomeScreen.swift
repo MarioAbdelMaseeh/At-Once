@@ -13,7 +13,7 @@ struct HomeScreen: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16){
-                    HorizontalCollectionView()
+                    AdCarouselView()
                     NavigationLink(destination: RegisterView(), label: {
                         HStack {
                             Image(systemName: "magnifyingglass")

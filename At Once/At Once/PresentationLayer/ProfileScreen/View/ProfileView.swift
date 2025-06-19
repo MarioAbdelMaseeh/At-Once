@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State private var showSheet = false
     var body: some View {
         NavigationStack{
             VStack{
@@ -15,11 +16,26 @@ struct ProfileView: View {
                 ProfileHeader()
                 Spacer().frame(height: 80)
                 VStack(alignment: .leading, spacing: 16){
-                    ProfileOption(icon: "questionmark.circle.fill", title: "Common Questions")
+                    NavigationLink {
+                        WebViewScreen(url: "https://atonce2025.blogspot.com/2025/06/frequently-asked-questions-body-font.html",title: "Commen Questions")
+                    } label: {
+                        ProfileOption(icon: "questionmark.circle.fill", title: "Common Questions")
+                    }
+
+                   
                     Divider()
-                    ProfileOption(icon: "shield.fill", title: "Privacy & Policy")
+                    NavigationLink {
+                        WebViewScreen(url: "https://atonce2025.blogspot.com/2025/06/frequently-asked-questions-body-font.html",title: "Commen Questions")
+                    } label: {
+                        ProfileOption(icon: "shield.fill", title: "Privacy & Policy")
+                    }
+                    
                     Divider()
-                    ProfileOption(icon: "headphones", title: "Contact Us")
+                    Button {
+                        showSheet.toggle()
+                    } label: {
+                        ProfileOption(icon: "headphones", title: "Contact Us")
+                    }
                     Divider()
                     ProfileOption(icon: "exclamationmark.circle.fill", title: "About Us")
                     Divider()
@@ -46,6 +62,9 @@ struct ProfileView: View {
                                 .tint(.primary)
                         }
                     }
+                }.sheet(isPresented: $showSheet) {
+                    BottomSheetView().presentationDetents([.fraction(0.15)])
+                        .presentationDragIndicator(.visible)
                 }
         }
     }
