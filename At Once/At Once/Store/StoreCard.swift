@@ -20,37 +20,38 @@ struct StoreCard: View {
             
             Text("Product Name name")
                 .font(.headline)
-                .fontWeight(.semibold)
+               // .fontWeight(.semibold)
 //                .font(.title2)
 //                .fontWeight(.bold)
-                .padding(.top)
+               // .padding(.top,8)
             
             Text("Discount: 26%")
-                .font(.caption)
+                .font(.subheadline)
                // .font(.title3)
-                .fontWeight(.bold)
+             //   .fontWeight(.bold)
                 .foregroundColor(Color.primaryTeal)
-                .padding(.vertical,2)
+               // .padding(.vertical,2)
             
             
             Text("Price : 21.76 EGP")
-                .font(.caption)
+                .font(.subheadline)
               //  .font(.title3)
-                .fontWeight(.semibold)
+               // .fontWeight(.semibold)
 
-                .padding(.top,4)
+               // .padding(.vertical,4)
+               // .padding(.bottom,8)
             
             MediumButton(buttonLabel: "Add to Cart",
                          buttonIcon: "cart", color: Color.primaryTeal,action: {
                 
-            }).padding(.top)
+            })//.padding(.top,8)
             
             
             
             
         }
         .padding()
-        .background(Color.white)
+        .background(Color(.customBackground))
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
                 

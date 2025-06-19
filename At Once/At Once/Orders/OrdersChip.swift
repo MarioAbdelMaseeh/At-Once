@@ -19,12 +19,12 @@ struct OrdersChip: View {
            // .padding(12)
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
-            .background(isSelected ? Color.primaryTeal : /*Color.gray.opacity(0.2)*/Color.white)
-            .foregroundColor(isSelected ? .white : .black)
+            .background(isSelected ? Color.primaryTeal : /*Color.gray.opacity(0.2)*/Color.customBackground)
+            .foregroundColor(isSelected ? .customBackground : Color(.systemGray))
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.primaryTeal )
+                    .stroke(Color.primaryTeal,lineWidth: 2 )
                    
                 )
             

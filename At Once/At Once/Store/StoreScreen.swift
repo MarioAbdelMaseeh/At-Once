@@ -44,8 +44,8 @@ struct StoreScreen: View {
                     .padding(.horizontal)
                 }
                 
-            }
-            .background(Color.white.edgesIgnoringSafeArea(.all))
+            }//.edgesIgnoringSafeArea(.all)
+          //  .background(Color(.customBackground))
             
             
             .navigationBarTitleDisplayMode(.inline)

@@ -9,14 +9,14 @@ import SwiftUI
 
 struct SupplierSheetView: View {
     var body: some View {
-        VStack/*(spacing: 10)*/ {
+        VStack(spacing: 8) {
 
             HStack {
                 Image(.icon)
                     .resizable()
                     .frame(width: 60, height: 60)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .padding(8)
+                    .padding(.horizontal,8)
 
                 Text("Panadol Extra 600mg")
                     .font(.title2.bold())
