@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ProductCardView: View {
     let isSuppliers: Bool
-    @State private var showSheet = false 
+    let discount : Int = 26
+    let price : Double = 100
+    @State private var showSheet = false
  
 
     var body: some View {
@@ -27,13 +29,13 @@ struct ProductCardView: View {
                         .lineLimit(2)
                         
                         
-                    Text("Discount : 26 %")
+                    Text(String(format: NSLocalizedString("discount_with_value", comment: ""), discount))
                         .foregroundColor(.primaryTeal)
                         .font(.subheadline)
                         .padding(.bottom, 2)
                         //.padding(.top, 1)
 
-                    Text("Price : \(String(format: "%.2f", 35.6788)) EGP")
+                    Text("Price : \(String(format: "%.2f", price)) EGP")
                        // .padding(.bottom, 4)
                         .font(.subheadline)
                         

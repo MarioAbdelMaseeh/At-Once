@@ -12,7 +12,7 @@ struct LoginScreen: View {
     @State private var email = ""
     @State private var password = ""
     @State private var isPasswordVisible = false
-    let buttonLabel = "Login"
+    let buttonLabel = NSLocalizedString("login", comment: "")
 
     var body: some View {
         NavigationStack {
@@ -28,24 +28,24 @@ struct LoginScreen: View {
     //                .padding(.top,40)
 
                 VStack(spacing: 4) {
-                    Text("Welcome to")
+                    Text("welcome_to")
                         .font(.title2)
                         .fontWeight(.bold)
-                    Text("At Once Pharma")
+                    Text("at_once_pharma")
                         .font(.title2)
                         .fontWeight(.bold)
                 }.padding(.bottom,32)
 
               
-                TextFieldComponent(title: "Email", text: $email).padding(.bottom, 16)
+                TextFieldComponent(title: NSLocalizedString("email", comment: ""), text: $email).padding(.bottom, 16)
                 
                
-                PasswordFieldComponent(title: "Password",isPasswordVisible: $isPasswordVisible, password: $password)
+                PasswordFieldComponent(title:NSLocalizedString("password", comment: ""),isPasswordVisible: $isPasswordVisible, password: $password)
 
                
                 HStack {
                     Spacer()
-                    Button("Forget Password ?") {
+                    Button("forget_password") {
                         // action
                     }
                     .foregroundColor(.primaryTeal)
@@ -61,10 +61,10 @@ struct LoginScreen: View {
                 Spacer().frame(height: 80)
 
                 HStack(spacing: 4) {
-                    Text("Don’t have an account yet ?")
+                    Text("no_account")
                 
                     NavigationLink(destination: RegisterView()) {
-                        Text("Register here")
+                        Text("register_here")
                             .foregroundColor(.primaryTeal)
                             .fontWeight(.semibold)
                     }
