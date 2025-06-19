@@ -9,19 +9,10 @@ import SwiftUI
 
 @main
 struct At_OnceApp: App {
-    let persistenceController = PersistenceController.shared
-
+   
     var body: some Scene {
         WindowGroup {
-
             MainTabView()
-            
-         //  StoreScreen()
-          //  HomeScreen()
-
-            
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
