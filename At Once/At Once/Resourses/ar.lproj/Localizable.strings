@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  At Once
+
+  Created by Iman Mahmoud on 20/06/2025.
+  
+*/
+"welcome_to" = "مرحبًا بك في";
+"at_once_pharma" = "أت ونس فارما";
+"email" = "البريد الإلكتروني";
+"password" = "كلمة المرور";
+"forget_password" = "هل نسيت كلمة المرور؟";
+"login" = "تسجيل الدخول";
+"no_account" = "ليس لديك حساب؟";
+"register_here" = "سجل من هنا";
