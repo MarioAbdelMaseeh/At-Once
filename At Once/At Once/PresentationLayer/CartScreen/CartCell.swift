@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CartCell: View {
-    var medecinDiscount: Int = 28
     @Binding var order: CartOrder
     var delete: ()->Void = {}
     var body: some View {
@@ -39,9 +38,9 @@ struct CartCell: View {
                         }.padding(.horizontal,4)
                     }
                     
-                    HStack{
+                    HStack(alignment: .bottom){
                         VStack(alignment: .leading){
-                            Text("Discount: \(medecinDiscount)%")
+                            Text("Discount: \(order.discount)%")
                                 .font(.caption)
                                 .foregroundColor(.primaryTeal)
                             
@@ -104,7 +103,7 @@ struct CartCell: View {
     }
 }
 #Preview {
-    CartCell( order:.constant(CartOrder(name: "Order", quantity: 3, pricePerItem: 200))) {
+    CartCell( order:.constant(CartOrder(name: "Order", quantity: 3, pricePerItem: 200, discount: 28))) {
         
     }
 }

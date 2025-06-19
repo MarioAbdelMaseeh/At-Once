@@ -1,9 +1,10 @@
 import SwiftUI
 
 struct StoreCell: View {
-    var storeName: String = "My Store"
-    var storeAddress: String = "Store Address"
-    var mini: Int = 700
+//    var storeName: String = "My Store"
+//    var storeAddress: String = "Store Address"
+//    var mini: Int = 700
+    var store: Store
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -16,16 +17,16 @@ struct StoreCell: View {
                     .padding(.trailing, 12)
 
                 VStack(alignment: .leading, spacing: 6) {
-                    Text(storeName)
+                    Text(store.storeName)
                         .font(.headline)
                         .fontWeight(.bold)
                         .foregroundColor(.primary)
 
-                    Text(storeAddress)
+                    Text(store.storeAddress)
                         .font(.caption)
                         .foregroundColor(.secondary)
 
-                    Text("Minimum: \(mini) EGP")
+                    Text("Minimum: \(store.storeMinOrder) EGP")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
 
@@ -47,12 +48,12 @@ struct StoreCell: View {
 
 #Preview {
     Group {
-        StoreCell()
+        StoreCell(store: Store(storeName: "My Store", storeAddress: "Address", storeMinOrder: 400))
             .padding()
             .background(Color(.systemGroupedBackground))
             .previewDisplayName("Light Mode")
 
-        StoreCell()
+        StoreCell(store: Store(storeName: "My Store", storeAddress: "Address", storeMinOrder: 400))
             .padding()
             .background(Color(.systemGroupedBackground))
             .preferredColorScheme(.dark)

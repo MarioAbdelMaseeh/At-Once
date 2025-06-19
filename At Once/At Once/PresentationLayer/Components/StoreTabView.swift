@@ -8,24 +8,8 @@
 
 import SwiftUI
 
-struct Store: Identifiable {
-    var id = UUID()
-    var name: String
-    var orders: [CartOrder]
-}
-struct CartOrder: Identifiable {
-    let id = UUID()
-    var name: String
-    var quantity: Int
-    var pricePerItem: Double
-    
-    var total: Double {
-        Double(quantity) * pricePerItem
-    }
-}
-
 struct StoreTabView: View {
-    let stores: [Store]
+    let stores: [StoreOrder]
     @Binding var selectedIndex: Int
 
     var body: some View {
