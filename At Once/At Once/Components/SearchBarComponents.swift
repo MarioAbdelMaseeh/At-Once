@@ -20,7 +20,7 @@ struct SearchBarComponents: View {
                 .padding(8)
         }
         .padding(.horizontal)
-        .background(Color.lightGray)
+        .background(Color(.systemGray6))
         .cornerRadius(12)
     }
 }

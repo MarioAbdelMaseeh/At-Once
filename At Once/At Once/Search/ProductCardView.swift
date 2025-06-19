@@ -13,7 +13,7 @@ struct ProductCardView: View {
  
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack(alignment:.top) {
                 Image(.icon)
                     .resizable()
@@ -21,20 +21,22 @@ struct ProductCardView: View {
                     .clipShape(.circle)
                     .padding(.trailing, 8)
                 
-                VStack(alignment:.leading){
+                VStack(alignment:.leading, spacing: 8){
                     Text("medicine name name name ")
                         .font(.headline)
                         .lineLimit(2)
                         
+                        
                     Text("Discount : 26 %")
                         .foregroundColor(.primaryTeal)
                         .font(.subheadline)
-                        .padding(.vertical, 4)
+                        .padding(.bottom, 2)
+                        //.padding(.top, 1)
 
                     Text("Price : \(String(format: "%.2f", 35.6788)) EGP")
-                        .padding(.bottom, 6)
+                       // .padding(.bottom, 4)
                         .font(.subheadline)
-                        .font(.callout)
+                        
                        
                 
                     
@@ -56,7 +58,12 @@ struct ProductCardView: View {
                    
                 }else{
                     
-                    Spacer().frame(width: UIScreen.main.bounds.width / 2)
+                    Spacer().frame(width:( UIScreen.main.bounds.width / 2)-30)
+                    
+//                    GeometryReader { geometry in
+//                        Spacer()
+//                            .frame(width: geometry.size.width / 2)
+//                    }
                     
                     MediumButton(buttonLabel: "Add to cart", buttonIcon: "cart",color: Color.primaryTeal,
                                  action: {})
@@ -78,7 +85,7 @@ struct ProductCardView: View {
         
         .sheet(isPresented: $showSheet) {
             SupplierSheetView().padding(.top)
-                .presentationDetents([.medium, .large])
+                .presentationDetents([.medium, .fraction(0.85)])
                 .presentationDragIndicator(.visible)
                 .presentationCornerRadius(20)
         }
@@ -92,5 +99,5 @@ struct ProductCardView: View {
 }
 
 #Preview {
-    ProductCardView(isSuppliers: false)
+    ProductCardView(isSuppliers: true)
 }

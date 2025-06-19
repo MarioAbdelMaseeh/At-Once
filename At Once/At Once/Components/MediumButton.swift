@@ -29,7 +29,7 @@ struct MediumButton: View {
                     
                     
                 
-            }.padding(.vertical,8)
+            }.padding(.vertical,12)
             
             
           
