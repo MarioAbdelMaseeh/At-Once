@@ -13,3 +13,19 @@
 "login" = "تسجيل الدخول";
 "no_account" = "ليس لديك حساب؟";
 "register_here" = "سجل من هنا";
+"discount_format" = "الخصم: %d ٪";
+"price_format" = "السعر: %.2f ج.م";
+"add_to_cart" = "أضف إلى السلة";
+"price" = "السعر";
+"product_name" = "اسم المنتج";
+"currency" = "ج.م";
+"products" = "المنتجات";
+"suppliers" = "الموردين";
+"search" = "بحث";
+"search_placeholder" = "ابحث...";
+"orders" = "الطلبات";
+
+
+
+
+

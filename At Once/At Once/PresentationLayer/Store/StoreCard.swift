@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct StoreCard: View {
+    let discount : Int = 26
+    let price : Double = 21.76
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8){
             Image(.icon)
@@ -25,7 +28,9 @@ struct StoreCard: View {
 //                .fontWeight(.bold)
                // .padding(.top,8)
             
-            Text("Discount: 26%")
+          //  Text("Discount:\(discount) %")
+           // Text("discount_label \(discount)")
+            Text(String(format: NSLocalizedString("discount_format", comment: ""), discount))
                 .font(.subheadline)
                // .font(.title3)
              //   .fontWeight(.bold)
@@ -33,7 +38,9 @@ struct StoreCard: View {
                // .padding(.vertical,2)
             
             
-            Text("Price : 21.76 EGP")
+         //  Text("Price : \(price) EGP")
+           Text(String(format: NSLocalizedString("price_format", comment: ""), price))
+           
                 .font(.subheadline)
               //  .font(.title3)
                // .fontWeight(.semibold)
@@ -41,7 +48,7 @@ struct StoreCard: View {
                // .padding(.vertical,4)
                // .padding(.bottom,8)
             
-            MediumButton(buttonLabel: "Add to Cart",
+            MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""),
                          buttonIcon: "cart", color: Color.primaryTeal,action: {
                 
             })//.padding(.top,8)

@@ -13,3 +13,19 @@
 "login" = "Login";
 "no_account" = "Don’t have an account yet ?";
 "register_here" = "Register here";
+"discount_format" = "Discount: %d %%";
+"price_format" = "Price: %.2f EGP";
+"add_to_cart" = "Add to Cart";
+"price" = "Price";
+"currency" = "EGP";
+"products" = "Products";
+"suppliers" = "Suppliers";
+"search" = "Search";
+"search_placeholder" = "Search...";
+"orders" = "Orders";
+
+
+
+
+
+

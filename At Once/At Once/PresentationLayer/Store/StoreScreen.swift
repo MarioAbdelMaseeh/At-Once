@@ -51,7 +51,7 @@ struct StoreScreen: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Products")
+                    Text("products")
                         .font(.title)
                         .fontWeight(.semibold)
                 }
