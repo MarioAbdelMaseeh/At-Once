@@ -11,9 +11,9 @@ import Foundation
 struct StoreOrder: Identifiable {
     var id = UUID()
     var name: String
-    var orders: [CartOrder]
+    var orders: [ProductOrder]
 }
-struct CartOrder: Identifiable {
+struct ProductOrder: Identifiable {
     let id = UUID()
     var name: String
     var quantity: Int

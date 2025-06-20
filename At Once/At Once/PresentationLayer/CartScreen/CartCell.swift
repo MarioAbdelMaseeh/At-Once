@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CartCell: View {
-    @Binding var order: CartOrder
+    @Binding var order: ProductOrder
     var delete: ()->Void = {}
     var body: some View {
         VStack(alignment: .leading) {
@@ -107,7 +107,7 @@ struct CartCell: View {
     }
 }
 #Preview {
-    CartCell( order:.constant(CartOrder(name: "Order", quantity: 3, pricePerItem: 200, discount: 28))) {
+    CartCell( order:.constant(ProductOrder(name: "Order", quantity: 3, pricePerItem: 200, discount: 28))) {
         
     }
 }
