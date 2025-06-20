@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StoreCard: View {
     let discount : Int = 26
-    let price : Double = 21.76
+    let price : Double = 21
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8){
@@ -30,7 +30,7 @@ struct StoreCard: View {
             
           //  Text("Discount:\(discount) %")
            // Text("discount_label \(discount)")
-            Text(String(format: NSLocalizedString("discount_format", comment: ""), discount))
+            Text(String(format: NSLocalizedString("discount_format", comment: ""), discount.localizedDigits))
                 .font(.subheadline)
                // .font(.title3)
              //   .fontWeight(.bold)
@@ -39,7 +39,7 @@ struct StoreCard: View {
             
             
          //  Text("Price : \(price) EGP")
-           Text(String(format: NSLocalizedString("price_format", comment: ""), price))
+            Text(String(format: NSLocalizedString("price_format", comment: ""), price.localizedDigits))
            
                 .font(.subheadline)
               //  .font(.title3)

@@ -31,6 +31,7 @@ struct SearchScreen: View {
                         ForEach(items, id: \.self) { medicine in
                             ProductCardView(isSuppliers: false)
                         }
+                        
                     }
                     .padding(.horizontal)
                 }
@@ -43,7 +44,7 @@ struct SearchScreen: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItem(placement: .principal){
-                    Text("Search")
+                    Text("search")
                         .font(.title)
                         .fontWeight(.semibold)
                 }

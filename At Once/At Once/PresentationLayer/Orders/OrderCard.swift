@@ -59,8 +59,12 @@ struct OrderCard: View {
                             .font(.caption)
                         Text(item.name)
                         Spacer()
-                        Text("\(item.quantity) items").padding(.trailing,8)
-                        Text(item.price, format: .currency(code: Locale.current.currency?.identifier ?? "EGP"))
+                        Text(String(
+                            format: NSLocalizedString("items_format", comment: ""),
+                            item.quantity.localizedDigits
+                        ))
+//                        Text(item.price, format: .currency(code: Locale.current.currency?.identifier ?? "EGP"))
+                        Text(String(format: NSLocalizedString("amount_only_format", comment: ""), item.totalPrice.localizedDigits))
                             .foregroundColor(.primaryTeal)
                             .bold()
                     }
@@ -71,7 +75,9 @@ struct OrderCard: View {
 
                 HStack {
                     Spacer()
-                    Text("Total : \(String(format: "%.2f",order.items.reduce(0) { $0 + $1.price })) EGP")
+//                    Text("Total : \(String(format: "%.2f",order.items.reduce(0) { $0 + $1.price })) EGP")
+                    Text(String(format: NSLocalizedString("total_label", comment: ""), order.total.localizedDigits))
+                    
                         .font(.callout)
                         .foregroundColor(.red)
                         .bold()

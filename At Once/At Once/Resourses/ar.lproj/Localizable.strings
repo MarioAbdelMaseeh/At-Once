@@ -13,21 +13,18 @@
 "login" = "تسجيل الدخول";
 "no_account" = "ليس لديك حساب؟";
 "register_here" = "سجل من هنا";
-"discount_format" = "الخصم: %d ٪";
-"price_format" = "السعر: %.2f ج.م";
+//"discount_format" = "الخصم: %d ٪";
+//"price_format" = "السعر: %.2f ج.م";
+"price_format" = "السعر: ‎%@ ج.م";
 "add_to_cart" = "أضف إلى السلة";
 "price" = "السعر";
 "product_name" = "اسم المنتج";
 "currency" = "ج.م";
 "products" = "المنتجات";
-"suppliers" = "الموردين";
+"suppliers" = " الموزعين";
 "search" = "بحث";
-"search_placeholder" = "ابحث...";
+//"search_placeholder" = "ابحث...";
 "orders" = "الطلبات";
-
-
-
-
 
 
 "username" = "اسم المستخدم";
@@ -65,3 +62,15 @@
 "log_out" = "تسجيل الخروج";
 
 "see_account_details" = "عرض تفاصيل الحساب";
+
+"order_status_ordered" = "تم الطلب";
+"order_status_preparing" = "قيد التحضير";
+"order_status_delivering" = "جار التوصيل";
+"order_status_delivered" = "تم التوصيل";
+"order_status_canceled" = "تم الإلغاء";
+"order_status_returned" = "تم الإرجاع";
+"amount_only_format" = "%@ ج.م";
+"items_format" = "%@ قطع";
+
+
+

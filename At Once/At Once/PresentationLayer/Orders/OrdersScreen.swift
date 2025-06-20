@@ -52,7 +52,7 @@ struct OrdersScreen: View {
                     HStack(spacing: 12) {
                         ForEach(OrderStatus.allCases, id: \.self) { status in
                             
-                            OrdersChip(title: status.rawValue, isSelected: selectedStatus == status)
+                            OrdersChip(title: status.localizedValue, isSelected: selectedStatus == status)
                                 .onTapGesture {
                                     withAnimation {
                                         selectedStatus = status
@@ -95,7 +95,7 @@ struct OrdersScreen: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Orders")
+                    Text("orders")
                         .font(.title)
                         .fontWeight(.semibold)
                 }

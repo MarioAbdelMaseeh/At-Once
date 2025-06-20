@@ -13,8 +13,8 @@
 "login" = "Login";
 "no_account" = "Don’t have an account yet ?";
 "register_here" = "Register here";
-"discount_format" = "Discount: %d %%";
-"price_format" = "Price: %.2f EGP";
+//"discount_format" = "Discount: %d %%";
+"price_format" = "Price: %@ EGP";
 "add_to_cart" = "Add to Cart";
 "price" = "Price";
 "currency" = "EGP";
@@ -39,11 +39,6 @@
 "orders" = "Orders";
 
 
-
-
-
-
-
 "discount_format" = "Discount: %@%%";
 "cost_per_item_label" = "Cost per item: %@ EGP";
 "total_label" = "Total: %@ EGP";
@@ -64,3 +59,16 @@
 "log_out" = "Log out";
 
 "see_account_details" = "See Account details";
+
+"order_status_ordered" = "Ordered";
+"order_status_preparing" = "Preparing";
+"order_status_delivering" = "Delivering";
+"order_status_delivered" = "Delivered";
+"order_status_canceled" = "Canceled";
+"order_status_returned" = "Returned";
+
+"amount_only_format" = "%@ EGP";
+"items_format" = "%@ items";
+
+
+

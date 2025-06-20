@@ -29,14 +29,14 @@ struct ProductCardView: View {
                         .lineLimit(2)
                         
                         
-                    Text(String(format: NSLocalizedString("price_format", comment: ""), discount))
+                    Text(String(format: NSLocalizedString("discount_format", comment: ""), discount.localizedDigits))
                         .foregroundColor(.primaryTeal)
                         .font(.subheadline)
                         .padding(.bottom, 2)
                         //.padding(.top, 1)
 
                  //   Text("Price : \(String(format: "%.2f", price)) EGP")
-                    Text(String(format: NSLocalizedString("price_format", comment: ""), price))
+                    Text(String(format: NSLocalizedString("price_format", comment: ""), price.localizedDigits))
                     
                        // .padding(.bottom, 4)
                         .font(.subheadline)
@@ -52,10 +52,10 @@ struct ProductCardView: View {
             }
             HStack {
                 if !isSuppliers {
-                    MediumButton(buttonLabel: "add_to_cart", buttonIcon: "cart",color: Color.primaryTeal,
+                    MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
                                  action: {}).padding(.trailing,4)
                     
-                    MediumButton(buttonLabel: "suppliers", buttonIcon: "storefront",color: Color.darkGray, action: {
+                    MediumButton(buttonLabel: NSLocalizedString("suppliers", comment: ""), buttonIcon: "storefront",color: Color.darkGray, action: {
                         showSheet.toggle()
                     }).padding(.leading,4)
                     
@@ -69,7 +69,7 @@ struct ProductCardView: View {
 //                            .frame(width: geometry.size.width / 2)
 //                    }
                     
-                    MediumButton(buttonLabel: "add_to_cart", buttonIcon: "cart",color: Color.primaryTeal,
+                    MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
                                  action: {})
                     
                 }
@@ -103,5 +103,5 @@ struct ProductCardView: View {
 }
 
 #Preview {
-    ProductCardView(isSuppliers: true)
+    ProductCardView(isSuppliers: false)
 }
