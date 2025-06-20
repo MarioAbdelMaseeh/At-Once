@@ -7,26 +7,7 @@
 
 
 import SwiftUI
-//
-//struct HorizontalCollectionView: View {
-//    let items = Array(1...10)
-//
-//    var body: some View {
-//        ScrollView(.horizontal, showsIndicators: false) {
-//            HStack(spacing: 16) {
-//                ForEach(items, id: \.self) { item in
-//                    Button {
-//                        
-//                    } label: {
-//                        Image(.icon).resizable()
-//                            .frame(width: 350, height: 150)
-//                            .clipShape(RoundedRectangle(cornerRadius: 10))
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
+
 import SwiftUI
 
 struct AdCarouselView: View {
@@ -43,7 +24,7 @@ struct AdCarouselView: View {
                     Image(.icon)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: .infinity,height: 180)
+                        .frame(maxWidth: .infinity, minHeight: 180, maxHeight: 180)
                         .clipped()
                         .cornerRadius(12)
                         .tag(index)
@@ -57,7 +38,6 @@ struct AdCarouselView: View {
                 }
             }
 
-            // Custom page indicator (dots)
             HStack(spacing: 8) {
                 ForEach(images.indices, id: \.self) { index in
                     Circle()

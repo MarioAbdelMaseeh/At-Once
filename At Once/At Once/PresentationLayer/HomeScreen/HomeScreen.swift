@@ -18,7 +18,7 @@ struct HomeScreen: View {
                         HStack {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.gray)
-                            Text("Search...")
+                            Text("search_placeholder")
                                 .foregroundColor(.gray)
                                 .padding(8)
                             Spacer()
@@ -52,7 +52,7 @@ struct HomeScreen: View {
                         }
                     }
                     ToolbarItem(placement: .principal){
-                            Text("Home").font(.title).fontWeight(.semibold)
+                            Text("home").font(.title).fontWeight(.semibold)
                         }
                     ToolbarItem(placement: .topBarTrailing) {
                         NavigationLink {

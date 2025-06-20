@@ -40,17 +40,21 @@ struct CartCell: View {
                     
                     HStack(alignment: .bottom){
                         VStack(alignment: .leading){
-                            Text("Discount: \(order.discount)%")
+                            
+                            let localizedDiscount = NumberFormatter.localizedString(from: NSNumber(value: order.discount), number: .none)
+
+                            Text(String(format: NSLocalizedString("discount_format", comment: ""), localizedDiscount))
                                 .font(.caption)
                                 .foregroundColor(.primaryTeal)
                             
-                            Text("Cost per item: \(String(format:"%.2f", order.pricePerItem)) EGP")
+                            Text(String(format: NSLocalizedString("cost_per_item_label", comment: ""), order.pricePerItem.localizedDigits))
                                 .font(.caption2)
                                 .foregroundColor(.secondary)
-                            
-                            Text("Total: \(String(format:"%.2f", order.total)) EGP")
+
+                            Text(String(format: NSLocalizedString("total_label", comment: ""), order.total.localizedDigits))
                                 .font(.callout)
                                 .foregroundColor(.primary)
+
                         }
                         
                         

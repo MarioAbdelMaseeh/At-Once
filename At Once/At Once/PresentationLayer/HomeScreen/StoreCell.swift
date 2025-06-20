@@ -26,10 +26,13 @@ struct StoreCell: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
 
-                    Text("Minimum: \(store.storeMinOrder) EGP")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-
+                    Text(String(
+                        format: NSLocalizedString("minimum_order_format", comment: ""),
+                        store.storeMinOrder.localizedDigits
+                    ))
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    
                     Text("Delivery Daily")
                         .font(.subheadline)
                         .foregroundColor(.green)

@@ -31,10 +31,6 @@ struct MainTabView: View {
 
                 CustomTabBarView(selectedTab: $selectedTab)
             }
-            
-            
-            
-            
         }
     }
 //    var body: some View {

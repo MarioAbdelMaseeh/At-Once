@@ -22,27 +22,77 @@ struct RegisterView: View {
     let cities = ["Alexandria", "Cairo", "Giza", "Luxor", "Aswan"]
     @State var selectedArea = "Sidi Bishr"
     let areas = ["Sidi Bishr", "Smoha", "Miami", "Gleem"]
+    
     var body: some View {
-        ScrollView{
-            VStack(alignment: .leading, spacing: 16){
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
                 
-                TextFieldComponent(title: "Username", text: $username)
-                TextFieldComponent(title: "PharacyName", text: $pharmacyName)
-                PasswordFieldComponent(title: "Password",isPasswordVisible: $isPasswordVisible, password: $password)
-                PasswordFieldComponent(title: "ConfirmPassword",isPasswordVisible: $isConfirmPasswordVisible, password: $confirmPassword)
-                TextFieldComponent(title: "Email", text: $email)
-                TextFieldComponent(title: "Phone", text: $phone)
-                DropDownComponent(title: "Governorate", selectedOption: $selectedCity, options: cities)
-                DropDownComponent(title: "Area", selectedOption: $selectedArea, options: areas)
-                TextFieldComponent(title: "Address Details", text: $addressDetails)
-                QRCodeComponent(title: "Invitation Code", qrCode: $qrCode)
+                TextFieldComponent(
+                    title: NSLocalizedString("username", comment: ""),
+                    text: $username
+                )
+                
+                TextFieldComponent(
+                    title: NSLocalizedString("pharmacy_name", comment: ""),
+                    text: $pharmacyName
+                )
+                
+                PasswordFieldComponent(
+                    title: NSLocalizedString("password", comment: ""),
+                    isPasswordVisible: $isPasswordVisible,
+                    password: $password
+                )
+                
+                PasswordFieldComponent(
+                    title: NSLocalizedString("confirm_password", comment: ""),
+                    isPasswordVisible: $isConfirmPasswordVisible,
+                    password: $confirmPassword
+                )
+                
+                TextFieldComponent(
+                    title: NSLocalizedString("email", comment: ""),
+                    text: $email
+                )
+                
+                TextFieldComponent(
+                    title: NSLocalizedString("phone", comment: ""),
+                    text: $phone
+                )
+                
+                DropDownComponent(
+                    title: NSLocalizedString("governorate", comment: ""),
+                    selectedOption: $selectedCity,
+                    options: cities
+                )
+                
+                DropDownComponent(
+                    title: NSLocalizedString("area", comment: ""),
+                    selectedOption: $selectedArea,
+                    options: areas
+                )
+                
+                TextFieldComponent(
+                    title: NSLocalizedString("address_details", comment: ""),
+                    text: $addressDetails
+                )
+                
+                QRCodeComponent(
+                    title: NSLocalizedString("invitation_code", comment: ""),
+                    qrCode: $qrCode
+                )
+                
                 Spacer().frame(height: 16)
-                LargeButtonComponent(label: "Register") {
-                    
+                
+                LargeButtonComponent(
+                    label: NSLocalizedString("register", comment: "")
+                ) {
+                    // Register button action
                 }
-            }.padding()
-        }.navigationTitle("Register New Account")
-            .navigationBarTitleDisplayMode(.inline)
+            }
+            .padding()
+        }
+        .navigationTitle(NSLocalizedString("register_new_account", comment: ""))
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

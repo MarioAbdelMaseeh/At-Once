@@ -68,33 +68,49 @@ struct CartScreen: View {
                     }.padding()
                 }
                 Spacer()
-                VStack(alignment: .leading){
+                VStack(alignment: .leading) {
                     Group {
                         HStack {
-                            Text("SubTotal").font(.subheadline)
+                            Text(NSLocalizedString("subtotal", comment: ""))
+                                .font(.subheadline)
                             Spacer()
-                            Text("\(String(format: "%.2f", subTotal)) EGP").font(.subheadline)
+                            Text("\(NSLocalizedString("egp_currency", comment: "")) \(subTotal.localizedDigits)")
+                                .font(.subheadline)
                         }
+
                         HStack {
-                            Text("Discount").font(.footnote)
+                            Text(NSLocalizedString("discount", comment: ""))
+                                .font(.footnote)
                             Spacer()
-                            Text("\(String(format: "%.2f", discount)) EGP").font(.footnote)
+                            Text("\(NSLocalizedString("egp_currency", comment: "")) \(discount.localizedDigits)")
+                                .font(.footnote)
                         }
+
                         HStack {
-                            Text("Total").font(.title3)
+                            Text(NSLocalizedString("total", comment: ""))
+                                .font(.title3)
                             Spacer()
-                            Text("\(String(format: "%.2f", total)) EGP").font(.title3)
+                            Text("\(NSLocalizedString("egp_currency", comment: "")) \(total.localizedDigits)")
+                                .font(.title3)
                         }
                     }
-                    LargeButtonComponent(label: "Checkout \(String(format: "%.2f", total)) EGP") {
-                        
+
+                    LargeButtonComponent(
+                        label: String(
+                            format: NSLocalizedString("checkout_with_total", comment: ""),
+                            "\(total.localizedDigits) \(NSLocalizedString("egp_currency", comment: ""))"
+                        )
+                    ) {
+                        // checkout action
                     }
-                    
                 }.padding(.horizontal)
-            }.navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal){
-                    Text("Cart").font(.title).fontWeight(.semibold)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(NSLocalizedString("cart", comment: ""))
+                            .font(.title)
+                            .fontWeight(.semibold)
+                    }
                 }
             }
         }

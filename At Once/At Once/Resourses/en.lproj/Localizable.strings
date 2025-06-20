@@ -13,3 +13,39 @@
 "login" = "Login";
 "no_account" = "Don’t have an account yet ?";
 "register_here" = "Register here";
+
+"username" = "Username";
+"pharmacy_name" = "Pharmacy Name";
+"confirm_password" = "Confirm Password";
+"phone" = "Phone";
+"governorate" = "Governorate";
+"area" = "Area";
+"address_details" = "Address Details";
+"invitation_code" = "Invitation Code";
+"register" = "Register";
+"register_new_account" = "Register New Account";
+
+"minimum_order_format" = "Minimum: %@ EGP";
+"home" = "Home";
+"search_placeholder" = "Search...";
+
+"discount_format" = "Discount: %@%%";
+"cost_per_item_label" = "Cost per item: %@ EGP";
+"total_label" = "Total: %@ EGP";
+
+"egp_currency" = "EGP";
+"subtotal" = "SubTotal";
+"discount" = "Discount";
+"total" = "Total";
+"checkout_with_total" = "Checkout %@";
+"cart" = "Cart";
+
+"profile" = "Profile";
+"common_questions" = "Common Questions";
+"privacy_policy" = "Privacy & Policy";
+"contact_us" = "Contact Us";
+"about_us" = "About Us";
+"share_app" = "Share App";
+"log_out" = "Log out";
+
+"see_account_details" = "See Account details";
