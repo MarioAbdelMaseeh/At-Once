@@ -16,6 +16,7 @@ struct MainTabView: View {
 
     var body: some View {
         VStack() {
+            
             Group {
                 switch selectedTab {
                 case .home:
@@ -27,15 +28,9 @@ struct MainTabView: View {
                 case .orders:
                     OrdersScreen()
                 }
-                
-                
-                
+
                 CustomTabBarView(selectedTab: $selectedTab)
             }
-            
-            
-            
-            
         }
     }
 //    var body: some View {

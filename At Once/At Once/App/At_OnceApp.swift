@@ -12,7 +12,8 @@ struct At_OnceApp: App {
    
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            RegisterView()
+//            MainTabView()
         }
     }
 }

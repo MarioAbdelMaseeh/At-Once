@@ -16,7 +16,7 @@ struct QRCodeComponent: View {
                 .fontWeight(.semibold)
             
             HStack {
-                TextField("Invitation Code", text: $qrCode)
+                TextField(title, text: $qrCode)
                 
                 Button(action: {
                     

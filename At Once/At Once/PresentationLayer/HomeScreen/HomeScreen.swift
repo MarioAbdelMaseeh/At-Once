@@ -13,12 +13,12 @@ struct HomeScreen: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16){
-                    HorizontalCollectionView()
+                    AdCarouselView()
                     NavigationLink(destination: RegisterView(), label: {
                         HStack {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.gray)
-                            Text("Search...")
+                            Text("search_placeholder")
                                 .foregroundColor(.gray)
                                 .padding(8)
                             Spacer()
@@ -35,7 +35,7 @@ struct HomeScreen: View {
                             NavigationLink {
                                 StoreScreen()
                             } label: {
-                                StoreCell()
+                                StoreCell(store: Store(storeName: "My Pharmacy", storeAddress: "Pharmacy Address", storeMinOrder: 400))
                             }
                         }
                     }
@@ -52,7 +52,7 @@ struct HomeScreen: View {
                         }
                     }
                     ToolbarItem(placement: .principal){
-                            Text("Home").font(.title).fontWeight(.semibold)
+                            Text("home").font(.title).fontWeight(.semibold)
                         }
                     ToolbarItem(placement: .topBarTrailing) {
                         NavigationLink {
