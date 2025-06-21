@@ -11,7 +11,7 @@ struct StoreScreen: View {
 
     @State private var searchText: String = ""
     @State private var selectedFilter = "None"
-    @StateObject private var viewModel = StoreViewModel(
+    @StateObject private var viewModel = StoreScreenViewModel(
         useCase: FetchProductByWarehouseIdUseCaseImpl(
             warehouseRepository: WarehouseRepositoryImpl(
                 networkService: NetworkService()

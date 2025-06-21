@@ -6,7 +6,13 @@
 //
 import Combine
 
-class StoreViewModel: ObservableObject {
+protocol StoreScreenViewModelProtocol {
+    func loadProducts(warehouseId: Int)
+    func loadMoreIfNeeded(currentProduct: ProductOrder,warehouseId: Int)
+    func reset(warehouseId: Int)
+}
+
+class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
     @Published var products: [ProductOrder] = []
     @Published var isLoading: Bool = false
     @Published var hasMorePages: Bool = true
@@ -21,7 +27,7 @@ class StoreViewModel: ObservableObject {
         self.useCase = useCase
     }
 
-    func loadProducts(warehouseId: Int) {
+     func loadProducts(warehouseId: Int) {
         guard !isLoading, hasMorePages else { return }
 
         isLoading = true
@@ -45,13 +51,13 @@ class StoreViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    func loadMoreIfNeeded(currentProduct: ProductOrder, warehouseId: Int) {
+     func loadMoreIfNeeded(currentProduct: ProductOrder, warehouseId: Int) {
        guard let last = products.last, last.id == currentProduct.id else {return}
 
         loadProducts(warehouseId: warehouseId)
     }
 
-    func reset(warehouseId: Int) {
+     func reset(warehouseId: Int) {
         currentPage = 1
         hasMorePages = true
         products = []
