@@ -33,10 +33,23 @@
 		04DBB8B92DFADAEF006AA2FE /* At OnceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "At OnceUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		04011CCC2E06420F002944F5 /* Exceptions for "AtOnce" folder in "At Once" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 04DBB89C2DFADAEE006AA2FE /* At Once */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		04DBB89F2DFADAEE006AA2FE /* At Once */ = {
+		04DBB89F2DFADAEE006AA2FE /* AtOnce */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "At Once";
+			exceptions = (
+				04011CCC2E06420F002944F5 /* Exceptions for "AtOnce" folder in "At Once" target */,
+			);
+			path = AtOnce;
 			sourceTree = "<group>";
 		};
 		04DBB8B22DFADAEF006AA2FE /* At OnceTests */ = {
@@ -80,7 +93,7 @@
 		04DBB8942DFADAEE006AA2FE = {
 			isa = PBXGroup;
 			children = (
-				04DBB89F2DFADAEE006AA2FE /* At Once */,
+				04DBB89F2DFADAEE006AA2FE /* AtOnce */,
 				04DBB8B22DFADAEF006AA2FE /* At OnceTests */,
 				04DBB8BC2DFADAEF006AA2FE /* At OnceUITests */,
 				04DBB89E2DFADAEE006AA2FE /* Products */,
@@ -113,7 +126,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				04DBB89F2DFADAEE006AA2FE /* At Once */,
+				04DBB89F2DFADAEE006AA2FE /* AtOnce */,
 			);
 			name = "At Once";
 			packageProductDependencies = (
@@ -409,6 +422,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "At Once/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -436,6 +450,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "At Once/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
