@@ -7,4 +7,8 @@
 import Combine
 protocol WarehouseRepository{
     func getWarehousesByArea(areaId: Int, page: Int, pageSize: Int)-> AnyPublisher<[Warehouse],Error>
+    
+    func getProductsByWarehouseId(warehouseId: Int, page: Int, pageSize: Int)-> AnyPublisher<[ProductOrder],Error>
 }
+
+

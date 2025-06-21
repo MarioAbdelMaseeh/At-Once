@@ -23,7 +23,7 @@ struct CartCell: View {
                 VStack(alignment: .leading, spacing: 6) {
                     
                     HStack{
-                        Text(order.name)
+                        Text(order.arName)
                             .font(.headline)
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
@@ -106,8 +106,8 @@ struct CartCell: View {
         }
     }
 }
-#Preview {
-    CartCell( order:.constant(ProductOrder(name: "Order", quantity: 3, pricePerItem: 200, discount: 28))) {
-        
-    }
-}
+//#Preview {
+//    CartCell( order:.constant(ProductOrder(name: "Order", quantity: 3, pricePerItem: 200, discount: 28))) {
+//        
+//    }
+//}

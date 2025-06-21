@@ -14,11 +14,14 @@ struct StoreOrder: Identifiable {
     var orders: [ProductOrder]
 }
 struct ProductOrder: Identifiable {
-    let id = UUID()
-    var name: String
+    let id : Int
+    let arName: String
+    let enName: String
     var quantity: Int
-    var pricePerItem: Double
-    var discount: Int
+    let prePrice: Double
+    let pricePerItem: Double
+    let discount: Double
+    let imageUrl: String
     
     var total: Double {
         Double(quantity) * pricePerItem
