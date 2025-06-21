@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		04011B302E060FB7002944F5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 04011B2F2E060FB7002944F5 /* Alamofire */; };
-		041AE5A72E06ABF6000827B3 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 041AE5A62E06ABF6000827B3 /* Swinject */; };
-		041AE5F32E06B673000827B3 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 041AE5F22E06B673000827B3 /* Shimmer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,9 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				041AE5F32E06B673000827B3 /* Shimmer in Frameworks */,
 				04011B302E060FB7002944F5 /* Alamofire in Frameworks */,
-				041AE5A72E06ABF6000827B3 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +131,6 @@
 			name = AtOnce;
 			packageProductDependencies = (
 				04011B2F2E060FB7002944F5 /* Alamofire */,
-				041AE5A62E06ABF6000827B3 /* Swinject */,
-				041AE5F22E06B673000827B3 /* Shimmer */,
 			);
 			productName = "At Once";
 			productReference = 04DBB89D2DFADAEE006AA2FE /* AtOnce.app */;
@@ -223,8 +217,6 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				04011B2E2E060FB7002944F5 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				041AE5A52E06ABF6000827B3 /* XCRemoteSwiftPackageReference "Swinject" */,
-				041AE5F12E06B673000827B3 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 04DBB89E2DFADAEE006AA2FE /* Products */;
@@ -595,22 +587,6 @@
 				minimumVersion = 5.10.2;
 			};
 		};
-		041AE5A52E06ABF6000827B3 /* XCRemoteSwiftPackageReference "Swinject" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Swinject/Swinject.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.9.1;
-			};
-		};
-		041AE5F12E06B673000827B3 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -618,16 +594,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04011B2E2E060FB7002944F5 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		041AE5A62E06ABF6000827B3 /* Swinject */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 041AE5A52E06ABF6000827B3 /* XCRemoteSwiftPackageReference "Swinject" */;
-			productName = Swinject;
-		};
-		041AE5F22E06B673000827B3 /* Shimmer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 041AE5F12E06B673000827B3 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
-			productName = Shimmer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
