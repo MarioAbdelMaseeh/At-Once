@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "04DBB89C2DFADAEE006AA2FE"
-               BuildableName = "At Once.app"
-               BlueprintName = "At Once"
-               ReferencedContainer = "container:At Once.xcodeproj">
+               BuildableName = "AtOnce.app"
+               BlueprintName = "AtOnce"
+               ReferencedContainer = "container:AtOnce.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,9 +36,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "04DBB8AE2DFADAEF006AA2FE"
-               BuildableName = "At OnceTests.xctest"
-               BlueprintName = "At OnceTests"
-               ReferencedContainer = "container:At Once.xcodeproj">
+               BuildableName = "AtOnceTests.xctest"
+               BlueprintName = "AtOnceTests"
+               ReferencedContainer = "container:AtOnce.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "04DBB8B82DFADAEF006AA2FE"
-               BuildableName = "At OnceUITests.xctest"
-               BlueprintName = "At OnceUITests"
-               ReferencedContainer = "container:At Once.xcodeproj">
+               BuildableName = "AtOnceUITests.xctest"
+               BlueprintName = "AtOnceUITests"
+               ReferencedContainer = "container:AtOnce.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "04DBB89C2DFADAEE006AA2FE"
-            BuildableName = "At Once.app"
-            BlueprintName = "At Once"
-            ReferencedContainer = "container:At Once.xcodeproj">
+            BuildableName = "AtOnce.app"
+            BlueprintName = "AtOnce"
+            ReferencedContainer = "container:AtOnce.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -88,9 +88,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "04DBB89C2DFADAEE006AA2FE"
-            BuildableName = "At Once.app"
-            BlueprintName = "At Once"
-            ReferencedContainer = "container:At Once.xcodeproj">
+            BuildableName = "AtOnce.app"
+            BlueprintName = "AtOnce"
+            ReferencedContainer = "container:AtOnce.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

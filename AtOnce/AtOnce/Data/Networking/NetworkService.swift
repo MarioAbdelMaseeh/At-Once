@@ -27,6 +27,7 @@ class NetworkService: NetworkServiceProtocol{
                         case .success(let data):
                             promise(.success(data))
                         case .failure(let error):
+                            print(error )
                             promise(.failure(error))
                     }
                 }

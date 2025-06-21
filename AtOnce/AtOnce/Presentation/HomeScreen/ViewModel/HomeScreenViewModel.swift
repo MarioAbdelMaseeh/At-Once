@@ -23,11 +23,14 @@ class HomeScreenViewModel : HomeScreenViewModelProtocol{
     }
     
     func fetchWarehouses(areaId: Int, page: Int, pageSize: Int){
+        print("called func")
         isLoading = true
         useCase.excute(areaId: areaId, page: page, pageSize: pageSize).sink { [weak self] completion in
             self?.isLoading = false
+            print("completed")
             if case let .failure(error) = completion{
                 self?.errorMessage = error.localizedDescription
+                print(error.localizedDescription)
             }
         } receiveValue: {[weak self] warehouses in
             print("Received warehouses: \(warehouses.count)")

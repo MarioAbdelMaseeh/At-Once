@@ -28,18 +28,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04DBB89D2DFADAEE006AA2FE /* At Once.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "At Once.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		04DBB8AF2DFADAEF006AA2FE /* At OnceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "At OnceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		04DBB8B92DFADAEF006AA2FE /* At OnceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "At OnceUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		04DBB89D2DFADAEE006AA2FE /* AtOnce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtOnce.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		04DBB8AF2DFADAEF006AA2FE /* AtOnceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AtOnceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04DBB8B92DFADAEF006AA2FE /* AtOnceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AtOnceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		04011CCC2E06420F002944F5 /* Exceptions for "AtOnce" folder in "At Once" target */ = {
+		04011CCC2E06420F002944F5 /* Exceptions for "AtOnce" folder in "AtOnce" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 04DBB89C2DFADAEE006AA2FE /* At Once */;
+			target = 04DBB89C2DFADAEE006AA2FE /* AtOnce */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -47,7 +47,7 @@
 		04DBB89F2DFADAEE006AA2FE /* AtOnce */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				04011CCC2E06420F002944F5 /* Exceptions for "AtOnce" folder in "At Once" target */,
+				04011CCC2E06420F002944F5 /* Exceptions for "AtOnce" folder in "AtOnce" target */,
 			);
 			path = AtOnce;
 			sourceTree = "<group>";
@@ -103,9 +103,9 @@
 		04DBB89E2DFADAEE006AA2FE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				04DBB89D2DFADAEE006AA2FE /* At Once.app */,
-				04DBB8AF2DFADAEF006AA2FE /* At OnceTests.xctest */,
-				04DBB8B92DFADAEF006AA2FE /* At OnceUITests.xctest */,
+				04DBB89D2DFADAEE006AA2FE /* AtOnce.app */,
+				04DBB8AF2DFADAEF006AA2FE /* AtOnceTests.xctest */,
+				04DBB8B92DFADAEF006AA2FE /* AtOnceUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,9 +113,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		04DBB89C2DFADAEE006AA2FE /* At Once */ = {
+		04DBB89C2DFADAEE006AA2FE /* AtOnce */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 04DBB8C32DFADAEF006AA2FE /* Build configuration list for PBXNativeTarget "At Once" */;
+			buildConfigurationList = 04DBB8C32DFADAEF006AA2FE /* Build configuration list for PBXNativeTarget "AtOnce" */;
 			buildPhases = (
 				04DBB8992DFADAEE006AA2FE /* Sources */,
 				04DBB89A2DFADAEE006AA2FE /* Frameworks */,
@@ -128,17 +128,17 @@
 			fileSystemSynchronizedGroups = (
 				04DBB89F2DFADAEE006AA2FE /* AtOnce */,
 			);
-			name = "At Once";
+			name = AtOnce;
 			packageProductDependencies = (
 				04011B2F2E060FB7002944F5 /* Alamofire */,
 			);
 			productName = "At Once";
-			productReference = 04DBB89D2DFADAEE006AA2FE /* At Once.app */;
+			productReference = 04DBB89D2DFADAEE006AA2FE /* AtOnce.app */;
 			productType = "com.apple.product-type.application";
 		};
-		04DBB8AE2DFADAEF006AA2FE /* At OnceTests */ = {
+		04DBB8AE2DFADAEF006AA2FE /* AtOnceTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 04DBB8C62DFADAEF006AA2FE /* Build configuration list for PBXNativeTarget "At OnceTests" */;
+			buildConfigurationList = 04DBB8C62DFADAEF006AA2FE /* Build configuration list for PBXNativeTarget "AtOnceTests" */;
 			buildPhases = (
 				04DBB8AB2DFADAEF006AA2FE /* Sources */,
 				04DBB8AC2DFADAEF006AA2FE /* Frameworks */,
@@ -152,16 +152,16 @@
 			fileSystemSynchronizedGroups = (
 				04DBB8B22DFADAEF006AA2FE /* At OnceTests */,
 			);
-			name = "At OnceTests";
+			name = AtOnceTests;
 			packageProductDependencies = (
 			);
 			productName = "At OnceTests";
-			productReference = 04DBB8AF2DFADAEF006AA2FE /* At OnceTests.xctest */;
+			productReference = 04DBB8AF2DFADAEF006AA2FE /* AtOnceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		04DBB8B82DFADAEF006AA2FE /* At OnceUITests */ = {
+		04DBB8B82DFADAEF006AA2FE /* AtOnceUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 04DBB8C92DFADAEF006AA2FE /* Build configuration list for PBXNativeTarget "At OnceUITests" */;
+			buildConfigurationList = 04DBB8C92DFADAEF006AA2FE /* Build configuration list for PBXNativeTarget "AtOnceUITests" */;
 			buildPhases = (
 				04DBB8B52DFADAEF006AA2FE /* Sources */,
 				04DBB8B62DFADAEF006AA2FE /* Frameworks */,
@@ -175,11 +175,11 @@
 			fileSystemSynchronizedGroups = (
 				04DBB8BC2DFADAEF006AA2FE /* At OnceUITests */,
 			);
-			name = "At OnceUITests";
+			name = AtOnceUITests;
 			packageProductDependencies = (
 			);
 			productName = "At OnceUITests";
-			productReference = 04DBB8B92DFADAEF006AA2FE /* At OnceUITests.xctest */;
+			productReference = 04DBB8B92DFADAEF006AA2FE /* AtOnceUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -205,7 +205,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 04DBB8982DFADAEE006AA2FE /* Build configuration list for PBXProject "At Once" */;
+			buildConfigurationList = 04DBB8982DFADAEE006AA2FE /* Build configuration list for PBXProject "AtOnce" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -223,9 +223,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				04DBB89C2DFADAEE006AA2FE /* At Once */,
-				04DBB8AE2DFADAEF006AA2FE /* At OnceTests */,
-				04DBB8B82DFADAEF006AA2FE /* At OnceUITests */,
+				04DBB89C2DFADAEE006AA2FE /* AtOnce */,
+				04DBB8AE2DFADAEF006AA2FE /* AtOnceTests */,
+				04DBB8B82DFADAEF006AA2FE /* AtOnceUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -281,12 +281,12 @@
 /* Begin PBXTargetDependency section */
 		04DBB8B12DFADAEF006AA2FE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 04DBB89C2DFADAEE006AA2FE /* At Once */;
+			target = 04DBB89C2DFADAEE006AA2FE /* AtOnce */;
 			targetProxy = 04DBB8B02DFADAEF006AA2FE /* PBXContainerItemProxy */;
 		};
 		04DBB8BB2DFADAEF006AA2FE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 04DBB89C2DFADAEE006AA2FE /* At Once */;
+			target = 04DBB89C2DFADAEE006AA2FE /* AtOnce */;
 			targetProxy = 04DBB8BA2DFADAEF006AA2FE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -422,7 +422,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "At Once/Info.plist";
+				INFOPLIST_FILE = AtOnce/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -450,7 +450,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "At Once/Info.plist";
+				INFOPLIST_FILE = AtOnce/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -483,7 +483,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/At Once.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/At Once";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AtOnce.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AtOnce";
 			};
 			name = Debug;
 		};
@@ -501,7 +501,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/At Once.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/At Once";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AtOnce.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AtOnce";
 			};
 			name = Release;
 		};
@@ -540,7 +540,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		04DBB8982DFADAEE006AA2FE /* Build configuration list for PBXProject "At Once" */ = {
+		04DBB8982DFADAEE006AA2FE /* Build configuration list for PBXProject "AtOnce" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04DBB8C12DFADAEF006AA2FE /* Debug */,
@@ -549,7 +549,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		04DBB8C32DFADAEF006AA2FE /* Build configuration list for PBXNativeTarget "At Once" */ = {
+		04DBB8C32DFADAEF006AA2FE /* Build configuration list for PBXNativeTarget "AtOnce" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04DBB8C42DFADAEF006AA2FE /* Debug */,
@@ -558,7 +558,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		04DBB8C62DFADAEF006AA2FE /* Build configuration list for PBXNativeTarget "At OnceTests" */ = {
+		04DBB8C62DFADAEF006AA2FE /* Build configuration list for PBXNativeTarget "AtOnceTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04DBB8C72DFADAEF006AA2FE /* Debug */,
@@ -567,7 +567,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		04DBB8C92DFADAEF006AA2FE /* Build configuration list for PBXNativeTarget "At OnceUITests" */ = {
+		04DBB8C92DFADAEF006AA2FE /* Build configuration list for PBXNativeTarget "AtOnceUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04DBB8CA2DFADAEF006AA2FE /* Debug */,

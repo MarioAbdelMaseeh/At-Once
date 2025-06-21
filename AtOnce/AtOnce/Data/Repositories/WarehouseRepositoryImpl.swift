@@ -16,8 +16,8 @@ class WarehouseRepositoryImpl: WarehouseRepository{
     }
     
     func getWarehousesByArea(areaId: Int, page: Int, pageSize: Int) -> AnyPublisher<[Warehouse],Error> {
-        return networkService.request(_request: WarehouseAPI.getWarehousesByArea(areaId: areaId, page: page, pageSize: pageSize), responseType: [WarehouseDTO].self)
-            .map {$0.map {$0.toEntity()}
+        return networkService.request(_request: WarehouseAPI.getWarehousesByArea(areaId: areaId, page: page, pageSize: pageSize), responseType: APIResponse<[WarehouseDTO]>.self)
+            .map {$0.items.map {$0.toEntity()}
         }.eraseToAnyPublisher()
     }
 }

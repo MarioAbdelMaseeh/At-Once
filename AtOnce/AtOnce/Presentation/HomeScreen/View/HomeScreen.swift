@@ -32,7 +32,7 @@ struct HomeScreen: View {
                     })
                   
                     VStack(spacing: 16){
-                        ForEach(viewModel.warehouses, id: \.id){
+                        ForEach(viewModel.warehouses){
                             item in
                             NavigationLink {
                                 StoreScreen()
