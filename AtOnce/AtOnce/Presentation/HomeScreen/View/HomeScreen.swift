@@ -9,8 +9,10 @@ import SwiftUI
 
 struct HomeScreen: View {
     
-    @StateObject var viewModel = HomeScreenViewModel(useCase: GetWarehouseByAreaUseCaseImpl(warehouseRepository: WarehouseRepositoryImpl(networkService: NetworkService())))
-    
+    @StateObject var viewModel: HomeScreenViewModel
+    init() {
+        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(HomeScreenViewModelProtocol.self)! as! HomeScreenViewModel)
+    }
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -30,18 +32,24 @@ struct HomeScreen: View {
                         .background(Color(.systemGray6))
                         .cornerRadius(12)
                     })
-                  
+                    
                     VStack(spacing: 16){
+                        if(viewModel.isLoading){
+                            ForEach(0..<5, id: \.self) { _ in
+                                LoadingCell()
+                            }
+                        }
                         ForEach(viewModel.warehouses){
                             item in
                             NavigationLink {
                                 StoreScreen()
                             } label: {
                                 StoreCell(warehouse: item)
+                                    .onAppear{
+                                        viewModel.loadMoreIfNeeded(currentItem: item)
+                                    }
                             }
                         }
-                    }.onAppear{
-                        viewModel.fetchWarehouses(areaId: 2, page: 1, pageSize: 10)
                     }
                 }.padding()
             }.navigationBarTitleDisplayMode(.inline)
@@ -56,8 +64,8 @@ struct HomeScreen: View {
                         }
                     }
                     ToolbarItem(placement: .principal){
-                            Text("home").font(.title).fontWeight(.semibold)
-                        }
+                        Text("home").font(.title).fontWeight(.semibold)
+                    }
                     ToolbarItem(placement: .topBarTrailing) {
                         NavigationLink {
                             ProfileView()

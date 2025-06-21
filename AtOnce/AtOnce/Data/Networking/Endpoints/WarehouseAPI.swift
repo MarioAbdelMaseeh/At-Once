@@ -8,8 +8,6 @@ import Alamofire
 enum WarehouseAPI: APIRequest{
     case getWarehousesByArea(areaId: Int, page: Int, pageSize: Int)
     var baseURL: String{
-       // "http://predeploypharmaatonce.somee.com/"
-       // "http://predeploypharmaatonceafteredit.somee.com/"
         "http://www.pharmaatoncepredeploy.somee.com/"
     }
     
@@ -38,4 +36,3 @@ enum WarehouseAPI: APIRequest{
     
     
 }
-
