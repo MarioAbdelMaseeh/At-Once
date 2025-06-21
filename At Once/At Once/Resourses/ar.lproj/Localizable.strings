@@ -1,0 +1,76 @@
+/* 
+  Localizable.strings
+  At Once
+
+  Created by Iman Mahmoud on 20/06/2025.
+  
+*/
+"welcome_to" = "مرحبًا بك في";
+"at_once_pharma" = "أت ونس فارما";
+"email" = "البريد الإلكتروني";
+"password" = "كلمة المرور";
+"forget_password" = "هل نسيت كلمة المرور؟";
+"login" = "تسجيل الدخول";
+"no_account" = "ليس لديك حساب؟";
+"register_here" = "سجل من هنا";
+//"discount_format" = "الخصم: %d ٪";
+//"price_format" = "السعر: %.2f ج.م";
+"price_format" = "السعر: ‎%@ ج.م";
+"add_to_cart" = "أضف إلى السلة";
+"price" = "السعر";
+"product_name" = "اسم المنتج";
+"currency" = "ج.م";
+"products" = "المنتجات";
+"suppliers" = " الموزعين";
+"search" = "بحث";
+//"search_placeholder" = "ابحث...";
+"orders" = "الطلبات";
+
+
+"username" = "اسم المستخدم";
+"pharmacy_name" = "اسم الصيدلية";
+"confirm_password" = "تأكيد كلمة المرور";
+"phone" = "رقم الهاتف";
+"governorate" = "المحافظة";
+"area" = "المنطقة";
+"address_details" = "تفاصيل العنوان";
+"invitation_code" = "رمز الدعوة";
+"register" = "تسجيل";
+"register_new_account" = "تسجيل حساب جديد";
+
+"minimum_order_format" = "الحد الأدنى: ‎%@ ج.م";
+"home" = "الرئيسية";
+"search_placeholder" = "بحث...";
+
+"discount_format" = "الخصم: ‎%@٪";
+"cost_per_item_label" = "السعر لكل قطعة: ‎%@ ج.م";
+"total_label" = "الإجمالي: ‎%@ ج.م";
+
+"egp_currency" = "ج.م";
+"subtotal" = "الإجمالي قبل الخصم";
+"discount" = "الخصم";
+"total" = "الإجمالي";
+"checkout_with_total" = "ادفع %@";
+"cart" = "عربة التسوق";
+
+"profile" = "الملف الشخصي";
+"common_questions" = "الأسئلة الشائعة";
+"privacy_policy" = "الخصوصية والسياسة";
+"contact_us" = "تواصل معنا";
+"about_us" = "من نحن";
+"share_app" = "مشاركة التطبيق";
+"log_out" = "تسجيل الخروج";
+
+"see_account_details" = "عرض تفاصيل الحساب";
+
+"order_status_ordered" = "تم الطلب";
+"order_status_preparing" = "قيد التحضير";
+"order_status_delivering" = "جار التوصيل";
+"order_status_delivered" = "تم التوصيل";
+"order_status_canceled" = "تم الإلغاء";
+"order_status_returned" = "تم الإرجاع";
+"amount_only_format" = "%@ ج.م";
+"items_format" = "%@ قطع";
+
+
+
