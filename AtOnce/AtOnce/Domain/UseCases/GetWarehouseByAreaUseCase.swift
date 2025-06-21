@@ -16,7 +16,7 @@ class GetWarehouseByAreaUseCaseImpl: GetWarehouseByAreaUseCase{
     init(warehouseRepository: WarehouseRepository) {
         self.warehouseRepository = warehouseRepository
     }
-    func excute(areaId: Int, page: Int, pageSize: Int) -> AnyPublisher<[Warehouse], any Error> {
+    func excute(areaId: Int, page: Int, pageSize: Int) -> AnyPublisher<[Warehouse],Error> {
         return warehouseRepository.getWarehousesByArea(areaId: areaId, page: page, pageSize: pageSize)
     }
 }

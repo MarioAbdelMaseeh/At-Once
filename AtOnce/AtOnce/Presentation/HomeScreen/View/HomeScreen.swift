@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeScreen: View {
-//    let items = Array(1...10)
+    
     @StateObject var viewModel = HomeScreenViewModel(useCase: GetWarehouseByAreaUseCaseImpl(warehouseRepository: WarehouseRepositoryImpl(networkService: NetworkService())))
     
     var body: some View {

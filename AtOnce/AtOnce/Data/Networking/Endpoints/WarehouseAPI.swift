@@ -21,7 +21,7 @@ enum WarehouseAPI: APIRequest{
     
     var method: HTTPMethod{
         switch self {
-        case .getWarehousesByArea(areaId: let areaId, page: let page, pageSize: let pageSize):
+        case .getWarehousesByArea(areaId: _, page: _, pageSize: _):
                 .get
         }
     }
