@@ -52,14 +52,14 @@
 			path = AtOnce;
 			sourceTree = "<group>";
 		};
-		04DBB8B22DFADAEF006AA2FE /* At OnceTests */ = {
+		04DBB8B22DFADAEF006AA2FE /* AtOnceTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "At OnceTests";
+			path = AtOnceTests;
 			sourceTree = "<group>";
 		};
-		04DBB8BC2DFADAEF006AA2FE /* At OnceUITests */ = {
+		04DBB8BC2DFADAEF006AA2FE /* AtOnceUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "At OnceUITests";
+			path = AtOnceUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -94,8 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				04DBB89F2DFADAEE006AA2FE /* AtOnce */,
-				04DBB8B22DFADAEF006AA2FE /* At OnceTests */,
-				04DBB8BC2DFADAEF006AA2FE /* At OnceUITests */,
+				04DBB8B22DFADAEF006AA2FE /* AtOnceTests */,
+				04DBB8BC2DFADAEF006AA2FE /* AtOnceUITests */,
 				04DBB89E2DFADAEE006AA2FE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -150,7 +150,7 @@
 				04DBB8B12DFADAEF006AA2FE /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				04DBB8B22DFADAEF006AA2FE /* At OnceTests */,
+				04DBB8B22DFADAEF006AA2FE /* AtOnceTests */,
 			);
 			name = AtOnceTests;
 			packageProductDependencies = (
@@ -173,7 +173,7 @@
 				04DBB8BB2DFADAEF006AA2FE /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				04DBB8BC2DFADAEF006AA2FE /* At OnceUITests */,
+				04DBB8BC2DFADAEF006AA2FE /* AtOnceUITests */,
 			);
 			name = AtOnceUITests;
 			packageProductDependencies = (
