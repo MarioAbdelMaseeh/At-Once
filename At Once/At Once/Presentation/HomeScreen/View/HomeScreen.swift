@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct HomeScreen: View {
-    let items = Array(1...10)
+//    let items = Array(1...10)
+    @StateObject var viewModel = HomeScreenViewModel(useCase: GetWarehouseByAreaUseCaseImpl(warehouseRepository: WarehouseRepositoryImpl(networkService: NetworkService())))
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -30,14 +32,16 @@ struct HomeScreen: View {
                     })
                   
                     VStack(spacing: 16){
-                        ForEach(items,id: \.self){
+                        ForEach(viewModel.warehouses, id: \.id){
                             item in
                             NavigationLink {
                                 StoreScreen()
                             } label: {
-                                StoreCell(store: Store(storeName: "My Pharmacy", storeAddress: "Pharmacy Address", storeMinOrder: 400))
+                                StoreCell(warehouse: item)
                             }
                         }
+                    }.onAppear{
+                        viewModel.fetchWarehouses(areaId: 2, page: 1, pageSize: 10)
                     }
                 }.padding()
             }.navigationBarTitleDisplayMode(.inline)

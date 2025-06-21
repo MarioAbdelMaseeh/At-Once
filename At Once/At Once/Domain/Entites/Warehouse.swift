@@ -4,7 +4,7 @@
 //
 //  Created by mac on 21/06/2025.
 //
-struct Warehouse {
+struct Warehouse: Identifiable {
     let id: Int
     let name: String
     let address: String

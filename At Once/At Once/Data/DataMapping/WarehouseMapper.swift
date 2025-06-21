@@ -6,7 +6,7 @@
 //
 
 extension WarehouseDTO{
-    func toWarehouseEntity()->Warehouse{
+    func toEntity()->Warehouse{
         return Warehouse(id: self.id, name: self.name, address: self.address, imageUrl: self.imageUrl ?? "", minimumPrice: self.minimumPrice, delivaryRate: self.delivaryRate ?? "daily", governate: self.governate)
     }
 }
