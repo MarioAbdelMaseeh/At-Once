@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04011B302E060FB7002944F5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 04011B2F2E060FB7002944F5 /* Alamofire */; };
+		EE3468222E07740100306137 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = EE3468212E07740100306137 /* Swinject */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04011B302E060FB7002944F5 /* Alamofire in Frameworks */,
+				EE3468222E07740100306137 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +133,7 @@
 			name = AtOnce;
 			packageProductDependencies = (
 				04011B2F2E060FB7002944F5 /* Alamofire */,
+				EE3468212E07740100306137 /* Swinject */,
 			);
 			productName = "At Once";
 			productReference = 04DBB89D2DFADAEE006AA2FE /* AtOnce.app */;
@@ -217,6 +220,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				04011B2E2E060FB7002944F5 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				EE3468202E07740100306137 /* XCRemoteSwiftPackageReference "Swinject" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 04DBB89E2DFADAEE006AA2FE /* Products */;
@@ -587,6 +591,14 @@
 				minimumVersion = 5.10.2;
 			};
 		};
+		EE3468202E07740100306137 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -594,6 +606,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04011B2E2E060FB7002944F5 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		EE3468212E07740100306137 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE3468202E07740100306137 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
