@@ -11,13 +11,13 @@ protocol FetchProductByWarehouseIdUseCase{
 }
 
 class FetchProductByWarehouseIdUseCaseImpl: FetchProductByWarehouseIdUseCase{
-    let warehouseRepository: WarehouseRepository
+    let productRepository: ProductRepository
     
-    init(warehouseRepository: WarehouseRepository) {
-        self.warehouseRepository = warehouseRepository
+    init(productRepository: ProductRepository) {
+        self.productRepository = productRepository
     }
     func excute(warehouseId: Int, page: Int, pageSize: Int) -> AnyPublisher<[ProductOrder],Error> {
-        return warehouseRepository.getProductsByWarehouseId(warehouseId: warehouseId, page: page, pageSize: pageSize)
+        return productRepository.getProductsByWarehouseId(warehouseId: warehouseId, page: page, pageSize: pageSize)
     }
     
 }

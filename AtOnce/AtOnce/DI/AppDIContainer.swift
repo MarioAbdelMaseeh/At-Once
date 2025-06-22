@@ -13,6 +13,7 @@ class AppDIContainer{
     private init(){
         registerServices()
         container.registerHome()
+        container.registerProduct()
     }
     
     private func registerServices(){

@@ -11,13 +11,19 @@ struct StoreScreen: View {
 
     @State private var searchText: String = ""
     @State private var selectedFilter = "None"
-    @StateObject private var viewModel = StoreScreenViewModel(
-        useCase: FetchProductByWarehouseIdUseCaseImpl(
-            warehouseRepository: WarehouseRepositoryImpl(
-                networkService: NetworkService()
-            )
-        )
-    )
+    @StateObject var viewModel: StoreScreenViewModel
+    
+//    @StateObject private var viewModel = StoreScreenViewModel(
+//        useCase: FetchProductByWarehouseIdUseCaseImpl(
+//            warehouseRepository: WarehouseRepositoryImpl(
+//                networkService: NetworkService()
+//            )
+//        )
+//    )
+    
+    init() {
+        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel)
+    }
 
     let filterOptions = ["Option 1", "Option 2"]
 
