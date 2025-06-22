@@ -14,8 +14,8 @@ class SearchRepositoryImpl: SearchRepository{
         self.network = network
     }
     
-    func getProductsByText(text: String, page: Int, pageSize: Int) -> AnyPublisher<[SearchProduct], Error> {
-        network.request(_request: SearchAPI.SearchByText(text: text, page: page, pageSize: pageSize), responseType: APIResponse<[SearchProductDTO]>.self)
+    func getProductsByText(area: Int, text: String, page: Int, pageSize: Int) -> AnyPublisher<[SearchProduct], Error> {
+        network.request(_request: SearchAPI.SearchByText(area: area, text: text, page: page, pageSize: pageSize), responseType: APIResponse<[SearchProductDTO]>.self)
             .map { $0.items.map({  $0.toEntity() })}.eraseToAnyPublisher()
     }
     

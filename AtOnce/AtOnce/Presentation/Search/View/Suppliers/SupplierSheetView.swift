@@ -29,7 +29,7 @@ struct SupplierSheetView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     ForEach(0..<10) { _ in
-                        ProductCardView(isSuppliers: true) 
+//                        ProductCardView(product: <#T##SearchProduct#>, isSuppliersSheeet: true)
                     }
                 }
                 .padding()

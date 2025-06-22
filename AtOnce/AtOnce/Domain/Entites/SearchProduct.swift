@@ -5,8 +5,10 @@
 //  Created by mac on 22/06/2025.
 //
 
-struct SearchProduct{
-    
+import Foundation
+
+struct SearchProduct: Identifiable{
+    let id = UUID()
     let medicineId: Int
     let medicineName: String
     let drug: Int

@@ -8,7 +8,7 @@
 import Alamofire
 
 enum SearchAPI:APIRequest{
-    case SearchByText(text: String, page: Int, pageSize: Int)
+    case SearchByText(area: Int, text: String, page: Int, pageSize: Int)
     
     var baseURL: String{
         "http://www.pharmaatoncepredeploy.somee.com/"
@@ -16,8 +16,8 @@ enum SearchAPI:APIRequest{
     
     var path: String{
         switch self{
-        case .SearchByText(text: let text, page: let page, pageSize: let pageSize):
-            "api/Medicine/SearchNameByAreaPagination/2?page=\(page)&pageSize=\(pageSize)&search=\(text)"
+        case .SearchByText(area: let area, text: let text, page: let page, pageSize: let pageSize):
+            "api/Medicine/SearchNameByAreaPagination/\(area)?page=\(page)&pageSize=\(pageSize)&search=\(text)"
         }
     }
     
