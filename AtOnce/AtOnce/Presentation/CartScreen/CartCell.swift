@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CartCell: View {
-    @Binding var order: ProductOrder
+    @Binding var order: WarehouseProduct
     var delete: ()->Void = {}
     var body: some View {
         VStack(alignment: .leading) {

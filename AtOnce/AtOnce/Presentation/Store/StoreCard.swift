@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StoreCard: View {
-    let product : ProductOrder
+    let product : WarehouseProduct
     
 //    let discount : Int = 26
 //    let price : Double = 21
@@ -88,5 +88,5 @@ struct StoreCard: View {
 }
 
 #Preview {
-    StoreCard(product: ProductOrder(id: 1, arName: "ay 7aga", enName: "ay 7aga", quantity: 1, prePrice: 25, pricePerItem: 20, discount: 26.5, imageUrl: ""))
+    StoreCard(product: WarehouseProduct(id: 1, arName: "ay 7aga", enName: "ay 7aga", quantity: 1, prePrice: 25, pricePerItem: 20, discount: 26.5, imageUrl: ""))
 }

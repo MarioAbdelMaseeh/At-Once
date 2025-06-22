@@ -18,7 +18,7 @@ struct CartScreen: View {
     private var total: Double {
         subTotal - discount
     }
-    @State private var stores: [StoreOrder] = [
+    @State private var stores: [WarehouseOrder] = [
 //        StoreOrder(name: "Grocery Store", orders: [
 //            ProductOrder(name: "Apples", quantity: 3, pricePerItem: 5.0, discount: 10),
 //            ProductOrder(name: "Bananas", quantity: 2, pricePerItem: 4.5, discount: 20),

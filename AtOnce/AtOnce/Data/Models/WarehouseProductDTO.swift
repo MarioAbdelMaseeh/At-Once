@@ -5,7 +5,7 @@
 //  Created by Iman Mahmoud on 21/06/2025.
 //
 
-struct ProductDTO: Decodable {
+struct WarehouseProductDTO: Decodable {
     let medicineId: Int?
     let englishMedicineName: String?
     let arabicMedicineName: String?

@@ -1,12 +1,12 @@
 //
-//  Medicine.swift
+//  SearchProduct.swift
 //  AtOnce
 //
 //  Created by mac on 22/06/2025.
 //
 
-
-struct Medicine: Codable {
+struct SearchProduct{
+    
     let medicineId: Int
     let medicineName: String
     let drug: Int

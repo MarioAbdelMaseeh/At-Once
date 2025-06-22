@@ -8,6 +8,6 @@
 import Combine
 
 protocol ProductRepository{
-    func getProductsByWarehouseId(warehouseId: Int, page: Int, pageSize: Int)-> AnyPublisher<[ProductOrder],Error>
+    func getProductsByWarehouseId(warehouseId: Int, page: Int, pageSize: Int)-> AnyPublisher<[WarehouseProduct],Error>
 }
 

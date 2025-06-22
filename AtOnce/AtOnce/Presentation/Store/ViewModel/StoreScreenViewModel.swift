@@ -8,18 +8,18 @@ import Combine
 
 protocol StoreScreenViewModelProtocol {
     func loadProducts(warehouseId: Int)
-    func loadMoreIfNeeded(currentProduct: ProductOrder,warehouseId: Int)
+    func loadMoreIfNeeded(currentProduct: WarehouseProduct,warehouseId: Int)
     func reset(warehouseId: Int)
 }
 
 class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
-    @Published var products: [ProductOrder] = []
+    @Published var products: [WarehouseProduct] = []
     @Published var isLoading: Bool = false
     @Published var hasMorePages: Bool = true
     
     @Published var searchText: String = ""
     
-    var filteredProducts: [ProductOrder] {
+    var filteredProducts: [WarehouseProduct] {
         if searchText.isEmpty {
             return products
         } else {
@@ -64,7 +64,7 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
             .store(in: &cancellables)
     }
 
-     func loadMoreIfNeeded(currentProduct: ProductOrder, warehouseId: Int) {
+     func loadMoreIfNeeded(currentProduct: WarehouseProduct, warehouseId: Int) {
        guard let last = products.last, last.id == currentProduct.id else {return}
 
         loadProducts(warehouseId: warehouseId)

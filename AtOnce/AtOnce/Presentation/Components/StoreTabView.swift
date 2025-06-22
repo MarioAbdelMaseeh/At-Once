@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct StoreTabView: View {
-    let stores: [StoreOrder]
+    let stores: [WarehouseOrder]
     @Binding var selectedIndex: Int
 
     var body: some View {

@@ -8,12 +8,12 @@
 import Foundation
 
 
-struct StoreOrder: Identifiable {
+struct WarehouseOrder: Identifiable {
     var id = UUID()
     var name: String
-    var orders: [ProductOrder]
+    var orders: [WarehouseProduct]
 }
-struct ProductOrder: Identifiable {
+struct WarehouseProduct: Identifiable {
     let id : Int
     let arName: String
     let enName: String
