@@ -1,17 +1,17 @@
 //
-//  HomeScreenViewModel.swift
-//  At Once
+//  SearchViewModel.swift
+//  AtOnce
 //
-//  Created by mac on 21/06/2025.
+//  Created by mac on 22/06/2025.
 //
 
 import Combine
-protocol HomeScreenViewModelProtocol{
+protocol SearchViewModelProtocol{
     func fetchWarehouses(areaId: Int, page: Int, pageSize: Int)
     func loadMoreIfNeeded(currentItem: Warehouse?)
 }
 
-class HomeScreenViewModel : HomeScreenViewModelProtocol,  ObservableObject{
+class SearchViewModel : SearchViewModelProtocol,  ObservableObject{
     
     @Published var warehouses: [Warehouse] = []
     @Published var isLoading = false
