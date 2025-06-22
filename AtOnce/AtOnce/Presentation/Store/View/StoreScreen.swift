@@ -13,6 +13,8 @@ struct StoreScreen: View {
     @State private var selectedFilter = "None"
     @StateObject var viewModel: StoreScreenViewModel
     
+    let warehouseId : Int 
+    
     
     
 //    @StateObject private var viewModel = StoreScreenViewModel(
@@ -23,7 +25,8 @@ struct StoreScreen: View {
 //        )
 //    )
     
-    init() {
+    init(warehouseId : Int) {
+        self.warehouseId = warehouseId
         _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel)
     }
 
@@ -53,20 +56,27 @@ struct StoreScreen: View {
                 ScrollView {
 
                     LazyVGrid(columns: columns, spacing: 16) {
-                        ForEach(viewModel.filteredProducts) { product in
-                            StoreCard(product: product)
-                                .onAppear {
-                                    viewModel.loadMoreIfNeeded(
-                                        currentProduct: product,
-                                        warehouseId: 2
-                                    )
+                        if viewModel.isLoading || viewModel.products.isEmpty {
+                                ForEach(0..<6, id: \.self) { _ in
+                                    ShimmerCard()
                                 }
+                        } else{
+                            
+                            ForEach(viewModel.filteredProducts) { product in
+                                StoreCard(product: product)
+                                    .onAppear {
+                                        viewModel.loadMoreIfNeeded(
+                                            currentProduct: product,
+                                            warehouseId: warehouseId
+                                        )
+                                    }
+                            }
                         }
 
-                        if viewModel.isLoading {
-                            ProgressView()
-                                .frame(maxWidth: .infinity)
-                        }
+//                        if viewModel.isLoading {
+//                            ProgressView()
+//                                .frame(maxWidth: .infinity)
+//                        }
                     }
                     .padding(.horizontal)
                     .onAppear {
@@ -101,5 +111,5 @@ struct StoreScreen: View {
 }
 
 #Preview {
-    StoreScreen()
+    StoreScreen(warehouseId: 2)
 }

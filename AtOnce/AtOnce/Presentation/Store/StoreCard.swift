@@ -15,13 +15,33 @@ struct StoreCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8){
-            Image(.icon)
-                .resizable()
-                .scaledToFill()
-                .frame(height: 120)
-                .clipped()
-                .cornerRadius(8)
-
+            AsyncImage(url: URL(string: product.imageUrl)) { phase in
+                           switch phase {
+                           case .empty:
+                               Rectangle()
+                                   .fill(Color.gray.opacity(0.3))
+                                   .frame(height: 120)
+                                   .cornerRadius(8)
+                                   .shimmering()
+                           case .success(let image):
+                               image
+                                   .resizable()
+                                   .scaledToFill()
+                                   .frame(height: 120)
+                                   .clipped()
+                                   .cornerRadius(8)
+                           case .failure(_):
+                               Image(systemName: "photo")
+                                   .resizable()
+                                   .scaledToFit()
+                                   .frame(height: 120)
+                                   .foregroundColor(.gray)
+                                   .frame(maxWidth: .infinity)
+                                   .shimmering()
+                           @unknown default:
+                               EmptyView()
+                           }
+                       }
             
             Text(product.arName)
                 .font(.headline)
