@@ -70,5 +70,9 @@
 "amount_only_format" = "%@ EGP";
 "items_format" = "%@ items";
 
+"email_required" = "Email must not be empty";
+"password_required" = "Password must not be empty";
+
+
 
 

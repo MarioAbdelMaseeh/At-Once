@@ -8,20 +8,42 @@
 import SwiftUI
 
 struct StoreCard: View {
-    let discount : Int = 26
-    let price : Double = 21
+    let product : ProductOrder
+    
+//    let discount : Int = 26
+//    let price : Double = 21
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8){
-            Image(.icon)
-                .resizable()
-                .scaledToFill()
-                .frame(height: 120)
-                .clipped()
-                .cornerRadius(8)
-
+            AsyncImage(url: URL(string: product.imageUrl)) { phase in
+                           switch phase {
+                           case .empty:
+                               Rectangle()
+                                   .fill(Color.gray.opacity(0.3))
+                                   .frame(height: 120)
+                                   .cornerRadius(8)
+                                   .shimmering()
+                           case .success(let image):
+                               image
+                                   .resizable()
+                                   .scaledToFill()
+                                   .frame(height: 120)
+                                   .clipped()
+                                   .cornerRadius(8)
+                           case .failure(_):
+                               Image(systemName: "photo")
+                                   .resizable()
+                                   .scaledToFit()
+                                   .frame(height: 120)
+                                   .foregroundColor(.gray)
+                                   .frame(maxWidth: .infinity)
+                                   .shimmering()
+                           @unknown default:
+                               EmptyView()
+                           }
+                       }
             
-            Text("Product Name name")
+            Text(product.arName)
                 .font(.headline)
                // .fontWeight(.semibold)
 //                .font(.title2)
@@ -30,7 +52,7 @@ struct StoreCard: View {
             
           //  Text("Discount:\(discount) %")
            // Text("discount_label \(discount)")
-            Text(String(format: NSLocalizedString("discount_format", comment: ""), discount.localizedDigits))
+            Text(String(format: NSLocalizedString("discount_format", comment: ""), product.discount.localizedDigits))
                 .font(.subheadline)
                // .font(.title3)
              //   .fontWeight(.bold)
@@ -39,7 +61,7 @@ struct StoreCard: View {
             
             
          //  Text("Price : \(price) EGP")
-            Text(String(format: NSLocalizedString("price_format", comment: ""), price.localizedDigits))
+            Text(String(format: NSLocalizedString("price_format", comment: ""), product.pricePerItem.localizedDigits))
            
                 .font(.subheadline)
               //  .font(.title3)
@@ -66,5 +88,5 @@ struct StoreCard: View {
 }
 
 #Preview {
-    StoreCard()
+    StoreCard(product: ProductOrder(id: 1, arName: "ay 7aga", enName: "ay 7aga", quantity: 1, prePrice: 25, pricePerItem: 20, discount: 26.5, imageUrl: ""))
 }

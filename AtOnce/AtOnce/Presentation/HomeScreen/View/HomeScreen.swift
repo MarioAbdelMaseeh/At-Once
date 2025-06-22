@@ -42,7 +42,7 @@ struct HomeScreen: View {
                         ForEach(viewModel.warehouses){
                             item in
                             NavigationLink {
-                                StoreScreen()
+                                StoreScreen(warehouseId: item.id)
                             } label: {
                                 StoreCell(warehouse: item)
                                     .onAppear{
