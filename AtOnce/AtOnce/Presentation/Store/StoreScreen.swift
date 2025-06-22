@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StoreScreen: View {
 
-    @State private var searchText: String = ""
+   // @State private var searchText: String = ""
     @State private var selectedFilter = "None"
     @StateObject var viewModel: StoreScreenViewModel
     
@@ -41,7 +41,7 @@ struct StoreScreen: View {
             VStack {
 
                 HStack {
-                    SearchBarComponents(searchText: $searchText)
+                    SearchBarComponents(searchText: $viewModel.searchText)
                     FilterMenuComponent(
                         options: filterOptions,
                         selectedOption: $selectedFilter
@@ -53,7 +53,7 @@ struct StoreScreen: View {
                 ScrollView {
 
                     LazyVGrid(columns: columns, spacing: 16) {
-                        ForEach(viewModel.products) { product in
+                        ForEach(viewModel.filteredProducts) { product in
                             StoreCard(product: product)
                                 .onAppear {
                                     viewModel.loadMoreIfNeeded(

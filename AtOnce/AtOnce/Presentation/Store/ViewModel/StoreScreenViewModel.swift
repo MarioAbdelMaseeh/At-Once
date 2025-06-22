@@ -16,6 +16,19 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
     @Published var products: [ProductOrder] = []
     @Published var isLoading: Bool = false
     @Published var hasMorePages: Bool = true
+    
+    @Published var searchText: String = ""
+    
+    var filteredProducts: [ProductOrder] {
+        if searchText.isEmpty {
+            return products
+        } else {
+            return products.filter {
+                $0.arName.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
+    
 
     private var currentPage = 1
     private let pageSize = 10
