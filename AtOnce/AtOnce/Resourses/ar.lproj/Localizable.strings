@@ -72,5 +72,8 @@
 "amount_only_format" = "%@ ج.م";
 "items_format" = "%@ قطع";
 
+"email_required" = "يجب إدخال البريد الإلكتروني";
+"password_required" = "يجب إدخال كلمة المرور";
+
 
 

@@ -12,6 +12,7 @@ protocol GetWarehouseByAreaUseCase{
 }
 
 class GetWarehouseByAreaUseCaseImpl: GetWarehouseByAreaUseCase{
+   
     let warehouseRepository: WarehouseRepository
     init(warehouseRepository: WarehouseRepository) {
         self.warehouseRepository = warehouseRepository
@@ -20,3 +21,8 @@ class GetWarehouseByAreaUseCaseImpl: GetWarehouseByAreaUseCase{
         return warehouseRepository.getWarehousesByArea(areaId: areaId, page: page, pageSize: pageSize)
     }
 }
+
+
+
+   
+        
