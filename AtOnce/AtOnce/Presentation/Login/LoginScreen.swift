@@ -9,10 +9,16 @@
 import SwiftUI
 
 struct LoginScreen: View {
+    @StateObject var viewModel: LoginScreenViewModel
+    
     @State private var email = ""
     @State private var password = ""
     @State private var isPasswordVisible = false
     let buttonLabel = NSLocalizedString("login", comment: "")
+    
+    init() {
+        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(LoginScreenViewModelProtocol.self)! as! LoginScreenViewModel)
+    }
 
     var body: some View {
         NavigationStack {
@@ -55,7 +61,7 @@ struct LoginScreen: View {
 
                 
                 LargeButtonComponent(label: buttonLabel){
-                    
+                    viewModel.login(email: email, password: password)
                 }
 
                 Spacer().frame(height: 80)

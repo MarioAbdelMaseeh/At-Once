@@ -7,11 +7,11 @@
 
 import Combine
 
-protocol LoginScreenViewModel{
+protocol LoginScreenViewModelProtocol{
     func login(email: String, password: String)
 }
 
-class LoginScreenViewModelImpl:LoginScreenViewModel, ObservableObject {
+class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
     @Published var loginResponse: LoginResponse?
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
@@ -36,6 +36,8 @@ class LoginScreenViewModelImpl:LoginScreenViewModel, ObservableObject {
                 }
             } receiveValue: { [weak self] response in
                 self?.loginResponse = response
+                
+                print(response)
             }
             .store(in: &cancellables)
     }

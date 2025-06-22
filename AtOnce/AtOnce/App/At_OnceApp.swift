@@ -14,6 +14,8 @@ struct At_OnceApp: App {
         WindowGroup {
            // RegisterView()
               MainTabView()
+           //LoginScreen()
+            
         }
     }
 }
