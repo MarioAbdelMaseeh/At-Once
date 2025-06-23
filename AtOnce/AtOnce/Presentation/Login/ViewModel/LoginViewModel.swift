@@ -37,7 +37,7 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
     @Published var loginSuccess: Bool?
     
     
-   private let useCase : LoginUseCase
+    private let useCase : LoginUseCase
     private var cancellables = Set<AnyCancellable>()
     
     init(useCase: LoginUseCase) {

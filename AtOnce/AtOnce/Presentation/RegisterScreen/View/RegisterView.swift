@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import CodeScanner
 
 struct RegisterView: View {
+    
     @State var username: String = ""
     @State var pharmacyName: String = ""
     @State var password: String = ""
@@ -18,10 +20,22 @@ struct RegisterView: View {
     @State var phone: String = ""
     @State var addressDetails: String = ""
     @State var qrCode: String = ""
-    @State private var selectedCity = "Alexandria"
-    let cities = ["Alexandria", "Cairo", "Giza", "Luxor", "Aswan"]
+    
+    @State private var selectedGovernorateName: String = ""
+    
     @State var selectedArea = "Sidi Bishr"
     let areas = ["Sidi Bishr", "Smoha", "Miami", "Gleem"]
+    
+    @StateObject var viewModel: RegisterViewModel
+    
+    @State var showErrorAlert : Bool = false
+    
+    @State private var isShowingScanner = false  // Add this
+    
+    init() {
+        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(RegisterViewModelProtocol.self)! as! RegisterViewModel)
+    }
+
     
     var body: some View {
         ScrollView {
@@ -61,10 +75,10 @@ struct RegisterView: View {
                 
                 DropDownComponent(
                     title: NSLocalizedString("governorate", comment: ""),
-                    selectedOption: $selectedCity,
-                    options: cities
+                    selectedOption: $selectedGovernorateName,
+                    options: viewModel.governorateList.map { $0.name }
                 )
-                
+
                 DropDownComponent(
                     title: NSLocalizedString("area", comment: ""),
                     selectedOption: $selectedArea,
@@ -78,24 +92,66 @@ struct RegisterView: View {
                 
                 QRCodeComponent(
                     title: NSLocalizedString("invitation_code", comment: ""),
-                    qrCode: $qrCode
+                    qrCode: $qrCode,
+                    onScanTapped: {
+                        isShowingScanner = true
+                    }
                 )
                 
                 Spacer().frame(height: 16)
                 
+                if let errorMessage = viewModel.errorMessage {
+                    Spacer().frame(height: 16)
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .font(.caption)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                
                 LargeButtonComponent(
                     label: NSLocalizedString("register", comment: "")
                 ) {
-                    // Register button action
+                    viewModel.validateRegister(username: username, pharmacyName: pharmacyName, password: password, confirmPassword: confirmPassword, email: email, phone: phone, addressDetails: addressDetails, qrCode: qrCode)
                 }
             }
             .padding()
         }
+        .sheet(isPresented: $isShowingScanner) {
+            #if targetEnvironment(simulator)
+            // Fallback for Simulator
+            VStack(spacing: 20) {
+                Text("Simulator QR Test")
+                    .font(.headline)
+
+                Button("Use Test QR Code") {
+                    // Simulate QR code result
+                    qrCode = "SIMULATED-QR-CODE-1234"
+                    isShowingScanner = false
+                }
+                
+                Button("Cancel") {
+                    isShowingScanner = false
+                }
+            }
+            .padding()
+            #else
+            // Real camera scanner for device
+            CodeScannerView(codeTypes: [.qr], completion: handleScan)
+            #endif
+        }
         .navigationTitle(NSLocalizedString("register_new_account", comment: ""))
         .navigationBarTitleDisplayMode(.inline)
     }
+    
+    private func handleScan(result: Result<ScanResult, ScanError>) {
+            isShowingScanner = false
+            switch result {
+            case .success(let scan):
+                qrCode = scan.string
+            case .failure(let error):
+                print("QR scan failed: \(error.localizedDescription)")
+            }
+        }
 }
 
-#Preview {
-    RegisterView()
-}
+

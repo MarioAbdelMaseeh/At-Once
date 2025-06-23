@@ -18,5 +18,15 @@ extension Container{
         self.register((LoginScreenViewModelProtocol).self) { r in
             LoginScreenViewModel(useCase: r.resolve(LoginUseCase.self)!)
         }
+        
+        self.register(GovernorateRepository.self) { r in
+            GovernorateRepositoryImpl(networkService: r.resolve(NetworkServiceProtocol.self)!)
+        }
+        self.register(GetAllGovernoratesUseCase.self) { r in
+            GetAllGovernoratesUseCaseUseCaseImpl(governorateRepository:r.resolve(GovernorateRepository.self)!)
+        }
+        self.register((RegisterViewModelProtocol).self) { r in
+            RegisterViewModel(governoratesUseCase: r.resolve(GetAllGovernoratesUseCase.self)!)
+        }
     }
 }

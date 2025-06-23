@@ -10,6 +10,7 @@
 		04011B302E060FB7002944F5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 04011B2F2E060FB7002944F5 /* Alamofire */; };
 		041AE5A72E06ABF6000827B3 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 041AE5A62E06ABF6000827B3 /* Swinject */; };
 		041AE5F32E06B673000827B3 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 041AE5F22E06B673000827B3 /* Shimmer */; };
+		B83DCD212E09A730009FE751 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = B83DCD202E09A730009FE751 /* CodeScanner */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		04011CCC2E06420F002944F5 /* Exceptions for "AtOnce" folder in "AtOnce" target */ = {
+		B83DD1072E09CCB0009FE751 /* Exceptions for "AtOnce" folder in "AtOnce" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -49,7 +50,7 @@
 		04DBB89F2DFADAEE006AA2FE /* AtOnce */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				04011CCC2E06420F002944F5 /* Exceptions for "AtOnce" folder in "AtOnce" target */,
+				B83DD1072E09CCB0009FE751 /* Exceptions for "AtOnce" folder in "AtOnce" target */,
 			);
 			path = AtOnce;
 			sourceTree = "<group>";
@@ -71,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B83DCD212E09A730009FE751 /* CodeScanner in Frameworks */,
 				041AE5F32E06B673000827B3 /* Shimmer in Frameworks */,
 				04011B302E060FB7002944F5 /* Alamofire in Frameworks */,
 				041AE5A72E06ABF6000827B3 /* Swinject in Frameworks */,
@@ -137,6 +139,7 @@
 				04011B2F2E060FB7002944F5 /* Alamofire */,
 				041AE5A62E06ABF6000827B3 /* Swinject */,
 				041AE5F22E06B673000827B3 /* Shimmer */,
+				B83DCD202E09A730009FE751 /* CodeScanner */,
 			);
 			productName = "At Once";
 			productReference = 04DBB89D2DFADAEE006AA2FE /* AtOnce.app */;
@@ -225,6 +228,7 @@
 				04011B2E2E060FB7002944F5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				041AE5A52E06ABF6000827B3 /* XCRemoteSwiftPackageReference "Swinject" */,
 				041AE5F12E06B673000827B3 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				B83DCD1F2E09A730009FE751 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 04DBB89E2DFADAEE006AA2FE /* Products */;
@@ -611,6 +615,14 @@
 				minimumVersion = 1.5.1;
 			};
 		};
+		B83DCD1F2E09A730009FE751 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -628,6 +640,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 041AE5F12E06B673000827B3 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
 			productName = Shimmer;
+		};
+		B83DCD202E09A730009FE751 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B83DCD1F2E09A730009FE751 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
