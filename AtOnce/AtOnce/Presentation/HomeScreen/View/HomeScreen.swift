@@ -9,9 +9,9 @@ import SwiftUI
 
 struct HomeScreen: View {
     
-    @StateObject var viewModel: HomeScreenViewModel
-    init() {
-        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(HomeScreenViewModelProtocol.self)! as! HomeScreenViewModel)
+    @ObservedObject var viewModel: HomeScreenViewModel
+    init(viewModel: HomeScreenViewModel) {
+        self.viewModel = viewModel
     }
     var body: some View {
         NavigationStack {
@@ -80,6 +80,6 @@ struct HomeScreen: View {
     }
 }
 
-#Preview {
-    HomeScreen()
-}
+//#Preview {
+//    HomeScreen()
+//}

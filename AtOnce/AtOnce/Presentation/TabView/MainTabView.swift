@@ -16,19 +16,17 @@ struct MainTabView: View {
 
     var body: some View {
         VStack() {
-            
             Group {
                 switch selectedTab {
                 case .home:
-                    HomeScreen()
+                    HomeScreen(viewModel: AppDIContainer.shared.container.resolve(HomeScreenViewModelProtocol.self) as! HomeScreenViewModel)
                 case .search:
-                    SearchScreen()
+                    SearchScreen(viewModel: AppDIContainer.shared.container.resolve(SearchViewModelProtocol.self) as! SearchViewModel)
                 case .cart:
                     CartScreen()
                 case .orders:
                     OrdersScreen()
                 }
-
                 CustomTabBarView(selectedTab: $selectedTab)
             }
         }

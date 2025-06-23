@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct SearchScreen: View {
-    @StateObject private var viewModel: SearchViewModel
+    @ObservedObject private var viewModel: SearchViewModel
     @State private var selectedFilter = "None"
     
     let filterOptions = ["Option 1", "Option 2"]
-    init() {
-        _viewModel = StateObject(wrappedValue: SearchViewModel(useCase: SearchUseCaseImpl(repo: SearchRepositoryImpl(network: NetworkService()))))
-        
+    init(viewModel: SearchViewModel) {
+        self.viewModel = viewModel
     }
     var body: some View {
         NavigationStack {
@@ -73,9 +72,9 @@ struct SearchScreen: View {
     }
 }
 
-#Preview {
-    SearchScreen()
-}
+//#Preview {
+//    SearchScreen()
+//}
 
 
 
