@@ -62,7 +62,7 @@ struct StoreScreen: View {
                                 }
                         } else{
                             
-                            ForEach(viewModel.filteredProducts) { product in
+                            ForEach(viewModel.products) { product in
                                 StoreCard(product: product)
                                     .onAppear {
                                         viewModel.loadMoreIfNeeded(

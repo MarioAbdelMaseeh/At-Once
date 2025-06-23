@@ -19,15 +19,16 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
     
     @Published var searchText: String = ""
     
-    var filteredProducts: [ProductOrder] {
-        if searchText.isEmpty {
-            return products
-        } else {
-            return products.filter {
-                $0.arName.localizedCaseInsensitiveContains(searchText)
-            }
-        }
-    }
+    
+//    var filteredProducts: [ProductOrder] {
+//        if searchText.isEmpty {
+//            return products
+//        } else {
+//            return products.filter {
+//                $0.arName.localizedCaseInsensitiveContains(searchText)
+//            }
+//        }
+//    }
     
 
     private var currentPage = 1
@@ -45,7 +46,7 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
 
         isLoading = true
 
-        useCase.excute(warehouseId: warehouseId, page: currentPage, pageSize: pageSize)
+         useCase.excute(warehouseId: warehouseId, page: currentPage, pageSize: pageSize)
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case let .failure(error) = completion {
