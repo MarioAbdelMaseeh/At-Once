@@ -9,5 +9,7 @@ import Combine
 
 protocol ProductRepository{
     func getProductsByWarehouseId(warehouseId: Int, page: Int, pageSize: Int)-> AnyPublisher<[ProductOrder],Error>
+    
+    func getSuppliersByProductId(areaId: Int, productId: Int)-> AnyPublisher<[SuppliersProduct],Error>
 }
 

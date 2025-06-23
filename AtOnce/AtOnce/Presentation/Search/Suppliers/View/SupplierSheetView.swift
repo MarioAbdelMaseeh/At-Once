@@ -8,6 +8,20 @@
 import SwiftUI
 
 struct SupplierSheetView: View {
+    @StateObject var viewModel: SuppliersScreenViewModel
+    
+    let productId : Int
+    let productImage : String
+    
+    init(productId : Int, productImage : String) {
+        self.productId = productId
+        self.productImage = productImage
+        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(SuppliersScreenViewModelProtocol.self)! as! SuppliersScreenViewModel)
+    }
+    
+    
+    
+    
     var body: some View {
         VStack(spacing: 8) {
 
@@ -28,19 +42,24 @@ struct SupplierSheetView: View {
 
             ScrollView {
                 VStack(spacing: 16) {
-                    ForEach(0..<10) { _ in
-                        ProductCardView(isSuppliers: true) 
+                    ForEach(viewModel.suppliersProduct) { product in
+                       SuppliersProductCard(suppliersProduct: product)
                     }
                 }
                 .padding()
             }
+            
         }
         .background(Color(.systemBackground))
         .cornerRadius(20)
+        .onAppear {
+            viewModel.loadSuppliersProduct(areaId: 2, ProductId: 3/*productId*/)
+        }
+        
     }
 }
 
 
-#Preview {
-    SupplierSheetView()
-}
+//#Preview {
+//    SupplierSheetView()
+//}
