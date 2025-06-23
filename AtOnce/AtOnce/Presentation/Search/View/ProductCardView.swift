@@ -11,6 +11,7 @@ struct ProductCardView: View {
     let product: SearchProduct
     var hasSuppliers: Bool{
         product.distributorsCount != 0
+      //  false
     }
     var isSuppliersSheeet = false
     @State private var showSheet = false
@@ -45,10 +46,11 @@ struct ProductCardView: View {
                 }
             }
             HStack {
+               
                 if hasSuppliers {
+                    
                     MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
                                  action: {}).padding(.trailing,4)
-                    
                     MediumButton(buttonLabel: NSLocalizedString("suppliers", comment: ""), buttonIcon: "storefront",color: Color.darkGray, action: {
                         showSheet.toggle()
                     }).padding(.leading,4)
@@ -56,7 +58,7 @@ struct ProductCardView: View {
                     
                 }else{
                     
-                    Spacer().frame(width:( UIScreen.main.bounds.width / 2)-30)
+                    
                     
                     //                    GeometryReader { geometry in
                     //                        Spacer()
@@ -65,7 +67,7 @@ struct ProductCardView: View {
                     
                     MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
                                  action: {})
-                    
+                    Spacer().frame(width:( UIScreen.main.bounds.width / 2)-30)
                 }
             }
         }
@@ -76,7 +78,7 @@ struct ProductCardView: View {
         
         
         .sheet(isPresented: $showSheet) {
-            SupplierSheetView().padding(.top)
+            SupplierSheetView(productId: 3, productImage: "").padding(.top)
                 .presentationDetents([.medium, .fraction(0.85)])
                 .presentationDragIndicator(.visible)
                 .presentationCornerRadius(20)

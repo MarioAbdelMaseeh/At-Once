@@ -11,8 +11,8 @@ import SwiftUI
 struct LoginScreen: View {
     @StateObject var viewModel: LoginScreenViewModel
     
-//    @State private var email = ""
-//    @State private var password = ""
+    @State private var email = ""
+    @State private var password = ""
     @State var showErrorAlert : Bool = false
     @State var ShowSuccessAlert : Bool = false
     @State private var isPasswordVisible = false
@@ -45,7 +45,7 @@ struct LoginScreen: View {
                 }.padding(.bottom,32)
 
               
-                TextFieldComponent(title: NSLocalizedString("email", comment: ""), text: $viewModel.email)
+                TextFieldComponent(title: NSLocalizedString("email", comment: ""), text: /*$viewModel.*/$email)
 //                    .padding(.bottom, 16)
                 if let emailError = viewModel.emailError {
                     Text(emailError)
@@ -58,7 +58,7 @@ struct LoginScreen: View {
                     
                 
                
-                PasswordFieldComponent(title:NSLocalizedString("password", comment: ""),isPasswordVisible: $isPasswordVisible, password: $viewModel.password)
+                PasswordFieldComponent(title:NSLocalizedString("password", comment: ""),isPasswordVisible: $isPasswordVisible, password: /*$viewModel.*/$password)
                     .padding(.top,16)
                 
                 if let passwordError = viewModel.passwordError {
@@ -84,7 +84,7 @@ struct LoginScreen: View {
 
                 
                 LargeButtonComponent(label: buttonLabel){
-                    viewModel.login()
+                    viewModel.login(email: email, password: password)
                 }
 
                 Spacer().frame(height: 80)
