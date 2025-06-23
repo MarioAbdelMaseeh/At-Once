@@ -22,9 +22,8 @@ struct RegisterView: View {
     @State var qrCode: String = ""
     
     @State private var selectedGovernorateName: String = ""
-    
-    @State var selectedArea = "Sidi Bishr"
-    let areas = ["Sidi Bishr", "Smoha", "Miami", "Gleem"]
+    @State private var selectedGovernorateId: Int?
+    @State private var selectedAreaName: String = ""
     
     @StateObject var viewModel: RegisterViewModel
     
@@ -35,7 +34,10 @@ struct RegisterView: View {
     init() {
         _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(RegisterViewModelProtocol.self)! as! RegisterViewModel)
     }
-
+    
+    private func governorateId(for name: String) -> Int? {
+        viewModel.governorateList.first(where: { $0.name == name })?.id
+    }
     
     var body: some View {
         ScrollView {
@@ -77,13 +79,20 @@ struct RegisterView: View {
                     title: NSLocalizedString("governorate", comment: ""),
                     selectedOption: $selectedGovernorateName,
                     options: viewModel.governorateList.map { $0.name }
-                )
+                ).onChange(of: selectedGovernorateName) { newName in
+                    if let id = governorateId(for: newName) {
+                        selectedGovernorateId = id
+                        selectedAreaName = ""
+                        viewModel.fetchAllAreasByGovernorateId(governorateId: id)
+                    }
+                }
 
                 DropDownComponent(
                     title: NSLocalizedString("area", comment: ""),
-                    selectedOption: $selectedArea,
-                    options: areas
+                    selectedOption: $selectedAreaName,
+                    options: viewModel.areasList.map { $0.name }
                 )
+                .disabled(selectedGovernorateName.isEmpty)
                 
                 TextFieldComponent(
                     title: NSLocalizedString("address_details", comment: ""),
@@ -101,7 +110,7 @@ struct RegisterView: View {
                 Spacer().frame(height: 16)
                 
                 if let errorMessage = viewModel.errorMessage {
-                    Spacer().frame(height: 16)
+                    //Spacer().frame(height: 16)
                     Text(errorMessage)
                         .foregroundColor(.red)
                         .font(.caption)
@@ -111,7 +120,18 @@ struct RegisterView: View {
                 LargeButtonComponent(
                     label: NSLocalizedString("register", comment: "")
                 ) {
-                    viewModel.validateRegister(username: username, pharmacyName: pharmacyName, password: password, confirmPassword: confirmPassword, email: email, phone: phone, addressDetails: addressDetails, qrCode: qrCode)
+                    viewModel.validateRegister(
+                        username: username,
+                        pharmacyName: pharmacyName,
+                        password: password,
+                        confirmPassword: confirmPassword,
+                        email: email,
+                        phone: phone,
+                        addressDetails: addressDetails,
+                        governorateName: selectedGovernorateName,
+                        areaName: selectedAreaName,
+                        qrCode: qrCode
+                    )
                 }
             }
             .padding()

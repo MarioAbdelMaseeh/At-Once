@@ -23,10 +23,16 @@ extension Container{
             GovernorateRepositoryImpl(networkService: r.resolve(NetworkServiceProtocol.self)!)
         }
         self.register(GetAllGovernoratesUseCase.self) { r in
-            GetAllGovernoratesUseCaseUseCaseImpl(governorateRepository:r.resolve(GovernorateRepository.self)!)
+            GetAllGovernoratesUseCaseUseCaseImpl(governorateRepository: r.resolve(GovernorateRepository.self)!)
+        }
+        self.register(AreaRepository.self) { r in
+            AreaRepositoryImpl(networkService: r.resolve(NetworkServiceProtocol.self)!)
+        }
+        self.register(GetAllAreasByGovernorateIdUseCase.self) { r in
+            GetAllAreasByGovernorateIdUseCaseImpl(areaRepository: r.resolve(AreaRepository.self)!)
         }
         self.register((RegisterViewModelProtocol).self) { r in
-            RegisterViewModel(governoratesUseCase: r.resolve(GetAllGovernoratesUseCase.self)!)
+            RegisterViewModel(governoratesUseCase: r.resolve(GetAllGovernoratesUseCase.self)!, areasUseCase: r.resolve(GetAllAreasByGovernorateIdUseCase.self)!)
         }
     }
 }
