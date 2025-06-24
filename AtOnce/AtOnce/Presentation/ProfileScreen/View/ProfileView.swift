@@ -95,11 +95,14 @@ struct ProfileView: View {
                     .fontWeight(.semibold)
             }
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    // language toggle logic here
+                Menu {
+                    ForEach(AppLanguage.allCases, id: \.self) { lang in
+                        Button(lang.displayName) {
+                            languageManager.setLanguage(lang)
+                        }
+                    }
                 } label: {
                     Image(systemName: "globe")
-                        .tint(.primary)
                 }
             }
         }

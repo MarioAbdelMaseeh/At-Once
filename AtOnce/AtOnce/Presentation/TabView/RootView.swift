@@ -5,13 +5,12 @@
 //  Created by mac on 24/06/2025.
 //
 
-import SwiftUICore
 import SwiftUI
 
 struct RootView: View {
     @EnvironmentObject var languageManager: LanguageManager
     @StateObject private var coordinator = AppCoordinator()
-
+    
     var body: some View {
         NavigationStack(path: $coordinator.path) {
             Group {
@@ -25,7 +24,7 @@ struct RootView: View {
                             }
                         }
                     )
-
+                    
                 case .main:
                     MainTabView(
                         onLogout: {
@@ -38,17 +37,18 @@ struct RootView: View {
                         }
                     )
                 }
-            }
+            }.environment(\.layoutDirection, layoutDirection(for: languageManager.currentLanguage))
             .navigationDestination(for: OutOfTabDestination.self) { destination in
                 coordinator.buildView(for: destination)
             }
+        }
+    }
     private func layoutDirection(for language: AppLanguage) -> LayoutDirection {
         switch language {
         case .arabic:
             return .rightToLeft
         case .english, .system:
             return .leftToRight
-            }
         }
     }
 }
