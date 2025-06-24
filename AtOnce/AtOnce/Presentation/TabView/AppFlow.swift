@@ -10,3 +10,6 @@ enum AppFlow {
     case login
     case main
 }
+enum OutOfTabDestination: Hashable {
+    case profile
+}

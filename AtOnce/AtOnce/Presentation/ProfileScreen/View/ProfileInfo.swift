@@ -4,13 +4,6 @@
 //
 //  Created by Iman Mahmoud on 23/06/2025.
 //
-
-import SwiftUI
-
-
-import SwiftUI
-
-
 import SwiftUI
 
 struct ProfileInfo: View {
@@ -19,96 +12,93 @@ struct ProfileInfo: View {
     var body: some View {
         
         
-        NavigationStack{
+        ZStack(alignment: .top) {
+            Color.primaryTeal
+                .edgesIgnoringSafeArea(.all)
             
-            ZStack(alignment: .top) {
-                Color.primaryTeal
-                    .edgesIgnoringSafeArea(.all)
+            VStack {
+                // Top bar
+                //                HStack {
+                //                    Button(action: {
+                //                        // handle back
+                //                    }) {
+                //                        Image(systemName: "chevron.left")
+                //                            .font(.title2)
+                //                            .foregroundColor(.white)
+                //                    }
+                //                    Spacer()
+                //                    Text("My Profile")
+                //                        .font(.title2)
+                //                        .fontWeight(.semibold)
+                //                        .foregroundColor(.white)
+                //                    Spacer()
+                //                    // spacer to balance the back button
+                //                    Spacer().frame(width: 24)
+                //                }
+                //                .padding(.horizontal)
+                //                .padding(.top, 50)
                 
-                VStack {
-                    // Top bar
-                    //                HStack {
-                    //                    Button(action: {
-                    //                        // handle back
-                    //                    }) {
-                    //                        Image(systemName: "chevron.left")
-                    //                            .font(.title2)
-                    //                            .foregroundColor(.white)
-                    //                    }
-                    //                    Spacer()
-                    //                    Text("My Profile")
-                    //                        .font(.title2)
-                    //                        .fontWeight(.semibold)
-                    //                        .foregroundColor(.white)
-                    //                    Spacer()
-                    //                    // spacer to balance the back button
-                    //                    Spacer().frame(width: 24)
-                    //                }
-                    //                .padding(.horizontal)
-                    //                .padding(.top, 50)
+                Spacer()
+            }
+            
+            VStack {
+                Spacer().frame(height: 120) // push the card down
+                
+                // White card with info
+                VStack(spacing: 24) {
+                    Spacer().frame(height: 70) // leave space for image
+                    
+                    Text(pharmacy.name)
+                        .font(.headline)
+                        .foregroundColor(.primaryTeal)
+                    
+                    profileRow(icon: "envelope.fill", text: pharmacy.email)
+                    profileRow(icon: "phone.fill", text: pharmacy.phone)
+                    profileRow(icon: "house.fill", text: pharmacy.name)
+                    profileRow(icon: "mappin.and.ellipse", text: pharmacy.governate)
+                    profileRow(icon: "mappin.and.ellipse", text: pharmacy.address)
                     
                     Spacer()
                 }
-                
-                VStack {
-                    Spacer().frame(height: 120) // push the card down
-                    
-                    // White card with info
-                    VStack(spacing: 24) {
-                        Spacer().frame(height: 70) // leave space for image
-                        
-                        Text(pharmacy.name)
-                            .font(.headline)
-                            .foregroundColor(.primaryTeal)
-                        
-                        profileRow(icon: "envelope.fill", text: pharmacy.email)
-                        profileRow(icon: "phone.fill", text: pharmacy.phone)
-                        profileRow(icon: "house.fill", text: pharmacy.name)
-                        profileRow(icon: "mappin.and.ellipse", text: pharmacy.governate)
-                        profileRow(icon: "mappin.and.ellipse", text: pharmacy.address)
-                        
-                        Spacer()
-                    }
-                    .padding()
-                    .frame(/*width: 350,*/ height: 500)
-                    .background(Color.white)
-                    .cornerRadius(20)
-                    .padding(.horizontal)
-                }.padding(.horizontal)
-                //.padding(.bottom,50)//.frame(height: 150)
-                
-                // Avatar image in circle, overlapping card
-                VStack {
-                    Spacer().frame(height: 90)
-                    Image(.icon) // Add to Assets
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 120, height: 120)
-                        .clipShape(Circle())
-                        .overlay(
-                            Circle()
-                                .stroke(Color.primaryTeal, lineWidth: 5)
-                        )
-                        .background(Circle().fill(Color.white))
-                        .shadow(radius: 5)
-                }
+                .padding()
+                .frame(/*width: 350,*/ height: 500)
+                .background(Color.white)
+                .cornerRadius(20)
+                .padding(.horizontal)
+            }.padding(.horizontal)
+            //.padding(.bottom,50)//.frame(height: 150)
+            
+            // Avatar image in circle, overlapping card
+            VStack {
+                Spacer().frame(height: 90)
+                Image(.icon) // Add to Assets
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 120, height: 120)
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle()
+                            .stroke(Color.primaryTeal, lineWidth: 5)
+                    )
+                    .background(Circle().fill(Color.white))
+                    .shadow(radius: 5)
             }
-            
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Profile Info")
-                        .font(.title)
-                        .fontWeight(.semibold)
-                }
-
+        }
+        
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Profile Info")
+                    .font(.title)
+                    .fontWeight(.semibold)
             }
-            
-            
             
         }
+        
+        
+        
     }
-
+    
     @ViewBuilder
     func profileRow(icon: String, text: String) -> some View {
         HStack(spacing: 16) {
@@ -119,11 +109,11 @@ struct ProfileInfo: View {
                 Image(systemName: icon)
                     .foregroundColor(.primaryTeal)
             }
-
+            
             Text(text)
                 .foregroundColor(.black)
                 .font(.body)
-
+            
             Spacer()
         }
         .padding(.horizontal)
@@ -261,9 +251,9 @@ struct ProfileInfo: View {
 //                    }
 //                    .padding(.horizontal)
 //                    .padding(.top, 50)
-//                    
+//
 //                    Spacer()
-//                    
+//
 //                    // Profile Image
 //                    ZStack {
 //                        Circle()

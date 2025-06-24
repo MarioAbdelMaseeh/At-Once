@@ -16,58 +16,56 @@ struct SearchScreen: View {
         self.viewModel = viewModel
     }
     var body: some View {
-        NavigationStack {
-            VStack {
-                HStack {
-                    SearchBarComponents(searchText: $viewModel.searchText)
-                    FilterMenuComponent(options: filterOptions, selectedOption: $selectedFilter)
-                }
-                .padding()
-                
-                if viewModel.isLoading && viewModel.products.isEmpty {
-                    ScrollView {
-                        LazyVStack(spacing: 16) {
-                            ForEach(0..<5, id: \.self) { _ in
-                                ProductCardLoadingView()
-                            }
+        VStack {
+            HStack {
+                SearchBarComponents(searchText: $viewModel.searchText)
+                FilterMenuComponent(options: filterOptions, selectedOption: $selectedFilter)
+            }
+            .padding()
+            
+            if viewModel.isLoading && viewModel.products.isEmpty {
+                ScrollView {
+                    LazyVStack(spacing: 16) {
+                        ForEach(0..<5, id: \.self) { _ in
+                            ProductCardLoadingView()
                         }
-                        .padding(.horizontal)
                     }
-                }else if let error = viewModel.errorMessage {
-                    Text(error)
-                        .foregroundColor(.red)
-                        .padding()
-                } else {
-                    ScrollView {
-                        LazyVStack(spacing: 16) {
-                            ForEach(viewModel.products, id: \.id) { product in
-                                ProductCardView(product: product)
-                                    .onAppear {
-                                        viewModel.loadMoreIfNeeded(currentItem: product)
-                                    }
-                            }
-
-                            if viewModel.isLoading {
-                                ProgressView()
-                                    .padding()
-                            }
+                    .padding(.horizontal)
+                }
+            }else if let error = viewModel.errorMessage {
+                Text(error)
+                    .foregroundColor(.red)
+                    .padding()
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 16) {
+                        ForEach(viewModel.products, id: \.id) { product in
+                            ProductCardView(product: product)
+                                .onAppear {
+                                    viewModel.loadMoreIfNeeded(currentItem: product)
+                                }
                         }
-                        .padding(.horizontal)
+                        
+                        if viewModel.isLoading {
+                            ProgressView()
+                                .padding()
+                        }
                     }
-                }
-                Spacer()
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Search")
-                        .font(.title)
-                        .fontWeight(.semibold)
+                    .padding(.horizontal)
                 }
             }
-            .onAppear {
-                viewModel.fetchProducts(areaId: 2, text: viewModel.searchText, page: 1, pageSize: 10)
+            Spacer()
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Search")
+                    .font(.title)
+                    .fontWeight(.semibold)
             }
+        }
+        .onAppear {
+            viewModel.fetchProducts(areaId: 2, text: viewModel.searchText, page: 1, pageSize: 10)
         }
     }
 }

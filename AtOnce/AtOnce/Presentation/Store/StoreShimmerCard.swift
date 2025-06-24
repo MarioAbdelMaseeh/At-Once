@@ -35,6 +35,6 @@ struct ShimmerCard: View {
         .background(Color(.customBackground))
         .cornerRadius(12)
         .redacted(reason: .placeholder)
-        .shimmering() // <- This is the shimmer package usage
+        .shimmering() 
     }
 }

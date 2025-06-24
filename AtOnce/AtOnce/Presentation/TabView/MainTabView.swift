@@ -13,7 +13,8 @@ enum Tab {
 struct MainTabView: View {
     let onLogout: () -> Void
     @StateObject private var tabCoordinator = TabCoordinator()
-
+    var onNavigateOutOfTabs: (OutOfTabDestination) -> Void
+    
     var body: some View {
         VStack {
             Group {

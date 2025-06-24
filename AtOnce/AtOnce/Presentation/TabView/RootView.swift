@@ -6,25 +6,41 @@
 //
 
 import SwiftUICore
+import SwiftUI
 
 
 struct RootView: View {
     @StateObject private var coordinator = AppCoordinator()
 
     var body: some View {
-        if coordinator.flow == .login {
-            LoginScreen(
-                viewModel: AppDIContainer.shared.container.resolve(LoginScreenViewModelProtocol.self) as! LoginScreenViewModel
-            ) {
-                withAnimation {
-                    coordinator.flow = .main
+        NavigationStack(path: $coordinator.path) {
+            Group {
+                switch coordinator.flow {
+                case .login:
+                    LoginScreen(
+                        viewModel: coordinator.container.resolve(LoginScreenViewModelProtocol.self)! as! LoginScreenViewModel,
+                        onLoginSuccess: {
+                            withAnimation {
+                                coordinator.flow = .main
+                            }
+                        }
+                    )
+
+                case .main:
+                    MainTabView(
+                        onLogout: {
+                            withAnimation {
+                                coordinator.flow = .login
+                            }
+                        },
+                        onNavigateOutOfTabs: { destination in
+                            coordinator.path.append(destination)
+                        }
+                    )
                 }
             }
-        } else {
-            MainTabView {
-                withAnimation {
-                    coordinator.flow = .login 
-                }
+            .navigationDestination(for: OutOfTabDestination.self) { destination in
+                coordinator.buildView(for: destination)
             }
         }
     }
