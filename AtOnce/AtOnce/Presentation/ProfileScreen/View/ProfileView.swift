@@ -11,6 +11,9 @@ struct ProfileView: View {
     @State private var showSheet = false
     @State private var goToDetails = false
     @ObservedObject var viewModel: ProfileViewModel
+    
+    @EnvironmentObject var languageManager: LanguageManager
+    
     let onLogout: () -> Void
     
     
@@ -93,12 +96,16 @@ struct ProfileView: View {
                         .fontWeight(.semibold)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        // language toggle logic here
+                    Menu {
+                        ForEach(AppLanguage.allCases, id: \.self) { lang in
+                            Button(lang.displayName) {
+                                languageManager.setLanguage(lang)
+                            }
+                        }
                     } label: {
                         Image(systemName: "globe")
-                            .tint(.primary)
                     }
+                                           
                 }
             }
             .sheet(isPresented: $showSheet) {

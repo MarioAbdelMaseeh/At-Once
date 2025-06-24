@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct At_OnceApp: App {
+    let languageManager = AppDIContainer.shared.container.resolve(LanguageManager.self)!
+
+    
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environmentObject(languageManager)
         }
     }
 }
