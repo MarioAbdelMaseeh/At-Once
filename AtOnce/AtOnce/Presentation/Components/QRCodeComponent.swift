@@ -7,21 +7,27 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct QRCodeComponent: View {
     var title: String
     @Binding var qrCode: String
+    var onScanTapped: () -> Void  // callback to trigger QR scan
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
                 .fontWeight(.semibold)
             
             HStack {
-                TextField(title, text: $qrCode)
-                
+                Text(qrCode.isEmpty ? title : qrCode) // Show placeholder or value
+                    .foregroundColor(qrCode.isEmpty ? .gray : .primary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
                 Button(action: {
-                    
+                    onScanTapped()
                 }) {
-                    Image(systemName: "qrcode")
+                    Image(systemName: "qrcode.viewfinder")
                         .foregroundColor(.black)
                 }
             }
@@ -33,5 +39,5 @@ struct QRCodeComponent: View {
 }
 
 #Preview {
-    QRCodeComponent(title: "Invitation Code", qrCode: .constant(""))
+    QRCodeComponent(title: "Invitation Code", qrCode: .constant(""), onScanTapped: {})
 }
