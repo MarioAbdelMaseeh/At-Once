@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ProfileHeader: View {
-    var profileName: String = "Profile Name"
+    var profileName: String
+    var onTap: () -> Void
+    
     @Environment(\.layoutDirection) var layoutDirection
     
     var body: some View {
@@ -31,6 +33,7 @@ struct ProfileHeader: View {
             
             Button {
                 // handle action
+                onTap()
             } label: {
                 Image(systemName: layoutDirection == .rightToLeft ? "arrow.left" : "arrow.right")
                     .resizable()
@@ -54,14 +57,14 @@ struct ProfileHeader: View {
     }
 }
 
-#Preview {
-    Group {
-        ProfileHeader()
-            .environment(\.layoutDirection, .leftToRight)
-            .previewDisplayName("LTR")
-
-        ProfileHeader()
-            .environment(\.layoutDirection, .rightToLeft)
-            .previewDisplayName("RTL")
-    }
-}
+//#Preview {
+//    Group {
+//        ProfileHeader()
+//            .environment(\.layoutDirection, .leftToRight)
+//            .previewDisplayName("LTR")
+//
+//        ProfileHeader()
+//            .environment(\.layoutDirection, .rightToLeft)
+//            .previewDisplayName("RTL")
+//    }
+//}
