@@ -10,8 +10,10 @@ import SwiftUI
 struct HomeScreen: View {
     
     @ObservedObject var viewModel: HomeScreenViewModel
-    init(viewModel: HomeScreenViewModel) {
+    let onLogout: () -> Void
+    init(viewModel: HomeScreenViewModel, onLogout: @escaping () -> Void) {
         self.viewModel = viewModel
+        self.onLogout = onLogout
     }
     var body: some View {
         NavigationStack {
@@ -56,7 +58,7 @@ struct HomeScreen: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         NavigationLink {
-                            ProfileView()
+//                            ProfileView()
                         } label: {
                             Image(systemName: "phone.fill").resizable()
                                 .frame(width: 20,height: 20)
@@ -68,7 +70,9 @@ struct HomeScreen: View {
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         NavigationLink {
-                            ProfileView()
+                            ProfileView(viewModel: AppDIContainer.shared.container.resolve(ProfileViewModelProtocol.self) as! ProfileViewModel) {
+                                onLogout()
+                            }
                         } label: {
                             Image(systemName: "person.fill").resizable()
                                 .frame(width: 20,height: 20)

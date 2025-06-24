@@ -11,54 +11,35 @@ enum Tab {
     case home, search, cart, orders
 }
 struct MainTabView: View {
-    @State private var selectedTab: Tab = .home
-
+    let onLogout: () -> Void
+    @StateObject private var tabCoordinator = TabCoordinator()
 
     var body: some View {
-        VStack() {
+        VStack {
             Group {
-                switch selectedTab {
+                switch tabCoordinator.selectedTab{
                 case .home:
-                    HomeScreen(viewModel: AppDIContainer.shared.container.resolve(HomeScreenViewModelProtocol.self) as! HomeScreenViewModel)
+                    AnyView(
+                        HomeScreen(
+                            viewModel: AppDIContainer.shared.container.resolve(HomeScreenViewModelProtocol.self) as! HomeScreenViewModel,
+                        ){
+                            onLogout()
+                        }
+                    )
                 case .search:
-                    SearchScreen(viewModel: AppDIContainer.shared.container.resolve(SearchViewModelProtocol.self) as! SearchViewModel)
+                    AnyView(
+                        SearchScreen(
+                            viewModel: AppDIContainer.shared.container.resolve(SearchViewModelProtocol.self) as! SearchViewModel
+                        )
+                    )
                 case .cart:
-                    CartScreen()
+                    AnyView(CartScreen())
                 case .orders:
-                    OrdersScreen()
+                    AnyView(OrdersScreen())
                 }
-                CustomTabBarView(selectedTab: $selectedTab)
             }
+
+            CustomTabBarView(selectedTab: $tabCoordinator.selectedTab)
         }
     }
-//    var body: some View {
-//        TabView {
-//            HomeScreen()
-//                .tabItem {
-//                    Image(systemName: "house.fill")
-//                    Text("Home")
-//                }
-//            
-//            LoginView()
-//                .tabItem {
-//                    Image(systemName: "magnifyingglass")
-//                    Text("Search")
-//                }
-//            
-//            CartScreen()
-//                .tabItem {
-//                    Image(systemName: "cart.fill")
-//                    Text("Cart")
-//                }
-//            RegisterView()
-//                .tabItem {
-//                    Image(systemName: "list.bullet.rectangle.portrait")
-//                    Text("Orders")
-//                }
-//        }
-//    }
-}
-
-#Preview {
-    MainTabView()
 }

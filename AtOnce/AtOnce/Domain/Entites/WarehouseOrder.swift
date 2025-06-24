@@ -22,7 +22,6 @@ struct WarehouseProduct: Identifiable {
     let pricePerItem: Double
     let discount: Double
     let imageUrl: String
-    
     var total: Double {
         Double(quantity) * pricePerItem
     }

@@ -7,7 +7,7 @@
 
 
 struct LoginResponseDTO: Decodable {
-    let token: String
+    let token: String?
     let message: String
     let success: Bool
     let pharmacy: PharmacyDTO
@@ -18,10 +18,12 @@ struct PharmacyDTO : Decodable {
     let userName: String
     let name: String
     let email: String
+    let password: String
     let address: String
     let governate: String
     let areaId: Int
     let phoneNumber: String
+    let representativeId: Int
 }
 
 

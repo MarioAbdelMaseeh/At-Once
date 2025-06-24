@@ -111,7 +111,7 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
         }
     
     func cachePharmacy(loginResponse:LoginResponse){
-        let cachedUser = CachedPharmacy(user: loginResponse.pharmacy, token: loginResponse.token)
+        let cachedUser = CachedPharmacy(user: loginResponse.pharmacy, token: loginResponse.token ?? "")
         cachePharmacyUseCase.cacheUser(user: cachedUser)
     }
     
