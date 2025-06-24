@@ -31,8 +31,15 @@ extension Container{
         self.register(GetAllAreasByGovernorateIdUseCase.self) { r in
             GetAllAreasByGovernorateIdUseCaseImpl(areaRepository: r.resolve(AreaRepository.self)!)
         }
+        
+        
+        self.register(RegisterUseCase.self) { r in
+            RegisterUseCaseImpl(authRepository: r.resolve(AuthRepository.self)!)
+        }
+        
+        
         self.register((RegisterViewModelProtocol).self) { r in
-            RegisterViewModel(governoratesUseCase: r.resolve(GetAllGovernoratesUseCase.self)!, areasUseCase: r.resolve(GetAllAreasByGovernorateIdUseCase.self)!)
+            RegisterViewModel(governoratesUseCase: r.resolve(GetAllGovernoratesUseCase.self)!, areasUseCase: r.resolve(GetAllAreasByGovernorateIdUseCase.self)!, registerUseCase: r.resolve(RegisterUseCase.self)!)
         }
     }
 }
