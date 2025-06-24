@@ -10,6 +10,8 @@ import SwiftUI
 struct StoreCard: View {
     let product : WarehouseProduct
     
+    @EnvironmentObject var languageManager: LanguageManager
+    
 //    let discount : Int = 26
 //    let price : Double = 21
     

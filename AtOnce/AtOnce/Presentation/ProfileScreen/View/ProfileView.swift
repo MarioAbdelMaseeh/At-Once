@@ -11,6 +11,9 @@ struct ProfileView: View {
     @State private var showSheet = false
     @State private var goToDetails = false
     @ObservedObject var viewModel: ProfileViewModel
+    
+    @EnvironmentObject var languageManager: LanguageManager
+    
     let onLogout: () -> Void
     
     init(viewModel: ProfileViewModel, onLogout: @escaping () -> Void) {

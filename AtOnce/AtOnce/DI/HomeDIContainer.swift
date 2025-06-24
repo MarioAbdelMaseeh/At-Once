@@ -7,6 +7,7 @@
 import Swinject
 
 extension Container{
+    
     func registerHome(){
         self.register(WarehouseRepository.self) { r in
             WarehouseRepositoryImpl(networkService: r.resolve(NetworkServiceProtocol.self)!)
@@ -18,4 +19,5 @@ extension Container{
             HomeScreenViewModel(useCase: r.resolve(GetWarehouseByAreaUseCase.self)!)
         }
     }
+    
 }

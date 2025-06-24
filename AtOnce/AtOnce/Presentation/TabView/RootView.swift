@@ -8,8 +8,8 @@
 import SwiftUICore
 import SwiftUI
 
-
 struct RootView: View {
+    @EnvironmentObject var languageManager: LanguageManager
     @StateObject private var coordinator = AppCoordinator()
 
     var body: some View {
@@ -42,6 +42,35 @@ struct RootView: View {
             .navigationDestination(for: OutOfTabDestination.self) { destination in
                 coordinator.buildView(for: destination)
             }
+    private func layoutDirection(for language: AppLanguage) -> LayoutDirection {
+        switch language {
+        case .arabic:
+            return .rightToLeft
+        case .english, .system:
+            return .leftToRight
+            }
         }
     }
 }
+
+//struct RootView: View {
+//    @StateObject private var coordinator = AppCoordinator()
+//
+//    var body: some View {
+//        if coordinator.flow == .login {
+//            LoginScreen(
+//                viewModel: AppDIContainer.shared.container.resolve(LoginScreenViewModelProtocol.self) as! LoginScreenViewModel
+//            ) {
+//                withAnimation {
+//                    coordinator.flow = .main
+//                }
+//            }
+//        } else {
+//            MainTabView {
+//                withAnimation {
+//                    coordinator.flow = .login 
+//                }
+//            }
+//        }
+//    }
+//}

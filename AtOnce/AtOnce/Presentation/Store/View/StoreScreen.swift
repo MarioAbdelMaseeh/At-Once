@@ -13,17 +13,19 @@ struct StoreScreen: View {
     @State private var selectedFilter = "None"
     @StateObject var viewModel: StoreScreenViewModel
     
-    let warehouseId : Int
+    @EnvironmentObject var languageManager: LanguageManager
+    
+    let warehouseId : Int 
     
     
     
-    //    @StateObject private var viewModel = StoreScreenViewModel(
-    //        useCase: FetchProductByWarehouseIdUseCaseImpl(
-    //            warehouseRepository: WarehouseRepositoryImpl(
-    //                networkService: NetworkService()
-    //            )
-    //        )
-    //    )
+//    @StateObject private var viewModel = StoreScreenViewModel(
+//        useCase: FetchProductByWarehouseIdUseCaseImpl(
+//            warehouseRepository: WarehouseRepositoryImpl(
+//                networkService: NetworkService()
+//            )
+//        )
+//    )
     
     init(warehouseId : Int) {
         self.warehouseId = warehouseId
