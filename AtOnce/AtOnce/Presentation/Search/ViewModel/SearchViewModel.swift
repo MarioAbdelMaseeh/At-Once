@@ -24,10 +24,13 @@ class SearchViewModel : SearchViewModelProtocol,  ObservableObject{
     private let pageSize = 10
     private var isFetching = false
     private var cancellables = Set<AnyCancellable>()
-    let useCase: SearchUseCase
-    
-    init(useCase: SearchUseCase){
-        self.useCase = useCase
+    let searchUseCase: SearchUseCase
+    let addToCartUseCase: AddToCartUseCase
+    let userDefaultsUseCase: CachePharmacyUseCase
+    init(useCase: SearchUseCase, addToCartUseCase: AddToCartUseCase, userDefaultsUseCase: CachePharmacyUseCase){
+        self.searchUseCase = useCase
+        self.addToCartUseCase = addToCartUseCase
+        self.userDefaultsUseCase = userDefaultsUseCase
         $searchText
                 .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
                 .removeDuplicates()
@@ -43,8 +46,7 @@ class SearchViewModel : SearchViewModelProtocol,  ObservableObject{
         guard !isFetching else{return}
         isFetching = true
         isLoading = page == 1
-        
-        useCase.excute(area: areaId, text: text, page: page, pageSize: pageSize).sink { [weak self] completion in
+        searchUseCase.excute(area: areaId, text: text, page: page, pageSize: pageSize).sink { [weak self] completion in
             self?.isLoading = false
             self?.isFetching = false
             if case let .failure(error) = completion{
@@ -81,5 +83,14 @@ class SearchViewModel : SearchViewModelProtocol,  ObservableObject{
         products = []
         hasMorePages = true
         errorMessage = nil
+    }
+    func addToCart(p: SearchProduct){
+        let cartBody = CartBodyDTO(warehouseId: p.warehouseIdOfMaxDiscount , pharmacyId: userDefaultsUseCase.getCachedUser()?.id ?? 0, medicineId: p.medicineId, englishMedicineName: p.medicineName, arabicMedicineName: p.arabicMedicineName, medicineUrl: p.imageUrl, warehouseUrl: p.imageUrl, price: p.finalPrice, quantity: 1, discount: p.maximumDiscount)
+        addToCartUseCase.excute(cartBody: cartBody).sink { completion in
+            
+        } receiveValue: { result in
+            print(result.message)
+            print(result.success)
+        }.store(in: &cancellables)
     }
 }

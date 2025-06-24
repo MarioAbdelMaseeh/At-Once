@@ -40,7 +40,9 @@ struct SearchScreen: View {
                 ScrollView {
                     LazyVStack(spacing: 16) {
                         ForEach(viewModel.products, id: \.id) { product in
-                            ProductCardView(product: product)
+                            ProductCardView(product: product){
+                                viewModel.addToCart(p: product)
+                            }
                                 .onAppear {
                                     viewModel.loadMoreIfNeeded(currentItem: product)
                                 }

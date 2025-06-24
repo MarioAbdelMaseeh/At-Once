@@ -21,5 +21,8 @@ class CartRepositoryImpl: CartRepository{
             .map {$0.toEntity()}
             .eraseToAnyPublisher()
     }
+    func addToCart(cartBody: CartBodyDTO)-> AnyPublisher<AddToCartResponseDTO, Error>{
+        return networkService.request(_request: CartAPI.addToCart(cartBody: cartBody), responseType: AddToCartResponseDTO.self).eraseToAnyPublisher()
+    }
     
 }
