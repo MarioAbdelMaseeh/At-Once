@@ -17,5 +17,12 @@ extension Container{
         self.register((StoreScreenViewModelProtocol).self) { r in
             StoreScreenViewModel(useCase: r.resolve(FetchProductByWarehouseIdUseCase.self)!)
         }
+        self.register(FetchSuppliersByProductIdUseCase.self) { r in
+            FetchSuppliersByProductIdUseCaseImpl(productRepository: r.resolve(ProductRepository.self)!)
+        }
+        self.register((SuppliersScreenViewModelProtocol).self) { r in
+            SuppliersScreenViewModel(useCase: r.resolve(FetchSuppliersByProductIdUseCase.self)!)
+        }
+        
     }
 }

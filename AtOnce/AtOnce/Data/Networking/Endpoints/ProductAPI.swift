@@ -9,6 +9,7 @@ import Alamofire
 enum ProductAPI: APIRequest{
     
     case getProductsByWarehouse(warehouseId: Int, page: Int, pageSize: Int)
+    case getSuppliersByProduct(areaId: Int,productId: Int)
     var baseURL: String{
       //  "http://predeploypharmaatonceafteredit.somee.com/"
         "http://www.pharmaatoncepredeploy.somee.com/"
@@ -17,7 +18,9 @@ enum ProductAPI: APIRequest{
     var path: String{
         switch self{
         case .getProductsByWarehouse(warehouseId: let warehouseId, page: let page, pageSize: let pageSize):
-            "api/Warehouse/GetWarehousMedicines/\(warehouseId)/medicines?page=\(page)&pageSize=\(pageSize)"
+           return "api/Warehouse/GetWarehousMedicines/\(warehouseId)/medicines?page=\(page)&pageSize=\(pageSize)"
+        case .getSuppliersByProduct(areaId: let areaId, productId: let productId):
+            return "api/warehouse/area/\(areaId)/medicine/\(productId)"
             
         }
     }
@@ -25,7 +28,10 @@ enum ProductAPI: APIRequest{
     var method: HTTPMethod{
         switch self {
         case .getProductsByWarehouse(warehouseId: _, page: _, pageSize: _):
-                .get
+             return   .get
+        case .getSuppliersByProduct(areaId: _, productId: _):
+            return   .get
+            
         }
     }
     

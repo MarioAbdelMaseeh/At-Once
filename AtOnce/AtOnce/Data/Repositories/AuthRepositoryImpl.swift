@@ -8,6 +8,7 @@
 import Combine
 
 class AuthRepositoryImpl: AuthRepository {
+    
     let networkService: NetworkServiceProtocol
     
     init(networkService: NetworkServiceProtocol) {
@@ -22,4 +23,12 @@ class AuthRepositoryImpl: AuthRepository {
         .map { $0.toEntity() }
         .eraseToAnyPublisher()
     }
+    
+    func registerRequest(request: RegisterRequestDTO) -> AnyPublisher<RegisterResponse, any Error> {
+        return networkService.request(
+            _request: RegisterRequestAPI.registerRequest(request: request), responseType: RegisterResponseDTO.self)
+        .map { $0.toEntity() }
+        .eraseToAnyPublisher()
+    }
+    
 }

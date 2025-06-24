@@ -8,21 +8,21 @@ import SwiftUI
 import Combine
 
 protocol LoginScreenViewModelProtocol{
-    func login(/*email: String, password: String*/)
+    func login(email: String, password: String)
 }
 
 class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
-    @Published var email: String = "" {
-            didSet {
-                validateEmail()
-            }
-        }
-
-        @Published var password: String = "" {
-            didSet {
-                validatePassword()
-            }
-        }
+//    @Published var email: String = "" {
+//            didSet {
+//                validateEmail()
+//            }
+//        }
+//
+//        @Published var password: String = "" {
+//            didSet {
+//                validatePassword()
+//            }
+//        }
     
     
     
@@ -37,17 +37,17 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
     @Published var loginSuccess: Bool?
     
     
-   private let useCase : LoginUseCase
+    private let useCase : LoginUseCase
     private var cancellables = Set<AnyCancellable>()
     
     init(useCase: LoginUseCase) {
         self.useCase = useCase
     }
     
-    func login(/*email: String, password: String*/) {
+    func login(email: String, password: String) {
         
-        validateEmail()
-        validatePassword()
+        validateEmail(email: email)
+        validatePassword(password: password)
 
         guard emailError == nil, passwordError == nil else {
             return
@@ -80,7 +80,7 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
     
     
     
-    private func validateEmail() {
+    private func validateEmail(email:String) {
             if email.trimmingCharacters(in: .whitespaces).isEmpty {
                 emailError = NSLocalizedString("email_required", comment: "")
             } else {
@@ -88,7 +88,7 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
             }
         }
 
-        private func validatePassword() {
+    private func validatePassword(password:String) {
             if password.trimmingCharacters(in: .whitespaces).isEmpty {
                 passwordError = NSLocalizedString("password_required", comment: "")
             } else {
