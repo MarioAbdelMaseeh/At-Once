@@ -13,6 +13,8 @@ struct StoreScreen: View {
     @State private var selectedFilter = "None"
     @StateObject var viewModel: StoreScreenViewModel
     
+    @EnvironmentObject var languageManager: LanguageManager
+    
     let warehouseId : Int 
     
     

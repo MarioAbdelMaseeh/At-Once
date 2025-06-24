@@ -16,6 +16,7 @@ class AppDIContainer{
         container.registerProduct()
         container.registerAuth()
         container.registerSearch()
+        container.registerLanguage()
     }
     
     private func registerServices(){
