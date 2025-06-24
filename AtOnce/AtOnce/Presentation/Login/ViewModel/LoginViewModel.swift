@@ -36,12 +36,26 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
     
     @Published var loginSuccess: Bool?
     
+   // var pharmacyName: CachedPharmacy?
+    
+    
     
    private let useCase : LoginUseCase
+    let cachePharmacyUseCase: CachePharmacyUseCase
     private var cancellables = Set<AnyCancellable>()
     
-    init(useCase: LoginUseCase) {
+    init(useCase: LoginUseCase ,cachePharmacyUseCase: CachePharmacyUseCase) {
         self.useCase = useCase
+        self.cachePharmacyUseCase = cachePharmacyUseCase
+        
+//        guard let pharmacyName = cachePharmacyUseCase.getCachedUser() else {
+//            return
+//        }
+//     
+//        self.pharmacyName = pharmacyName
+//        print(pharmacyName)
+        
+        
     }
     
     func login(email: String, password: String) {
@@ -67,6 +81,7 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
                 self?.loginResponse = response
                 if response.success {
                     self?.loginSuccess = true
+                    self?.cachePharmacy(loginResponse: response)
                   //  self?.savePharmacy(response.pharmacy)
                 } else {
                     self?.errorMessage = response.message
@@ -77,7 +92,6 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
     
     
     private func validateEmail(email:String) {
@@ -95,6 +109,11 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
                 passwordError = nil
             }
         }
+    
+    func cachePharmacy(loginResponse:LoginResponse){
+        let cachedUser = CachedPharmacy(user: loginResponse.pharmacy, token: loginResponse.token)
+        cachePharmacyUseCase.cacheUser(user: cachedUser)
+    }
     
 
     

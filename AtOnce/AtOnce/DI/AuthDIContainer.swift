@@ -16,7 +16,15 @@ extension Container{
             LoginUseCaseImpl(authRepository: r.resolve(AuthRepository.self)!)
         }
         self.register((LoginScreenViewModelProtocol).self) { r in
-            LoginScreenViewModel(useCase: r.resolve(LoginUseCase.self)!)
+            LoginScreenViewModel(useCase: r.resolve(LoginUseCase.self)!,cachePharmacyUseCase: r.resolve(CachePharmacyUseCase.self)!)
+        }
+        
+        self.register(UserDefaultsRepository.self) { r in
+            UserDefaultsRepositoryImpl()
+        }
+        
+        self.register(CachePharmacyUseCase.self) { r in
+            CachePharmacyUseCaseImpl(userDefaultsRepo: r.resolve(UserDefaultsRepository.self)!)
         }
     }
 }
