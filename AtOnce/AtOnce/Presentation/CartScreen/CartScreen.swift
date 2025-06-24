@@ -12,7 +12,7 @@ struct CartScreen: View {
     @State private var selectedIndex = 0
     private var subTotal: Double = 1000.00
     private var discount: Double {
-        0.0 
+        0.0
     }
     private var total: Double {
         subTotal - discount
@@ -25,25 +25,26 @@ struct CartScreen: View {
         _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(CartViewModelProtocol.self)! as! CartViewModel)
     }
     
-    
-    @State private var stores: [CartWarehouse] = []
-
     var body: some View {
         NavigationStack{
             VStack{
-                StoreTabView(stores: stores, selectedIndex: $selectedIndex).padding(.horizontal)
+                StoreTabView(stores: viewModel.cartWarehousesList, selectedIndex: $selectedIndex).padding(.horizontal)
                 Spacer().frame(height: 16)
                 ScrollView{
                     LazyVStack(spacing: 12) {
-//                        ForEach(Array(stores[selectedIndex].orders.enumerated()), id: \.element.id) { index, _ in
-//                            CartCell(order: $stores[selectedIndex].orders[index]) {
-//                                stores[selectedIndex].orders.remove(at: index)
-//                                if stores[selectedIndex].orders.isEmpty {
-//                                    stores.remove(at: selectedIndex)
-//                                    selectedIndex = max(0, stores.count - 1)
-//                                }
-//                            }
-//                        }
+                        LazyVStack(spacing: 12) {
+                            if viewModel.isLoading {
+                                ForEach(0..<5, id: \.self) { _ in
+                                    CartCellShimmer()
+                                }
+                            } else if viewModel.cartWarehousesList.indices.contains(selectedIndex) {
+                                CartItemListView(
+                                    warehouse: $viewModel.cartWarehousesList[selectedIndex],
+                                    onDelete: { _ in }
+                                )
+                            }
+                        }
+
                     }.padding()
                 }
                 Spacer()
@@ -56,7 +57,7 @@ struct CartScreen: View {
                             Text("\(NSLocalizedString("egp_currency", comment: "")) \(subTotal.localizedDigits)")
                                 .font(.subheadline)
                         }
-
+                        
                         HStack {
                             Text(NSLocalizedString("discount", comment: ""))
                                 .font(.footnote)
@@ -64,7 +65,7 @@ struct CartScreen: View {
                             Text("\(NSLocalizedString("egp_currency", comment: "")) \(discount.localizedDigits)")
                                 .font(.footnote)
                         }
-
+                        
                         HStack {
                             Text(NSLocalizedString("total", comment: ""))
                                 .font(.title3)
@@ -73,7 +74,7 @@ struct CartScreen: View {
                                 .font(.title3)
                         }
                     }
-
+                    
                     LargeButtonComponent(
                         label: String(
                             format: NSLocalizedString("checkout_with_total", comment: ""),
@@ -83,14 +84,14 @@ struct CartScreen: View {
                         // checkout action
                     }
                 }.padding(.horizontal)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text(NSLocalizedString("cart", comment: ""))
-                            .font(.title)
-                            .fontWeight(.semibold)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .principal) {
+                            Text(NSLocalizedString("cart", comment: ""))
+                                .font(.title)
+                                .fontWeight(.semibold)
+                        }
                     }
-                }
             }
         }
     }

@@ -10,6 +10,8 @@ import SwiftUI
 struct SupplierSheetView: View {
     @StateObject var viewModel: SuppliersScreenViewModel
     
+    @EnvironmentObject var languageManager: LanguageManager
+    
     let productId : Int
     let productImage : String
     
@@ -54,8 +56,17 @@ struct SupplierSheetView: View {
         .cornerRadius(20)
         .onAppear {
             viewModel.loadSuppliersProduct(areaId: 2, ProductId: 3/*productId*/)
-        }
+        }.environment(\.layoutDirection, layoutDirection(for: languageManager.currentLanguage))
         
+    }
+    
+    private func layoutDirection(for language: AppLanguage) -> LayoutDirection {
+        switch language {
+        case .arabic:
+            return .rightToLeft
+        case .english, .system:
+            return .leftToRight
+        }
     }
 }
 
