@@ -9,11 +9,31 @@ import SwiftUI
 
 struct ProfileView: View {
     @State private var showSheet = false
+    @State private var goToDetails = false
+
+    
+    @StateObject var viewModel: ProfileViewModel
+    
+    init() {
+        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(ProfileViewModelProtocol.self)! as! ProfileViewModel)
+    }
+    
+    
+    
+    
     var body: some View {
         NavigationStack{
             VStack{
                 Spacer().frame(height: 20)
-                ProfileHeader()
+                
+                
+                if let pharmacy = viewModel.pharmacy {
+                    ProfileHeader(profileName: pharmacy.name) {
+                        goToDetails = true
+                    }
+                }
+                
+                
                 Spacer().frame(height: 80)
                 VStack(alignment: .leading, spacing: 16) {
                             NavigationLink {
@@ -54,6 +74,20 @@ struct ProfileView: View {
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color(.customBackground)))
                         .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
                         Spacer()
+                
+                NavigationLink(
+                    destination: viewModel.pharmacy.map { pharmacy in
+                        ProfileInfo(pharmacy: pharmacy)
+                    },
+                    isActive: $goToDetails
+                ) {
+                    EmptyView()
+                }
+                .hidden()
+
+                
+                
+            
                     }
                     .padding()
                     .navigationBarTitleDisplayMode(.inline)

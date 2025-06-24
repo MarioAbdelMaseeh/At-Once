@@ -26,5 +26,9 @@ extension Container{
         self.register(CachePharmacyUseCase.self) { r in
             CachePharmacyUseCaseImpl(userDefaultsRepo: r.resolve(UserDefaultsRepository.self)!)
         }
+        
+        self.register((ProfileViewModelProtocol).self) { r in
+            ProfileViewModel(cacheUseCase: r.resolve(CachePharmacyUseCase.self)!)
+        }
     }
 }
