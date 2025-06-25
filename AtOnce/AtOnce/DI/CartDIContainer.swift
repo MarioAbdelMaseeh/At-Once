@@ -19,8 +19,11 @@ extension Container{
         self.register(AddToCartUseCase.self) { r in
             AddToCartUseCaseImpl(cartRepository: r.resolve(CartRepository.self)!)
         }
+        self.register(UpdateCartItemUseCase.self) { r in
+            UpdateCartItemUseCaseImpl(cartRepository: r.resolve(CartRepository.self)!)
+        }
         self.register((CartViewModelProtocol).self) { r in
-            CartViewModel(cartUseCase: r.resolve(GetCartByPharmacyIdUseCase.self)!, userDefaultUseCase: r.resolve(CachePharmacyUseCase.self)!, deleteCartUseCase: r.resolve(DeleteItemUseCase.self)! )
+            CartViewModel(cartUseCase: r.resolve(GetCartByPharmacyIdUseCase.self)!, userDefaultUseCase: r.resolve(CachePharmacyUseCase.self)!, deleteCartUseCase: r.resolve(DeleteItemUseCase.self)!, updateCartItemUseCase: r.resolve(UpdateCartItemUseCase.self)! )
         }
         self.register(DeleteItemUseCase.self) { r in
             DeleteItemUseCaseImpl(cartRepository: r.resolve(CartRepository.self)!)

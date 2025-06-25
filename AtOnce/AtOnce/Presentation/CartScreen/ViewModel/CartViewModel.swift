@@ -9,8 +9,9 @@ import Foundation
 import Combine
 
 protocol CartViewModelProtocol {
-    func fetchCartByPharmacyId(pharmacyId:Int)
-    func deleteItem(pharmacyId:Int, warehouseId:Int, itemId:Int)
+    func fetchCartByPharmacyId()
+    func deleteItem(warehouseId:Int, itemId:Int)
+    func updateItem(warehouseId: Int, medicineId: Int, quantity: Int)
 }
 
 class CartViewModel: CartViewModelProtocol, ObservableObject {
@@ -23,21 +24,24 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
     @Published var cartWarehousesList: [CartWarehouse] = []
 
     private var cancellables = Set<AnyCancellable>()
-
+    var isfetching = false
     let cartUseCase: GetCartByPharmacyIdUseCase
     let userDefaultUseCase: CachePharmacyUseCase
     let deleteCartUseCase: DeleteItemUseCase
-    
-    init(cartUseCase: GetCartByPharmacyIdUseCase, userDefaultUseCase: CachePharmacyUseCase, deleteCartUseCase: DeleteItemUseCase) {
+    let updateCartItemUseCase: UpdateCartItemUseCase
+    let pharamcyId: Int
+    init(cartUseCase: GetCartByPharmacyIdUseCase, userDefaultUseCase: CachePharmacyUseCase, deleteCartUseCase: DeleteItemUseCase, updateCartItemUseCase: UpdateCartItemUseCase) {
         self.cartUseCase = cartUseCase
         self.userDefaultUseCase = userDefaultUseCase
         self.deleteCartUseCase = deleteCartUseCase
-        fetchCartByPharmacyId(pharmacyId: userDefaultUseCase.getCachedUser()?.id ?? 0)
+        self.updateCartItemUseCase = updateCartItemUseCase
+        self.pharamcyId = userDefaultUseCase.getCachedUser()?.id ?? 0
+        fetchCartByPharmacyId()
     }
 
-    func fetchCartByPharmacyId(pharmacyId:Int) {
+    func fetchCartByPharmacyId() {
         isLoading = true
-        cartUseCase.excute(pharmacyId: pharmacyId) .sink { [weak self] completion in
+        cartUseCase.excute(pharmacyId: pharamcyId) .sink { [weak self] completion in
             self?.isLoading = false
             if case let .failure(error) = completion {
                 self?.errorMessage = error.localizedDescription
@@ -50,9 +54,9 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
         }.store(in: &cancellables)
     }
     
-    func deleteItem(pharmacyId: Int, warehouseId: Int, itemId: Int) {
+    func deleteItem(warehouseId: Int, itemId: Int) {
         isLoading = true
-        deleteCartUseCase.excute(pharmacyId: pharmacyId, warehouseId: warehouseId, itemId: itemId)
+        deleteCartUseCase.excute(pharmacyId: pharamcyId, warehouseId: warehouseId, itemId: itemId)
             .sink { [weak self] completion in
             self?.isLoading = false
             if case let .failure(error) = completion {
@@ -62,7 +66,7 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
         } receiveValue: { [weak self] response in
             if response.success {
                 self?.SuccessMessage = response.message
-                self?.fetchCartByPharmacyId(pharmacyId: pharmacyId)
+                self?.fetchCartByPharmacyId()
                 
             }
             else {
@@ -71,7 +75,16 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
             }
         }.store(in: &cancellables)
     }
+    
+    func updateItem(warehouseId: Int, medicineId: Int, quantity: Int){
+        updateCartItemUseCase.excute(pharmacyId: pharamcyId, warehouseId: warehouseId, medicineId: medicineId, quantity: quantity).sink { [weak self] completion in
+            if case let .failure(error) = completion {
+                self?.errorMessage = error.localizedDescription
+            }
+        } receiveValue: { [weak self] result in
+            self?.fetchCartByPharmacyId()
+        }.store(in: &cancellables)
 
-
+    }
 }
 

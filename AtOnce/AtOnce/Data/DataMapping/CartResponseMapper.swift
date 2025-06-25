@@ -21,7 +21,20 @@ extension CartDataDTO {
 
 extension CartWarehouseDTO {
     func toEntity() -> CartWarehouse {
-        return CartWarehouse(warehouseId: self.warehouseId, warehouseUrl: self.warehouseUrl, warehouseName: "warehouse \(warehouseId)", minimumPrice: 1000, totalQuantity: 100, totalPriceBeforeDiscount: 100, totalPriceAfterDiscount: 100, items: self.items.map{$0.toEntity()})
+        let totalQuantity = items.reduce(0) { $0 + $1.quantity }
+        let totalPriceBefore = items.reduce(0.0) { $0 + ($1.priceBeforeDiscount * Double($1.quantity)) }
+        let totalPriceAfter = items.reduce(0.0) { $0 + ($1.priceAfterDiscount * Double($1.quantity)) }
+
+        return CartWarehouse(
+            warehouseId: self.warehouseId,
+            warehouseUrl: self.warehouseUrl,
+            warehouseName: self.name,
+            minimumPrice: self.minWarehousePriceInPharmacyArea ?? 0.0,
+            totalQuantity: totalQuantity,
+            totalPriceBeforeDiscount: totalPriceBefore,
+            totalPriceAfterDiscount: totalPriceAfter,
+            items: self.items.map { $0.toEntity() },
+        )
     }
 }
 

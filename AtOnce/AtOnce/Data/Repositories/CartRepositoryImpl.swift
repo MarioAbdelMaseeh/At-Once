@@ -10,8 +10,6 @@ import Combine
 
 class CartRepositoryImpl: CartRepository{
     
-    
-
     let networkService: NetworkServiceProtocol
     
     init(networkService: NetworkServiceProtocol) {
@@ -23,7 +21,7 @@ class CartRepositoryImpl: CartRepository{
             .map {$0.toEntity()}
             .eraseToAnyPublisher()
     }
-    func addToCart(cartBody: CartBodyDTO)-> AnyPublisher<AddToCartResponseDTO, Error>{
+    func addToCart(cartBody: CartBodyDTO) -> AnyPublisher<AddToCartResponseDTO, Error>{
         return networkService.request(_request: CartAPI.addToCart(cartBody: cartBody), responseType: AddToCartResponseDTO.self).eraseToAnyPublisher()
     }
     
@@ -32,5 +30,8 @@ class CartRepositoryImpl: CartRepository{
             .map {$0.toEntity()}
             .eraseToAnyPublisher()
     }
-    
+    func updateCartItem(pharmacyId: Int, warehouseId: Int, medicineId: Int, quantity: Int) -> AnyPublisher<AddToCartResponseDTO, Error>{
+        return networkService.request(_request: CartAPI.updateCartItem(pharmacyID: pharmacyId, warehouseId: warehouseId, medicineId: medicineId, quantity: quantity), responseType: AddToCartResponseDTO.self)
+            .eraseToAnyPublisher()
+    }
 }
