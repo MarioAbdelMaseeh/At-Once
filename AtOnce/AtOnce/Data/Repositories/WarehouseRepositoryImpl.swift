@@ -23,11 +23,11 @@ class WarehouseRepositoryImpl: WarehouseRepository{
         }.eraseToAnyPublisher()
     }
     
-    func getProductsByWarehouseId(warehouseId: Int, page: Int, pageSize: Int) -> AnyPublisher<[WarehouseProduct], any Error> {
-        return networkService.request(_request: ProductAPI.getProductsByWarehouse(warehouseId: warehouseId, page: page, pageSize: pageSize), responseType: APIResponse<[WarehouseProductDTO]>.self)
-            .map {$0.items.map{$0.toEntity()}
-            }.eraseToAnyPublisher()
-    }
+//    func getProductsByWarehouseId(warehouseId: Int, page: Int, pageSize: Int) -> AnyPublisher<[WarehouseProduct], any Error> {
+//        return networkService.request(_request: ProductAPI.getProductsByWarehouse(warehouseId: warehouseId, page: page, pageSize: pageSize), responseType: APIResponse<[WarehouseProductDTO]>.self)
+//            .map {$0.items.map{$0.toEntity()}
+//            }.eraseToAnyPublisher()
+//    }
 }
 
 

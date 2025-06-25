@@ -5,6 +5,7 @@
 //  Created by Iman Mahmoud on 21/06/2025.
 //
 import Combine
+import Foundation
 
 protocol StoreScreenViewModelProtocol {
     func loadProducts(warehouseId: Int)
@@ -18,6 +19,8 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
     @Published var hasMorePages: Bool = true
     
     @Published var searchText: String = ""
+    
+    private(set) var currentWarehouseId: Int = 0
     
 
     
@@ -41,6 +44,15 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
 
     init(useCase: FetchProductByWarehouseIdUseCase) {
         self.useCase = useCase
+        
+        $searchText
+            .removeDuplicates()
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .sink { [weak self] newText in
+                guard let self = self else { return }
+                self.reset(warehouseId: self.currentWarehouseId)
+            }
+            .store(in: &cancellables)
     }
 
      func loadProducts(warehouseId: Int) {
@@ -48,7 +60,7 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
 
         isLoading = true
 
-         useCase.excute(warehouseId: warehouseId, page: currentPage, pageSize: pageSize)
+         useCase.excute(warehouseId: warehouseId, page: currentPage, pageSize: pageSize, search: searchText  )
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case let .failure(error) = completion {
@@ -74,6 +86,7 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
     }
 
      func reset(warehouseId: Int) {
+        currentWarehouseId = warehouseId
         currentPage = 1
         hasMorePages = true
         products = []
