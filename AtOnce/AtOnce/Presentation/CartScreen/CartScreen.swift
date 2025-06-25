@@ -10,13 +10,16 @@ import SwiftUI
 struct CartScreen: View {
     
     @State private var selectedIndex = 0
-    private var subTotal: Double = 1000.00
-    private var discount: Double {
-        0.0
-    }
-    private var total: Double {
-        subTotal - discount
-    }
+    
+//    private var subTotal: Double = 1000.00
+//    private var discount: Double {
+//        0.0
+//    }
+//    private var total: Double {
+//        subTotal - discount
+//    }
+    
+   
     
     
     @ObservedObject var viewModel: CartViewModel
@@ -26,76 +29,107 @@ struct CartScreen: View {
     }
     
     var body: some View {
-        NavigationStack{
-            VStack{
-                StoreTabView(stores: viewModel.cartWarehousesList, selectedIndex: $selectedIndex).padding(.horizontal)
-                Spacer().frame(height: 16)
-                ScrollView{
-                    LazyVStack(spacing: 12) {
+        NavigationStack {
+            if viewModel.cartWarehousesList.indices.contains(selectedIndex) {
+                let subTotal = viewModel.cartWarehousesList[selectedIndex].totalPriceBeforeDiscount ?? 0
+                let total = viewModel.cartWarehousesList[selectedIndex].totalPriceAfterDiscount ?? 0
+                let discount = subTotal - total
+
+                VStack {
+                    StoreTabView(stores: viewModel.cartWarehousesList, selectedIndex: $selectedIndex)
+                        .padding(.horizontal)
+
+                    Spacer().frame(height: 16)
+
+                    ScrollView {
                         LazyVStack(spacing: 12) {
                             if viewModel.isLoading {
                                 ForEach(0..<5, id: \.self) { _ in
                                     CartCellShimmer()
                                 }
-                            } else if viewModel.cartWarehousesList.indices.contains(selectedIndex) {
+                            } else {
                                 CartItemListView(
                                     warehouse: $viewModel.cartWarehousesList[selectedIndex],
-                                    viewModel: viewModel /*, onDelete: { _ in }*/
-                                    
+                                    viewModel: viewModel
                                 )
+                            }
+                        }.padding()
+                    }
+
+                    Spacer()
+
+                    VStack(alignment: .leading) {
+                        Group {
+                            HStack {
+                                Text(NSLocalizedString("subtotal", comment: ""))
+                                    .font(.subheadline)
+                                Spacer()
+                                Text("\(NSLocalizedString("egp_currency", comment: "")) \(subTotal.localizedDigits)")
+                                    .font(.subheadline)
+                            }
+
+                            HStack {
+                                Text(NSLocalizedString("discount", comment: ""))
+                                    .font(.footnote)
+                                Spacer()
+                                Text("\(NSLocalizedString("egp_currency", comment: "")) \(discount.localizedDigits)")
+                                    .font(.footnote)
+                            }
+
+                            HStack {
+                                Text(NSLocalizedString("total", comment: ""))
+                                    .font(.title3)
+                                Spacer()
+                                Text("\(NSLocalizedString("egp_currency", comment: "")) \(total.localizedDigits)")
+                                    .font(.title3)
                             }
                         }
 
-                    }.padding()
+                        LargeButtonComponent(
+                            label: String(
+                                format: NSLocalizedString("checkout_with_total", comment: ""),
+                                "\(total.localizedDigits) \(NSLocalizedString("egp_currency", comment: ""))"
+                            )
+                        ) {
+                            // checkout action
+                        }
+                    }
+                    .padding(.horizontal)
                 }
-                Spacer()
-                VStack(alignment: .leading) {
-                    Group {
-                        HStack {
-                            Text(NSLocalizedString("subtotal", comment: ""))
-                                .font(.subheadline)
-                            Spacer()
-                            Text("\(NSLocalizedString("egp_currency", comment: "")) \(subTotal.localizedDigits)")
-                                .font(.subheadline)
-                        }
-                        
-                        HStack {
-                            Text(NSLocalizedString("discount", comment: ""))
-                                .font(.footnote)
-                            Spacer()
-                            Text("\(NSLocalizedString("egp_currency", comment: "")) \(discount.localizedDigits)")
-                                .font(.footnote)
-                        }
-                        
-                        HStack {
-                            Text(NSLocalizedString("total", comment: ""))
-                                .font(.title3)
-                            Spacer()
-                            Text("\(NSLocalizedString("egp_currency", comment: "")) \(total.localizedDigits)")
-                                .font(.title3)
-                        }
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(NSLocalizedString("cart", comment: ""))
+                            .font(.title)
+                            .fontWeight(.semibold)
                     }
-                    
-                    LargeButtonComponent(
-                        label: String(
-                            format: NSLocalizedString("checkout_with_total", comment: ""),
-                            "\(total.localizedDigits) \(NSLocalizedString("egp_currency", comment: ""))"
-                        )
-                    ) {
-                        // checkout action
+                }
+            } else {
+                // Optional: Loading or empty state
+                VStack {
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .scaleEffect(1.5)
+                            .padding()
+                    } else {
+                        Text("No items in cart")
+                            .foregroundColor(.gray)
+                            .padding()
                     }
-                }.padding(.horizontal)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            Text(NSLocalizedString("cart", comment: ""))
-                                .font(.title)
-                                .fontWeight(.semibold)
-                        }
+                }
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(NSLocalizedString("cart", comment: ""))
+                            .font(.title)
+                            .fontWeight(.semibold)
                     }
+                }
             }
         }
     }
+
 }
 
 //#Preview {
