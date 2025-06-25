@@ -45,7 +45,9 @@ struct SupplierSheetView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     ForEach(viewModel.suppliersProduct) { product in
-                       SuppliersProductCard(suppliersProduct: product)
+                        SuppliersProductCard(suppliersProduct: product){
+                            viewModel.addToCart(p: product)
+                        }
                     }
                 }
                 .padding()

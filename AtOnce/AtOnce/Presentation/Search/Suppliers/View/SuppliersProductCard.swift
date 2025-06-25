@@ -68,7 +68,7 @@ struct SuppliersProductCard: View {
                     
                     MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
                                  action: {
-                        
+                        addToCart()
                     })
                // }
                     

@@ -46,8 +46,8 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
     
     init(useCase: FetchProductByWarehouseIdUseCase, addToCartUseCase: AddToCartUseCase, userDefaultsUseCase: CachePharmacyUseCase) {
         self.useCase = useCase
-<<<<<<< HEAD
-        
+        self.addToCartUseCase = addToCartUseCase
+        self.userDefaultsUseCase = userDefaultsUseCase
         $searchText
             .removeDuplicates()
             .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
@@ -56,10 +56,6 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
                 self.reset(warehouseId: self.currentWarehouseId)
             }
             .store(in: &cancellables)
-=======
-        self.addToCartUseCase = addToCartUseCase
-        self.userDefaultsUseCase = userDefaultsUseCase
->>>>>>> AddCart
     }
 
      func loadProducts(warehouseId: Int) {

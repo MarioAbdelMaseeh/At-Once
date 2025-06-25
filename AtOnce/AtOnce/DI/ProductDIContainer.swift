@@ -21,7 +21,7 @@ extension Container{
             FetchSuppliersByProductIdUseCaseImpl(productRepository: r.resolve(ProductRepository.self)!)
         }
         self.register((SuppliersScreenViewModelProtocol).self) { r in
-            SuppliersScreenViewModel(useCase: r.resolve(FetchSuppliersByProductIdUseCase.self)!)
+            SuppliersScreenViewModel(useCase: r.resolve(FetchSuppliersByProductIdUseCase.self)!, addToCartUseCase: r.resolve(AddToCartUseCase.self)!, userDefaultsUseCase: r.resolve(CachePharmacyUseCase.self)!)
         }
         
     }
