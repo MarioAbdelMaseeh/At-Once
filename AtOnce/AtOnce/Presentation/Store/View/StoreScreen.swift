@@ -62,7 +62,9 @@ struct StoreScreen: View {
                     } else{
                         
                         ForEach(viewModel.products) { product in
-                            StoreCard(product: product)
+                            StoreCard(product: product){
+                                viewModel.addToCart(p: product, warehouseId: warehouseId)
+                            }
                                 .onAppear {
                                     viewModel.loadMoreIfNeeded(
                                         currentProduct: product,

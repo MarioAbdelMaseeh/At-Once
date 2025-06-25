@@ -11,7 +11,6 @@ struct ProfileView: View {
     @State private var showSheet = false
     @State private var goToDetails = false
     @ObservedObject var viewModel: ProfileViewModel
-    
     @EnvironmentObject var languageManager: LanguageManager
     
     let onLogout: () -> Void
@@ -67,6 +66,7 @@ struct ProfileView: View {
                 ProfileOption(icon: "square.and.arrow.up.fill", title: NSLocalizedString("share_app", comment: ""))
                 Divider()
                 Button {
+                    viewModel.clearPharmacy()
                     onLogout()
                 } label: {
                     ProfileOption(icon: "rectangle.portrait.and.arrow.right.fill", title: NSLocalizedString("log_out", comment: ""), isDestructive: true)
