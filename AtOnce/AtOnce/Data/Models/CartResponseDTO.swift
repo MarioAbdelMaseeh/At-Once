@@ -22,8 +22,10 @@ struct CartDataDTO: Codable {
 
 struct CartWarehouseDTO: Codable {
     let warehouseId: Int
+    let name: String
     let warehouseUrl: String?
     let items: [CartItemDTO]
+    let minWarehousePriceInPharmacyArea: Double?
 }
 
 struct CartItemDTO: Codable {
