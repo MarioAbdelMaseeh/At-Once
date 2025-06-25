@@ -13,7 +13,6 @@ struct CartItemListView: View {
     
     @Binding var warehouse: CartWarehouse
     
-    
     var viewModel: CartViewModel
     
     @State private var showAlert = false
@@ -23,7 +22,7 @@ struct CartItemListView: View {
     
     var body: some View {
         ForEach(warehouse.items.indices, id: \.self) { index in
-            CartCell(order: warehouse.items[index]) {
+            CartCell(order: warehouse.items[index] ) {
                 selectedItemIndex = index
                 showAlert = true
             } onUpdate:{ medicineId, quantity in

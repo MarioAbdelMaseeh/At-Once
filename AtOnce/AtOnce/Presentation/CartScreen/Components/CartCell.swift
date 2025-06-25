@@ -13,6 +13,7 @@ struct CartCell: View {
     var isLoading: Bool = false
     var onDelete: () -> Void
     var onUpdate: (_ medicineId: Int, _ quantity: Int) -> Void
+    @State var text: String = ""
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center) {
@@ -72,8 +73,23 @@ struct CartCell: View {
                                     .background(Color(.customBackground))
                             }
                             
-                            Text("\(order.quantity)")
-                            
+//                            Text("\(order.quantity)")
+                            TextField("", text: $text)
+                                .keyboardType(.numberPad)
+                                .frame(width: 20)
+                                .multilineTextAlignment(.center)
+                                .onSubmit {
+                                    if let newQuantity = Int(text), newQuantity > 0 {
+                                        onUpdate(order.medicineId, newQuantity)
+                                    } else {
+                                        text = "\(order.quantity)" 
+                                    }
+                                }.onAppear {
+                                    text = "\(order.quantity)"
+                                }
+                                .onChange(of: order.quantity) {
+                                    text = "\($0)"
+                                }
                             Button {
                                 onUpdate(order.medicineId, order.quantity + 1)
                             } label: {

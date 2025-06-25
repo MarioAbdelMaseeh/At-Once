@@ -29,7 +29,6 @@ struct CartScreen: View {
     }
     
     var body: some View {
-        NavigationStack {
             if viewModel.cartWarehousesList.indices.contains(selectedIndex) {
                 let subTotal = viewModel.cartWarehousesList[selectedIndex].totalPriceBeforeDiscount ?? 0
                 let total = viewModel.cartWarehousesList[selectedIndex].totalPriceAfterDiscount ?? 0
@@ -104,7 +103,7 @@ struct CartScreen: View {
                         }
                 }
             }
-        }
+        
     }
 }
 
