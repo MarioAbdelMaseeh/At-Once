@@ -19,7 +19,7 @@ class HomeScreenViewModel : HomeScreenViewModelProtocol,  ObservableObject{
     @Published var hasMorePages = true
     
     private var currentPage = 1
-    private let pageSize = 2
+    private let pageSize = 10
     private var isFetching = false
     private var cancellables = Set<AnyCancellable>()
     let useCase: GetWarehouseByAreaUseCase

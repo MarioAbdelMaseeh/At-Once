@@ -9,23 +9,30 @@
 import SwiftUI
 
 struct LoginScreen: View {
+    @ObservedObject var viewModel: LoginScreenViewModel
+    var onLoginSuccess: () -> Void
+    
     @State private var email = ""
     @State private var password = ""
     @State private var isPasswordVisible = false
+
+    @State private var showSuccessAlert = false
+    @State private var showFailureAlert = false
+
     let buttonLabel = NSLocalizedString("login", comment: "")
+    
+    init(viewModel: LoginScreenViewModel, onLoginSuccess: @escaping () -> Void) {
+        self.viewModel = viewModel
+        self.onLoginSuccess = onLoginSuccess
+    }
 
     var body: some View {
         NavigationStack {
-            VStack/*(spacing: 20)*/ {
-                //Spacer(minLength: 10)
-
-                
+            VStack {
                 Image(.icon)
                     .resizable()
-                    .frame(width: 120,height: 120,alignment: .center)
-                   // .shadow(color: .green, radius: 10)
+                    .frame(width: 120, height: 120)
                     .clipShape(.circle)
-    //                .padding(.top,40)
 
                 VStack(spacing: 4) {
                     Text("welcome_to")
@@ -34,35 +41,51 @@ struct LoginScreen: View {
                     Text("at_once_pharma")
                         .font(.title2)
                         .fontWeight(.bold)
-                }.padding(.bottom,32)
+                }
+                .padding(.bottom, 32)
 
-              
-                TextFieldComponent(title: NSLocalizedString("email", comment: ""), text: $email).padding(.bottom, 16)
-                
-               
-                PasswordFieldComponent(title:NSLocalizedString("password", comment: ""),isPasswordVisible: $isPasswordVisible, password: $password)
+                TextFieldComponent(title: NSLocalizedString("email", comment: ""), text: $email)
 
-               
+                if let emailError = viewModel.emailError {
+                    Text(emailError)
+                        .foregroundColor(.red)
+                        .font(.caption)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+
+                PasswordFieldComponent(
+                    title: NSLocalizedString("password", comment: ""),
+                    isPasswordVisible: $isPasswordVisible,
+                    password: $password
+                )
+                .padding(.top, 16)
+
+                if let passwordError = viewModel.passwordError {
+                    Text(passwordError)
+                        .foregroundColor(.red)
+                        .font(.caption)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+
                 HStack {
                     Spacer()
                     Button("forget_password") {
-                        // action
+                        // Handle forget password
                     }
                     .foregroundColor(.primaryTeal)
                     .bold()
                     .font(.callout)
-                }.padding(.bottom, 32)
+                }
+                .padding(.bottom, 32)
 
-                
-                LargeButtonComponent(label: buttonLabel){
-                    
+                LargeButtonComponent(label: buttonLabel) {
+                    viewModel.login(email: email, password: password)
                 }
 
                 Spacer().frame(height: 80)
 
                 HStack(spacing: 4) {
                     Text("no_account")
-                
                     NavigationLink(destination: RegisterView()) {
                         Text("register_here")
                             .foregroundColor(.primaryTeal)
@@ -70,24 +93,27 @@ struct LoginScreen: View {
                     }
                 }
                 .font(.callout)
-                
-            
-                    
-                    
-                   
-                    
-                    
-                    
-                    
-                    
-                
             }
             .padding()
+            .alert("Login Successful", isPresented: $showSuccessAlert) {
+                Button("OK") {
+                    onLoginSuccess()
+                }
+            } message: {
+                Text("Welcome back!")
+            }
+            .alert("Login Failed", isPresented: $showFailureAlert) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(viewModel.errorMessage ?? "Unknown error")
+            }
         }
-        
+        .onReceive(viewModel.$loginSuccess) { success in
+            if success == true {
+                showSuccessAlert = true
+            } else if success == false {
+                showFailureAlert = true
+            }
+        }
     }
-}
-
-#Preview {
-    LoginScreen()
 }

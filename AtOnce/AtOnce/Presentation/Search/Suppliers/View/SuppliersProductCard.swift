@@ -1,42 +1,39 @@
 //
-//  MedicineCardView.swift
-//  At Once
+//  SuppliersProductCard.swift
+//  AtOnce
 //
-//  Created by Iman Mahmoud on 18/06/2025.
+//  Created by Iman Mahmoud on 23/06/2025.
 //
 
 import SwiftUI
 
-struct ProductCardView: View {
-    let isSuppliers: Bool
-    let discount : Int = 26
-    let price : Double = 100
-    @State private var showSheet = false
- 
-
+struct SuppliersProductCard: View {
+    
+    let suppliersProduct: SuppliersProduct
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment:.top) {
-                Image(.icon)
-                    .resizable()
-                    .frame(width: 80, height: 80)
-                    .clipShape(.circle)
-                    .padding(.trailing, 8)
+//                Image(.icon)
+//                    .resizable()
+//                    .frame(width: 80, height: 80)
+//                    .clipShape(.circle)
+//                    .padding(.trailing, 8)
                 
                 VStack(alignment:.leading, spacing: 8){
-                    Text("medicine name name name ")
+                    Text(suppliersProduct.warehHouseName)
                         .font(.headline)
                         .lineLimit(2)
                         
                         
-                    Text(String(format: NSLocalizedString("discount_format", comment: ""), discount.localizedDigits))
+                    Text(String(format: NSLocalizedString("discount_format", comment: ""), suppliersProduct.discount.localizedDigits))
                         .foregroundColor(.primaryTeal)
                         .font(.subheadline)
                         .padding(.bottom, 2)
                         //.padding(.top, 1)
 
                  //   Text("Price : \(String(format: "%.2f", price)) EGP")
-                    Text(String(format: NSLocalizedString("price_format", comment: ""), price.localizedDigits))
+                    Text(String(format: NSLocalizedString("price_format", comment: ""), suppliersProduct.finalPrice.localizedDigits))
                     
                        // .padding(.bottom, 4)
                         .font(.subheadline)
@@ -51,16 +48,16 @@ struct ProductCardView: View {
                 
             }
             HStack {
-                if !isSuppliers {
-                    MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
-                                 action: {}).padding(.trailing,4)
-                    
-                    MediumButton(buttonLabel: NSLocalizedString("suppliers", comment: ""), buttonIcon: "storefront",color: Color.darkGray, action: {
-                        showSheet.toggle()
-                    }).padding(.leading,4)
-                    
-                   
-                }else{
+//                if !isSuppliers {
+//                    MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
+//                                 action: {}).padding(.trailing,4)
+//                    
+//                    MediumButton(buttonLabel: NSLocalizedString("suppliers", comment: ""), buttonIcon: "storefront",color: Color.darkGray, action: {
+//                        showSheet.toggle()
+//                    }).padding(.leading,4)
+//                    
+//                   
+//                }else{
                     
                     Spacer().frame(width:( UIScreen.main.bounds.width / 2)-30)
                     
@@ -72,7 +69,7 @@ struct ProductCardView: View {
                     MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
                                  action: {})
                     
-                }
+               // }
                     
 
             }
@@ -87,12 +84,12 @@ struct ProductCardView: View {
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
         
         
-        .sheet(isPresented: $showSheet) {
-            SupplierSheetView().padding(.top)
-                .presentationDetents([.medium, .fraction(0.85)])
-                .presentationDragIndicator(.visible)
-                .presentationCornerRadius(20)
-        }
+//        .sheet(isPresented: $showSheet) {
+//            SupplierSheetView().padding(.top)
+//                .presentationDetents([.medium, .fraction(0.85)])
+//                .presentationDragIndicator(.visible)
+//                .presentationCornerRadius(20)
+//        }
                    
         
 //        .padding()
@@ -102,6 +99,6 @@ struct ProductCardView: View {
     }
 }
 
-#Preview {
-    ProductCardView(isSuppliers: false)
-}
+//#Preview {
+//    SuppliersProductCard()
+//}

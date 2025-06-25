@@ -9,23 +9,27 @@
 import SwiftUI
 
 struct StoreTabView: View {
-    let stores: [StoreOrder]
+    let stores: [CartWarehouse]
     @Binding var selectedIndex: Int
 
     var body: some View {
         let maxVisibleTabs = 3
-        let tabWidth = (UIScreen.main.bounds.width) / CGFloat(maxVisibleTabs)
+        let tabWidth = UIScreen.main.bounds.width / CGFloat(maxVisibleTabs)
+
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 0) {
                 ForEach(stores.indices, id: \.self) { index in
+                    let isSelected = selectedIndex == index
+                    let storeName = stores[index].warehouseName ?? "Store"
+
                     Button(action: {
                         withAnimation {
                             selectedIndex = index
                         }
                     }) {
                         VStack(spacing: 6) {
-                            Text(stores[index].name)
-                                .foregroundColor(selectedIndex == index ? .primary : Color(.systemGray))
+                            Text(storeName)
+                                .foregroundColor(isSelected ? .primary : Color(.systemGray))
                                 .fontWeight(.medium)
                                 .frame(maxWidth: .infinity)
                                 .padding(.horizontal)
@@ -33,7 +37,7 @@ struct StoreTabView: View {
                                 .truncationMode(.tail)
 
                             Capsule()
-                                .fill(selectedIndex == index ? Color.teal : Color.clear)
+                                .fill(isSelected ? Color.teal : Color.clear)
                                 .frame(height: 3)
                         }
                         .frame(width: tabWidth)
@@ -44,3 +48,4 @@ struct StoreTabView: View {
         }
     }
 }
+

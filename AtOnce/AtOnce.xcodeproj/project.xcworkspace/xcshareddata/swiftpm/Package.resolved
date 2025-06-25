@@ -1,5 +1,5 @@
 {
-  "originHash" : "3b240871476fb3dbf1b15242c4019a0c41c57a71f0c3bbc272b540f1cabd0b82",
+  "originHash" : "5a3bf269d80370fcac6c471f3955e03b2885a30ba7f87b9a2d2a24ba273f5508",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -11,9 +11,18 @@
       }
     },
     {
+      "identity" : "codescanner",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twostraws/CodeScanner",
+      "state" : {
+        "revision" : "5e886430238944c7200fc9e10dbf2d9550dba865",
+        "version" : "2.5.2"
+      }
+    },
+    {
       "identity" : "swiftui-shimmer",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/markiv/SwiftUI-Shimmer",
+      "location" : "https://github.com/markiv/SwiftUI-Shimmer.git",
       "state" : {
         "revision" : "0226e21f9bf355d40e07e5f5e1c33679d50e167f",
         "version" : "1.5.1"
