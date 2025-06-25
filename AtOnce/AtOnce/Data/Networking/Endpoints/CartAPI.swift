@@ -39,7 +39,7 @@ enum CartAPI: APIRequest{
                 .post
         case .deleteCartItem(pharmacyID: _, warehouseId: _, cartItemId: _):
                 .delete
-        case .updateCartItem(pharmacyID: let pharmacyID, warehouseId: let warehouseId, medicineId: let medicineId, quantity: let quantity):
+        case .updateCartItem(pharmacyID: _, warehouseId: _, medicineId: _, quantity: _):
                 .put
         }
     }
@@ -67,7 +67,7 @@ enum CartAPI: APIRequest{
             nil
         case .deleteCartItem(pharmacyID: _, warehouseId: _, cartItemId: _):
             nil
-        case .updateCartItem(pharmacyID: let pharmacyID, warehouseId: let warehouseId, medicineId: let medicineId, quantity: let quantity):
+        case .updateCartItem(pharmacyID: _, warehouseId: _, medicineId: _, quantity: _):
             nil
         }
     }

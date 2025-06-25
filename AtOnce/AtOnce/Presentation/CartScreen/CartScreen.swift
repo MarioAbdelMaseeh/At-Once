@@ -24,6 +24,10 @@ struct CartScreen: View {
     var discount: Double {
         subTotal - total
     }
+    var minimum: Double{
+        guard viewModel.cartWarehousesList.indices.contains(selectedIndex) else { return 0 }
+        return viewModel.cartWarehousesList[selectedIndex].minimumPrice ?? 0
+    }
     
     @ObservedObject var viewModel: CartViewModel
     
@@ -63,7 +67,6 @@ struct CartScreen: View {
                         Text("\(NSLocalizedString("egp_currency", comment: "")) \(subTotal.localizedDigits)")
                             .font(.subheadline)
                     }
-                    
                     HStack {
                         Text(NSLocalizedString("discount", comment: ""))
                             .font(.footnote)
@@ -78,6 +81,13 @@ struct CartScreen: View {
                         Spacer()
                         Text("\(NSLocalizedString("egp_currency", comment: "")) \(total.localizedDigits)")
                             .font(.title3)
+                    }
+                    if(total < minimum){
+                        HStack{
+                            Spacer()
+                            Text("\(NSLocalizedString("min_order_limit", comment: "")) \(minimum.localizedDigits) \(NSLocalizedString("egp_currency", comment: ""))").font(.caption).foregroundStyle(Color.red)
+                            Spacer()
+                        }
                     }
                 }
                 

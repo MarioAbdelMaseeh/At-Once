@@ -72,7 +72,7 @@
 
 "email_required" = "Email must not be empty";
 "password_required" = "Password must not be empty";
-
+"min_order_limit" = "Minimum to place an order is";
 
 
 
