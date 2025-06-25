@@ -24,4 +24,7 @@ class ProfileViewModel:ProfileViewModelProtocol, ObservableObject {
     func loadPharmacy() {
         self.pharmacy = cacheUseCase.getCachedUser()
     }
+    func clearPharmacy(){
+        cacheUseCase.clearCachedUser()
+    }
 }
