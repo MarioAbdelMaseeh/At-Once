@@ -95,7 +95,7 @@ struct OrdersScreen: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("orders")
+                    Text("orders".localized)
                         .font(.title)
                         .fontWeight(.semibold)
                 }

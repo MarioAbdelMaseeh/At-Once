@@ -36,11 +36,15 @@ struct RootView: View {
                         }
                     )
                 }
-            }.environment(\.layoutDirection, layoutDirection(for: languageManager.currentLanguage))
+            }//.environment(\.layoutDirection, layoutDirection(for: languageManager.currentLanguage))
             .navigationDestination(for: OutOfTabDestination.self) { destination in
                 coordinator.buildView(for: destination)
             }
-        }.tint(.primary)
+        }.environment(\.layoutDirection, layoutDirection(for: languageManager.currentLanguage))
+         .environmentObject(languageManager)
+         .environmentObject(coordinator)
+        .tint(.primary)
+        
     }
     private func layoutDirection(for language: AppLanguage) -> LayoutDirection {
         switch language {

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ProductCardView: View {
     let product: SearchProduct
+    @EnvironmentObject var languageManager: LanguageManager
+    
     var hasSuppliers: Bool{
         product.distributorsCount != 0
       //  false
@@ -28,7 +30,7 @@ struct ProductCardView: View {
                     .padding(.trailing, 8)
                 
                 VStack(alignment:.leading, spacing: 8){
-                    Text(product.medicineName)
+                    Text(languageManager.currentLanguage == .arabic ? product.arabicMedicineName : product.medicineName)
                         .font(.headline)
                         .lineLimit(2)
                     
@@ -81,7 +83,7 @@ struct ProductCardView: View {
         
         
         .sheet(isPresented: $showSheet) {
-            SupplierSheetView(productId: 3, productImage: "").padding(.top)
+            SupplierSheetView(productId: product.medicineId, productImage: product.imageUrl, productName: languageManager.currentLanguage == .arabic ? product.arabicMedicineName : product.medicineName).padding(.top)
                 .presentationDetents([.medium, .fraction(0.85)])
                 .presentationDragIndicator(.visible)
                 .presentationCornerRadius(20)

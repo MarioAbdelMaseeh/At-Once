@@ -35,10 +35,10 @@ struct LoginScreen: View {
                     .clipShape(.circle)
 
                 VStack(spacing: 4) {
-                    Text("welcome_to")
+                    Text("welcome_to".localized)
                         .font(.title2)
                         .fontWeight(.bold)
-                    Text("at_once_pharma")
+                    Text("at_once_pharma".localized)
                         .font(.title2)
                         .fontWeight(.bold)
                 }
@@ -54,7 +54,7 @@ struct LoginScreen: View {
                 }
 
                 PasswordFieldComponent(
-                    title: NSLocalizedString("password", comment: ""),
+                    title: NSLocalizedString("password".localized, comment: ""),
                     isPasswordVisible: $isPasswordVisible,
                     password: $password
                 )
@@ -69,7 +69,7 @@ struct LoginScreen: View {
 
                 HStack {
                     Spacer()
-                    Button("forget_password") {
+                    Button("forget_password".localized) {
                         // Handle forget password
                     }
                     .foregroundColor(.primaryTeal)
@@ -85,9 +85,9 @@ struct LoginScreen: View {
                 Spacer().frame(height: 80)
 
                 HStack(spacing: 4) {
-                    Text("no_account")
+                    Text("no_account".localized)
                     NavigationLink(destination: RegisterView()) {
-                        Text("register_here")
+                        Text("register_here".localized)
                             .foregroundColor(.primaryTeal)
                             .fontWeight(.semibold)
                     }
@@ -95,17 +95,17 @@ struct LoginScreen: View {
                 .font(.callout)
             }
             .padding()
-            .alert("Login Successful", isPresented: $showSuccessAlert) {
+            .alert("login_successful".localized, isPresented: $showSuccessAlert) {
                 Button("OK") {
                     onLoginSuccess()
                 }
             } message: {
-                Text("Welcome back!")
+                Text("welcome_back".localized)
             }
-            .alert("Login Failed", isPresented: $showFailureAlert) {
-                Button("OK", role: .cancel) {}
+            .alert("login_failed".localized, isPresented: $showFailureAlert) {
+                Button("ok".localized, role: .cancel) {}
             } message: {
-                Text(viewModel.errorMessage ?? "Unknown error")
+                Text(viewModel.errorMessage ?? "unknown_error".localized)
             }
         }
         .onReceive(viewModel.$loginSuccess) { success in
@@ -117,3 +117,4 @@ struct LoginScreen: View {
         }
     }
 }
+

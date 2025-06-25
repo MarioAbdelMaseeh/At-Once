@@ -43,7 +43,7 @@ struct StoreCard: View {
                            }
                        }
             
-            Text(product.arName)
+            Text(languageManager.currentLanguage == .arabic ? product.arName : product.enName)
                 .font(.headline)
                // .fontWeight(.semibold)
 //                .font(.title2)

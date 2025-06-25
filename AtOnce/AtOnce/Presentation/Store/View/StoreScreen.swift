@@ -15,22 +15,24 @@ struct StoreScreen: View {
     
     @EnvironmentObject var languageManager: LanguageManager
     
-    let warehouseId : Int 
+    @EnvironmentObject var coordinator: AppCoordinator
+    
+    let warehouseId : Int
     
     
     
-//    @StateObject private var viewModel = StoreScreenViewModel(
-//        useCase: FetchProductByWarehouseIdUseCaseImpl(
-//            warehouseRepository: WarehouseRepositoryImpl(
-//                networkService: NetworkService()
-//            )
-//        )
-//    )
+    //    @StateObject private var viewModel = StoreScreenViewModel(
+    //        useCase: FetchProductByWarehouseIdUseCaseImpl(
+    //            warehouseRepository: WarehouseRepositoryImpl(
+    //                networkService: NetworkService()
+    //            )
+    //        )
+    //    )
     
     init(warehouseId : Int, viewModel: StoreScreenViewModel) {
         self.warehouseId = warehouseId
         self.viewModel = viewModel
-//        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel)
+        //        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel)
     }
     
     let filterOptions = ["Option 1", "Option 2"]
@@ -41,7 +43,7 @@ struct StoreScreen: View {
     ]
     
     var body: some View {
-
+        
         VStack {
             HStack {
                 SearchBarComponents(searchText: $viewModel.searchText)
@@ -59,18 +61,22 @@ struct StoreScreen: View {
                         ForEach(0..<6, id: \.self) { _ in
                             ShimmerCard()
                         }
-                    } else{
-                        
+                    }else if let error = viewModel.errorMessage {
+                        Text(error)
+                            .foregroundColor(.red)
+                            .padding()
+                    }
+                    else{
                         ForEach(viewModel.products) { product in
                             StoreCard(product: product){
                                 viewModel.addToCart(p: product, warehouseId: warehouseId)
                             }
-                                .onAppear {
-                                    viewModel.loadMoreIfNeeded(
-                                        currentProduct: product,
-                                        warehouseId: warehouseId
-                                    )
-                                }
+                            .onAppear {
+                                viewModel.loadMoreIfNeeded(
+                                    currentProduct: product,
+                                    warehouseId: warehouseId
+                                )
+                            }
                         }
                     }
                     
@@ -94,17 +100,31 @@ struct StoreScreen: View {
         //  .background(Color(.customBackground))
         
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        coordinator.path.removeLast()
+                    }) {
+                        HStack {
+                            Image(systemName: "chevron.backward")
+                            Text(NSLocalizedString("back", comment: ""))
+                        }
+                    }
+                }
+            
             ToolbarItem(placement: .principal) {
-                Text("products")
+                Text("products".localized)
                     .font(.title)
                     .fontWeight(.semibold)
             }
             
+            
         }
+       // .navigationTitle(NSLocalizedString("products".localized, comment: ""))
     }
 }
 
 #Preview {
-//    StoreScreen(warehouseId: 2)
+    //    StoreScreen(warehouseId: 2)
 }

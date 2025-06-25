@@ -9,6 +9,12 @@ import SwiftUI
 struct ProfileInfo: View {
     
     var pharmacy: CachedPharmacy
+    @EnvironmentObject var coordinator: AppCoordinator
+    
+//    init(pharmacy: CachedPharmacy) {
+//        self.pharmacy = pharmacy
+//    }
+    
     var body: some View {
         
         
@@ -86,12 +92,24 @@ struct ProfileInfo: View {
         }
         
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("Profile Info")
+                Text("Profile Info".localized)
                     .font(.title)
                     .fontWeight(.semibold)
             }
+            
+            ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        coordinator.path.removeLast()
+                    }) {
+                        HStack {
+                            Image(systemName: "chevron.backward")
+                            Text(NSLocalizedString("back", comment: ""))
+                        }
+                    }
+                }
             
         }
         

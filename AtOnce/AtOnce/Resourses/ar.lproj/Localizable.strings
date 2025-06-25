@@ -75,5 +75,19 @@
 "email_required" = "يجب إدخال البريد الإلكتروني";
 "password_required" = "يجب إدخال كلمة المرور";
 
+"login_successful" = "تم تسجيل الدخول بنجاح";
+"welcome_back" = "مرحبًا بعودتك!";
+"login_failed" = "فشل في تسجيل الدخول";
+"ok" = "حسنًا";
+"unknown_error" = "خطأ غير معروف";
+
+"simulator_qr_test" = "اختبار QR بالمحاكي";
+"use_test_qr_code" = "استخدم رمز QR التجريبي";
+"cancel" = "إلغاء";
+
+"back" = "رجوع";
+
+
+
 
 

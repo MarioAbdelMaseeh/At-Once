@@ -12,4 +12,7 @@ enum AppFlow {
 }
 enum OutOfTabDestination: Hashable {
     case profile
+    case store(id: Int)
+    case profileInfo(CachedPharmacy)
+    
 }

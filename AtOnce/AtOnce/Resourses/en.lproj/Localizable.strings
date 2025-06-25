@@ -73,6 +73,21 @@
 "email_required" = "Email must not be empty";
 "password_required" = "Password must not be empty";
 
+"login_successful" = "Login Successful";
+"welcome_back" = "Welcome back!";
+"login_failed" = "Login Failed";
+"ok" = "OK";
+"unknown_error" = "Unknown error";
+
+"simulator_qr_test" = "Simulator QR Test";
+"use_test_qr_code" = "Use Test QR Code";
+"cancel" = "Cancel";
+"back" = "Back";
+
+
+
+
+
 
 
 

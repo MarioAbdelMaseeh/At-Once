@@ -13,6 +13,9 @@ struct ProfileView: View {
     @ObservedObject var viewModel: ProfileViewModel
     @EnvironmentObject var languageManager: LanguageManager
     
+    @EnvironmentObject var coordinator: AppCoordinator
+
+    
     let onLogout: () -> Void
     
     init(viewModel: ProfileViewModel, onLogout: @escaping () -> Void) {
@@ -25,9 +28,15 @@ struct ProfileView: View {
         VStack{
             Spacer().frame(height: 20)
             
+//            if let pharmacy = viewModel.pharmacy {
+//                ProfileHeader(profileName: pharmacy.name) {
+//                    goToDetails = true
+//                }
+//            }
+            
             if let pharmacy = viewModel.pharmacy {
                 ProfileHeader(profileName: pharmacy.name) {
-                    goToDetails = true
+                    coordinator.path.append(.profileInfo(pharmacy))
                 }
             }
             
@@ -36,10 +45,10 @@ struct ProfileView: View {
                 NavigationLink {
                     WebViewScreen(
                         url: "https://atonce2025.blogspot.com/2025/06/frequently-asked-questions-body-font.html",
-                        title: NSLocalizedString("common_questions", comment: "")
+                        title: "common_questions".localized
                     )
                 } label: {
-                    ProfileOption(icon: "questionmark.circle.fill", title: NSLocalizedString("common_questions", comment: ""))
+                    ProfileOption(icon: "questionmark.circle.fill", title: "common_questions".localized)
                 }
                 
                 Divider()
@@ -76,24 +85,36 @@ struct ProfileView: View {
                 .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
             Spacer()
             
-            NavigationLink(
-                destination: viewModel.pharmacy.map { pharmacy in
-                    ProfileInfo(pharmacy: pharmacy)
-                },
-                isActive: $goToDetails
-            ) {
-                EmptyView()
-            }
-            .hidden()
+//            NavigationLink(
+//                destination: viewModel.pharmacy.map { pharmacy in
+//                    ProfileInfo(pharmacy: pharmacy)
+//                },
+//                isActive: $goToDetails
+//            ) {
+//                EmptyView()
+//            }
+//            .hidden()
         }
         .padding()
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text(NSLocalizedString("profile", comment: ""))
                     .font(.title)
                     .fontWeight(.semibold)
             }
+            ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        // Pop view manually
+                        coordinator.path.removeLast()
+                    }) {
+                        HStack {
+                            Image(systemName: "chevron.backward")
+                            Text(NSLocalizedString("back", comment: ""))
+                        }
+                    }
+                }
             ToolbarItem(placement: .topBarTrailing) {
                 Menu {
                     ForEach(AppLanguage.allCases, id: \.self) { lang in
@@ -106,6 +127,8 @@ struct ProfileView: View {
                 }
             }
         }
+      //  .navigationTitle(NSLocalizedString("profile", comment: ""))
+
         .sheet(isPresented: $showSheet) {
             BottomSheetView()
                 .presentationDetents([.fraction(0.15)])

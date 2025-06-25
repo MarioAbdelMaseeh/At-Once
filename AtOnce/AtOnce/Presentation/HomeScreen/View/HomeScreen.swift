@@ -10,6 +10,9 @@ import SwiftUI
 struct HomeScreen: View {
     
     @ObservedObject var viewModel: HomeScreenViewModel
+    
+    @EnvironmentObject var coordinator: AppCoordinator
+
     let onLogout: () -> Void
     let onSearch: () -> Void
     init(viewModel: HomeScreenViewModel, onLogout: @escaping () -> Void, onSearch: @escaping () -> Void) {
@@ -49,9 +52,12 @@ struct HomeScreen: View {
                     }
                     ForEach(viewModel.warehouses){
                         item in
-                        NavigationLink {
-                            StoreScreen(warehouseId: item.id, viewModel: AppDIContainer.shared.container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel)
-                        } label: {
+//                        NavigationLink {
+//                            StoreScreen(warehouseId: item.id, viewModel: AppDIContainer.shared.container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel)
+//                        }
+                        Button {
+                                coordinator.path.append(.store(id: item.id))
+                            }label: {
                             StoreCell(warehouse: item)
                                 .onAppear{
                                     viewModel.loadMoreIfNeeded(currentItem: item)
@@ -72,18 +78,28 @@ struct HomeScreen: View {
                     }
                 }
                 ToolbarItem(placement: .principal){
-                    Text("home").font(.title).fontWeight(.semibold)
+                    Text("home".localized).font(.title).fontWeight(.semibold)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
-                        ProfileView(viewModel: AppDIContainer.shared.container.resolve(ProfileViewModelProtocol.self) as! ProfileViewModel) {
-                            onLogout()
-                        }
+                    
+                    Button {
+                        coordinator.path.append(.profile)
                     } label: {
-                        Image(systemName: "person.fill").resizable()
-                            .frame(width: 20,height: 20)
+                        Image(systemName: "person.fill")
+                            .resizable()
+                            .frame(width: 20, height: 20)
                             .tint(.primary)
                     }
+                    
+//                    NavigationLink {
+//                        ProfileView(viewModel: AppDIContainer.shared.container.resolve(ProfileViewModelProtocol.self) as! ProfileViewModel) {
+//                            onLogout()
+//                        }
+//                    } label: {
+//                        Image(systemName: "person.fill").resizable()
+//                            .frame(width: 20,height: 20)
+//                            .tint(.primary)
+//                    }
                 }
             }
     }
