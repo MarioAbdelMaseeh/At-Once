@@ -97,8 +97,9 @@ struct CartScreen: View {
                         "\(total.localizedDigits) \(NSLocalizedString("egp_currency", comment: ""))"
                     )
                 ) {
-                    // checkout action
-                }
+                    viewModel.placeOrder(warehouseId: viewModel.cartWarehousesList[selectedIndex].warehouseId)
+                }.disabled(total < minimum || total == 0)
+                    .opacity((total < minimum || total == 0) ? 0.5 : 1)
             }
         }.padding(.horizontal)
             .navigationBarTitleDisplayMode(.inline)

@@ -13,6 +13,7 @@ enum CartAPI: APIRequest{
     case addToCart(cartBody:CartBodyDTO)
     case deleteCartItem(pharmacyID: Int,warehouseId: Int,cartItemId:Int)
     case updateCartItem(pharmacyID: Int, warehouseId: Int, medicineId: Int, quantity: Int)
+    case placeOrder(pharmacyId: Int, warehouseId: Int)
     var baseURL: String{
         "http://www.pharmaatoncepredeploy.somee.com/"
     }
@@ -27,6 +28,8 @@ enum CartAPI: APIRequest{
             "api/Cart/remove-item?pharmacyId=\(pharmacyId)&warehouseId=\(warehouseId)&medicineId=\(cartItemId)"
         case .updateCartItem(pharmacyID: let pharmacyId, warehouseId: let warehouseId, medicineId: let medicineId, quantity: let quantity):
             "api/Cart/update-quantity?pharmacyId=\(pharmacyId)&warehouseId=\(warehouseId)&medicineId=\(medicineId)&newQuantity=\(quantity)"
+        case .placeOrder(pharmacyId: let pharmacyId, warehouseId: let warehouseId):
+            "api/Cart/place-order?pharmacyId=\(pharmacyId)&warehouseId=\(warehouseId)"
         }
         
     }
@@ -41,6 +44,8 @@ enum CartAPI: APIRequest{
                 .delete
         case .updateCartItem(pharmacyID: _, warehouseId: _, medicineId: _, quantity: _):
                 .put
+        case .placeOrder(pharmacyId: let pharmacyId, warehouseId: let warehouseId):
+                .post
         }
     }
     
@@ -69,9 +74,9 @@ enum CartAPI: APIRequest{
             nil
         case .updateCartItem(pharmacyID: _, warehouseId: _, medicineId: _, quantity: _):
             nil
+        case .placeOrder(pharmacyId: let pharmacyId, warehouseId: let warehouseId):
+            nil
         }
     }
-    
-    
 }
 

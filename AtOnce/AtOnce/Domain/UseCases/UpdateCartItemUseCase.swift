@@ -8,7 +8,7 @@
 import Combine
 
 protocol UpdateCartItemUseCase{
-    func excute(pharmacyId: Int, warehouseId: Int, medicineId: Int, quantity: Int) -> AnyPublisher<AddToCartResponseDTO, any Error>
+    func excute(pharmacyId: Int, warehouseId: Int, medicineId: Int, quantity: Int) -> AnyPublisher<CartMessageResponseDTO, any Error>
 }
 
 class UpdateCartItemUseCaseImpl: UpdateCartItemUseCase{
@@ -18,7 +18,7 @@ class UpdateCartItemUseCaseImpl: UpdateCartItemUseCase{
         self.cartRepository = cartRepository
     }
     
-    func excute(pharmacyId: Int, warehouseId: Int, medicineId: Int, quantity: Int) -> AnyPublisher<AddToCartResponseDTO, any Error> {
+    func excute(pharmacyId: Int, warehouseId: Int, medicineId: Int, quantity: Int) -> AnyPublisher<CartMessageResponseDTO, any Error> {
         return cartRepository.updateCartItem(pharmacyId: pharmacyId, warehouseId: warehouseId, medicineId: medicineId, quantity: quantity)
     }
 }

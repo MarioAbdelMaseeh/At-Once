@@ -21,8 +21,8 @@ class CartRepositoryImpl: CartRepository{
             .map {$0.toEntity()}
             .eraseToAnyPublisher()
     }
-    func addToCart(cartBody: CartBodyDTO) -> AnyPublisher<AddToCartResponseDTO, Error>{
-        return networkService.request(_request: CartAPI.addToCart(cartBody: cartBody), responseType: AddToCartResponseDTO.self).eraseToAnyPublisher()
+    func addToCart(cartBody: CartBodyDTO) -> AnyPublisher<CartMessageResponseDTO, Error>{
+        return networkService.request(_request: CartAPI.addToCart(cartBody: cartBody), responseType: CartMessageResponseDTO.self).eraseToAnyPublisher()
     }
     
     func removeFromCart(pharmacyId: Int, warehouseId: Int, cartItemId: Int) -> AnyPublisher<DeletedProduct, Error> {
@@ -30,8 +30,12 @@ class CartRepositoryImpl: CartRepository{
             .map {$0.toEntity()}
             .eraseToAnyPublisher()
     }
-    func updateCartItem(pharmacyId: Int, warehouseId: Int, medicineId: Int, quantity: Int) -> AnyPublisher<AddToCartResponseDTO, Error>{
-        return networkService.request(_request: CartAPI.updateCartItem(pharmacyID: pharmacyId, warehouseId: warehouseId, medicineId: medicineId, quantity: quantity), responseType: AddToCartResponseDTO.self)
+    func updateCartItem(pharmacyId: Int, warehouseId: Int, medicineId: Int, quantity: Int) -> AnyPublisher<CartMessageResponseDTO, Error>{
+        return networkService.request(_request: CartAPI.updateCartItem(pharmacyID: pharmacyId, warehouseId: warehouseId, medicineId: medicineId, quantity: quantity), responseType: CartMessageResponseDTO.self)
+            .eraseToAnyPublisher()
+    }
+    func placeOrder(pharmacyId: Int, warehouseId: Int) -> AnyPublisher<CartMessageResponseDTO, Error>{
+        return networkService.request(_request: CartAPI.placeOrder(pharmacyId: pharmacyId, warehouseId: warehouseId), responseType: CartMessageResponseDTO.self)
             .eraseToAnyPublisher()
     }
 }

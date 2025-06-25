@@ -10,7 +10,8 @@ import Combine
 
 protocol CartRepository {
     func getCartByPharmacyId(pharmacyId:Int)-> AnyPublisher<CartResponse,Error>
-    func addToCart(cartBody: CartBodyDTO)-> AnyPublisher<AddToCartResponseDTO, Error>
+    func addToCart(cartBody: CartBodyDTO)-> AnyPublisher<CartMessageResponseDTO, Error>
     func removeFromCart(pharmacyId: Int,warehouseId: Int, cartItemId:Int)-> AnyPublisher<DeletedProduct, Error>
-    func updateCartItem(pharmacyId: Int, warehouseId: Int, medicineId: Int, quantity: Int) -> AnyPublisher<AddToCartResponseDTO, Error>
+    func updateCartItem(pharmacyId: Int, warehouseId: Int, medicineId: Int, quantity: Int) -> AnyPublisher<CartMessageResponseDTO, Error>
+    func placeOrder(pharmacyId: Int, warehouseId: Int) -> AnyPublisher<CartMessageResponseDTO, Error>
 }

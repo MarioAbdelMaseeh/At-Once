@@ -37,7 +37,5 @@ final class UserDefaultsRepositoryImpl: UserDefaultsRepository{
     func clearAll() {
         defaults.removeObject(forKey: Keys.savedUser)
         isLoggedIn = false
-    }
-    
-    
+    } 
 }

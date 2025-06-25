@@ -29,12 +29,14 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
     let userDefaultUseCase: CachePharmacyUseCase
     let deleteCartUseCase: DeleteItemUseCase
     let updateCartItemUseCase: UpdateCartItemUseCase
+    let placeOrderUseCase: PlaceOrderUseCase
     let pharamcyId: Int
-    init(cartUseCase: GetCartByPharmacyIdUseCase, userDefaultUseCase: CachePharmacyUseCase, deleteCartUseCase: DeleteItemUseCase, updateCartItemUseCase: UpdateCartItemUseCase) {
+    init(cartUseCase: GetCartByPharmacyIdUseCase, userDefaultUseCase: CachePharmacyUseCase, deleteCartUseCase: DeleteItemUseCase, updateCartItemUseCase: UpdateCartItemUseCase, placeOrderUseCase: PlaceOrderUseCase) {
         self.cartUseCase = cartUseCase
         self.userDefaultUseCase = userDefaultUseCase
         self.deleteCartUseCase = deleteCartUseCase
         self.updateCartItemUseCase = updateCartItemUseCase
+        self.placeOrderUseCase = placeOrderUseCase
         self.pharamcyId = userDefaultUseCase.getCachedUser()?.id ?? 0
         fetchCartByPharmacyId()
     }
@@ -82,6 +84,17 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
                 self?.errorMessage = error.localizedDescription
             }
         } receiveValue: { [weak self] result in
+            self?.fetchCartByPharmacyId()
+        }.store(in: &cancellables)
+    }
+    
+    func placeOrder(warehouseId: Int){
+        placeOrderUseCase.placeOrder(pharmacyId: pharamcyId, warehouseId: warehouseId).sink { [weak self] completion in
+            if case let .failure(error) = completion {
+                self?.errorMessage = error.localizedDescription
+            }
+        } receiveValue: { [weak self] result in
+            print(result.message)
             self?.fetchCartByPharmacyId()
         }.store(in: &cancellables)
 
