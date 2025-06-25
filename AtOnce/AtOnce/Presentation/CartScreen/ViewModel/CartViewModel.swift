@@ -23,10 +23,12 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     let cartUseCase: GetCartByPharmacyIdUseCase
+    let userDefaultUseCase: CachePharmacyUseCase
     
-    init(cartUseCase: GetCartByPharmacyIdUseCase) {
+    init(cartUseCase: GetCartByPharmacyIdUseCase, userDefaultUseCase: CachePharmacyUseCase) {
         self.cartUseCase = cartUseCase
-        fetchCartByPharmacyId(pharmacyId: 45)
+        self.userDefaultUseCase = userDefaultUseCase
+        fetchCartByPharmacyId(pharmacyId: userDefaultUseCase.getCachedUser()?.id ?? 0)
     }
 
     func fetchCartByPharmacyId(pharmacyId:Int) {

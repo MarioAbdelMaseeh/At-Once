@@ -11,7 +11,7 @@ struct StoreScreen: View {
     
     // @State private var searchText: String = ""
     @State private var selectedFilter = "None"
-    @StateObject var viewModel: StoreScreenViewModel
+    @ObservedObject var viewModel: StoreScreenViewModel
     
     @EnvironmentObject var languageManager: LanguageManager
     
@@ -27,9 +27,10 @@ struct StoreScreen: View {
 //        )
 //    )
     
-    init(warehouseId : Int) {
+    init(warehouseId : Int, viewModel: StoreScreenViewModel) {
         self.warehouseId = warehouseId
-        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel)
+        self.viewModel = viewModel
+//        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel)
     }
     
     let filterOptions = ["Option 1", "Option 2"]
@@ -103,5 +104,5 @@ struct StoreScreen: View {
 }
 
 #Preview {
-    StoreScreen(warehouseId: 2)
+//    StoreScreen(warehouseId: 2)
 }

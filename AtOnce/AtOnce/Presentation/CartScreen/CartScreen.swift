@@ -19,10 +19,10 @@ struct CartScreen: View {
     }
     
     
-    @StateObject var viewModel: CartViewModel
+    @ObservedObject var viewModel: CartViewModel
     
-    init() {
-        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(CartViewModelProtocol.self)! as! CartViewModel)
+    init(viewModel: CartViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -97,6 +97,6 @@ struct CartScreen: View {
     }
 }
 
-#Preview {
-    CartScreen()
-}
+//#Preview {
+//    CartScreen()
+//}

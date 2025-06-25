@@ -86,8 +86,11 @@ class SearchViewModel : SearchViewModelProtocol,  ObservableObject{
     }
     func addToCart(p: SearchProduct){
         let cartBody = CartBodyDTO(warehouseId: p.warehouseIdOfMaxDiscount , pharmacyId: userDefaultsUseCase.getCachedUser()?.id ?? 0, medicineId: p.medicineId, englishMedicineName: p.medicineName, arabicMedicineName: p.arabicMedicineName, medicineUrl: p.imageUrl, warehouseUrl: p.imageUrl, price: p.finalPrice, quantity: 1, discount: p.maximumDiscount)
-        addToCartUseCase.excute(cartBody: cartBody).sink { completion in
-            
+        addToCartUseCase.excute(cartBody: cartBody).sink {[weak self] completion in
+            if case let .failure(error) = completion{
+                self?.errorMessage = error.localizedDescription
+                print(error.localizedDescription)
+            }
         } receiveValue: { result in
             print(result.message)
             print(result.success)

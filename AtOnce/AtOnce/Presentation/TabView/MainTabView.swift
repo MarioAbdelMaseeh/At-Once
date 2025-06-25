@@ -25,6 +25,8 @@ struct MainTabView: View {
                             viewModel: AppDIContainer.shared.container.resolve(HomeScreenViewModelProtocol.self) as! HomeScreenViewModel,
                         ){
                             onLogout()
+                        } onSearch: {
+                            tabCoordinator.selectedTab = .search
                         }
                     )
                 case .search:
@@ -34,7 +36,7 @@ struct MainTabView: View {
                         )
                     )
                 case .cart:
-                    AnyView(CartScreen())
+                    AnyView(CartScreen(viewModel: AppDIContainer.shared.container.resolve(CartViewModelProtocol.self) as! CartViewModel))
                 case .orders:
                     AnyView(OrdersScreen())
                 }
