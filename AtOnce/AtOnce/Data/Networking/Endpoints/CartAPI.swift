@@ -11,6 +11,7 @@ import Alamofire
 enum CartAPI: APIRequest{
     case getCartByPharmacyId(pharmacyId:Int)
     case addToCart(cartBody:CartBodyDTO)
+    case deleteCartItem(pharmacyID: Int,warehouseId: Int,cartItemId:Int)
     
     var baseURL: String{
         "http://www.pharmaatoncepredeploy.somee.com/"
@@ -22,7 +23,10 @@ enum CartAPI: APIRequest{
             "api/Cart/\(pharmacyId)"
         case .addToCart(cartBody: let cartBody):
             "api/Cart/add"
+        case .deleteCartItem(pharmacyID: let pharmacyId, warehouseId: let warehouseId, cartItemId: let cartItemId):
+            "api/Cart/remove-item?pharmacyId=\(pharmacyId)&warehouseId=\(warehouseId)&medicineId=\(cartItemId)"
         }
+        
     }
     
     var method: HTTPMethod{
@@ -31,6 +35,9 @@ enum CartAPI: APIRequest{
                 .get
         case .addToCart(cartBody: let cartBody):
                 .post
+        case .deleteCartItem(pharmacyID: _, warehouseId: _, cartItemId: _):
+                .delete
+            
         }
     }
     
@@ -54,6 +61,8 @@ enum CartAPI: APIRequest{
                 "discount": cartBody.discount
             ]
         case.getCartByPharmacyId(pharmacyId: let pharamacyId):
+            nil
+        case .deleteCartItem(pharmacyID: let pharmacyID, warehouseId: let warehouseId, cartItemId: let cartItemId):
             nil
         }
     }

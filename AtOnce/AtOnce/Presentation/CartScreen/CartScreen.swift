@@ -40,7 +40,8 @@ struct CartScreen: View {
                             } else if viewModel.cartWarehousesList.indices.contains(selectedIndex) {
                                 CartItemListView(
                                     warehouse: $viewModel.cartWarehousesList[selectedIndex],
-                                    onDelete: { _ in }
+                                    viewModel: viewModel /*, onDelete: { _ in }*/
+                                    
                                 )
                             }
                         }
