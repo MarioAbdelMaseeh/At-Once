@@ -20,10 +20,10 @@ class SuppliersScreenViewModel: SuppliersScreenViewModelProtocol, ObservableObje
     private var cancellables = Set<AnyCancellable>()
     
     let useCase: FetchSuppliersByProductIdUseCase
-    
-    init(useCase: FetchSuppliersByProductIdUseCase){
+    let addToCart: AddToCartUseCase
+    init(useCase: FetchSuppliersByProductIdUseCase, addToCart: AddToCartUseCase){
         self.useCase = useCase
-        
+        self.addToCart = addToCart
     }
     
     func loadSuppliersProduct(areaId: Int, ProductId: Int) {
