@@ -14,7 +14,8 @@ struct SplashScreen: View {
 
     var body: some View {
         if isActive {
-            RootView().environmentObject(languageManager)
+            RootView()
+                .environmentObject(languageManager)
         } else {
             VStack {
                 Lottie(animationName: "Splash-Lottie")

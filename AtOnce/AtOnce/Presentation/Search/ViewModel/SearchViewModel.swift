@@ -27,17 +27,21 @@ class SearchViewModel : SearchViewModelProtocol,  ObservableObject{
     let searchUseCase: SearchUseCase
     let addToCartUseCase: AddToCartUseCase
     let userDefaultsUseCase: CachePharmacyUseCase
+    @Published var cachedPharmacy : CachedPharmacy?
+    
     init(useCase: SearchUseCase, addToCartUseCase: AddToCartUseCase, userDefaultsUseCase: CachePharmacyUseCase){
         self.searchUseCase = useCase
         self.addToCartUseCase = addToCartUseCase
         self.userDefaultsUseCase = userDefaultsUseCase
+       cachedPharmacy = userDefaultsUseCase.getCachedUser()
+        
         $searchText
                 .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
                 .removeDuplicates()
                 .sink { [weak self] text in
                     guard let self = self else { return }
                     self.reset()
-                    self.fetchProducts(areaId: 2, text: text, page: 1, pageSize: self.pageSize)
+                    self.fetchProducts(areaId: cachedPharmacy?.areaId ?? 2 /*userDefaultsUseCase.getCachedUser()?.areaId ?? 2*/, text: text, page: 1, pageSize: self.pageSize)
                 }
                 .store(in: &cancellables)
     }
@@ -75,7 +79,7 @@ class SearchViewModel : SearchViewModelProtocol,  ObservableObject{
 
         let threshold = products.count - 4
         if index >= threshold {
-            fetchProducts(areaId: 2, text: searchText, page: currentPage, pageSize: pageSize)
+            fetchProducts(areaId: cachedPharmacy?.areaId ?? 2, text: searchText, page: currentPage, pageSize: pageSize)
         }
     }
     func reset() {

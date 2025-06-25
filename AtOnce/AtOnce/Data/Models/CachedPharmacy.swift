@@ -5,7 +5,7 @@
 //  Created by Iman Mahmoud on 23/06/2025.
 //
 
-struct CachedPharmacy: Codable{
+struct CachedPharmacy: Codable , Equatable, Hashable{
     var id: Int
     var token: String
     var name: String

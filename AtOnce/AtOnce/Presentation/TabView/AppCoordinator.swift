@@ -33,11 +33,29 @@ class AppCoordinator: ObservableObject {
         switch destination {
         case .profile:
             let vm = container.resolve(ProfileViewModelProtocol.self)! as! ProfileViewModel
-            return ProfileView(viewModel: vm){
-                self.logout()
-            }
+            return AnyView(
+                        ProfileView(viewModel: vm) {
+                            self.logout()
+                        }
+                        .environmentObject(self)
+                        .environmentObject(AppDIContainer.shared.container.resolve(LanguageManager.self)!)
+                    )
+           // .environmentObject(self)
+           // .environmentObject(AppDIContainer.shared.container.resolve(LanguageManager.self)!)
+            
+        case .store(let id):
+                let vm = container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel
+            return AnyView(
+                        StoreScreen(warehouseId: id, viewModel: vm)
+                    )
+            
+        case .profileInfo(let pharmacy):
+                return AnyView(
+                    ProfileInfo(pharmacy: pharmacy)
+                )
         }
     }
+    
     func logout() {
             path = []
         DispatchQueue.main.async {

@@ -61,13 +61,13 @@ struct SearchScreen: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("Search")
+                Text("Search".localized)
                     .font(.title)
                     .fontWeight(.semibold)
             }
         }
         .onAppear {
-            viewModel.fetchProducts(areaId: 2, text: viewModel.searchText, page: 1, pageSize: 10)
+            viewModel.fetchProducts(areaId: viewModel.cachedPharmacy?.areaId ?? 2, text: viewModel.searchText, page: 1, pageSize: 10)
         }
     }
 }

@@ -16,3 +16,9 @@ extension Numeric {
         return formatter.string(for: self) ?? "\(self)"
     }
 }
+
+extension String {
+    var localized: String {
+        NSLocalizedString(self, comment: "")
+    }
+}

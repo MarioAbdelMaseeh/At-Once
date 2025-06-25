@@ -61,13 +61,17 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
             self?.isLoading = false
             if case let .failure(error) = completion {
                 self?.errorMessage = error.localizedDescription
+             
             }
         } receiveValue: { [weak self] response in
             if response.success {
                 self?.SuccessMessage = response.message
+                self?.fetchCartByPharmacyId()
+                
             }
             else {
                 self?.errorMessage = response.message
+                self?.isLoading = false
             }
         }.store(in: &cancellables)
     }
