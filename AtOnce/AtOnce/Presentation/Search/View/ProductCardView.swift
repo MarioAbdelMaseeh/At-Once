@@ -13,6 +13,7 @@ struct ProductCardView: View {
         product.distributorsCount != 0
       //  false
     }
+    var addToCart: ()-> Void
     var isSuppliersSheeet = false
     @State private var showSheet = false
     
@@ -50,7 +51,9 @@ struct ProductCardView: View {
                 if hasSuppliers {
                     
                     MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
-                                 action: {}).padding(.trailing,4)
+                                 action: {
+                        addToCart()
+                    }).padding(.trailing,4)
                     MediumButton(buttonLabel: NSLocalizedString("suppliers", comment: ""), buttonIcon: "storefront",color: Color.darkGray, action: {
                         showSheet.toggle()
                     }).padding(.leading,4)

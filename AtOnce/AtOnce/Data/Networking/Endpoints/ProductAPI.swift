@@ -8,7 +8,7 @@ import Alamofire
 
 enum ProductAPI: APIRequest{
     
-    case getProductsByWarehouse(warehouseId: Int, page: Int, pageSize: Int)
+    case getProductsByWarehouse(warehouseId: Int, page: Int, pageSize: Int, search: String)
     case getSuppliersByProduct(areaId: Int,productId: Int)
     var baseURL: String{
       //  "http://predeploypharmaatonceafteredit.somee.com/"
@@ -17,8 +17,8 @@ enum ProductAPI: APIRequest{
     
     var path: String{
         switch self{
-        case .getProductsByWarehouse(warehouseId: let warehouseId, page: let page, pageSize: let pageSize):
-           return "api/Warehouse/GetWarehousMedicines/\(warehouseId)/medicines?page=\(page)&pageSize=\(pageSize)"
+        case .getProductsByWarehouse(warehouseId: let warehouseId, page: let page, pageSize: let pageSize, search: let search):
+           return "api/Warehouse/GetWarehousMedicines/\(warehouseId)/medicines?page=\(page)&pageSize=\(pageSize)&search=\(search)"
         case .getSuppliersByProduct(areaId: let areaId, productId: let productId):
             return "api/warehouse/area/\(areaId)/medicine/\(productId)"
             
@@ -27,7 +27,7 @@ enum ProductAPI: APIRequest{
     
     var method: HTTPMethod{
         switch self {
-        case .getProductsByWarehouse(warehouseId: _, page: _, pageSize: _):
+        case .getProductsByWarehouse(warehouseId: _, page: _, pageSize: _, search: _):
              return   .get
         case .getSuppliersByProduct(areaId: _, productId: _):
             return   .get

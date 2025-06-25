@@ -11,6 +11,7 @@ struct SearchProduct: Identifiable{
     let id = UUID()
     let medicineId: Int
     let medicineName: String
+    let arabicMedicineName: String
     let drug: Int
     let price: Double
     let maximumwareHouseAreaName: String

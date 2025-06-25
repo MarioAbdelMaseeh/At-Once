@@ -9,6 +9,8 @@ import Foundation
 import Combine
 
 class CartRepositoryImpl: CartRepository{
+    
+    
 
     let networkService: NetworkServiceProtocol
     
@@ -18,6 +20,15 @@ class CartRepositoryImpl: CartRepository{
     
     func getCartByPharmacyId(pharmacyId: Int) -> AnyPublisher<CartResponse, any Error> {
         return networkService.request(_request: CartAPI.getCartByPharmacyId(pharmacyId: pharmacyId), responseType: CartResponseDTO.self)
+            .map {$0.toEntity()}
+            .eraseToAnyPublisher()
+    }
+    func addToCart(cartBody: CartBodyDTO)-> AnyPublisher<AddToCartResponseDTO, Error>{
+        return networkService.request(_request: CartAPI.addToCart(cartBody: cartBody), responseType: AddToCartResponseDTO.self).eraseToAnyPublisher()
+    }
+    
+    func removeFromCart(pharmacyId: Int, warehouseId: Int, cartItemId: Int) -> AnyPublisher<DeletedProduct, Error> {
+        return networkService.request(_request: CartAPI.deleteCartItem(pharmacyID: pharmacyId, warehouseId: warehouseId, cartItemId: cartItemId), responseType: DeletedProductResponseDTO.self)
             .map {$0.toEntity()}
             .eraseToAnyPublisher()
     }

@@ -18,6 +18,7 @@ extension Container{
         self.register((HomeScreenViewModelProtocol).self) { r in
             HomeScreenViewModel(useCase: r.resolve(GetWarehouseByAreaUseCase.self)!)
         }
+        
     }
     
 }

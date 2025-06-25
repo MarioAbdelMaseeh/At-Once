@@ -10,6 +10,7 @@ import Combine
 
 protocol CartViewModelProtocol {
     func fetchCartByPharmacyId(pharmacyId:Int)
+    func deleteItem(pharmacyId:Int, warehouseId:Int, itemId:Int)
 }
 
 class CartViewModel: CartViewModelProtocol, ObservableObject {
@@ -18,15 +19,20 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
     @Published var errorMessage: String?
 
     @Published var cartResponse: CartResponse?
+    @Published var SuccessMessage: String?
     @Published var cartWarehousesList: [CartWarehouse] = []
 
     private var cancellables = Set<AnyCancellable>()
 
     let cartUseCase: GetCartByPharmacyIdUseCase
+    let userDefaultUseCase: CachePharmacyUseCase
+    let deleteCartUseCase: DeleteItemUseCase
     
-    init(cartUseCase: GetCartByPharmacyIdUseCase) {
+    init(cartUseCase: GetCartByPharmacyIdUseCase, userDefaultUseCase: CachePharmacyUseCase, deleteCartUseCase: DeleteItemUseCase) {
         self.cartUseCase = cartUseCase
-        fetchCartByPharmacyId(pharmacyId: 45)
+        self.userDefaultUseCase = userDefaultUseCase
+        self.deleteCartUseCase = deleteCartUseCase
+        fetchCartByPharmacyId(pharmacyId: userDefaultUseCase.getCachedUser()?.id ?? 0)
     }
 
     func fetchCartByPharmacyId(pharmacyId:Int) {
@@ -41,6 +47,24 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
             
             self?.cartWarehousesList = cartResponse.data?.warehouses ?? []
             
+        }.store(in: &cancellables)
+    }
+    
+    func deleteItem(pharmacyId: Int, warehouseId: Int, itemId: Int) {
+        isLoading = true
+        deleteCartUseCase.excute(pharmacyId: pharmacyId, warehouseId: warehouseId, itemId: itemId)
+            .sink { [weak self] completion in
+            self?.isLoading = false
+            if case let .failure(error) = completion {
+                self?.errorMessage = error.localizedDescription
+            }
+        } receiveValue: { [weak self] response in
+            if response.success {
+                self?.SuccessMessage = response.message
+            }
+            else {
+                self?.errorMessage = response.message
+            }
         }.store(in: &cancellables)
     }
 

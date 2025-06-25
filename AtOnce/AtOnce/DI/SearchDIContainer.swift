@@ -16,7 +16,7 @@ extension Container{
             SearchUseCaseImpl(repo: r.resolve(SearchRepository.self)!)
         }
         self.register((SearchViewModelProtocol).self) { r in
-            SearchViewModel(useCase: r.resolve(SearchUseCase.self)!)
+            SearchViewModel(useCase: r.resolve(SearchUseCase.self)!, addToCartUseCase: r.resolve(AddToCartUseCase.self)!, userDefaultsUseCase: r.resolve(CachePharmacyUseCase.self)!)
         }
     }
 }
