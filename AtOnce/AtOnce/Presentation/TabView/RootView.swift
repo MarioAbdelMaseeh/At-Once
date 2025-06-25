@@ -24,7 +24,6 @@ struct RootView: View {
                             }
                         }
                     )
-                    
                 case .main:
                     MainTabView(
                         onLogout: {
@@ -41,7 +40,7 @@ struct RootView: View {
             .navigationDestination(for: OutOfTabDestination.self) { destination in
                 coordinator.buildView(for: destination)
             }
-        }
+        }.tint(.primary)
     }
     private func layoutDirection(for language: AppLanguage) -> LayoutDirection {
         switch language {

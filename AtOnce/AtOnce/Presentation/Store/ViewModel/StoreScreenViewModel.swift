@@ -16,7 +16,7 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
     @Published var products: [WarehouseProduct] = []
     @Published var isLoading: Bool = false
     @Published var hasMorePages: Bool = true
-    
+    @Published var errorMessage: String?
     @Published var searchText: String = ""
     
 
@@ -38,9 +38,13 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
 
     private var cancellables = Set<AnyCancellable>()
     let useCase: FetchProductByWarehouseIdUseCase
-
-    init(useCase: FetchProductByWarehouseIdUseCase) {
+    let addToCartUseCase: AddToCartUseCase
+    let userDefaultsUseCase: CachePharmacyUseCase
+    
+    init(useCase: FetchProductByWarehouseIdUseCase, addToCartUseCase: AddToCartUseCase, userDefaultsUseCase: CachePharmacyUseCase) {
         self.useCase = useCase
+        self.addToCartUseCase = addToCartUseCase
+        self.userDefaultsUseCase = userDefaultsUseCase
     }
 
      func loadProducts(warehouseId: Int) {
@@ -78,5 +82,17 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
         hasMorePages = true
         products = []
         loadProducts(warehouseId: warehouseId)
+    }
+    func addToCart(p: WarehouseProduct, warehouseId: Int){
+        let cartBody = CartBodyDTO(warehouseId: warehouseId , pharmacyId: userDefaultsUseCase.getCachedUser()?.id ?? 0, medicineId: p.id, englishMedicineName: p.enName, arabicMedicineName: p.arName, medicineUrl: p.imageUrl, warehouseUrl: p.imageUrl, price: p.total, quantity: 1, discount: p.discount)
+        addToCartUseCase.excute(cartBody: cartBody).sink {[weak self] completion in
+            if case let .failure(error) = completion{
+                self?.errorMessage = error.localizedDescription
+                print(error.localizedDescription)
+            }
+        } receiveValue: { result in
+            print(result.message)
+            print(result.success)
+        }.store(in: &cancellables)
     }
 }

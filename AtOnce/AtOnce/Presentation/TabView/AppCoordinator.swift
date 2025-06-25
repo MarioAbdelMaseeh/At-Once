@@ -20,9 +20,13 @@ class AppCoordinator: ObservableObject {
     @Published var path: [OutOfTabDestination] = []
 
     let container: Resolver
-
+    let isLoggedIn: Bool?
     init(container: Resolver = AppDIContainer.shared.container) {
         self.container = container
+        self.isLoggedIn = container.resolve(CachePharmacyUseCase.self)?.isUserLoggedin()
+        if let isLoggedIn = isLoggedIn{
+            flow = isLoggedIn ? .main : .login
+        }
     }
 
     func buildView(for destination: OutOfTabDestination) -> some View {

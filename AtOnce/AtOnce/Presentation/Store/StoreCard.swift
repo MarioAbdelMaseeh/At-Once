@@ -9,11 +9,9 @@ import SwiftUI
 
 struct StoreCard: View {
     let product : WarehouseProduct
-    
+    let addToCart: ()-> Void
     @EnvironmentObject var languageManager: LanguageManager
     
-//    let discount : Int = 26
-//    let price : Double = 21
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8){
@@ -74,7 +72,7 @@ struct StoreCard: View {
             
             MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""),
                          buttonIcon: "cart", color: Color.primaryTeal,action: {
-                
+                addToCart()
             })//.padding(.top,8)
             
             
@@ -90,5 +88,7 @@ struct StoreCard: View {
 }
 
 #Preview {
-    StoreCard(product: WarehouseProduct(id: 1, arName: "ay 7aga", enName: "ay 7aga", quantity: 1, prePrice: 25, pricePerItem: 20, discount: 26.5, imageUrl: ""))
+    StoreCard(product: WarehouseProduct(id: 1, arName: "ay 7aga", enName: "ay 7aga", quantity: 1, prePrice: 25, pricePerItem: 20, discount: 26.5, imageUrl: "")){
+        
+    }
 }
