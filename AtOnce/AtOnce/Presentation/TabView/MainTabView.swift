@@ -41,7 +41,7 @@ struct MainTabView: View {
                     AnyView(OrdersScreen())
                 }
             }
-
+            Spacer()
             CustomTabBarView(selectedTab: $tabCoordinator.selectedTab)
         }
     }
