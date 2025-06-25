@@ -23,10 +23,12 @@ class HomeScreenViewModel : HomeScreenViewModelProtocol,  ObservableObject{
     private var isFetching = false
     private var cancellables = Set<AnyCancellable>()
     let useCase: GetWarehouseByAreaUseCase
+    let userDefaultUseCase: CachePharmacyUseCase
     
-    init(useCase: GetWarehouseByAreaUseCase){
+    init(useCase: GetWarehouseByAreaUseCase,userDefaultUseCase: CachePharmacyUseCase){
         self.useCase = useCase
-        fetchWarehouses(areaId: 2, page: currentPage, pageSize: pageSize)
+        self.userDefaultUseCase = userDefaultUseCase
+        fetchWarehouses(areaId: userDefaultUseCase.getCachedUser()?.areaId ?? 2, page: currentPage, pageSize: pageSize)
     }
     
     func fetchWarehouses(areaId: Int, page: Int , pageSize: Int ){

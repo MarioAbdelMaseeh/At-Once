@@ -39,6 +39,9 @@ struct CartItemListView: View {
                                        let item = warehouse.items[index]
                                        if let pharmacyId = viewModel.userDefaultUseCase.getCachedUser()?.id {
                                            viewModel.deleteItem(pharmacyId: pharmacyId, warehouseId: warehouse.warehouseId, itemId: item.medicineId)
+                                
+                                         //  viewModel.fetchCartByPharmacyId(pharmacyId: pharmacyId)
+                                        
                                            warehouse.items.remove(at: index)
                                        }
                                    }

@@ -67,7 +67,7 @@ struct SearchScreen: View {
             }
         }
         .onAppear {
-            viewModel.fetchProducts(areaId: 2, text: viewModel.searchText, page: 1, pageSize: 10)
+            viewModel.fetchProducts(areaId: viewModel.cachedPharmacy?.areaId ?? 2, text: viewModel.searchText, page: 1, pageSize: 10)
         }
     }
 }

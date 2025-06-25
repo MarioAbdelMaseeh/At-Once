@@ -55,25 +55,3 @@ struct RootView: View {
         }
     }
 }
-
-//struct RootView: View {
-//    @StateObject private var coordinator = AppCoordinator()
-//
-//    var body: some View {
-//        if coordinator.flow == .login {
-//            LoginScreen(
-//                viewModel: AppDIContainer.shared.container.resolve(LoginScreenViewModelProtocol.self) as! LoginScreenViewModel
-//            ) {
-//                withAnimation {
-//                    coordinator.flow = .main
-//                }
-//            }
-//        } else {
-//            MainTabView {
-//                withAnimation {
-//                    coordinator.flow = .login 
-//                }
-//            }
-//        }
-//    }
-//}

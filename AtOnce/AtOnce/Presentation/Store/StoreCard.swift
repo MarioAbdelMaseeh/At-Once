@@ -14,6 +14,7 @@ struct StoreCard: View {
     
     
     var body: some View {
+        
         VStack(alignment: .leading, spacing: 8){
             AsyncImage(url: URL(string: product.imageUrl)) { phase in
                            switch phase {
@@ -37,7 +38,7 @@ struct StoreCard: View {
                                    .frame(height: 120)
                                    .foregroundColor(.gray)
                                    .frame(maxWidth: .infinity)
-                                   .shimmering()
+                                  // .shimmering()
                            @unknown default:
                                EmptyView()
                            }
