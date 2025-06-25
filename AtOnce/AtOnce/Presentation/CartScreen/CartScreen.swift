@@ -40,12 +40,12 @@ struct CartScreen: View {
                             } else if viewModel.cartWarehousesList.indices.contains(selectedIndex) {
                                 CartItemListView(
                                     warehouse: $viewModel.cartWarehousesList[selectedIndex],
-                                    viewModel: viewModel /*, onDelete: { _ in }*/
-                                    
+                                    viewModel: viewModel, onUpdate: { warehouseId, medicineId, quantity in
+                                        viewModel.updateItem(warehouseId: warehouseId, medicineId: medicineId, quantity: quantity)
+                                    }
                                 )
                             }
                         }
-
                     }.padding()
                 }
                 Spacer()
@@ -92,7 +92,7 @@ struct CartScreen: View {
                                 .font(.title)
                                 .fontWeight(.semibold)
                         }
-                    }
+                }
             }
         }
     }

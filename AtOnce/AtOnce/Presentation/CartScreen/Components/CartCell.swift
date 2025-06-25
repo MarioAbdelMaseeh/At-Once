@@ -11,8 +11,8 @@ import Shimmer
 struct CartCell: View {
     var order: CartItem
     var isLoading: Bool = false
-    var delete: () -> Void = {}
-    
+    var onDelete: () -> Void
+    var onUpdate: (_ medicineId: Int, _ quantity: Int) -> Void
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center) {
@@ -31,7 +31,7 @@ struct CartCell: View {
                             .foregroundColor(.primary)
                         Spacer()
                         Button {
-                            delete()
+                            onDelete()
                         } label: {
                             Image(systemName: "trash")
                                 .resizable()
@@ -63,7 +63,7 @@ struct CartCell: View {
                         HStack(spacing: 8) {
                             Button {
                                 if order.quantity > 1 {
-                                    // Decrease quantity
+                                    onUpdate(order.medicineId, order.quantity - 1)
                                 }
                             } label: {
                                 Image(systemName: "minus")
@@ -75,7 +75,7 @@ struct CartCell: View {
                             Text("\(order.quantity)")
                             
                             Button {
-                                // Increase quantity
+                                onUpdate(order.medicineId, order.quantity + 1)
                             } label: {
                                 Image(systemName: "plus")
                                     .foregroundColor(.primary)

@@ -38,7 +38,7 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
 
     private var currentPage = 1
     private let pageSize = 10
-
+    private var isFetching = false
     private var cancellables = Set<AnyCancellable>()
     let useCase: FetchProductByWarehouseIdUseCase
     let addToCartUseCase: AddToCartUseCase
@@ -56,16 +56,18 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
                 self.reset(warehouseId: self.currentWarehouseId)
             }
             .store(in: &cancellables)
+        
     }
 
      func loadProducts(warehouseId: Int) {
-        guard !isLoading, hasMorePages else { return }
+         guard !isLoading, hasMorePages else { return }
 
-        isLoading = true
-
+         isLoading = true
+         isFetching = true
          useCase.excute(warehouseId: warehouseId, page: currentPage, pageSize: pageSize, search: searchText  )
             .sink { [weak self] completion in
                 self?.isLoading = false
+                self?.isFetching = false
                 if case let .failure(error) = completion {
                     print("Error:", error.localizedDescription)
                 }
@@ -84,8 +86,10 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
 
      func loadMoreIfNeeded(currentProduct: WarehouseProduct, warehouseId: Int) {
        guard let last = products.last, last.id == currentProduct.id else {return}
+         if !isFetching {
+             loadProducts(warehouseId: warehouseId)
 
-        loadProducts(warehouseId: warehouseId)
+         }
     }
 
      func reset(warehouseId: Int) {

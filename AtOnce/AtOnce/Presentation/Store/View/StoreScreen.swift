@@ -84,6 +84,7 @@ struct StoreScreen: View {
                     //                        if viewModel.products.isEmpty {
                     //                                viewModel.loadProducts(warehouseId: 2)
                     //                            }
+                    print("on apeeeeeeeear")
                     viewModel.reset(warehouseId: 2)
                     
                     // viewModel.loadProducts(warehouseId: 2, page: 1, pageSize: 10)
