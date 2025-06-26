@@ -10,7 +10,9 @@ enum AppFlow {
     case login
     case main
 }
-enum OutOfTabDestination: Hashable , Equatable{
+
+enum OutOfTabDestination: Hashable, Equatable {
+
     case profile
     case store(id: Int)
     case profileInfo(CachedPharmacy)

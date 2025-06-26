@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SuppliersProductCard: View {
     
+    
     let suppliersProduct: SuppliersProduct
     let addToCart: (_ p: SuppliersProduct)->Void
     var body: some View {
@@ -31,12 +32,23 @@ struct SuppliersProductCard: View {
                         .font(.subheadline)
                         .padding(.bottom, 2)
                         //.padding(.top, 1)
+                    
+                    
+                    HStack{
+                        Text(String(format: NSLocalizedString("price_format", comment: ""), suppliersProduct.medicinePrice.localizedDigits))
+                            .font(.subheadline)
+                        Text(String(format: NSLocalizedString("amount_only_format", comment: ""), suppliersProduct.finalPrice.localizedDigits))
+                            .font(.subheadline)
+                            .foregroundColor(Color(.systemGray))
+                                    .strikethrough()
+                        
+                    }
 
                  //   Text("Price : \(String(format: "%.2f", price)) EGP")
-                    Text(String(format: NSLocalizedString("price_format", comment: ""), suppliersProduct.finalPrice.localizedDigits))
-                    
-                       // .padding(.bottom, 4)
-                        .font(.subheadline)
+//                    Text(String(format: NSLocalizedString("price_format", comment: ""), suppliersProduct.finalPrice.localizedDigits))
+//                    
+//                       // .padding(.bottom, 4)
+//                        .font(.subheadline)
                         
                        
                 

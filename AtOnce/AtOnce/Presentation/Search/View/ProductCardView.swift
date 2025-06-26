@@ -40,10 +40,20 @@ struct ProductCardView: View {
                     //.padding(.top, 1)
                     
                     //   Text("Price : \(String(format: "%.2f", price)) EGP")
-                    Text(String(format: NSLocalizedString("price_format", comment: ""), product.finalPrice.localizedDigits))
+                    HStack{
+                        Text(String(format: NSLocalizedString("price_format", comment: ""), product.finalPrice.localizedDigits))
+                            .font(.subheadline)
+                        Text(String(format: NSLocalizedString("amount_only_format", comment: ""), product.price.localizedDigits))
+                            .font(.subheadline)
+                            .foregroundColor(Color(.systemGray))
+                                    .strikethrough()
+                        
+                    }
+               //     Text(String(format: NSLocalizedString("price_format", comment: ""), product.finalPrice.localizedDigits))
+                    
                     
                     // .padding(.bottom, 4)
-                        .font(.subheadline)
+                      //  .font(.subheadline)
                 }
             }
             HStack {

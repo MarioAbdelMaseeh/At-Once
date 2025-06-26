@@ -62,9 +62,20 @@ struct StoreCard: View {
             
             
          //  Text("Price : \(price) EGP")
-            Text(String(format: NSLocalizedString("price_format", comment: ""), product.pricePerItem.localizedDigits))
-           
-                .font(.subheadline)
+//            Text(String(format: NSLocalizedString("price_format", comment: ""), product.pricePerItem.localizedDigits))
+//           
+//                .font(.subheadline)
+            
+            HStack{
+                Text(String(format: NSLocalizedString("price_format", comment: ""), product.pricePerItem.localizedDigits))
+                    .font(.caption)
+                Text(String(format: NSLocalizedString("amount_only_format", comment: ""), product.prePrice.localizedDigits))
+                    .font(.caption)
+                    .foregroundColor(Color(.systemGray))
+                            .strikethrough()
+                
+            }//.padding(.horizontal,4)
+            
               //  .font(.title3)
                // .fontWeight(.semibold)
 
@@ -80,7 +91,8 @@ struct StoreCard: View {
             
             
         }
-        .padding()
+        .padding(.horizontal,8)
+        .padding(.vertical)
         .background(Color(.customBackground))
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)

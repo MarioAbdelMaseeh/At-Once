@@ -43,4 +43,13 @@ extension Bundle {
         objc_setAssociatedObject(Bundle.main, &bundleKey, langBundle, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         object_setClass(Bundle.main, LocalizedBundle.self)
     }
+    
+    static var currentLanguageCode: String {
+            if let langBundle = objc_getAssociatedObject(Bundle.main, &bundleKey) as? Bundle,
+               let langPath = langBundle.bundlePath.components(separatedBy: "/").last {
+                return langPath // "en" or "ar"
+            }
+            // fallback to system
+            return Locale.preferredLanguages.first?.components(separatedBy: "-").first ?? "en"
+        }
 }
