@@ -45,7 +45,7 @@ struct ProductCardView: View {
                             .font(.subheadline)
                         Text(String(format: NSLocalizedString("amount_only_format", comment: ""), product.price.localizedDigits))
                             .font(.subheadline)
-                            .foregroundColor(Color(.systemGray))
+                            .foregroundColor(Color(.red))
                                     .strikethrough()
                         
                     }

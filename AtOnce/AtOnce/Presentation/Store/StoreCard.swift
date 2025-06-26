@@ -71,7 +71,7 @@ struct StoreCard: View {
                     .font(.caption)
                 Text(String(format: NSLocalizedString("amount_only_format", comment: ""), product.prePrice.localizedDigits))
                     .font(.caption)
-                    .foregroundColor(Color(.systemGray))
+                    .foregroundColor(Color(.red))
                             .strikethrough()
                 
             }//.padding(.horizontal,4)
