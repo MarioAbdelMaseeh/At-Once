@@ -10,9 +10,8 @@ import SwiftUI
 struct HomeScreen: View {
     
     @ObservedObject var viewModel: HomeScreenViewModel
-    
     @EnvironmentObject var coordinator: AppCoordinator
-
+    
     let onLogout: () -> Void
     let onSearch: () -> Void
     init(viewModel: HomeScreenViewModel, onLogout: @escaping () -> Void, onSearch: @escaping () -> Void) {
@@ -21,6 +20,7 @@ struct HomeScreen: View {
         self.onSearch = onSearch
     }
     var body: some View {
+        
         ScrollView {
             VStack(alignment: .leading, spacing: 16){
                 AdCarouselView()
@@ -40,10 +40,6 @@ struct HomeScreen: View {
                     .background(Color(.systemGray6))
                     .cornerRadius(12)
                 }
-                
-                
-                
-                
                 VStack(spacing: 16){
                     if(viewModel.isLoading){
                         ForEach(0..<5, id: \.self) { _ in
@@ -52,12 +48,9 @@ struct HomeScreen: View {
                     }
                     ForEach(viewModel.warehouses){
                         item in
-//                        NavigationLink {
-//                            StoreScreen(warehouseId: item.id, viewModel: AppDIContainer.shared.container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel)
-//                        }
                         Button {
-                                coordinator.path.append(.store(id: item.id))
-                            }label: {
+                            coordinator.path.append(.store(id: item.id))
+                        }label: {
                             StoreCell(warehouse: item)
                                 .onAppear{
                                     viewModel.loadMoreIfNeeded(currentItem: item)
@@ -66,11 +59,12 @@ struct HomeScreen: View {
                     }
                 }
             }.padding()
-        }.navigationBarTitleDisplayMode(.inline)
+        }.withConnectivityAlert()
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     NavigationLink {
-                        //                            ProfileView()
+                        
                     } label: {
                         Image(systemName: "phone.fill").resizable()
                             .frame(width: 20,height: 20)

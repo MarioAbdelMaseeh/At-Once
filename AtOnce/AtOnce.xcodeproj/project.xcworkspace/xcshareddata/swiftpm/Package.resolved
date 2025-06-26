@@ -1,5 +1,5 @@
 {
-  "originHash" : "d15c4cdd3c3ff66c9b7b808cfb60196f50b2ef78175db744514c6fe423082386",
+  "originHash" : "c741f0b10cfb64af42b6a8db01eafc1c679f8948187522d2c98f06d68119979b",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -20,6 +20,15 @@
       }
     },
     {
+      "identity" : "connectivity",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rwbutler/Connectivity",
+      "state" : {
+        "revision" : "30956aa751170afee0feb340714829dff159b265",
+        "version" : "8.0.1"
+      }
+    },
+    {
       "identity" : "lottie-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios",
@@ -31,7 +40,7 @@
     {
       "identity" : "swiftui-shimmer",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/markiv/SwiftUI-Shimmer.git",
+      "location" : "https://github.com/markiv/SwiftUI-Shimmer",
       "state" : {
         "revision" : "0226e21f9bf355d40e07e5f5e1c33679d50e167f",
         "version" : "1.5.1"

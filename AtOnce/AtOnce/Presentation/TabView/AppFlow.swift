@@ -16,5 +16,5 @@ enum OutOfTabDestination: Hashable, Equatable {
     case profile
     case store(id: Int)
     case profileInfo(CachedPharmacy)
-    
+    case noInternet
 }

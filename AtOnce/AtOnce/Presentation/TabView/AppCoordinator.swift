@@ -18,17 +18,35 @@ class AppCoordinator: ObservableObject {
 
     @Published var flow: Flow = .login
     @Published var path: [OutOfTabDestination] = []
-
+    let connectivityObserver = ConnectivityObserver()
     let container: Resolver
     let isLoggedIn: Bool?
+    private var cancellables = Set<AnyCancellable>()
     init(container: Resolver = AppDIContainer.shared.container) {
         self.container = container
         self.isLoggedIn = container.resolve(CachePharmacyUseCase.self)?.isUserLoggedin()
         if let isLoggedIn = isLoggedIn{
             flow = isLoggedIn ? .main : .login
         }
+        connectivityObserver.$isConnected
+                    .removeDuplicates()
+                    .sink { [weak self] connected in
+                        self?.handleConnectionChange(connected)
+                    }
+                    .store(in: &cancellables)
     }
-
+    
+    private func handleConnectionChange(_ connected: Bool) {
+            if connected {
+                if path.last == .noInternet {
+                    path.removeLast()
+                }
+            } else {
+                if path.last != .noInternet {
+                    path.append(.noInternet)
+                }
+            }
+        }
     func buildView(for destination: OutOfTabDestination) -> some View {
         switch destination {
         case .profile:
@@ -40,9 +58,6 @@ class AppCoordinator: ObservableObject {
                         .environmentObject(self)
                         .environmentObject(AppDIContainer.shared.container.resolve(LanguageManager.self)!)
                     )
-           // .environmentObject(self)
-           // .environmentObject(AppDIContainer.shared.container.resolve(LanguageManager.self)!)
-            
         case .store(let id):
                 let vm = container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel
             return AnyView(
@@ -53,6 +68,10 @@ class AppCoordinator: ObservableObject {
                 return AnyView(
                     ProfileInfo(pharmacy: pharmacy)
                 )
+        case .noInternet:
+            return AnyView(
+                NoInternetView()
+            )
         }
     }
     
