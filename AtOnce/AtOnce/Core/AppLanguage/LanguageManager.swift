@@ -9,11 +9,15 @@ import Combine
 import Foundation
 
 class LanguageManager: ObservableObject {
+
+    
+    
     @Published var currentLanguage: AppLanguage {
         didSet {
          //   useCase.saveLanguage(currentLanguage)
             useCase.set(currentLanguage)
             Bundle.setLanguage(currentLanguage)
+            AppLanguageEnvironment.shared.currentLanguage = currentLanguage
             objectWillChange.send()
         }
     }
@@ -25,6 +29,7 @@ class LanguageManager: ObservableObject {
        // let saved = useCase.getSavedLanguage()
         let saved = useCase.get()
         self.currentLanguage = saved
+        AppLanguageEnvironment.shared.currentLanguage = saved
         Bundle.setLanguage(saved)
     }
 

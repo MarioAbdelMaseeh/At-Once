@@ -4,6 +4,8 @@ struct StoreCell: View {
     
     var warehouse: Warehouse
     
+   // @EnvironmentObject var languageManager: LanguageManager
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
