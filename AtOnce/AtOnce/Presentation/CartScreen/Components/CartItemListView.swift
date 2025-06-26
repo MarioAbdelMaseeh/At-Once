@@ -22,7 +22,7 @@ struct CartItemListView: View {
     
     var body: some View {
         ForEach(warehouse.items.indices, id: \.self) { index in
-
+            
             CartCell(order: warehouse.items[index] ) {
                 selectedItemIndex = index
                 showAlert = true
@@ -42,8 +42,8 @@ struct CartItemListView: View {
                     },
                     secondaryButton: .cancel()
                 )
+                
             }
-
         }
     }
 }
