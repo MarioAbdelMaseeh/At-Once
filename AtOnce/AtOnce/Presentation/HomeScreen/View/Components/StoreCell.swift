@@ -21,10 +21,11 @@ struct StoreCell: View {
                             .clipShape(Circle())
                             .padding(.trailing, 12)
                     case .failure:
-                        Circle()
-                            .fill(Color.gray.opacity(0.3))
+                        Image(.icon).resizable()
+                            .scaledToFill()
                             .frame(width: 80, height: 80)
-                            .shimmering()
+                            .clipShape(Circle())
+                            .padding(.trailing, 12)
                     @unknown default:
                         EmptyView()
                     }

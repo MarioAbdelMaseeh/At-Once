@@ -90,16 +90,6 @@ struct HomeScreen: View {
                             .frame(width: 20, height: 20)
                             .tint(.primary)
                     }
-                    
-//                    NavigationLink {
-//                        ProfileView(viewModel: AppDIContainer.shared.container.resolve(ProfileViewModelProtocol.self) as! ProfileViewModel) {
-//                            onLogout()
-//                        }
-//                    } label: {
-//                        Image(systemName: "person.fill").resizable()
-//                            .frame(width: 20,height: 20)
-//                            .tint(.primary)
-//                    }
                 }
             }
     }
