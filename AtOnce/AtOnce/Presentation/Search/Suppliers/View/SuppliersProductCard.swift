@@ -10,7 +10,7 @@ import SwiftUI
 struct SuppliersProductCard: View {
     
     let suppliersProduct: SuppliersProduct
-    let addToCart: ()->Void
+    let addToCart: (_ p: SuppliersProduct)->Void
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment:.top) {
@@ -68,7 +68,7 @@ struct SuppliersProductCard: View {
                     
                     MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
                                  action: {
-                        addToCart()
+                        addToCart(suppliersProduct)
                     })
                // }
                     

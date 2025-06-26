@@ -48,10 +48,10 @@ struct SearchScreen: View {
                                 }
                         }
                         
-                        if viewModel.isLoading {
-                            ProgressView()
-                                .padding()
-                        }
+//                        if viewModel.isLoading {
+//                            ProgressView()
+//                                .padding()
+//                        }
                     }
                     .padding(.horizontal)
                 }

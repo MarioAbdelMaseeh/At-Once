@@ -7,7 +7,7 @@
 import Combine
 
 protocol SuppliersScreenViewModelProtocol {
-    func loadSuppliersProduct(areaId: Int, ProductId: Int)
+    func loadSuppliersProduct(productId: Int)
 }
 
 class SuppliersScreenViewModel: SuppliersScreenViewModelProtocol, ObservableObject {
@@ -28,11 +28,11 @@ class SuppliersScreenViewModel: SuppliersScreenViewModelProtocol, ObservableObje
         self.userDefaultsUseCase = userDefaultsUseCase
     }
     
-    func loadSuppliersProduct(areaId: Int, ProductId: Int) {
+    func loadSuppliersProduct(productId: Int) {
         isLoading = true
         errorMessage = nil
         
-        useCase.excute(areaId: areaId, productId: ProductId)
+        useCase.excute(areaId: userDefaultsUseCase.getCachedUser()?.areaId ?? 0, productId: productId)
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case let .failure(error) = completion {

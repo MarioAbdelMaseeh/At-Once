@@ -47,8 +47,8 @@ struct SupplierSheetView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     ForEach(viewModel.suppliersProduct) { product in
-                        SuppliersProductCard(suppliersProduct: product){
-                            viewModel.addToCart(p: product)
+                        SuppliersProductCard(suppliersProduct: product){ p in
+                            viewModel.addToCart(p: p)
                         }
                     }
                 }
@@ -59,7 +59,7 @@ struct SupplierSheetView: View {
         .background(Color(.systemBackground))
         .cornerRadius(20)
         .onAppear {
-            viewModel.loadSuppliersProduct(areaId: 2, ProductId: 3/*productId*/)
+            viewModel.loadSuppliersProduct( productId: productId)
         }.environment(\.layoutDirection, layoutDirection(for: languageManager.currentLanguage))
         
     }
