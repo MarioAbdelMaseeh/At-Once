@@ -9,9 +9,9 @@ import SwiftUI
 
 struct SearchScreen: View {
     @ObservedObject private var viewModel: SearchViewModel
-    @State private var selectedFilter = "None"
+    @State private var selectedFilter = FilterOption.all[0]
     
-    let filterOptions = ["Option 1", "Option 2"]
+    let filterOptions = FilterOption.all
     init(viewModel: SearchViewModel) {
         self.viewModel = viewModel
     }
@@ -67,7 +67,16 @@ struct SearchScreen: View {
             }
         }
         .onAppear {
-            viewModel.fetchProducts(areaId: viewModel.cachedPharmacy?.areaId ?? 2, text: viewModel.searchText, page: 1, pageSize: 10)
+            viewModel.fetchProducts(areaId: viewModel.cachedPharmacy?.areaId ?? 2, text: viewModel.searchText, type: selectedFilter.id)
+        }
+        .onChange(of: selectedFilter) { newFilter in
+            viewModel.selectedCategory = newFilter.id
+            viewModel.reset()
+            viewModel.fetchProducts(
+                areaId: viewModel.cachedPharmacy?.areaId ?? 2,
+                text: viewModel.searchText,
+                type: newFilter.id
+            )
         }
     }
 }
@@ -75,6 +84,5 @@ struct SearchScreen: View {
 //#Preview {
 //    SearchScreen()
 //}
-
 
 

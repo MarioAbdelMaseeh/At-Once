@@ -7,14 +7,14 @@
 
 import Combine
 protocol SearchUseCase{
-    func excute(area: Int, text: String, page: Int, pageSize: Int)-> AnyPublisher<[SearchProduct], Error>
+    func excute(area: Int, text: String, page: Int, pageSize: Int, type: String)-> AnyPublisher<[SearchProduct], Error>
 }
 class SearchUseCaseImpl: SearchUseCase{
     let repo: SearchRepository
     init(repo: SearchRepository) {
         self.repo = repo
     }
-    func excute(area: Int, text: String, page: Int, pageSize: Int) -> AnyPublisher<[SearchProduct], any Error> {
-        repo.getProductsByText(area: area, text: text, page: page, pageSize: pageSize)
+    func excute(area: Int, text: String, page: Int, pageSize: Int, type: String) -> AnyPublisher<[SearchProduct], any Error> {
+        repo.getProductsByText(area: area, text: text, page: page, pageSize: pageSize, type: type)
     }
 }

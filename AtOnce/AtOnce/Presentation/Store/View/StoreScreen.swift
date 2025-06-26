@@ -10,7 +10,7 @@ import SwiftUI
 struct StoreScreen: View {
     
     // @State private var searchText: String = ""
-    @State private var selectedFilter = "None"
+    @State private var selectedFilter = FilterOption.all[0]
     @ObservedObject var viewModel: StoreScreenViewModel
     
     @EnvironmentObject var languageManager: LanguageManager
@@ -35,7 +35,7 @@ struct StoreScreen: View {
         //        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel)
     }
     
-    let filterOptions = ["Option 1", "Option 2"]
+    let filterOptions = FilterOption.all
     
     let columns = [
         GridItem(.flexible()),
