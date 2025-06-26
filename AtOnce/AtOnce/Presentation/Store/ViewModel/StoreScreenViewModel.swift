@@ -61,8 +61,10 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
 
      func loadProducts(warehouseId: Int) {
          guard !isLoading, hasMorePages else { return }
+         
+        // isLoading = true
 
-         isLoading = true
+         isLoading = currentPage == 1
          isFetching = true
          useCase.excute(warehouseId: warehouseId, page: currentPage, pageSize: pageSize, search: searchText  )
             .sink { [weak self] completion in
