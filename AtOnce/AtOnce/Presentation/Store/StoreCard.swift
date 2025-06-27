@@ -101,7 +101,7 @@ struct StoreCard: View {
 }
 
 #Preview {
-    StoreCard(product: WarehouseProduct(id: 1, arName: "ay 7aga", enName: "ay 7aga", quantity: 1, prePrice: 25, pricePerItem: 20, discount: 26.5, imageUrl: "")){
+    StoreCard(product: WarehouseProduct(medicineId: 1, arName: "ay 7aga", enName: "ay 7aga", quantity: 1, prePrice: 25, pricePerItem: 20, discount: 26.5, imageUrl: "")){
         
     }
 }

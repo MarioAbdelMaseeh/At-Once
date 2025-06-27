@@ -20,19 +20,9 @@ struct StoreScreen: View {
     let warehouseId : Int
     
     
-    
-    //    @StateObject private var viewModel = StoreScreenViewModel(
-    //        useCase: FetchProductByWarehouseIdUseCaseImpl(
-    //            warehouseRepository: WarehouseRepositoryImpl(
-    //                networkService: NetworkService()
-    //            )
-    //        )
-    //    )
-    
     init(warehouseId : Int, viewModel: StoreScreenViewModel) {
         self.warehouseId = warehouseId
         self.viewModel = viewModel
-        //        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel)
     }
     
     let filterOptions = FilterOption.all

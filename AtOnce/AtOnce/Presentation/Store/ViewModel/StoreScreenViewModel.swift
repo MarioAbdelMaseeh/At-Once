@@ -102,7 +102,7 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
         loadProducts(warehouseId: warehouseId)
     }
     func addToCart(p: WarehouseProduct, warehouseId: Int){
-        let cartBody = CartBodyDTO(warehouseId: warehouseId , pharmacyId: userDefaultsUseCase.getCachedUser()?.id ?? 0, medicineId: p.id, englishMedicineName: p.enName, arabicMedicineName: p.arName, medicineUrl: p.imageUrl, warehouseUrl: p.imageUrl, price: p.total, quantity: 1, discount: p.discount)
+        let cartBody = CartBodyDTO(warehouseId: warehouseId , pharmacyId: userDefaultsUseCase.getCachedUser()?.id ?? 0, medicineId: p.medicineId, englishMedicineName: p.enName, arabicMedicineName: p.arName, medicineUrl: p.imageUrl, warehouseUrl: p.imageUrl, price: p.total, quantity: 1, discount: p.discount)
         addToCartUseCase.excute(cartBody: cartBody).sink {[weak self] completion in
             if case let .failure(error) = completion{
                 self?.errorMessage = error.localizedDescription

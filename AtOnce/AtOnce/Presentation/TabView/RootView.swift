@@ -10,7 +10,6 @@ import SwiftUI
 struct RootView: View {
     @EnvironmentObject var languageManager: LanguageManager
     @StateObject private var coordinator = AppCoordinator()
-    let connectivityObserver = ConnectivityObserver()
     var body: some View {
         NavigationStack(path: $coordinator.path) {
             Group {
@@ -23,7 +22,7 @@ struct RootView: View {
                                 coordinator.flow = .main
                             }
                         }
-                    ).environmentObject(connectivityObserver)
+                    ).environmentObject(coordinator.connectivityObserver)
                 case .main:
                     MainTabView(
                         onLogout: {
@@ -34,7 +33,7 @@ struct RootView: View {
                         onNavigateOutOfTabs: { destination in
                             coordinator.path.append(destination)
                         }
-                    ).environmentObject(connectivityObserver)
+                    ).environmentObject(coordinator.connectivityObserver)
                 }
             }//.environment(\.layoutDirection, layoutDirection(for: languageManager.currentLanguage))
             .navigationDestination(for: OutOfTabDestination.self) { destination in

@@ -14,7 +14,8 @@ struct WarehouseOrder: Identifiable {
     var orders: [WarehouseProduct]
 }
 struct WarehouseProduct: Identifiable {
-    let id : Int
+    var id = UUID()
+    let medicineId : Int
     let arName: String
     let enName: String
     var quantity: Int

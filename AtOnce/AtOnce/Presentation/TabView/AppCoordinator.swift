@@ -37,16 +37,15 @@ class AppCoordinator: ObservableObject {
     }
     
     private func handleConnectionChange(_ connected: Bool) {
-            if connected {
-                if path.last == .noInternet {
-                    path.removeLast()
-                }
-            } else {
-                if path.last != .noInternet {
-                    path.append(.noInternet)
-                }
+        if connected {
+            if path.last == .noInternet {
+                path.removeLast()
             }
+        } else {
+            guard path.last != .noInternet else { return }
+            path.append(.noInternet)
         }
+    }
     func buildView(for destination: OutOfTabDestination) -> some View {
         switch destination {
         case .profile:
@@ -54,23 +53,24 @@ class AppCoordinator: ObservableObject {
             return AnyView(
                         ProfileView(viewModel: vm) {
                             self.logout()
-                        }
+                        }.withConnectivityAlert()
+                            .environmentObject(connectivityObserver)
                         .environmentObject(self)
                         .environmentObject(AppDIContainer.shared.container.resolve(LanguageManager.self)!)
                     )
         case .store(let id):
                 let vm = container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel
             return AnyView(
-                        StoreScreen(warehouseId: id, viewModel: vm)
+                        StoreScreen(warehouseId: id, viewModel: vm).withConnectivityAlert().environmentObject(connectivityObserver)
                     )
             
         case .profileInfo(let pharmacy):
                 return AnyView(
-                    ProfileInfo(pharmacy: pharmacy)
+                    ProfileInfo(pharmacy: pharmacy).withConnectivityAlert().environmentObject(connectivityObserver)
                 )
         case .noInternet:
             return AnyView(
-                NoInternetView()
+                NoInternetView().environmentObject(connectivityObserver)
             )
         }
     }
