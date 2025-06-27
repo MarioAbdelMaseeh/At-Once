@@ -19,11 +19,8 @@ import Foundation
 
 extension Numeric {
     var localizedDigits: String {
-        let lang = AppLanguageEnvironment.shared.currentLanguage
-        let locale = lang.locale
-        
         let formatter = NumberFormatter()
-        formatter.locale = locale
+        formatter.locale = AppLanguage.current.locale
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
         formatter.minimumFractionDigits = 2
@@ -33,25 +30,43 @@ extension Numeric {
 
 
 
-extension AppLanguage {
-    
-    var locale: Locale {
-        switch self {
-        case .english: return Locale(identifier: "en")
-        case .arabic: return Locale(identifier: "ar_EG@numbers=arab") 
-            
-        case .system:
-            let systemLangCode = Locale.preferredLanguages.first?.prefix(2) ?? "en"
-            if systemLangCode == "ar" {
-                return Locale(identifier: "ar_EG@numbers=arab")
-            } else {
-                return Locale(identifier: "en")
-            }
-            //        case .system:
-//            let systemCode = Locale.preferredLanguages.first ?? "en"
-//            return Locale(identifier: systemCode)
-        }
-    }
+
+///////////////////////////////////////////////////////////////////////////////
+//extension Numeric {
+//    var localizedDigits: String {
+//        let lang = AppLanguageEnvironment.shared.currentLanguage
+//        let locale = lang.locale
+//        
+//        let formatter = NumberFormatter()
+//        formatter.locale = locale
+//        formatter.numberStyle = .decimal
+//        formatter.maximumFractionDigits = 2
+//        formatter.minimumFractionDigits = 2
+//        return formatter.string(for: self) ?? "\(self)"
+//    }
+//}
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+//extension AppLanguage {
+//    
+//    var locale: Locale {
+//        switch self {
+//        case .english: return Locale(identifier: "en")
+//        case .arabic: return Locale(identifier: "ar_EG@numbers=arab") 
+//            
+//        case .system:
+//            let systemLangCode = Locale.preferredLanguages.first?.prefix(2) ?? "en"
+//            if systemLangCode == "ar" {
+//                return Locale(identifier: "ar_EG@numbers=arab")
+//            } else {
+//                return Locale(identifier: "en")
+//            }
+//            //        case .system:
+////            let systemCode = Locale.preferredLanguages.first ?? "en"
+////            return Locale(identifier: systemCode)
+//        }
+//    }
 //    var locale: Locale {
 //        switch self {
 //        case .english: return Locale(identifier: "en")
@@ -61,7 +76,7 @@ extension AppLanguage {
 //            return Locale(identifier: systemCode)
 //        }
 //    }
-}
+//}
 
 
 

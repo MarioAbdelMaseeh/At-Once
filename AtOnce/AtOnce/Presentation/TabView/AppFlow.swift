@@ -15,6 +15,6 @@ enum OutOfTabDestination: Hashable, Equatable {
 
     case profile
     case store(id: Int)
-    case profileInfo(/*cachedPharmacy: */CachedPharmacy)
+    case profileInfo(cachedPharmacy: CachedPharmacy)
     
 }

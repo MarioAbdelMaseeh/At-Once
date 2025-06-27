@@ -47,6 +47,13 @@ extension Bundle {
   
 }
 
+extension Bundle {
+    static func resetToSystem() {
+        objc_setAssociatedObject(Bundle.main, &bundleKey, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        object_setClass(Bundle.main, Bundle.self)
+    }
+}
+
 
 
 

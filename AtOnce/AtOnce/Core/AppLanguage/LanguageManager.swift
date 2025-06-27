@@ -8,16 +8,53 @@
 import Combine
 import Foundation
 
-class LanguageManager: ObservableObject {
+//class LanguageManager: ObservableObject {
+//
+//    
+//    
+//    @Published var currentLanguage: AppLanguage {
+//        didSet {
+//         //   useCase.saveLanguage(currentLanguage)
+//            useCase.set(currentLanguage)
+//            Bundle.setLanguage(currentLanguage)
+//           // AppLanguageEnvironment.shared.currentLanguage = currentLanguage
+//            objectWillChange.send()
+//        }
+//    }
+//
+//    private let useCase: LanguageUseCase
+//
+//    init(useCase: LanguageUseCase) {
+//        self.useCase = useCase
+//       // let saved = useCase.getSavedLanguage()
+//        let saved = useCase.get()
+//        self.currentLanguage = saved
+//      //  AppLanguageEnvironment.shared.currentLanguage = saved
+//        Bundle.setLanguage(saved)
+//    }
+//
+//    func setLanguage(_ lang: AppLanguage) {
+//        currentLanguage = lang
+//    }
+//}
 
-    
-    
+
+
+
+
+class LanguageManager: ObservableObject {
     @Published var currentLanguage: AppLanguage {
         didSet {
-         //   useCase.saveLanguage(currentLanguage)
             useCase.set(currentLanguage)
-            Bundle.setLanguage(currentLanguage)
-            AppLanguageEnvironment.shared.currentLanguage = currentLanguage
+
+            // If the user selects a specific language, override the bundle.
+            if currentLanguage != .system {
+                Bundle.setLanguage(currentLanguage)
+            } else {
+                // Reset to system: remove the override
+                Bundle.resetToSystem()
+            }
+
             objectWillChange.send()
         }
     }
@@ -26,17 +63,34 @@ class LanguageManager: ObservableObject {
 
     init(useCase: LanguageUseCase) {
         self.useCase = useCase
-       // let saved = useCase.getSavedLanguage()
         let saved = useCase.get()
         self.currentLanguage = saved
-        AppLanguageEnvironment.shared.currentLanguage = saved
-        Bundle.setLanguage(saved)
+
+        // Apply correct bundle at launch
+        if saved != .system {
+            Bundle.setLanguage(saved)
+        } else {
+            Bundle.resetToSystem()
+        }
     }
 
     func setLanguage(_ lang: AppLanguage) {
         currentLanguage = lang
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 enum AppLanguage: String, CaseIterable {
     case system, english, arabic
 
@@ -18,6 +19,52 @@ enum AppLanguage: String, CaseIterable {
         }
     }
 }
+
+
+extension AppLanguage {
+//    static var current: AppLanguage {
+//        let storedRaw = UserDefaults.standard.string(forKey: "selected_language")
+//        let selected = AppLanguage(rawValue: storedRaw ?? "system") ?? .system
+//
+//        if selected == .system {
+//            let systemLangCode = Locale.preferredLanguages.first?.prefix(2) ?? "en"
+//            return systemLangCode == "ar" ? .arabic : .english
+//        } else {
+//            return selected
+//        }
+//    }
+
+//    var locale: Locale {
+//        switch self {
+//        case .english: return Locale(identifier: "en")
+//        case .arabic: return Locale(identifier: "ar_EG@numbers=arab")
+//        case .system:
+//            return AppLanguage.current.locale // recursively resolve the real one
+//        }
+//    }
+    
+    static var current: AppLanguage {
+           let storedRaw = UserDefaults.standard.string(forKey: "selected_language")
+           return AppLanguage(rawValue: storedRaw ?? "system") ?? .system
+       }
+    
+    
+    var locale: Locale {
+        switch self {
+        case .english:
+            return Locale(identifier: "en")
+        case .arabic:
+            return Locale(identifier: "ar_EG@numbers=arab")
+        case .system:
+            let systemLangCode = Locale.preferredLanguages.first?.prefix(2) ?? "en"
+            return systemLangCode == "ar" ? Locale(identifier: "ar_EG@numbers=arab") : Locale(identifier: "en")
+        }
+    }
+
+}
+
+
+
 //taba3hom
 //extension AppLanguage {
 //    var locale: Locale {
@@ -31,12 +78,12 @@ enum AppLanguage: String, CaseIterable {
 //    }
 //}
 
-
-struct AppLanguageEnvironment {
-    static var shared = AppLanguageEnvironment()
-    
-    var currentLanguage: AppLanguage = .system
-}
+///////////////////////////////////////////////////////////////////
+//struct AppLanguageEnvironment {
+//    static var shared = AppLanguageEnvironment()
+//    
+//    var currentLanguage: AppLanguage = .system
+//}
 
 
 //enum AppLanguage: String, CaseIterable {
