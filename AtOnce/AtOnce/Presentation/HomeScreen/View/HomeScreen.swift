@@ -10,16 +10,23 @@ import SwiftUI
 struct HomeScreen: View {
     
     @ObservedObject var viewModel: HomeScreenViewModel
+    @EnvironmentObject var coordinator: AppCoordinator
+    
     let onLogout: () -> Void
-    init(viewModel: HomeScreenViewModel, onLogout: @escaping () -> Void) {
+    let onSearch: () -> Void
+    init(viewModel: HomeScreenViewModel, onLogout: @escaping () -> Void, onSearch: @escaping () -> Void) {
         self.viewModel = viewModel
         self.onLogout = onLogout
+        self.onSearch = onSearch
     }
     var body: some View {
+        
         ScrollView {
             VStack(alignment: .leading, spacing: 16){
                 AdCarouselView()
-                NavigationLink(destination: RegisterView(), label: {
+                Button {
+                    onSearch()
+                } label: {
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.gray)
@@ -32,8 +39,7 @@ struct HomeScreen: View {
                     .frame(height: 50)
                     .background(Color(.systemGray6))
                     .cornerRadius(12)
-                })
-                
+                }
                 VStack(spacing: 16){
                     if(viewModel.isLoading){
                         ForEach(0..<5, id: \.self) { _ in
@@ -42,9 +48,9 @@ struct HomeScreen: View {
                     }
                     ForEach(viewModel.warehouses){
                         item in
-                        NavigationLink {
-                            StoreScreen(warehouseId: item.id)
-                        } label: {
+                        Button {
+                            coordinator.path.append(.store(id: item.id))
+                        }label: {
                             StoreCell(warehouse: item)
                                 .onAppear{
                                     viewModel.loadMoreIfNeeded(currentItem: item)
@@ -53,11 +59,12 @@ struct HomeScreen: View {
                     }
                 }
             }.padding()
-        }.navigationBarTitleDisplayMode(.inline)
+        }.withConnectivityAlert()
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     NavigationLink {
-                        //                            ProfileView()
+                        
                     } label: {
                         Image(systemName: "phone.fill").resizable()
                             .frame(width: 20,height: 20)
@@ -65,16 +72,16 @@ struct HomeScreen: View {
                     }
                 }
                 ToolbarItem(placement: .principal){
-                    Text("home").font(.title).fontWeight(.semibold)
+                    Text("home".localized).font(.title).fontWeight(.semibold)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
-                        ProfileView(viewModel: AppDIContainer.shared.container.resolve(ProfileViewModelProtocol.self) as! ProfileViewModel) {
-                            onLogout()
-                        }
+                    
+                    Button {
+                        coordinator.path.append(.profile)
                     } label: {
-                        Image(systemName: "person.fill").resizable()
-                            .frame(width: 20,height: 20)
+                        Image(systemName: "person.fill")
+                            .resizable()
+                            .frame(width: 20, height: 20)
                             .tint(.primary)
                     }
                 }

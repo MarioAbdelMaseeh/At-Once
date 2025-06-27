@@ -142,15 +142,15 @@ struct RegisterView: View {
         .sheet(isPresented: $isShowingScanner) {
             #if targetEnvironment(simulator)
             VStack(spacing: 20) {
-                Text("Simulator QR Test")
+                Text("simulator_qr_test".localized)
                     .font(.headline)
 
-                Button("Use Test QR Code") {
+                Button("use_test_qr_code".localized) {
                     qrCode = "RJN73R"
                     isShowingScanner = false
                 }
                 
-                Button("Cancel") {
+                Button("cancel".localized) {
                     isShowingScanner = false
                 }
             }

@@ -5,9 +5,11 @@
 //  Created by Iman Mahmoud on 22/06/2025.
 //
 
+import Foundation
+
 struct SuppliersProduct: Identifiable {
-    let id: Int
-   // let warehouseId: Int
+    let id = UUID()
+    let warehouseId: Int
     let warehHouseName: String
     let medicineId: Int
     let medicineName: String

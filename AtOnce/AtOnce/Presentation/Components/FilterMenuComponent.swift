@@ -8,25 +8,35 @@
 import SwiftUI
 
 struct FilterMenuComponent: View {
-    let options: [String]
-    @Binding var selectedOption: String
+    let options: [FilterOption]
+    @Binding var selectedOption: FilterOption
 
     var body: some View {
         Menu {
-            ForEach(options, id: \.self) { option in
-                Button(option) {
+            ForEach(options) { option in
+                Button {
                     selectedOption = option
+                } label: {
+                    HStack {
+                        Text(option.label)
+                        if option == selectedOption {
+                            Spacer()
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.primaryTeal)
+                        }
+                    }
                 }
             }
         } label: {
-            Image(systemName: "line.horizontal.3.decrease")
-                .font(.title)
-                .foregroundColor(.primaryTeal)
+            HStack(spacing: 4) {
+                Image(systemName: "line.horizontal.3.decrease")
+                    .font(.title3)
+                    .foregroundColor(.primaryTeal)
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 6)
+            .background(Color.primaryTeal.opacity(0.1))
+            .cornerRadius(8)
         }
     }
 }
-
-//#Preview {
-//    FilterMenuComponent()
-//}
-

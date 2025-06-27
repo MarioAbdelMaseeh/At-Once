@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 protocol SearchViewModelProtocol{
-    func fetchProducts(areaId: Int, text: String, page: Int, pageSize: Int)
+    func fetchProducts(areaId: Int, text: String, type: String)
     func loadMoreIfNeeded(currentItem: SearchProduct?)
 }
 
@@ -19,32 +19,40 @@ class SearchViewModel : SearchViewModelProtocol,  ObservableObject{
     @Published var errorMessage: String?
     @Published var hasMorePages = true
     @Published var searchText: String = ""
-
+    @Published var selectedCategory: String = FilterOption.all[0].id
+    
     private var currentPage = 1
     private let pageSize = 10
     private var isFetching = false
     private var cancellables = Set<AnyCancellable>()
-    let useCase: SearchUseCase
+    let searchUseCase: SearchUseCase
+    let addToCartUseCase: AddToCartUseCase
+    let userDefaultsUseCase: CachePharmacyUseCase
+    @Published var cachedPharmacy : CachedPharmacy?
     
-    init(useCase: SearchUseCase){
-        self.useCase = useCase
+    init(useCase: SearchUseCase, addToCartUseCase: AddToCartUseCase, userDefaultsUseCase: CachePharmacyUseCase){
+        self.searchUseCase = useCase
+        self.addToCartUseCase = addToCartUseCase
+        self.userDefaultsUseCase = userDefaultsUseCase
+       cachedPharmacy = userDefaultsUseCase.getCachedUser()
+        
         $searchText
                 .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
                 .removeDuplicates()
                 .sink { [weak self] text in
                     guard let self = self else { return }
                     self.reset()
-                    self.fetchProducts(areaId: 2, text: text, page: 1, pageSize: self.pageSize)
+                    self.fetchProducts(areaId: cachedPharmacy?.areaId ?? 2 , text: text,type: selectedCategory)
                 }
                 .store(in: &cancellables)
     }
     
-    func fetchProducts(areaId: Int, text: String, page: Int , pageSize: Int ){
+    func fetchProducts(areaId: Int, text: String, type: String){
         guard !isFetching else{return}
+        let page = currentPage
         isFetching = true
-        isLoading = page == 1
-        
-        useCase.excute(area: areaId, text: text, page: page, pageSize: pageSize).sink { [weak self] completion in
+        isLoading = currentPage == 1
+        searchUseCase.excute(area: areaId, text: text, page: page, pageSize: pageSize, type: type).sink { [weak self] completion in
             self?.isLoading = false
             self?.isFetching = false
             if case let .failure(error) = completion{
@@ -73,7 +81,7 @@ class SearchViewModel : SearchViewModelProtocol,  ObservableObject{
 
         let threshold = products.count - 4
         if index >= threshold {
-            fetchProducts(areaId: 2, text: searchText, page: currentPage, pageSize: pageSize)
+            fetchProducts(areaId: cachedPharmacy?.areaId ?? 2, text: searchText, type: selectedCategory)
         }
     }
     func reset() {
@@ -82,4 +90,27 @@ class SearchViewModel : SearchViewModelProtocol,  ObservableObject{
         hasMorePages = true
         errorMessage = nil
     }
+    func addToCart(p: SearchProduct){
+        let cartBody = CartBodyDTO(warehouseId: p.warehouseIdOfMaxDiscount , pharmacyId: userDefaultsUseCase.getCachedUser()?.id ?? 0, medicineId: p.medicineId, englishMedicineName: p.medicineName, arabicMedicineName: p.arabicMedicineName, medicineUrl: p.imageUrl, warehouseUrl: p.imageUrl, price: p.finalPrice, quantity: 1, discount: p.maximumDiscount)
+        addToCartUseCase.excute(cartBody: cartBody).sink {[weak self] completion in
+            if case let .failure(error) = completion{
+                self?.errorMessage = error.localizedDescription
+                print(error.localizedDescription)
+            }
+        } receiveValue: { result in
+            print(result.message)
+            print(result.success)
+        }.store(in: &cancellables)
+    }
+}
+
+struct FilterOption: Identifiable, Equatable {
+    let id: String
+    let label: String
+    
+    static let all: [FilterOption] = [
+        FilterOption(id: "", label: "All".localized),
+        FilterOption(id: "0", label: "Drugs".localized),
+        FilterOption(id: "1", label: "Cosmetics".localized)
+    ]
 }

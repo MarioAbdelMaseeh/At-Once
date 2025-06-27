@@ -9,10 +9,12 @@ import SwiftUI
 
 struct ProductCardView: View {
     let product: SearchProduct
+    @EnvironmentObject var languageManager: LanguageManager
+    
     var hasSuppliers: Bool{
         product.distributorsCount != 0
-      //  false
     }
+    var addToCart: ()-> Void
     var isSuppliersSheeet = false
     @State private var showSheet = false
     
@@ -27,11 +29,10 @@ struct ProductCardView: View {
                     .padding(.trailing, 8)
                 
                 VStack(alignment:.leading, spacing: 8){
-                    Text(product.medicineName)
+                    Text(languageManager.currentLanguage == .arabic ? product.arabicMedicineName : product.medicineName)
                         .font(.headline)
                         .lineLimit(2)
-                    
-                    
+    
                     Text(String(format: NSLocalizedString("discount_format", comment: ""), product.maximumDiscount.localizedDigits))
                         .foregroundColor(.primaryTeal)
                         .font(.subheadline)
@@ -39,10 +40,20 @@ struct ProductCardView: View {
                     //.padding(.top, 1)
                     
                     //   Text("Price : \(String(format: "%.2f", price)) EGP")
-                    Text(String(format: NSLocalizedString("price_format", comment: ""), product.finalPrice.localizedDigits))
+                    HStack{
+                        Text(String(format: NSLocalizedString("price_format", comment: ""), product.finalPrice.localizedDigits))
+                            .font(.subheadline)
+                        Text(String(format: NSLocalizedString("amount_only_format", comment: ""), product.price.localizedDigits))
+                            .font(.subheadline)
+                            .foregroundColor(Color(.red))
+                                    .strikethrough()
+                        
+                    }
+               //     Text(String(format: NSLocalizedString("price_format", comment: ""), product.finalPrice.localizedDigits))
+                    
                     
                     // .padding(.bottom, 4)
-                        .font(.subheadline)
+                      //  .font(.subheadline)
                 }
             }
             HStack {
@@ -50,23 +61,17 @@ struct ProductCardView: View {
                 if hasSuppliers {
                     
                     MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
-                                 action: {}).padding(.trailing,4)
+                                 action: {
+                        addToCart()
+                    }).padding(.trailing,4)
                     MediumButton(buttonLabel: NSLocalizedString("suppliers", comment: ""), buttonIcon: "storefront",color: Color.darkGray, action: {
                         showSheet.toggle()
                     }).padding(.leading,4)
-                    
-                    
                 }else{
-                    
-                    
-                    
-                    //                    GeometryReader { geometry in
-                    //                        Spacer()
-                    //                            .frame(width: geometry.size.width / 2)
-                    //                    }
-                    
                     MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
-                                 action: {})
+                                 action: {
+                        addToCart()
+                    })
                     Spacer().frame(width:( UIScreen.main.bounds.width / 2)-30)
                 }
             }
@@ -75,20 +80,12 @@ struct ProductCardView: View {
         .background(Color(.customBackground))
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-        
-        
         .sheet(isPresented: $showSheet) {
-            SupplierSheetView(productId: 3, productImage: "").padding(.top)
+            SupplierSheetView(productId: product.medicineId, productImage: product.imageUrl, productName: languageManager.currentLanguage == .arabic ? product.arabicMedicineName : product.medicineName).padding(.top)
                 .presentationDetents([.medium, .fraction(0.85)])
                 .presentationDragIndicator(.visible)
                 .presentationCornerRadius(20)
         }
-        
-        
-        //        .padding()
-        //        .background(Color.white)
-        //        .cornerRadius(15)
-        //        .shadow(radius: 2)
     }
 }
 

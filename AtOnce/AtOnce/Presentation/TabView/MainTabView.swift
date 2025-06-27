@@ -25,21 +25,23 @@ struct MainTabView: View {
                             viewModel: AppDIContainer.shared.container.resolve(HomeScreenViewModelProtocol.self) as! HomeScreenViewModel,
                         ){
                             onLogout()
-                        }
+                        } onSearch: {
+                            tabCoordinator.selectedTab = .search
+                        }.withConnectivityAlert()
                     )
                 case .search:
                     AnyView(
                         SearchScreen(
                             viewModel: AppDIContainer.shared.container.resolve(SearchViewModelProtocol.self) as! SearchViewModel
-                        )
+                        ).withConnectivityAlert()
                     )
                 case .cart:
-                    AnyView(CartScreen())
+                    AnyView(CartScreen(viewModel: AppDIContainer.shared.container.resolve(CartViewModelProtocol.self) as! CartViewModel).withConnectivityAlert())
                 case .orders:
-                    AnyView(OrdersScreen())
+                    AnyView(OrdersScreen().withConnectivityAlert())
                 }
             }
-
+            Spacer()
             CustomTabBarView(selectedTab: $tabCoordinator.selectedTab)
         }
     }

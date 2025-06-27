@@ -31,7 +31,7 @@ struct CartWarehouse: Identifiable {
     let totalQuantity: Int?
     let totalPriceBeforeDiscount: Double?
     let totalPriceAfterDiscount: Double?
-    let items: [CartItem]
+    var items: [CartItem]
 }
 
 struct CartItem: Identifiable {

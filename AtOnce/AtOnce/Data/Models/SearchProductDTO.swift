@@ -9,6 +9,7 @@
 struct SearchProductDTO: Codable {
     let medicineId: Int
     let medicineName: String
+    let arabicMedicineName: String
     let drug: Int
     let price: Double
     let maximumwareHouseAreaName: String

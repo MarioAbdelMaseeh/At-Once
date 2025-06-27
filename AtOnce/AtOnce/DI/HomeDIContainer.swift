@@ -16,8 +16,9 @@ extension Container{
             GetWarehouseByAreaUseCaseImpl(warehouseRepository: r.resolve(WarehouseRepository.self)!)
         }
         self.register((HomeScreenViewModelProtocol).self) { r in
-            HomeScreenViewModel(useCase: r.resolve(GetWarehouseByAreaUseCase.self)!)
+            HomeScreenViewModel(useCase: r.resolve(GetWarehouseByAreaUseCase.self)!,userDefaultUseCase: r.resolve(CachePharmacyUseCase.self)!)
         }
+        
     }
     
 }

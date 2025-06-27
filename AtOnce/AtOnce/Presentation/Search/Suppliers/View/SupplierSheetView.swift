@@ -14,10 +14,12 @@ struct SupplierSheetView: View {
     
     let productId : Int
     let productImage : String
+    let productName : String
     
-    init(productId : Int, productImage : String) {
+    init(productId : Int, productImage : String, productName : String) {
         self.productId = productId
         self.productImage = productImage
+        self.productName = productName
         _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(SuppliersScreenViewModelProtocol.self)! as! SuppliersScreenViewModel)
     }
     
@@ -34,7 +36,7 @@ struct SupplierSheetView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .padding(.horizontal,8)
 
-                Text("Panadol Extra 600mg")
+                Text(productName)
                     .font(.title2.bold())
                 Spacer()
             }
@@ -45,7 +47,9 @@ struct SupplierSheetView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     ForEach(viewModel.suppliersProduct) { product in
-                       SuppliersProductCard(suppliersProduct: product)
+                        SuppliersProductCard(suppliersProduct: product){ p in
+                            viewModel.addToCart(p: p)
+                        }
                     }
                 }
                 .padding()
@@ -55,7 +59,7 @@ struct SupplierSheetView: View {
         .background(Color(.systemBackground))
         .cornerRadius(20)
         .onAppear {
-            viewModel.loadSuppliersProduct(areaId: 2, ProductId: 3/*productId*/)
+            viewModel.loadSuppliersProduct( productId: productId)
         }.environment(\.layoutDirection, layoutDirection(for: languageManager.currentLanguage))
         
     }

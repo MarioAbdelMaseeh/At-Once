@@ -10,29 +10,22 @@ import SwiftUI
 struct StoreScreen: View {
     
     // @State private var searchText: String = ""
-    @State private var selectedFilter = "None"
-    @StateObject var viewModel: StoreScreenViewModel
+    @State private var selectedFilter = FilterOption.all[0]
+    @ObservedObject var viewModel: StoreScreenViewModel
     
     @EnvironmentObject var languageManager: LanguageManager
     
-    let warehouseId : Int 
+    @EnvironmentObject var coordinator: AppCoordinator
+    
+    let warehouseId : Int
     
     
-    
-//    @StateObject private var viewModel = StoreScreenViewModel(
-//        useCase: FetchProductByWarehouseIdUseCaseImpl(
-//            warehouseRepository: WarehouseRepositoryImpl(
-//                networkService: NetworkService()
-//            )
-//        )
-//    )
-    
-    init(warehouseId : Int) {
+    init(warehouseId : Int, viewModel: StoreScreenViewModel) {
         self.warehouseId = warehouseId
-        _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel)
+        self.viewModel = viewModel
     }
     
-    let filterOptions = ["Option 1", "Option 2"]
+    let filterOptions = FilterOption.all
     
     let columns = [
         GridItem(.flexible()),
@@ -40,7 +33,7 @@ struct StoreScreen: View {
     ]
     
     var body: some View {
-
+        
         VStack {
             HStack {
                 SearchBarComponents(searchText: $viewModel.searchText)
@@ -58,16 +51,22 @@ struct StoreScreen: View {
                         ForEach(0..<6, id: \.self) { _ in
                             ShimmerCard()
                         }
-                    } else{
-                        
+                    }else if let error = viewModel.errorMessage {
+                        Text(error)
+                            .foregroundColor(.red)
+                            .padding()
+                    }
+                    else{
                         ForEach(viewModel.products) { product in
-                            StoreCard(product: product)
-                                .onAppear {
-                                    viewModel.loadMoreIfNeeded(
-                                        currentProduct: product,
-                                        warehouseId: warehouseId
-                                    )
-                                }
+                            StoreCard(product: product){
+                                viewModel.addToCart(p: product, warehouseId: warehouseId)
+                            }
+                            .onAppear {
+                                viewModel.loadMoreIfNeeded(
+                                    currentProduct: product,
+                                    warehouseId: warehouseId
+                                )
+                            }
                         }
                     }
                     
@@ -81,6 +80,7 @@ struct StoreScreen: View {
                     //                        if viewModel.products.isEmpty {
                     //                                viewModel.loadProducts(warehouseId: 2)
                     //                            }
+                    print("on apeeeeeeeear")
                     viewModel.reset(warehouseId: 2)
                     
                     // viewModel.loadProducts(warehouseId: 2, page: 1, pageSize: 10)
@@ -91,17 +91,31 @@ struct StoreScreen: View {
         //  .background(Color(.customBackground))
         
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        coordinator.path.removeLast()
+                    }) {
+                        HStack {
+                            Image(systemName: "chevron.backward")
+                            Text(NSLocalizedString("back", comment: ""))
+                        }
+                    }
+                }
+            
             ToolbarItem(placement: .principal) {
-                Text("products")
+                Text("products".localized)
                     .font(.title)
                     .fontWeight(.semibold)
             }
             
+            
         }
+       // .navigationTitle(NSLocalizedString("products".localized, comment: ""))
     }
 }
 
 #Preview {
-    StoreScreen(warehouseId: 2)
+    //    StoreScreen(warehouseId: 2)
 }

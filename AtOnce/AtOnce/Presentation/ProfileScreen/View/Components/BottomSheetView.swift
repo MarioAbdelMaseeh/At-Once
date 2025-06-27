@@ -11,9 +11,9 @@ import SwiftUI
 struct BottomSheetView: View {
     var body: some View {
         VStack{
-            ProfileOption(icon: "phone", title: "phone")
+            ProfileOption(icon: "phone", title: "phone".localized)
             Divider()
-            ProfileOption(icon: "phone", title: "phone")
+            ProfileOption(icon: "phone", title: "phone".localized)
         }.padding()
     }
 }

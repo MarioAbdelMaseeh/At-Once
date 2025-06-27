@@ -10,7 +10,6 @@ import SwiftUI
 struct RootView: View {
     @EnvironmentObject var languageManager: LanguageManager
     @StateObject private var coordinator = AppCoordinator()
-    
     var body: some View {
         NavigationStack(path: $coordinator.path) {
             Group {
@@ -23,8 +22,7 @@ struct RootView: View {
                                 coordinator.flow = .main
                             }
                         }
-                    )
-                    
+                    ).environmentObject(coordinator.connectivityObserver)
                 case .main:
                     MainTabView(
                         onLogout: {
@@ -35,13 +33,17 @@ struct RootView: View {
                         onNavigateOutOfTabs: { destination in
                             coordinator.path.append(destination)
                         }
-                    )
+                    ).environmentObject(coordinator.connectivityObserver)
                 }
-            }.environment(\.layoutDirection, layoutDirection(for: languageManager.currentLanguage))
+            }//.environment(\.layoutDirection, layoutDirection(for: languageManager.currentLanguage))
             .navigationDestination(for: OutOfTabDestination.self) { destination in
                 coordinator.buildView(for: destination)
             }
-        }
+        }.environment(\.layoutDirection, layoutDirection(for: languageManager.currentLanguage))
+         .environmentObject(languageManager)
+         .environmentObject(coordinator)
+        .tint(.primary)
+        
     }
     private func layoutDirection(for language: AppLanguage) -> LayoutDirection {
         switch language {
@@ -52,25 +54,3 @@ struct RootView: View {
         }
     }
 }
-
-//struct RootView: View {
-//    @StateObject private var coordinator = AppCoordinator()
-//
-//    var body: some View {
-//        if coordinator.flow == .login {
-//            LoginScreen(
-//                viewModel: AppDIContainer.shared.container.resolve(LoginScreenViewModelProtocol.self) as! LoginScreenViewModel
-//            ) {
-//                withAnimation {
-//                    coordinator.flow = .main
-//                }
-//            }
-//        } else {
-//            MainTabView {
-//                withAnimation {
-//                    coordinator.flow = .login 
-//                }
-//            }
-//        }
-//    }
-//}

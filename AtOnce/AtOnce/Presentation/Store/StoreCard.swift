@@ -9,13 +9,12 @@ import SwiftUI
 
 struct StoreCard: View {
     let product : WarehouseProduct
-    
+    let addToCart: ()-> Void
     @EnvironmentObject var languageManager: LanguageManager
     
-//    let discount : Int = 26
-//    let price : Double = 21
     
     var body: some View {
+        
         VStack(alignment: .leading, spacing: 8){
             AsyncImage(url: URL(string: product.imageUrl)) { phase in
                            switch phase {
@@ -39,13 +38,13 @@ struct StoreCard: View {
                                    .frame(height: 120)
                                    .foregroundColor(.gray)
                                    .frame(maxWidth: .infinity)
-                                   .shimmering()
+                                  // .shimmering()
                            @unknown default:
                                EmptyView()
                            }
                        }
             
-            Text(product.arName)
+            Text(languageManager.currentLanguage == .arabic ? product.arName : product.enName)
                 .font(.headline)
                // .fontWeight(.semibold)
 //                .font(.title2)
@@ -63,9 +62,20 @@ struct StoreCard: View {
             
             
          //  Text("Price : \(price) EGP")
-            Text(String(format: NSLocalizedString("price_format", comment: ""), product.pricePerItem.localizedDigits))
-           
-                .font(.subheadline)
+//            Text(String(format: NSLocalizedString("price_format", comment: ""), product.pricePerItem.localizedDigits))
+//           
+//                .font(.subheadline)
+            
+            HStack{
+                Text(String(format: NSLocalizedString("price_format", comment: ""), product.pricePerItem.localizedDigits))
+                    .font(.caption)
+                Text(String(format: NSLocalizedString("amount_only_format", comment: ""), product.prePrice.localizedDigits))
+                    .font(.caption)
+                    .foregroundColor(Color(.red))
+                            .strikethrough()
+                
+            }//.padding(.horizontal,4)
+            
               //  .font(.title3)
                // .fontWeight(.semibold)
 
@@ -74,14 +84,15 @@ struct StoreCard: View {
             
             MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""),
                          buttonIcon: "cart", color: Color.primaryTeal,action: {
-                
+                addToCart()
             })//.padding(.top,8)
             
             
             
             
         }
-        .padding()
+        .padding(.horizontal,8)
+        .padding(.vertical)
         .background(Color(.customBackground))
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
@@ -90,5 +101,7 @@ struct StoreCard: View {
 }
 
 #Preview {
-    StoreCard(product: WarehouseProduct(id: 1, arName: "ay 7aga", enName: "ay 7aga", quantity: 1, prePrice: 25, pricePerItem: 20, discount: 26.5, imageUrl: ""))
+    StoreCard(product: WarehouseProduct(medicineId: 1, arName: "ay 7aga", enName: "ay 7aga", quantity: 1, prePrice: 25, pricePerItem: 20, discount: 26.5, imageUrl: "")){
+        
+    }
 }
