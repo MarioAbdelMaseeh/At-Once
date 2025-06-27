@@ -11,7 +11,7 @@ enum SearchAPI:APIRequest{
     case SearchByText(area: Int, text: String, page: Int, pageSize: Int, type: String)
     
     var baseURL: String{
-        "http://www.pharmaatoncepredeploy.somee.com/"
+        Constants.baseURL
     }
     
     var path: String{

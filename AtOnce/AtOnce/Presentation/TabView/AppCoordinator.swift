@@ -72,6 +72,13 @@ class AppCoordinator: ObservableObject {
             return AnyView(
                 NoInternetView().environmentObject(connectivityObserver)
             )
+        case .forgetPassword:
+            let vm = container.resolve(ForgetPasswordViewModelProtocol.self)! as! ForgetPasswordViewModel
+            return AnyView(
+                ForgetPasswordView(viewModel: vm)
+            )
+        case .verifyOPT(generatedOPT: let generatedOPT):
+            return AnyView(EmptyView())
         }
     }
     

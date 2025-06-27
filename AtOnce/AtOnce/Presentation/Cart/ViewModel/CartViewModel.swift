@@ -20,7 +20,7 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
     @Published var errorMessage: String?
 
     @Published var cartResponse: CartResponse?
-    @Published var SuccessMessage: String?
+    @Published var successMessage: String?
     @Published var cartWarehousesList: [CartWarehouse] = []
 
     private var cancellables = Set<AnyCancellable>()
@@ -67,7 +67,7 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
             }
         } receiveValue: { [weak self] response in
             if response.success {
-                self?.SuccessMessage = response.message
+                self?.successMessage = response.message
                 self?.fetchCartByPharmacyId()
                 
             }

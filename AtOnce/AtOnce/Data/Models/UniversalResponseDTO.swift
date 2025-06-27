@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RegisterResponseDTO: Codable {
+struct UniversalResponseDTO: Codable {
     let message: String
     let success: Bool
 }

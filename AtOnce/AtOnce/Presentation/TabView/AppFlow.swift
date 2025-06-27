@@ -17,4 +17,6 @@ enum OutOfTabDestination: Hashable, Equatable {
     case store(id: Int)
     case profileInfo(CachedPharmacy)
     case noInternet
+    case forgetPassword
+    case verifyOPT(generatedOPT: String)
 }

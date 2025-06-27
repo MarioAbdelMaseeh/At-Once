@@ -51,5 +51,14 @@ extension Container{
         self.register((RegisterViewModelProtocol).self) { r in
             RegisterViewModel(governoratesUseCase: r.resolve(GetAllGovernoratesUseCase.self)!, areasUseCase: r.resolve(GetAllAreasByGovernorateIdUseCase.self)!, registerUseCase: r.resolve(RegisterUseCase.self)!)
         }
+        self.register(ForgetPasswordUseCase.self) { r in
+            ForgetPasswordUseCaseImpl(authRepo: r.resolve(AuthRepository.self)!)
+        }
+        self.register(ResetPasswordUseCase.self) { r in
+            ResetPasswordUseCaseImpl(authRepo: r.resolve(AuthRepository.self)!)
+        }
+        self.register(ForgetPasswordViewModelProtocol.self) { r in
+            ForgetPasswordViewModel(forgetPasswordUseCase: r.resolve(ForgetPasswordUseCase.self)!, restPasswordUseCase: r.resolve(ResetPasswordUseCase.self)!)
+        }
     }
 }

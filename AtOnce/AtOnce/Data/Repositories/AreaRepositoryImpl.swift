@@ -17,7 +17,7 @@ class AreaRepositoryImpl: AreaRepository{
     }
     
     func getAllAreasByGovernorateId(governorateId:Int)-> AnyPublisher<[Area],Error>{
-        return networkService.request(_request: AreaAPI.getAllAreasByGovernorateId(governorateId: governorateId), responseType: [AreaDTO].self)
+        return networkService.request(_request: AuthAPI.getAllAreasByGovernorateId(governorateId: governorateId), responseType: [AreaDTO].self)
             .map { $0.map { $0.toEntity() } }
             .eraseToAnyPublisher()
     }

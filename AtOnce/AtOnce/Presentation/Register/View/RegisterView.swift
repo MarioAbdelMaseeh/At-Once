@@ -50,12 +50,12 @@ struct RegisterView: View {
             VStack(alignment: .leading, spacing: 16) {
                 
                 TextFieldComponent(
-                    title: NSLocalizedString("username", comment: ""),
+                    title: NSLocalizedString("username", comment: ""), textType: .name,
                     text: $username
                 )
                 
                 TextFieldComponent(
-                    title: NSLocalizedString("pharmacy_name", comment: ""),
+                    title: NSLocalizedString("pharmacy_name", comment: ""), textType: .name,
                     text: $pharmacyName
                 )
                 
@@ -72,12 +72,12 @@ struct RegisterView: View {
                 )
                 
                 TextFieldComponent(
-                    title: NSLocalizedString("email", comment: ""),
+                    title: NSLocalizedString("email", comment: ""), textType: .emailAddress,
                     text: $email
                 )
                 
                 TextFieldComponent(
-                    title: NSLocalizedString("phone", comment: ""),
+                    title: NSLocalizedString("phone", comment: ""), textType: .telephoneNumber,
                     text: $phone
                 )
                 
@@ -105,7 +105,7 @@ struct RegisterView: View {
                 .disabled(selectedGovernorateName.isEmpty)
                 
                 TextFieldComponent(
-                    title: NSLocalizedString("address_details", comment: ""),
+                    title: NSLocalizedString("address_details", comment: ""), textType: .fullStreetAddress,
                     text: $addressDetails
                 )
                 

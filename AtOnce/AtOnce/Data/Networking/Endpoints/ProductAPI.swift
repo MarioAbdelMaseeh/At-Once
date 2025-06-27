@@ -11,8 +11,7 @@ enum ProductAPI: APIRequest{
     case getProductsByWarehouse(warehouseId: Int, page: Int, pageSize: Int, search: String)
     case getSuppliersByProduct(areaId: Int,productId: Int)
     var baseURL: String{
-      //  "http://predeploypharmaatonceafteredit.somee.com/"
-        "http://www.pharmaatoncepredeploy.somee.com/"
+        Constants.baseURL
     }
     
     var path: String{

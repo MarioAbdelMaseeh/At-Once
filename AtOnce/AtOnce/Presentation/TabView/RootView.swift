@@ -15,7 +15,7 @@ struct RootView: View {
             Group {
                 switch coordinator.flow {
                 case .login:
-                    LoginScreen(
+                    LoginView(
                         viewModel: coordinator.container.resolve(LoginScreenViewModelProtocol.self)! as! LoginScreenViewModel,
                         onLoginSuccess: {
                             withAnimation {

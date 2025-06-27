@@ -9,19 +9,21 @@ import SwiftUI
 
 struct TextFieldComponent: View {
     var title: String
+    var textType: UITextContentType
     @Binding var text: String
     var body: some View {
         VStack(alignment: .leading, spacing: 8 ){
             Text(title)
                 .fontWeight(.semibold)
-            TextField(title, text: $text)
+            TextField(title, text: $text,)
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(10)
+                .textContentType(textType)
         }
     }
 }
 
 #Preview {
-    TextFieldComponent(title: "Email", text: .constant("Mario"))
+    TextFieldComponent(title: "Email", textType: .emailAddress, text: .constant("Mario"))
 }

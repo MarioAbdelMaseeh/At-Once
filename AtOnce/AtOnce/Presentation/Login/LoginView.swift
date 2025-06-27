@@ -8,8 +8,9 @@
 
 import SwiftUI
 
-struct LoginScreen: View {
+struct LoginView: View {
     @ObservedObject var viewModel: LoginScreenViewModel
+    @EnvironmentObject var coordinator: AppCoordinator
     var onLoginSuccess: () -> Void
     
     @State private var email = ""
@@ -44,7 +45,7 @@ struct LoginScreen: View {
                 }
                 .padding(.bottom, 32)
 
-                TextFieldComponent(title: NSLocalizedString("email", comment: ""), text: $email)
+                TextFieldComponent(title: NSLocalizedString("email", comment: ""), textType: .emailAddress, text: $email)
 
                 if let emailError = viewModel.emailError {
                     Text(emailError)
@@ -70,7 +71,7 @@ struct LoginScreen: View {
                 HStack {
                     Spacer()
                     Button("forget_password".localized) {
-                        // Handle forget password
+                        coordinator.path.append(.forgetPassword)
                     }
                     .foregroundColor(.primaryTeal)
                     .bold()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RegisterResponse: Identifiable {
+struct UniversalResponse: Identifiable {
     let id = UUID()
     let message: String
     let success: Bool

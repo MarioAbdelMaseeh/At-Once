@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol RegisterUseCase {
-    func execute(request: RegisterRequestDTO) -> AnyPublisher<RegisterResponse, any Error>
+    func execute(request: RegisterRequestDTO) -> AnyPublisher<UniversalResponse, any Error>
 }
 
 class RegisterUseCaseImpl: RegisterUseCase {
@@ -19,7 +19,7 @@ class RegisterUseCaseImpl: RegisterUseCase {
         self.authRepository = authRepository
     }
     
-    func execute(request: RegisterRequestDTO) -> AnyPublisher<RegisterResponse, any Error> {
+    func execute(request: RegisterRequestDTO) -> AnyPublisher<UniversalResponse, any Error> {
         authRepository.registerRequest(request: request)
     }
 }
