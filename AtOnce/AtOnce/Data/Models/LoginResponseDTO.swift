@@ -24,6 +24,7 @@ struct PharmacyDTO : Decodable {
     let areaId: Int
     let phoneNumber: String
     let representativeId: Int
+    let representativePhone: String
 }
 
 
