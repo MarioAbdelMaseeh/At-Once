@@ -38,7 +38,7 @@ struct MainTabView: View {
                 case .cart:
                     AnyView(CartScreen(viewModel: AppDIContainer.shared.container.resolve(CartViewModelProtocol.self) as! CartViewModel))
                 case .orders:
-                    AnyView(OrdersScreen())
+                    AnyView(OrdersScreen(viewModel: AppDIContainer.shared.container.resolve(OrdersViewModelProtocol.self) as! OrdersViewModel))
                 }
             }
             Spacer()

@@ -48,15 +48,15 @@ struct CartCell: View {
                             Text(String(format: NSLocalizedString("discount_format", comment: ""), localizedDiscount))
                                 .font(.caption)
                                 .foregroundColor(.primaryTeal)
-//                            
-//                            Text(String(format: NSLocalizedString("cost_per_item_label", comment: ""), order.priceBeforeDiscount.localizedDigits))
-//                                .font(.caption2)
-//                                .foregroundColor(.secondary)
-//
-//                            let totalPrice: Double = Double(order.quantity) * order.priceAfterDiscount
-//                            Text(String(format: NSLocalizedString("total_label", comment: ""), totalPrice.localizedDigits))
-//                                .font(.callout)
-//                                .foregroundColor(.primary)
+                            
+                            Text(String(format: NSLocalizedString("cost_per_item_label", comment: ""), order.priceBeforeDiscount.localizedDigits))
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+
+                            let totalPrice: Double = Double(order.quantity) * order.priceAfterDiscount
+                            Text(String(format: NSLocalizedString("total_label", comment: ""), totalPrice.localizedDigits))
+                                .font(.callout)
+                                .foregroundColor(.primary)
                         }
 
                         Spacer()

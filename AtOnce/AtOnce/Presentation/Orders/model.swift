@@ -33,26 +33,40 @@ enum OrderStatus: String, CaseIterable {
     }
 }
 
-struct OrderItem: Identifiable {
-    let id : String
-    let name: String
-    let quantity: Int
-    let price: Double
-    
-    var totalPrice: Double {
-        Double(quantity) * price
+extension OrderStatus {
+    var toInt: Int {
+        switch self {
+        case .ordered: return 0
+        case .preparing: return 1
+        case .delivering: return 2
+        case .delivered: return 3
+        case .canceled: return 4
+        case .returned: return 5
+        }
     }
 }
 
-struct Order: Identifiable {
-    let id : String
-    let pharmacyName: String
-    let date: String
-    let location: String
-    let items: [OrderItem]
-    let status: OrderStatus
-    
-    var total: Double {
-        items.reduce(0) { $0 + $1.totalPrice }
-    }
-}
+
+//struct OrderItem: Identifiable {
+//    let id : String
+//    let name: String
+//    let quantity: Int
+//    let price: Double
+//    
+//    var totalPrice: Double {
+//        Double(quantity) * price
+//    }
+//}
+//
+//struct Order: Identifiable {
+//    let id : String
+//    let pharmacyName: String
+//    let date: String
+//    let location: String
+//    let items: [OrderItem]
+//    let status: OrderStatus
+//    
+//    var total: Double {
+//        items.reduce(0) { $0 + $1.totalPrice }
+//    }
+//}
