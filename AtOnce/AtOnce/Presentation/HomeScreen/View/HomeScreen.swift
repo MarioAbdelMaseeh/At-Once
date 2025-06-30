@@ -30,7 +30,7 @@ struct HomeScreen: View {
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.gray)
-                        Text("search_placeholder")
+                        Text("search".localized)
                             .foregroundColor(.gray)
                             .padding(8)
                         Spacer()
