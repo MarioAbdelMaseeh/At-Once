@@ -17,22 +17,14 @@ struct OrdersScreen: View {
 //        orders.filter { $0.status == selectedStatus }
 //    }
     
-    @ObservedObject var viewModel: OrdersViewModel    //////////why(stateObject) this viewModel is get only
-    
+    @ObservedObject var viewModel: OrdersViewModel
     
     init(viewModel: OrdersViewModel){
         self.viewModel = viewModel
     }
 
-    
-  
-
     var body: some View {
         
-    
-        NavigationStack {
-            
-            
             VStack(spacing: 16) {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -87,14 +79,6 @@ struct OrdersScreen: View {
                         .font(.title)
                         .fontWeight(.semibold)
                 }
-                
-            }
         }.padding(.top)
     }
-    
 }
-
-
-//#Preview {
-//    OrdersScreen()
-//}
