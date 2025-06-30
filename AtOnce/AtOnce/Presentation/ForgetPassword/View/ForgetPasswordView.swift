@@ -42,7 +42,7 @@ struct ForgetPasswordView: View {
             }
             .onReceive(viewModel.$successMessage) { message in
                 if message != nil {
-                    coordinator.path.append(.verifyOPT(email: text, generatedOTP: viewModel.generatedOTP))
+                    coordinator.loginPath.append(.verifyOPT(email: text, generatedOTP: viewModel.generatedOTP))
                 }
             }
     }

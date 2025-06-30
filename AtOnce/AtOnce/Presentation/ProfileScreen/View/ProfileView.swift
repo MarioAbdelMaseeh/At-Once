@@ -36,7 +36,7 @@ struct ProfileView: View {
             
             if let pharmacy = viewModel.pharmacy {
                 ProfileHeader(profileName: pharmacy.name) {
-                    coordinator.path.append(.profileInfo(pharmacy))
+                    coordinator.mainPath.append(.profileInfo(pharmacy))
                 }
             }
             
@@ -107,7 +107,7 @@ struct ProfileView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         // Pop view manually
-                        coordinator.path.removeLast()
+                        coordinator.mainPath.removeLast()
                     }) {
                         HStack {
                             Image(systemName: "chevron.backward")

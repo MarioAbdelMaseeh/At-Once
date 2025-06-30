@@ -41,70 +41,65 @@ struct OrdersScreen: View {
 
     var body: some View {
         
-//        let filterOrders  = orders.filter { $0.status == selectedStatus }
-    
-        NavigationStack {
+        //        let filterOrders  = orders.filter { $0.status == selectedStatus }
+        
+        VStack(spacing: 16) {
             
-            
-            VStack(spacing: 16) {
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 12) {
-                        ForEach(OrderStatus.allCases, id: \.self) { status in
-                            
-                            OrdersChip(title: status.localizedValue, isSelected: selectedStatus == status)
-                                .onTapGesture {
-                                    withAnimation {
-                                        selectedStatus = status
-                                    }
-                                   
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(OrderStatus.allCases, id: \.self) { status in
+                        
+                        OrdersChip(title: status.localizedValue, isSelected: selectedStatus == status)
+                            .onTapGesture {
+                                withAnimation {
+                                    selectedStatus = status
                                 }
-                            
-                        }
+                                
+                            }
+                        
                     }
-                    .padding()
                 }
-                
-                ScrollView {
-                    VStack(spacing: 16) {
-                        ForEach(filteredOrders) { order in
-                            OrderCard(
-                                order: order,
-                                isExpanded: expandedOrderId == order.id
-                                , toggleExpand: {
-                                    withAnimation {
+                .padding()
+            }
+            
+            ScrollView {
+                VStack(spacing: 16) {
+                    ForEach(filteredOrders) { order in
+                        OrderCard(
+                            order: order,
+                            isExpanded: expandedOrderId == order.id
+                            , toggleExpand: {
+                                withAnimation {
+                                    
+                                    if expandedOrderId == order.id {
+                                        expandedOrderId = nil
                                         
-                                        if expandedOrderId == order.id {
-                                            expandedOrderId = nil
-                                            
-                                        } else {
-                                            expandedOrderId = order.id
-                                            
-                                        }
+                                    } else {
+                                        expandedOrderId = order.id
+                                        
                                     }
                                 }
-                            )
-                        }
+                            }
+                        )
                     }
-                    .padding(.horizontal)
                 }
-                
-                Spacer()
+                .padding(.horizontal)
             }
             
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("orders".localized)
-                        .font(.title)
-                        .fontWeight(.semibold)
-                }
-                
+            Spacer()
+        }
+        
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("orders".localized)
+                    .font(.title)
+                    .fontWeight(.semibold)
             }
+            
         }.padding(.top)
-            
-            
     }
+    
 }
 
 

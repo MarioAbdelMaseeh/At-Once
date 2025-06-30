@@ -49,7 +49,7 @@ struct HomeScreen: View {
                     ForEach(viewModel.warehouses){
                         item in
                         Button {
-                            coordinator.path.append(.store(id: item.id))
+                            coordinator.mainPath.append(.store(id: item.id))
                         }label: {
                             StoreCell(warehouse: item)
                                 .onAppear{
@@ -81,7 +81,7 @@ struct HomeScreen: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     
                     Button {
-                        coordinator.path.append(.profile)
+                        coordinator.mainPath.append(.profile)
                     } label: {
                         Image(systemName: "person.fill")
                             .resizable()

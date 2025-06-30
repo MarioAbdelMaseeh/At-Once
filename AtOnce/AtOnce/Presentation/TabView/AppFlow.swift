@@ -15,6 +15,7 @@ enum OutOfTabDestination: Hashable, Equatable, Codable {
 
     case profile
     case store(id: Int)
+    case register
     case profileInfo(CachedPharmacy)
     case noInternet
     case forgetPassword

@@ -68,7 +68,7 @@ struct OTPVerifyView: View {
                 if generatedOTP == otp {
                     alertMessage = "OTP Verified Successfully!"
                     showAlert = true
-                    coordinator.path.append(.resetPassword(email: email, generatedOTP: generatedOTP))
+                    coordinator.loginPath.append(.resetPassword(email: email, generatedOTP: generatedOTP))
                 } else {
                     alertMessage = "Invalid OTP. Please try again."
                     showAlert = true

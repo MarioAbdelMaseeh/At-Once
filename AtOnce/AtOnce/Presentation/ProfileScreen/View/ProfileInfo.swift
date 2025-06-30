@@ -102,7 +102,7 @@ struct ProfileInfo: View {
             
             ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        coordinator.path.removeLast()
+                        coordinator.mainPath.removeLast()
                     }) {
                         HStack {
                             Image(systemName: "chevron.backward")

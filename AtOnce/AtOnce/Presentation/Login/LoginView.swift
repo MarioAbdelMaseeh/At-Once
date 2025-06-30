@@ -28,7 +28,6 @@ struct LoginView: View {
     }
 
     var body: some View {
-        NavigationStack {
             VStack {
                 Image(.icon)
                     .resizable()
@@ -71,7 +70,7 @@ struct LoginView: View {
                 HStack {
                     Spacer()
                     Button("forget_password".localized) {
-                        coordinator.path.append(.forgetPassword)
+                        coordinator.loginPath.append(.forgetPassword)
                     }
                     .foregroundColor(.primaryTeal)
                     .bold()
@@ -87,7 +86,9 @@ struct LoginView: View {
 
                 HStack(spacing: 4) {
                     Text("no_account".localized)
-                    NavigationLink(destination: RegisterView()) {
+                    Button {
+                        coordinator.loginPath.append(.register)
+                    } label: {
                         Text("register_here".localized)
                             .foregroundColor(.primaryTeal)
                             .fontWeight(.semibold)
@@ -108,7 +109,6 @@ struct LoginView: View {
             } message: {
                 Text(viewModel.errorMessage ?? "unknown_error".localized)
             }
-        }
         .onReceive(viewModel.$loginSuccess) { success in
             if success == true {
                 showSuccessAlert = true
