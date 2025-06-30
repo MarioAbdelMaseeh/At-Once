@@ -60,8 +60,22 @@ struct RootView: View {
 
     private func layoutDirection(for language: AppLanguage) -> LayoutDirection {
         switch language {
-        case .arabic: return .rightToLeft
-        case .english, .system: return .leftToRight
+        case .arabic:
+            return .rightToLeft
+        case .english:
+            return .leftToRight
+        case .system:
+            let systemLanguageCode = Locale.preferredLanguages.first?.prefix(2) ?? "en"
+            return systemLanguageCode == "ar" ? .rightToLeft : .leftToRight
         }
     }
+
+//    private func layoutDirection(for language: AppLanguage) -> LayoutDirection {
+//        switch language {
+//        case .arabic:
+//            return .rightToLeft
+//        case .english, .system:
+//            return .leftToRight
+//        }
+//    }
 }

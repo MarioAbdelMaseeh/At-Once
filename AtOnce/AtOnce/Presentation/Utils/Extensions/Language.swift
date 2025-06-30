@@ -3,7 +3,7 @@
 //  AtOnce
 //
 //  Created by Iman Mahmoud on 24/06/2025.
-//
+
 
 import Foundation
 import ObjectiveC.runtime
@@ -25,12 +25,14 @@ extension Bundle {
             switch language {
             case .system:
                 return Locale.preferredLanguages.first?.components(separatedBy: "-").first
+               
             case .english:
                 return "en"
             case .arabic:
                 return "ar"
             }
         }()
+        print("Attempting to load language bundle for: \(languageCode ?? "nil")")
 
         guard let code = languageCode,
               let path = Bundle.main.path(forResource: code, ofType: "lproj"),
@@ -44,12 +46,12 @@ extension Bundle {
         object_setClass(Bundle.main, LocalizedBundle.self)
     }
     
-    static var currentLanguageCode: String {
-            if let langBundle = objc_getAssociatedObject(Bundle.main, &bundleKey) as? Bundle,
-               let langPath = langBundle.bundlePath.components(separatedBy: "/").last {
-                return langPath // "en" or "ar"
-            }
-            // fallback to system
-            return Locale.preferredLanguages.first?.components(separatedBy: "-").first ?? "en"
-        }
+    static func resetToSystem() {
+        objc_setAssociatedObject(Bundle.main, &bundleKey, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        object_setClass(Bundle.main, Bundle.self)
+    }
+    
+  
 }
+
+

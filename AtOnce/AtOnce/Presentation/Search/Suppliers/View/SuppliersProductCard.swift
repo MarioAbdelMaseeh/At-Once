@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SuppliersProductCard: View {
     
+   // @EnvironmentObject var languageManager: LanguageManager
     
     let suppliersProduct: SuppliersProduct
     let addToCart: (_ p: SuppliersProduct)->Void

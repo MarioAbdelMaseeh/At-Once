@@ -18,9 +18,9 @@ struct OrderCard: View {
                 Image(systemName: "storefront")
                     .foregroundColor(.primaryTeal)
                     .font(.system(size: 24))
-                Text(order.pharmacyName)
+                Text(order.wareHouseName)
                     .font(.headline)
-                Text("id:# \(order.id)")
+                Text("id:# \(order.orderId)")
                     .font(.callout).padding(.leading,32)
                 
                 Spacer()
@@ -36,7 +36,7 @@ struct OrderCard: View {
                 Image(systemName: "calendar")
                     .foregroundColor(.primaryTeal)
                     .font(.system(size: 24))
-                Text(order.date)
+                Text(order.createdAt)
                     .font(.headline)
                 
                     
@@ -47,24 +47,24 @@ struct OrderCard: View {
 
             if isExpanded {
                 
-                Text(order.location)
-                    .font(.callout)
-                    .foregroundColor(Color(.systemGray))
+//                Text(order.location)                     //// No Address
+//                    .font(.callout)
+//                    .foregroundColor(Color(.systemGray))
                                  
                 Divider()
 
-                ForEach(order.items) { item in
+                ForEach(order.orderDetails) { item in
                     HStack {
                         Image(systemName: "asterisk")
                             .font(.caption)
-                        Text(item.name)
+                        Text(item.medicineName)
                         Spacer()
                         Text(String(
                             format: NSLocalizedString("items_format", comment: ""),
                             item.quantity.localizedDigits
                         ))
 //                        Text(item.price, format: .currency(code: Locale.current.currency?.identifier ?? "EGP"))
-                        Text(String(format: NSLocalizedString("amount_only_format", comment: ""), item.totalPrice.localizedDigits))
+                        Text(String(format: NSLocalizedString("amount_only_format", comment: ""), item.totalPriceAfterDisccount.localizedDigits))
                             .foregroundColor(.primaryTeal)
                             .bold()
                     }
@@ -76,7 +76,7 @@ struct OrderCard: View {
                 HStack {
                     Spacer()
 //                    Text("Total : \(String(format: "%.2f",order.items.reduce(0) { $0 + $1.price })) EGP")
-                    Text(String(format: NSLocalizedString("total_label", comment: ""), order.total.localizedDigits))
+                    Text(String(format: NSLocalizedString("total_label", comment: ""), order.totalPrice.localizedDigits))
                     
                         .font(.callout)
                         .foregroundColor(.red)
@@ -93,6 +93,6 @@ struct OrderCard: View {
 }
 
 
-#Preview {
-    OrderCard(order:Order(id: "12345", pharmacyName: "UM Pharma", date: "25/05/2024 - 18:00 PM", location: "Zefta, Gharbia", items: Array(repeating: OrderItem(id: "5678",name: "Panadol Extra 600mg", quantity: 3, price: 150), count: 4), status: .preparing), isExpanded: true, toggleExpand: {})
-}
+//#Preview {
+//    OrderCard(order:Order(id: "12345", pharmacyName: "UM Pharma", date: "25/05/2024 - 18:00 PM", location: "Zefta, Gharbia", items: Array(repeating: OrderItem(id: "5678",name: "Panadol Extra 600mg", quantity: 3, price: 150), count: 4), status: .preparing), isExpanded: true, toggleExpand: {})
+//}

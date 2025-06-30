@@ -27,10 +27,12 @@ struct StoreCard: View {
                            case .success(let image):
                                image
                                    .resizable()
-                                   .scaledToFill()
-                                   .frame(height: 120)
-                                   .clipped()
+                                   .scaledToFit()
                                    .cornerRadius(8)
+                                  // .scaledToFill()
+                                   .frame(/*width:180 ,*/height: 120)
+                                  // .clipped()
+                                   
                            case .failure(_):
                                Image(systemName: "photo")
                                    .resizable()
