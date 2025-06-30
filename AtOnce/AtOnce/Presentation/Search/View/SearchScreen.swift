@@ -61,7 +61,7 @@ struct SearchScreen: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("Search".localized)
+                Text("search".localized)
                     .font(.title)
                     .fontWeight(.semibold)
             }
