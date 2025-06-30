@@ -75,10 +75,17 @@ class AppCoordinator: ObservableObject {
         case .forgetPassword:
             let vm = container.resolve(ForgetPasswordViewModelProtocol.self)! as! ForgetPasswordViewModel
             return AnyView(
-                ForgetPasswordView(viewModel: vm)
+                ForgetPasswordView(viewModel: vm).environmentObject(self)
             )
-        case .verifyOPT(generatedOPT: let generatedOPT):
-            return AnyView(EmptyView())
+        case .verifyOPT(email: let email, generatedOTP: let generatedOTP):
+            return AnyView(
+                OTPVerifyView(email: email, generatedOTP: generatedOTP).environmentObject(self)
+            )
+        case .resetPassword(email: let email, generatedOTP: let generatedOTP):
+            let vm = container.resolve(ForgetPasswordViewModelProtocol.self)! as! ForgetPasswordViewModel
+            return AnyView(
+                ResetPasswordView(viewModel: vm, generatedOTP: generatedOTP, email: email)
+            )
         }
     }
     
