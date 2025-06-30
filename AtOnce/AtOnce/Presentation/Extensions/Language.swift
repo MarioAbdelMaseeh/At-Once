@@ -24,21 +24,27 @@ extension Bundle {
         let languageCode: String? = {
             switch language {
             case .system:
-                return Locale.preferredLanguages.first?.components(separatedBy: "-").first
+                let systemCode = Locale.preferredLanguages.first?.components(separatedBy: "-").first
+                print("System language code: \(systemCode ?? "nil")")
+                return systemCode //Locale.preferredLanguages.first?.components(separatedBy: "-").first
+               
             case .english:
                 return "en"
             case .arabic:
                 return "ar"
             }
         }()
+        print("Attempting to load language bundle for: \(languageCode ?? "nil")")
 
         guard let code = languageCode,
               let path = Bundle.main.path(forResource: code, ofType: "lproj"),
               let langBundle = Bundle(path: path) else {
+            print("‼️ Failed to load bundle. Falling back to default")
             objc_setAssociatedObject(Bundle.main, &bundleKey, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             object_setClass(Bundle.main, Bundle.self)
             return
         }
+        print("✅ Loaded bundle for: \(code)")
 
         objc_setAssociatedObject(Bundle.main, &bundleKey, langBundle, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         object_setClass(Bundle.main, LocalizedBundle.self)
@@ -48,10 +54,32 @@ extension Bundle {
 }
 
 extension Bundle {
+    
     static func resetToSystem() {
-        objc_setAssociatedObject(Bundle.main, &bundleKey, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        object_setClass(Bundle.main, Bundle.self)
+        
+        
+        print("🧪 preferredLanguages: \(Locale.preferredLanguages)")
+        let systemCode = Locale.preferredLanguages.first?.components(separatedBy: "-").first
+        print("System language code: \(systemCode ?? "nil")")
+
+        guard let code = systemCode,
+              let path = Bundle.main.path(forResource: code, ofType: "lproj"),
+              let langBundle = Bundle(path: path) else {
+            print("‼️ Failed to load system bundle. Falling back to default")
+            objc_setAssociatedObject(Bundle.main, &bundleKey, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            object_setClass(Bundle.main, Bundle.self)
+            return
+        }
+
+        print("✅ Loaded system bundle for: \(code)")
+        objc_setAssociatedObject(Bundle.main, &bundleKey, langBundle, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        object_setClass(Bundle.main, LocalizedBundle.self)
     }
+
+//    static func resetToSystem() {
+//        objc_setAssociatedObject(Bundle.main, &bundleKey, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+//        object_setClass(Bundle.main, Bundle.self)
+//    }
 }
 
 
