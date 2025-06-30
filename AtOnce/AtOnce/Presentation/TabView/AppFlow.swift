@@ -20,5 +20,4 @@ enum OutOfTabDestination: Hashable, Equatable, Codable {
     case forgetPassword
     case verifyOPT(email: String, generatedOTP: String)
     case resetPassword(email: String, generatedOTP: String)
-    
 }
