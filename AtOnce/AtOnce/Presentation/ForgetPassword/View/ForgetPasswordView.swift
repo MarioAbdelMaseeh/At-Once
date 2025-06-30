@@ -42,12 +42,12 @@ struct ForgetPasswordView: View {
             }
             .onReceive(viewModel.$successMessage) { message in
                 if message != nil {
-                    coordinator.path.append(.verifyOPT(generatedOPT: viewModel.generatedOTP))
+                    coordinator.path.append(.verifyOPT(email: text, generatedOTP: viewModel.generatedOTP))
                 }
             }
     }
 }
 
-//#Preview {
-//    ForgetPasswordView()
-//}
+#Preview {
+    ForgetPasswordView(viewModel: AppDIContainer.shared.container.resolve(ForgetPasswordViewModelProtocol.self) as! ForgetPasswordViewModel)
+}

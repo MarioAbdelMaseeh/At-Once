@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct OTPVerifyView: View {
+    @EnvironmentObject var coordinator: AppCoordinator
     @FocusState private var focusedField: Int?
     @State private var code: [String] = Array(repeating: "", count: 5)
+    @State private var showAlert = false
+    @State private var alertMessage = ""
     let email: String
     let generatedOTP: String
     init( email: String, generatedOTP: String) {
@@ -56,10 +59,20 @@ struct OTPVerifyView: View {
                 }
             }
             
-            // Verify Button
+            
             Button(action: {
+                print("clicked")
                 let otp = code.joined()
-                print("Verify code: \(otp)")
+                print(otp)
+                print(generatedOTP)
+                if generatedOTP == otp {
+                    alertMessage = "OTP Verified Successfully!"
+                    showAlert = true
+                    coordinator.path.append(.resetPassword(email: email, generatedOTP: generatedOTP))
+                } else {
+                    alertMessage = "Invalid OTP. Please try again."
+                    showAlert = true
+                }
             }) {
                 Text("Verify Code")
                     .foregroundColor(.white)
@@ -70,7 +83,6 @@ struct OTPVerifyView: View {
             }
             .disabled(!isCodeComplete)
             
-            // Resend
             HStack {
                 Text("Haven’t got the email yet?")
                 Button("Resend email") {
@@ -86,6 +98,11 @@ struct OTPVerifyView: View {
         .onAppear {
             focusedField = 0
         }
+        .alert("Verification", isPresented: $showAlert) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text(alertMessage)
+                }
     }
     
     private var isCodeComplete: Bool {

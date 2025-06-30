@@ -23,6 +23,7 @@ struct RootView: View {
                             }
                         }
                     ).environmentObject(coordinator.connectivityObserver)
+                        .environmentObject(coordinator)
                 case .main:
                     MainTabView(
                         onLogout: {
