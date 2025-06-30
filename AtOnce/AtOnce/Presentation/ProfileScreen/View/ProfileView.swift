@@ -36,7 +36,7 @@ struct ProfileView: View {
             
             if let pharmacy = viewModel.pharmacy {
                 ProfileHeader(profileName: pharmacy.name) {
-                    coordinator.path.append(.profileInfo(cachedPharmacy: pharmacy))
+                    coordinator.path.append(.profileInfo/*(cachedPharmacy: pharmacy)*/)
                 }
             }
             

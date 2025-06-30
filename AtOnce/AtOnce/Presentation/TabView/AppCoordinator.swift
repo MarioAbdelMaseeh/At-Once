@@ -45,11 +45,16 @@ class AppCoordinator: ObservableObject {
             
         case .store(let id):
                 let vm = container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel
+         
+            
+            
             return AnyView(
                         StoreScreen(warehouseId: id, viewModel: vm)
                     )
             
-        case .profileInfo(let pharmacy):
+        case .profileInfo/*(let pharmacy)*/:
+            let cacheUseCase: CachePharmacyUseCase = container.resolve(CachePharmacyUseCase.self)!
+            let pharmacy = cacheUseCase.getCachedUser()!
                 return AnyView(
                     ProfileInfo(pharmacy: pharmacy)
                 )
