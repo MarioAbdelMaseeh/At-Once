@@ -68,4 +68,8 @@ class HomeScreenViewModel : HomeScreenViewModelProtocol,  ObservableObject{
                     fetchWarehouses(areaId: 2, page: currentPage, pageSize: pageSize)
                 }
     }
+    
+    func getRepresentativePhone()-> String{
+        self.userDefaultUseCase.getCachedUser()?.representativePhone ?? ""
+    }
 }

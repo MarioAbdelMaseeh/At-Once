@@ -25,4 +25,5 @@ struct Pharmacy: Codable {
     let areaId: Int
     let phoneNumber: String
     let representativeId: Int
+    var representativePhone: String
 }

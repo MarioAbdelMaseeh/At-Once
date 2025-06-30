@@ -14,6 +14,7 @@ struct CachedPharmacy: Codable , Equatable, Hashable{
     var email: String
     var areaId: Int
     var phone: String
+    var representativePhone: String
     init(user: Pharmacy, token: String) {
         self.id = user.id
         self.token = token
@@ -23,6 +24,6 @@ struct CachedPharmacy: Codable , Equatable, Hashable{
         self.governate = user.governate
         self.email = user.email
         self.phone = user.phoneNumber
-        
+        self.representativePhone = user.representativePhone
     }
 }

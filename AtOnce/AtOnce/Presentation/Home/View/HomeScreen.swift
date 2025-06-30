@@ -63,11 +63,15 @@ struct HomeScreen: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    NavigationLink {
-                        
+                    Button {
+                        if let url = URL(string: "tel://\(viewModel.getRepresentativePhone())"),
+                           UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url)
+                        }
                     } label: {
-                        Image(systemName: "phone.fill").resizable()
-                            .frame(width: 20,height: 20)
+                        Image(systemName: "phone.fill")
+                            .resizable()
+                            .frame(width: 20, height: 20)
                             .tint(.primary)
                     }
                 }
