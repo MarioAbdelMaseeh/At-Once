@@ -55,3 +55,9 @@ extension Bundle {
 }
 
 
+
+extension String {
+    var localized: String {
+        NSLocalizedString(self, comment: "")
+    }
+}

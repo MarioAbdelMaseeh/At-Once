@@ -18,10 +18,17 @@ extension Numeric {
     }
 }
 
-extension String {
-    var localized: String {
-        NSLocalizedString(self, comment: "")
+
+
+
+extension Numeric {
+    var localizedNumber: String {
+        let formatter = NumberFormatter()
+        formatter.locale = AppLanguage.current.locale
+      //  formatter.numberStyle = .
+       // formatter.maximumFractionDigits = 2
+       // formatter.minimumFractionDigits = 2
+        return formatter.string(for: self) ?? "\(self)"
     }
 }
-
 
