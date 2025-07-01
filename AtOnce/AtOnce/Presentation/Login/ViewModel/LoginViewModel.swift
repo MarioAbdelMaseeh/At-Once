@@ -30,6 +30,7 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
     @Published var loginResponse: LoginResponse?
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
+    @Published var successMessage: String?
     
     @Published var passwordError : String?
     @Published var emailError : String?
@@ -81,6 +82,7 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
                 self?.loginResponse = response
                 if response.success {
                     self?.loginSuccess = true
+                    self?.successMessage = response.message
                     self?.cachePharmacy(loginResponse: response)
                   //  self?.savePharmacy(response.pharmacy)
                 } else {

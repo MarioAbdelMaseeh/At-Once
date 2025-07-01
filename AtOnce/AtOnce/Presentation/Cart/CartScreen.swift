@@ -133,12 +133,12 @@ struct CartScreen: View {
                     
                 case .deleteConfirm(let warehouseId, let itemId, let itemName):
                     return Alert(
-                        title: Text("Confirm Deletion"),
-                        message: Text("Are you sure you want to delete \(itemName)?"),
-                        primaryButton: .destructive(Text("Delete")) {
+                        title: Text("confirm_deletion_title".localized),
+                        message: Text(String(format: NSLocalizedString("confirm_deletion_message", comment: ""), itemName)),
+                        primaryButton: .destructive(Text("delete_button".localized)) {
                             viewModel.deleteItem(warehouseId: warehouseId, itemId: itemId)
                         },
-                        secondaryButton: .cancel()
+                        secondaryButton: .cancel(Text("cancel".localized))
                     )
                 }
             }

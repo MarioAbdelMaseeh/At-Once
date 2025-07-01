@@ -122,3 +122,8 @@
 "error_fill_fields" = "يرجى ملء جميع الحقول.";
 "error_password_length" = "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.";
 "error_passwords_mismatch" = "كلمتا المرور غير متطابقتين.";
+
+"confirm_deletion_title" = "تأكيد الحذف";
+"confirm_deletion_message" = "هل أنت متأكد أنك تريد حذف %@؟";
+"delete_button" = "حذف";
+

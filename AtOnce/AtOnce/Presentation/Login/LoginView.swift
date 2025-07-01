@@ -98,11 +98,11 @@ struct LoginView: View {
             }
             .padding()
             .alert("login_successful".localized, isPresented: $showSuccessAlert) {
-                Button("OK") {
+                Button("oK".localized) {
                     onLoginSuccess()
                 }
             } message: {
-                Text("welcome_back".localized)
+                Text(viewModel.successMessage ?? "welcome_back".localized)
             }
             .alert("login_failed".localized, isPresented: $showFailureAlert) {
                 Button("ok".localized, role: .cancel) {}

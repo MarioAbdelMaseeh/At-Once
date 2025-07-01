@@ -11,6 +11,7 @@ struct OrderCard: View {
     let order: Order
     let isExpanded: Bool
     let toggleExpand: () -> Void
+    @EnvironmentObject var languageManager: LanguageManager
 
     var body: some View {
         VStack(alignment: .leading,spacing: 12) {
@@ -36,10 +37,8 @@ struct OrderCard: View {
                 Image(systemName: "calendar")
                     .foregroundColor(.primaryTeal)
                     .font(.system(size: 24))
-                Text(order.createdAt)
+                Text(order.createdAt.toLocalizedDateTime())
                     .font(.headline)
-                
-                    
                 
             }
     
@@ -57,11 +56,11 @@ struct OrderCard: View {
                     HStack {
                         Image(systemName: "asterisk")
                             .font(.caption)
-                        Text(item.medicineName)
+                        Text(languageManager.currentLanguage == .arabic ? item.arabicMedicineName :  item.medicineName)
                         Spacer()
                         Text(String(
                             format: NSLocalizedString("items_format", comment: ""),
-                            item.quantity.localizedDigits
+                            item.quantity.localizedNumber
                         ))
 //                        Text(item.price, format: .currency(code: Locale.current.currency?.identifier ?? "EGP"))
                         Text(String(format: NSLocalizedString("amount_only_format", comment: ""), item.totalPriceAfterDisccount.localizedDigits))
