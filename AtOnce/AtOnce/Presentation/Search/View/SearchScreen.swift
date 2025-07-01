@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchScreen: View {
     @ObservedObject private var viewModel: SearchViewModel
     @State private var selectedFilter = FilterOption.all[0]
-    
+    @State private var currentAlert: SearchAlertType?
     let filterOptions = FilterOption.all
     init(viewModel: SearchViewModel) {
         self.viewModel = viewModel
@@ -40,7 +40,8 @@ struct SearchScreen: View {
                 ScrollView {
                     LazyVStack(spacing: 16) {
                         ForEach(viewModel.products, id: \.id) { product in
-                            ProductCardView(product: product){
+                            ProductCardView(product: product,
+                            isLoading: viewModel.loadingProductIds.contains(product.medicineId)){
                                 viewModel.addToCart(p: product)
                             }
                                 .onAppear {
@@ -58,6 +59,18 @@ struct SearchScreen: View {
             }
             Spacer()
         }
+        .alert(item: $currentAlert) { alert in
+            Alert(
+                title: Text(alert.title),
+                message: Text(alert.message),
+                dismissButton: .default(Text("OK")) {
+                    viewModel.alert = nil
+                }
+            )
+        }
+        .onChange(of: viewModel.alert) { newValue in
+            currentAlert = newValue
+        }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -66,6 +79,7 @@ struct SearchScreen: View {
                     .fontWeight(.semibold)
             }
         }
+        
         .onAppear {
             viewModel.fetchProducts(areaId: viewModel.cachedPharmacy?.areaId ?? 2, text: viewModel.searchText, type: selectedFilter.id)
         }

@@ -64,7 +64,7 @@ struct HomeScreen: View {
                     }
                 }
             }.padding()
-        }.withConnectivityAlert()
+        }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

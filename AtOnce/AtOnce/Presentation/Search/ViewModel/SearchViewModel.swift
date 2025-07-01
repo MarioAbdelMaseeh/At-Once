@@ -20,7 +20,8 @@ class SearchViewModel : SearchViewModelProtocol,  ObservableObject{
     @Published var hasMorePages = true
     @Published var searchText: String = ""
     @Published var selectedCategory: String = FilterOption.all[0].id
-    
+    @Published var loadingProductIds: Set<Int> = []
+    @Published var alert: SearchAlertType?
     private var currentPage = 1
     private let pageSize = 10
     private var isFetching = false
@@ -56,8 +57,7 @@ class SearchViewModel : SearchViewModelProtocol,  ObservableObject{
             self?.isLoading = false
             self?.isFetching = false
             if case let .failure(error) = completion{
-                self?.errorMessage = error.localizedDescription
-                print(error.localizedDescription)
+                self?.alert = .error(message: error.localizedDescription)
             }
         } receiveValue: {[weak self] newProducts in
             if(newProducts.isEmpty){
@@ -91,15 +91,16 @@ class SearchViewModel : SearchViewModelProtocol,  ObservableObject{
         errorMessage = nil
     }
     func addToCart(p: SearchProduct){
+        let productId = p.medicineId
+            loadingProductIds.insert(productId)
         let cartBody = CartBodyDTO(warehouseId: p.warehouseIdOfMaxDiscount , pharmacyId: userDefaultsUseCase.getCachedUser()?.id ?? 0, medicineId: p.medicineId, englishMedicineName: p.medicineName, arabicMedicineName: p.arabicMedicineName, medicineUrl: p.imageUrl, warehouseUrl: p.imageUrl, price: p.finalPrice, quantity: 1, discount: p.maximumDiscount)
         addToCartUseCase.excute(cartBody: cartBody).sink {[weak self] completion in
             if case let .failure(error) = completion{
-                self?.errorMessage = error.localizedDescription
-                print(error.localizedDescription)
+                self?.alert = .error(message: error.localizedDescription)
             }
-        } receiveValue: { result in
-            print(result.message)
-            print(result.success)
+        } receiveValue: { [weak self] result in
+            self?.loadingProductIds.remove(productId)
+            self?.alert = .success(message: result.message)
         }.store(in: &cancellables)
     }
 }

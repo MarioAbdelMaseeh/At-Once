@@ -15,35 +15,38 @@ struct CartItemListView: View {
     
     var viewModel: CartViewModel
     
-    @State private var showAlert = false
-    @State private var selectedItemIndex: Int?
+    @State private var selectedItem: SelectedCartItem?
     var onUpdate: (_ warehouseId: Int, _ medicineId: Int, _ quantity: Int ) -> Void
-    //  var onDelete: (Int) -> Void
+    var onDeleteRequest: (_ warehouseId: Int, _ itemId: Int, _ itemName: String) -> Void
     
     var body: some View {
-        ForEach(warehouse.items.indices, id: \.self) { index in
-            
-            CartCell(order: warehouse.items[index] ) {
-                selectedItemIndex = index
-                showAlert = true
-            } onUpdate:{ medicineId, quantity in
-                onUpdate(warehouse.warehouseId, medicineId, quantity)
+            VStack {
+                ForEach(warehouse.items.indices, id: \.self) { index in
+                    CartCell(order: warehouse.items[index]) {
+                        onDeleteRequest(warehouse.warehouseId, warehouse.items[index].medicineId,  warehouse.items[index].englishMedicineName)
+                    } onUpdate: { medicineId, quantity in
+                        onUpdate(warehouse.warehouseId, medicineId, quantity)
+                    }
+                }
             }
-            .alert(isPresented: $showAlert) {
-                Alert(
+            .alert(item: $selectedItem) { item in
+                let cartItem = warehouse.items[item.index]
+                return Alert(
                     title: Text("Confirm Deletion"),
                     message: Text("Are you sure you want to delete this item?"),
                     primaryButton: .destructive(Text("Delete")) {
-                        if let index = selectedItemIndex {
-                            let item = warehouse.items[index]
-                            viewModel.deleteItem(warehouseId: warehouse.warehouseId, itemId: item.medicineId)
-                            warehouse.items.remove(at: index)
-                        }
+                        viewModel.deleteItem(
+                            warehouseId: warehouse.warehouseId,
+                            itemId: cartItem.medicineId
+                        )
+                        warehouse.items.remove(at: item.index)
                     },
                     secondaryButton: .cancel()
                 )
-                
             }
         }
     }
+struct SelectedCartItem: Identifiable {
+    let id = UUID()
+    let index: Int
 }
