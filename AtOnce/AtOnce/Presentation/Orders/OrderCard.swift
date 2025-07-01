@@ -91,8 +91,3 @@ struct OrderCard: View {
         
     }
 }
-
-
-//#Preview {
-//    OrderCard(order:Order(id: "12345", pharmacyName: "UM Pharma", date: "25/05/2024 - 18:00 PM", location: "Zefta, Gharbia", items: Array(repeating: OrderItem(id: "5678",name: "Panadol Extra 600mg", quantity: 3, price: 150), count: 4), status: .preparing), isExpanded: true, toggleExpand: {})
-//}

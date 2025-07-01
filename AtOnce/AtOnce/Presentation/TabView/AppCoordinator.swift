@@ -95,33 +95,46 @@ class AppCoordinator: ObservableObject {
         case .noInternet:
             return AnyView(
                 NoInternetView().environmentObject(connectivityObserver)
+                    .withConnectivityAlert()
             )
 
         case .forgetPassword:
             let vm = container.resolve(ForgetPasswordViewModelProtocol.self)! as! ForgetPasswordViewModel
             return AnyView(
                 ForgetPasswordView(viewModel: vm).environmentObject(self)
+                    .environmentObject(connectivityObserver)
+                    .withConnectivityAlert()
             )
 
         case .verifyOPT(email: let email, generatedOTP: let generatedOTP):
             return AnyView(
                 OTPVerifyView(email: email, generatedOTP: generatedOTP).environmentObject(self)
+                    .environmentObject(connectivityObserver)
+                    .withConnectivityAlert()
             )
 
         case .resetPassword(email: let email, generatedOTP: let generatedOTP):
             let vm = container.resolve(ForgetPasswordViewModelProtocol.self)! as! ForgetPasswordViewModel
             return AnyView(
-                ResetPasswordView(viewModel: vm, generatedOTP: generatedOTP, email: email)
+                ResetPasswordView(viewModel: vm, generatedOTP: generatedOTP, email: email).environmentObject(connectivityObserver)
+                    .withConnectivityAlert()
             )
         case .register:
             return AnyView(
-                RegisterView()
+                RegisterView().environmentObject(connectivityObserver)
+                    .withConnectivityAlert()
+            )
+        case .webView(url: let url, title: let title):
+            return AnyView(
+                WebViewScreen(url: url, title: title).environmentObject(connectivityObserver)
+                    .withConnectivityAlert()
             )
         }
     }
 
     func logout() {
-        mainPath = [] // only clear main flow
+        loginPath = []
+        mainPath = []
         DispatchQueue.main.async {
             self.flow = .login
         }

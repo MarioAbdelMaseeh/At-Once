@@ -13,25 +13,28 @@ struct OTPVerifyView: View {
     @State private var code: [String] = Array(repeating: "", count: 5)
     @State private var showAlert = false
     @State private var alertMessage = ""
+
     let email: String
     let generatedOTP: String
-    init( email: String, generatedOTP: String) {
+
+    init(email: String, generatedOTP: String) {
         self.email = email
         self.generatedOTP = generatedOTP
     }
+
     var body: some View {
         VStack(spacing: 24) {
             Spacer().frame(height: 40)
-            
-            Text("Check your email")
+
+            Text("otp_check_title".localized)
                 .font(.title2)
                 .bold()
-            
-            Text("We sent a reset link to \(email)\nEnter 5 digit code that was mentioned in the email")
+
+            Text(String(format: NSLocalizedString("otp_check_subtitle", comment: ""), email))
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.gray)
-            
+
             HStack(spacing: 12) {
                 ForEach(0..<5, id: \.self) { index in
                     TextField("", text: $code[index])
@@ -50,31 +53,25 @@ struct OTPVerifyView: View {
                                 if index < 4 {
                                     focusedField = index + 1
                                 }
-                            } else {
-                                if index > 0 && code[index].isEmpty {
-                                    focusedField = index - 1
-                                }
+                            } else if index > 0 {
+                                focusedField = index - 1
                             }
                         }
                 }
             }
-            
-            
+
             Button(action: {
-                print("clicked")
                 let otp = code.joined()
-                print(otp)
-                print(generatedOTP)
                 if generatedOTP == otp {
-                    alertMessage = "OTP Verified Successfully!"
+                    alertMessage = "otp_success".localized
                     showAlert = true
                     coordinator.loginPath.append(.resetPassword(email: email, generatedOTP: generatedOTP))
                 } else {
-                    alertMessage = "Invalid OTP. Please try again."
+                    alertMessage = "otp_invalid".localized
                     showAlert = true
                 }
             }) {
-                Text("Verify Code")
+                Text("verify_code_button".localized)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -82,29 +79,43 @@ struct OTPVerifyView: View {
                     .cornerRadius(10)
             }
             .disabled(!isCodeComplete)
-            
+
             HStack {
-                Text("Haven’t got the email yet?")
-                Button("Resend email") {
+                Text("otp_not_received".localized)
+                Button("resend_email_button".localized) {
                     print("Resend OTP tapped")
                 }
                 .foregroundColor(.primaryTeal)
             }
             .font(.footnote)
-            
+
             Spacer()
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    coordinator.loginPath.removeLast()
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.backward")
+                        Text(NSLocalizedString("back", comment: ""))
+                    }
+                }
+            }
         }
         .padding()
         .onAppear {
             focusedField = 0
         }
-        .alert("Verification", isPresented: $showAlert) {
-                    Button("OK", role: .cancel) { }
-                } message: {
-                    Text(alertMessage)
-                }
+        .alert("otp_alert_title".localized, isPresented: $showAlert) {
+            Button("ok_button".localized, role: .cancel) { }
+        } message: {
+            Text(alertMessage)
+        }
     }
-    
+
     private var isCodeComplete: Bool {
         code.allSatisfy { $0.count == 1 }
     }

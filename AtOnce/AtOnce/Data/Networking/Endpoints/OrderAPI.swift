@@ -12,7 +12,7 @@ enum OrderAPI: APIRequest {
     case getOrdersByStatus(status: Int, pharmacyId: Int)
 
     var baseURL: String {
-        "http://www.pharmaatoncepredeploy.somee.com/"
+        Constants.baseURL
     }
 
     var path: String {

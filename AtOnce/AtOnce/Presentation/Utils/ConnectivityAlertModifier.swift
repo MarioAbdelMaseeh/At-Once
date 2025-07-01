@@ -5,7 +5,6 @@
 //  Created by mac on 26/06/2025.
 //
 
-
 import SwiftUI
 
 struct ConnectivityAlertModifier: ViewModifier {
@@ -19,11 +18,13 @@ struct ConnectivityAlertModifier: ViewModifier {
             }
             .alert(isPresented: $showAlert) {
                 Alert(
-                    title: Text(connectivityObserver.isConnected ? "Internet!" : "No Internet!"),
+                    title: Text(connectivityObserver.isConnected
+                                ? "internet_title_connected".localized
+                                : "internet_title_disconnected".localized),
                     message: Text(connectivityObserver.isConnected
-                                 ? "You're connected to the internet"
-                                 : "Please check your connection"),
-                    dismissButton: .default(Text("OK"))
+                                  ? "internet_message_connected".localized
+                                  : "internet_message_disconnected".localized),
+                    dismissButton: .default(Text("ok_button".localized))
                 )
             }
     }

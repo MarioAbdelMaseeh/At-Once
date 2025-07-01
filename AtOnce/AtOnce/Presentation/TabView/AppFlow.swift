@@ -17,6 +17,7 @@ enum OutOfTabDestination: Hashable, Equatable, Codable {
     case store(id: Int)
     case register
     case profileInfo(CachedPharmacy)
+    case webView(url: String, title: String)
     case noInternet
     case forgetPassword
     case verifyOPT(email: String, generatedOTP: String)

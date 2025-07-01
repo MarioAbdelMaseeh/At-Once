@@ -41,6 +41,7 @@ struct CartScreen: View {
             ScrollView {
                 LazyVStack(spacing: 12) {
                     if viewModel.isLoading{
+                        Spacer().frame(height: 48)
                         ForEach(0..<3, id: \.self) { _ in
                             CartCellShimmer()
                         }
@@ -85,7 +86,9 @@ struct CartScreen: View {
                     if(total < minimum){
                         HStack{
                             Spacer()
-                            Text("\(NSLocalizedString("min_order_limit", comment: "")) \(minimum.localizedDigits) \(NSLocalizedString("egp_currency", comment: ""))").font(.caption).foregroundStyle(Color.red)
+                            Text(String(format: NSLocalizedString("min_order_limit_full", comment: ""), minimum.localizedDigits))
+                                .font(.caption)
+                                .foregroundStyle(Color.red)
                             Spacer()
                         }
                     }

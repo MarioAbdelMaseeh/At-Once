@@ -42,6 +42,7 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
     }
 
     func fetchCartByPharmacyId() {
+        print("fetchhhchchch")
         isLoading = true
         cartUseCase.excute(pharmacyId: pharamcyId) .sink { [weak self] completion in
             self?.isLoading = false
