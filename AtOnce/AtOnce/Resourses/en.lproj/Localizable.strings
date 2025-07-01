@@ -120,3 +120,8 @@
 "error_fill_fields" = "Please fill in all fields.";
 "error_password_length" = "Password must be at least 8 characters.";
 "error_passwords_mismatch" = "Passwords do not match.";
+
+"confirm_deletion_title" = "Confirm Deletion";
+"confirm_deletion_message" = "Are you sure you want to delete %@?";
+"delete_button" = "Delete";
+
