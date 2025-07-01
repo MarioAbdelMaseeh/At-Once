@@ -14,6 +14,7 @@ struct CartCell: View {
     var onDelete: () -> Void
     var onUpdate: (_ medicineId: Int, _ quantity: Int) -> Void
     @State var text: String = ""
+    @EnvironmentObject var lang: LanguageManager
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center) {
@@ -26,7 +27,7 @@ struct CartCell: View {
                 
                 VStack(alignment: .leading, spacing: 6) {
                     HStack {
-                        Text(order.englishMedicineName)
+                        Text(lang.currentLanguage == .arabic ? order.arabicMedicineName : order.arabicMedicineName)
                             .font(.headline)
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
@@ -43,9 +44,9 @@ struct CartCell: View {
 
                     HStack(alignment: .bottom) {
                         VStack(alignment: .leading) {
-                            let localizedDiscount = NumberFormatter.localizedString(from: NSNumber(value: order.discount), number: .none)
+//                            let localizedDiscount = NumberFormatter.localizedString(from: NSNumber(value: order.discount), number: .none)
 
-                            Text(String(format: NSLocalizedString("discount_format", comment: ""), localizedDiscount))
+                            Text(String(format: NSLocalizedString("discount_format", comment: ""), order.discount.localizedDigits))
                                 .font(.caption)
                                 .foregroundColor(.primaryTeal)
                             

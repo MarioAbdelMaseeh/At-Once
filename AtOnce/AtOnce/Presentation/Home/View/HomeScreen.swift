@@ -40,21 +40,26 @@ struct HomeScreen: View {
                     .background(Color(.systemGray6))
                     .cornerRadius(12)
                 }
-                VStack(spacing: 16){
-                    if(viewModel.isLoading){
+                VStack(spacing: 16) {
+                    if viewModel.isLoading {
                         ForEach(0..<5, id: \.self) { _ in
                             LoadingCell()
                         }
-                    }
-                    ForEach(viewModel.warehouses){
-                        item in
-                        Button {
-                            coordinator.mainPath.append(.store(id: item.id))
-                        }label: {
-                            StoreCell(warehouse: item)
-                                .onAppear{
-                                    viewModel.loadMoreIfNeeded(currentItem: item)
-                                }
+                    } else if viewModel.warehouses.isEmpty {
+                        Text("No warehouses available.")
+                            .foregroundColor(.primary)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .padding()
+                    } else {
+                        ForEach(viewModel.warehouses) { item in
+                            Button {
+                                coordinator.mainPath.append(.store(id: item.id))
+                            } label: {
+                                StoreCell(warehouse: item)
+                                    .onAppear {
+                                        viewModel.loadMoreIfNeeded(currentItem: item)
+                                    }
+                            }
                         }
                     }
                 }
