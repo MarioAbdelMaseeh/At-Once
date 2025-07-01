@@ -30,7 +30,7 @@ struct CartScreen: View {
     }
     
     @ObservedObject var viewModel: CartViewModel
-    
+    @State private var activeAlert: CartAlert?
     init(viewModel: CartViewModel) {
         self.viewModel = viewModel
     }
@@ -53,8 +53,15 @@ struct CartScreen: View {
                             warehouse: $viewModel.cartWarehousesList[selectedIndex],
                             viewModel: viewModel, onUpdate: { warehouseId, medicineId, quantity in
                                 viewModel.updateItem(warehouseId: warehouseId, medicineId: medicineId, quantity: quantity)
+                            }, onDeleteRequest: { warehouseId, itemId, itemName in
+                                activeAlert = .deleteConfirm(warehouseId: warehouseId, itemId: itemId, itemName: itemName)
                             }
                         )
+                    }else{
+                        Spacer().frame(height: 64)
+                        Lottie(animationName: "Empty-Cart")
+                            .frame(width: 250, height: 250)
+                        Spacer()
                     }
                 }
             }
@@ -111,6 +118,28 @@ struct CartScreen: View {
                     Text(NSLocalizedString("cart", comment: ""))
                         .font(.title)
                         .fontWeight(.semibold)
+                }
+            }
+            .onReceive(viewModel.$successMessage.compactMap { $0 }) { msg in
+                activeAlert = .message(msg)
+            }
+            .onReceive(viewModel.$errorMessage.compactMap { $0 }) { msg in
+                activeAlert = .message(msg)
+            }
+            .alert(item: $activeAlert) { alert in
+                switch alert {
+                case .message(let msg):
+                    return Alert(title: Text(msg))
+                    
+                case .deleteConfirm(let warehouseId, let itemId, let itemName):
+                    return Alert(
+                        title: Text("Confirm Deletion"),
+                        message: Text("Are you sure you want to delete \(itemName)?"),
+                        primaryButton: .destructive(Text("Delete")) {
+                            viewModel.deleteItem(warehouseId: warehouseId, itemId: itemId)
+                        },
+                        secondaryButton: .cancel()
+                    )
                 }
             }
     }

@@ -16,6 +16,8 @@ class SuppliersScreenViewModel: SuppliersScreenViewModelProtocol, ObservableObje
     @Published var suppliersProduct: [SuppliersProduct] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
+    @Published var successMessage: String?
+    @Published var loadingProductIds: Set<Int> = []
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -45,14 +47,17 @@ class SuppliersScreenViewModel: SuppliersScreenViewModelProtocol, ObservableObje
         
     }
     func addToCart(p: SuppliersProduct){
+        let productId = p.medicineId
+            loadingProductIds.insert(productId)
         let cartBody = CartBodyDTO(warehouseId: p.warehouseId, pharmacyId: userDefaultsUseCase.getCachedUser()?.id ?? 0, medicineId: p.medicineId, englishMedicineName: p.medicineName, arabicMedicineName:p.medicineName, medicineUrl: p.warehouseImageUrl, warehouseUrl: p.warehouseImageUrl, price: p.finalPrice, quantity: 1, discount: p.discount)
         addToCartUseCase.excute(cartBody: cartBody).sink {[weak self] completion in
             if case let .failure(error) = completion{
                 self?.errorMessage = error.localizedDescription
                 print(error.localizedDescription)
             }
-        } receiveValue: { result in
-            print(result.message)
+        } receiveValue: { [weak self] result in
+            self?.successMessage = result.message
+            self?.loadingProductIds.remove(productId)
         }.store(in: &cancellables)
     }
 }

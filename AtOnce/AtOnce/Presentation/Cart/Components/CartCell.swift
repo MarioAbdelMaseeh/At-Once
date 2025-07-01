@@ -27,7 +27,7 @@ struct CartCell: View {
                 
                 VStack(alignment: .leading, spacing: 6) {
                     HStack {
-                        Text(lang.currentLanguage == .arabic ? order.arabicMedicineName : order.arabicMedicineName)
+                        Text(lang.currentLanguage == .arabic ? order.arabicMedicineName : order.englishMedicineName)
                             .font(.headline)
                             .fontWeight(.bold)
                             .foregroundColor(.primary)

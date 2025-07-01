@@ -27,18 +27,18 @@ struct MainTabView: View {
                             onLogout()
                         } onSearch: {
                             tabCoordinator.selectedTab = .search
-                        }.withConnectivityAlert()
+                        }
                     )
                 case .search:
                     AnyView(
                         SearchScreen(
                             viewModel: AppDIContainer.shared.container.resolve(SearchViewModelProtocol.self) as! SearchViewModel
-                        ).withConnectivityAlert()
+                        )
                     )
                 case .cart:
-                    AnyView(CartScreen(viewModel: AppDIContainer.shared.container.resolve(CartViewModelProtocol.self) as! CartViewModel).withConnectivityAlert())
+                    AnyView(CartScreen(viewModel: AppDIContainer.shared.container.resolve(CartViewModelProtocol.self) as! CartViewModel))
                 case .orders:
-                    AnyView(OrdersScreen(viewModel: AppDIContainer.shared.container.resolve(OrdersViewModelProtocol.self) as! OrdersViewModel)).withConnectivityAlert()
+                    AnyView(OrdersScreen(viewModel: AppDIContainer.shared.container.resolve(OrdersViewModelProtocol.self) as! OrdersViewModel))
                 }
             }
             Spacer()

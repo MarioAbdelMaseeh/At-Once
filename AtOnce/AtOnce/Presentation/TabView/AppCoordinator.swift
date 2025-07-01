@@ -71,7 +71,6 @@ class AppCoordinator: ObservableObject {
                 ProfileView(viewModel: vm) {
                     self.logout()
                 }
-                .withConnectivityAlert()
                 .environmentObject(connectivityObserver)
                 .environmentObject(self)
                 .environmentObject(AppDIContainer.shared.container.resolve(LanguageManager.self)!)
@@ -81,21 +80,18 @@ class AppCoordinator: ObservableObject {
             let vm = container.resolve(StoreScreenViewModelProtocol.self)! as! StoreScreenViewModel
             return AnyView(
                 StoreScreen(warehouseId: id, viewModel: vm)
-                    .withConnectivityAlert()
                     .environmentObject(connectivityObserver)
             )
 
         case .profileInfo(let pharmacy):
             return AnyView(
                 ProfileInfo(pharmacy: pharmacy)
-                    .withConnectivityAlert()
                     .environmentObject(connectivityObserver)
             )
 
         case .noInternet:
             return AnyView(
                 NoInternetView().environmentObject(connectivityObserver)
-                    .withConnectivityAlert()
             )
 
         case .forgetPassword:
@@ -103,31 +99,26 @@ class AppCoordinator: ObservableObject {
             return AnyView(
                 ForgetPasswordView(viewModel: vm).environmentObject(self)
                     .environmentObject(connectivityObserver)
-                    .withConnectivityAlert()
             )
 
         case .verifyOPT(email: let email, generatedOTP: let generatedOTP):
             return AnyView(
                 OTPVerifyView(email: email, generatedOTP: generatedOTP).environmentObject(self)
                     .environmentObject(connectivityObserver)
-                    .withConnectivityAlert()
             )
 
         case .resetPassword(email: let email, generatedOTP: let generatedOTP):
             let vm = container.resolve(ForgetPasswordViewModelProtocol.self)! as! ForgetPasswordViewModel
             return AnyView(
                 ResetPasswordView(viewModel: vm, generatedOTP: generatedOTP, email: email).environmentObject(connectivityObserver)
-                    .withConnectivityAlert()
             )
         case .register:
             return AnyView(
                 RegisterView().environmentObject(connectivityObserver)
-                    .withConnectivityAlert()
             )
         case .webView(url: let url, title: let title):
             return AnyView(
                 WebViewScreen(url: url, title: title)
-                    .withConnectivityAlert()
                     .environmentObject(connectivityObserver)
             )
         }

@@ -12,32 +12,33 @@ struct MediumButton: View {
     let buttonIcon: String
     let color : Color
     let action: () -> Void
-    
+    var isLoading: Bool = false
     var body: some View {
-        
         Button(action: {
-            action()
+            if !isLoading {
+                action()
+            }
         }) {
-            
-            HStack(alignment: .center) {
-                Text(buttonLabel)
-                    .font(.callout)
-                    .foregroundColor(.white)
-                    //.padding(.horizontal)
-                Image(systemName: buttonIcon)
-                    .foregroundColor(.white)
-                    
-                    
-                
-            }.padding(.vertical,12)
-            
-            
-          
+            HStack {
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .frame(maxWidth: .infinity)
+                } else {
+                    Text(buttonLabel)
+                        .font(.callout)
+                        .foregroundColor(.white)
+                    Image(systemName: buttonIcon)
+                        .foregroundColor(.white)
+                }
+            }
+            .padding(.vertical, 12)
+            .frame(maxWidth: .infinity)
+            .fontWeight(.semibold)
+            .background(color)
+            .cornerRadius(10)
         }
-        .fontWeight(.semibold)
-        .frame(maxWidth: .infinity)
-        .background(color)
-        .cornerRadius(10)
+        .disabled(isLoading)
     }
 }
 

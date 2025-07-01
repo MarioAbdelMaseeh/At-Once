@@ -84,6 +84,7 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
                 self?.errorMessage = error.localizedDescription
             }
         } receiveValue: { [weak self] result in
+            self?.successMessage = result.message
             self?.fetchCartByPharmacyId()
         }.store(in: &cancellables)
     }
@@ -94,7 +95,7 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
                 self?.errorMessage = error.localizedDescription
             }
         } receiveValue: { [weak self] result in
-            print(result.message)
+            self?.successMessage = result.message
             self?.fetchCartByPharmacyId()
         }.store(in: &cancellables)
 
