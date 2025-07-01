@@ -11,7 +11,7 @@ import SwiftUI
 
 struct RootView: View {
     @EnvironmentObject var languageManager: LanguageManager
-    @StateObject private var coordinator = AppCoordinator()
+    @EnvironmentObject var coordinator: AppCoordinator
 
     var body: some View {
         Group {

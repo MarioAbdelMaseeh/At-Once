@@ -126,8 +126,9 @@ class AppCoordinator: ObservableObject {
             )
         case .webView(url: let url, title: let title):
             return AnyView(
-                WebViewScreen(url: url, title: title).environmentObject(connectivityObserver)
+                WebViewScreen(url: url, title: title)
                     .withConnectivityAlert()
+                    .environmentObject(connectivityObserver)
             )
         }
     }

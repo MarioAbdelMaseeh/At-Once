@@ -60,6 +60,34 @@ final class At_OnceTests: XCTestCase {
         
      
     }
+    func testNetworkCallFail() {
+        let request = MockAPIRequest(
+            baseURL: "http://www.pharmaatoncepredeploy.com",
+            path: "/api/Cart/2",
+            method: .post,
+            headers: nil,
+            bodyAsDictionary: [
+                "" : ""
+            ]
+        )
+
+        let expectation = XCTestExpectation(description: "API should fail and return an error")
+
+        networkManager.request(_request: request, responseType: CartResponseDTO.self)
+            .sink(receiveCompletion: { completion in
+                if case let .failure(error) = completion {
+                    XCTAssertNotNil(error, "Expected error but got nil")
+                    expectation.fulfill()
+                } else {
+                    XCTFail("Expected failure but got success")
+                }
+            }, receiveValue: { _ in
+                XCTFail("Expected no value, but got a response")
+            })
+            .store(in: &cancellables)
+
+        wait(for: [expectation], timeout: 5.0)
+    }
 
 }
 

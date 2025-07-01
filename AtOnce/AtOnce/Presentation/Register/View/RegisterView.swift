@@ -31,7 +31,7 @@ struct RegisterView: View {
     
     @State private var showAlert = false
     @Environment(\.dismiss) private var dismiss
-
+    @EnvironmentObject var coordinator: AppCoordinator
 
     init() {
         _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(RegisterViewModelProtocol.self)! as! RegisterViewModel)
@@ -161,7 +161,19 @@ struct RegisterView: View {
         }
         .navigationTitle(NSLocalizedString("register_new_account", comment: ""))
         .navigationBarTitleDisplayMode(.inline)
-        
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    coordinator.loginPath.removeLast()
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.backward")
+                        Text(NSLocalizedString("back", comment: ""))
+                    }
+                }
+            }
+        }
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text(viewModel.registerSuccess ? "Success" : "Error"),
