@@ -9,16 +9,12 @@ import SwiftUI
 
 struct StoreScreen: View {
     
-    // @State private var searchText: String = ""
     @State private var selectedFilter = FilterOption.all[0]
     @ObservedObject var viewModel: StoreScreenViewModel
-    
     @EnvironmentObject var languageManager: LanguageManager
-    
     @EnvironmentObject var coordinator: AppCoordinator
-    
+    @State private var currentAlert: StoreAlertType?
     let warehouseId : Int
-    
     
     init(warehouseId : Int, viewModel: StoreScreenViewModel) {
         self.warehouseId = warehouseId
@@ -58,7 +54,7 @@ struct StoreScreen: View {
                     }
                     else{
                         ForEach(viewModel.products) { product in
-                            StoreCard(product: product){
+                            StoreCard(product: product, isLoading: viewModel.loadingProductIds.contains(product.medicineId)){
                                 viewModel.addToCart(p: product, warehouseId: warehouseId)
                             }
                             .onAppear {
@@ -69,50 +65,52 @@ struct StoreScreen: View {
                             }
                         }
                     }
-                    
-                    //                        if viewModel.isLoading {
-                    //                            ProgressView()
-                    //                                .frame(maxWidth: .infinity)
-                    //                        }
                 }
                 .padding(.horizontal)
                 .onAppear {
                     //                        if viewModel.products.isEmpty {
                     //                                viewModel.loadProducts(warehouseId: 2)
                     //                            }
-                    print("on apeeeeeeeear")
-                    viewModel.reset(warehouseId: 2)
+                    viewModel.reset(warehouseId: warehouseId)
                     
                     // viewModel.loadProducts(warehouseId: 2, page: 1, pageSize: 10)
                 }
             }
         }
-        //.edgesIgnoringSafeArea(.all)
-        //  .background(Color(.customBackground))
-        
+        .alert(item: $currentAlert) { alert in
+            Alert(
+                title: Text(alert.title),
+                message: Text(alert.message),
+                dismissButton: .default(Text("OK")) {
+                    viewModel.alert = nil
+                }
+            )
+        }
+        .onChange(of: viewModel.alert) { newAlert in
+            currentAlert = newAlert
+        }
+
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        coordinator.mainPath.removeLast()
-                    }) {
-                        HStack {
-                            Image(systemName: "chevron.backward")
-                            Text(NSLocalizedString("back", comment: ""))
-                        }
+                Button(action: {
+                    coordinator.mainPath.removeLast()
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.backward")
+                        Text(NSLocalizedString("back", comment: ""))
                     }
                 }
+            }
             
             ToolbarItem(placement: .principal) {
                 Text("products".localized)
                     .font(.title)
                     .fontWeight(.semibold)
             }
-            
-            
         }
-       // .navigationTitle(NSLocalizedString("products".localized, comment: ""))
+        // .navigationTitle(NSLocalizedString("products".localized, comment: ""))
     }
 }
 

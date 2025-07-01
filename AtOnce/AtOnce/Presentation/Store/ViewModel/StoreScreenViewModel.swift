@@ -19,7 +19,8 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
     @Published var hasMorePages: Bool = true
     @Published var errorMessage: String?
     @Published var searchText: String = ""
-    
+    @Published var loadingProductIds: Set<Int> = []
+    @Published var alert: StoreAlertType?
     private(set) var currentWarehouseId: Int = 0
     
 
@@ -71,7 +72,7 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
                 self?.isLoading = false
                 self?.isFetching = false
                 if case let .failure(error) = completion {
-                    print("Error:", error.localizedDescription)
+                    self?.alert = .error(message: error.localizedDescription)
                 }
             } receiveValue: { [weak self] newProducts in
                 guard let self = self else { return }
@@ -80,7 +81,6 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
                 } else {
                     self.currentPage += 1
                 }
-                print("new liiiiiiiiiiiiiiiiiiiiiiiist")
                 self.products.append(contentsOf: newProducts)
             }
             .store(in: &cancellables)
@@ -102,15 +102,16 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
         loadProducts(warehouseId: warehouseId)
     }
     func addToCart(p: WarehouseProduct, warehouseId: Int){
+        let productId = p.medicineId
+        loadingProductIds.insert(productId)
         let cartBody = CartBodyDTO(warehouseId: warehouseId , pharmacyId: userDefaultsUseCase.getCachedUser()?.id ?? 0, medicineId: p.medicineId, englishMedicineName: p.enName, arabicMedicineName: p.arName, medicineUrl: p.imageUrl, warehouseUrl: p.imageUrl, price: p.total, quantity: 1, discount: p.discount)
         addToCartUseCase.excute(cartBody: cartBody).sink {[weak self] completion in
             if case let .failure(error) = completion{
-                self?.errorMessage = error.localizedDescription
-                print(error.localizedDescription)
+                self?.alert = .error(message: error.localizedDescription)
             }
-        } receiveValue: { result in
-            print(result.message)
-            print(result.success)
+        } receiveValue: { [weak self] result in
+            self?.alert = .success(message: result.message)
+            self?.loadingProductIds.remove(productId)
         }.store(in: &cancellables)
     }
 }
