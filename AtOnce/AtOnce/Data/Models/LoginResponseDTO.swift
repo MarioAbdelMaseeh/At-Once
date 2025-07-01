@@ -14,17 +14,17 @@ struct LoginResponseDTO: Decodable {
 }
 
 struct PharmacyDTO : Decodable {
-    let id: Int
-    let userName: String
-    let name: String
-    let email: String
-    let password: String
-    let address: String
-    let governate: String
-    let areaId: Int
-    let phoneNumber: String
-    let representativeId: Int
-    let representativePhone: String
+    let id: Int?
+    let userName: String?
+    let name: String?
+    let email: String?
+    let password: String?
+    let address: String?
+    let governate: String?
+    let areaId: Int?
+    let phoneNumber: String?
+    let representativeId: Int?
+    let representativePhone: String?
 }
 
 
