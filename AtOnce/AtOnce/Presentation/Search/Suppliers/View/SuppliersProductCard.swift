@@ -26,65 +26,54 @@ struct SuppliersProductCard: View {
                     Text(suppliersProduct.warehHouseName)
                         .font(.headline)
                         .lineLimit(2)
-                        
-                        
+                    
+                    
                     Text(String(format: NSLocalizedString("discount_format", comment: ""), suppliersProduct.discount.localizedDigits))
                         .foregroundColor(.primaryTeal)
                         .font(.subheadline)
                         .padding(.bottom, 2)
-                        //.padding(.top, 1)
+                    //.padding(.top, 1)
                     
                     
                     HStack{
-                        Text(String(format: NSLocalizedString("price_format", comment: ""), suppliersProduct.medicinePrice.localizedDigits))
+                        Text(String(format: NSLocalizedString("price_format", comment: ""), suppliersProduct.finalPrice.localizedDigits))
                             .font(.subheadline)
-                        Text(String(format: NSLocalizedString("amount_only_format", comment: ""), suppliersProduct.finalPrice.localizedDigits))
+                           
+                        Text(String(format: NSLocalizedString("amount_only_format", comment: ""), suppliersProduct.medicinePrice.localizedDigits))
                             .font(.subheadline)
                             .foregroundColor(Color(.red))
-                                    .strikethrough()
+                            .strikethrough()
                         
                     }
                 }
             }
             HStack {
-
-                    
-                    Spacer().frame(width:( UIScreen.main.bounds.width / 2)-30)
-
-                    
-                    MediumButton(
-                        buttonLabel: NSLocalizedString("add_to_cart", comment: ""),
-                        buttonIcon: "cart",color: Color.primaryTeal,
-                                 action: {
+                
+                
+                Spacer().frame(width:( UIScreen.main.bounds.width / 2)-30)
+                
+                
+                MediumButton(
+                    buttonLabel: NSLocalizedString("add_to_cart", comment: ""),
+                    buttonIcon: "cart",color: Color.primaryTeal,
+                    action: {
                         addToCart(suppliersProduct)
                     },
                     isLoading: isLoading)
-                    
-
+                
+                
             }
-
             
-
-        
+            
+            
+            
         }
         .padding()
         .background(Color(.customBackground))
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
         
-        
-//        .sheet(isPresented: $showSheet) {
-//            SupplierSheetView().padding(.top)
-//                .presentationDetents([.medium, .fraction(0.85)])
-//                .presentationDragIndicator(.visible)
-//                .presentationCornerRadius(20)
-//        }
-                   
-        
-//        .padding()
-//        .background(Color.white)
-//        .cornerRadius(15)
-//        .shadow(radius: 2)
+ 
     }
 }
 
