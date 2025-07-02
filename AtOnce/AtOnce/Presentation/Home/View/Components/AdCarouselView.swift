@@ -11,7 +11,7 @@ import SwiftUI
 import SwiftUI
 
 struct AdCarouselView: View {
-    let images = Array(1...5).map { "ad_\($0)" } // Replace with your image names
+    let images = Array(1...5).map { "ad_\($0)" } 
 
     @State private var currentIndex = 0
     let timer = Timer.publish(every: 6, on: .main, in: .common).autoconnect()
@@ -30,7 +30,7 @@ struct AdCarouselView: View {
                         .tag(index)
                 }
             }
-            .tabViewStyle(.page(indexDisplayMode: .never)) // hide default dots
+            .tabViewStyle(.page(indexDisplayMode: .never)) 
             .frame(height: 180)
             .onReceive(timer) { _ in
                 withAnimation {

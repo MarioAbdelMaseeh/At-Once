@@ -29,10 +29,9 @@ struct OrderCard: View {
                     Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
                         .foregroundColor(.black)
                         .font(.system(size: 24))
-                }//.padding(.trailing,8)
-                
-                
-            }//.padding(.bottom, 8)
+                }
+    
+            }
             HStack {
                 Image(systemName: "calendar")
                     .foregroundColor(.primaryTeal)
@@ -45,10 +44,6 @@ struct OrderCard: View {
     
 
             if isExpanded {
-                
-//                Text(order.location)                     //// No Address
-//                    .font(.callout)
-//                    .foregroundColor(Color(.systemGray))
                                  
                 Divider()
 
@@ -62,7 +57,6 @@ struct OrderCard: View {
                             format: NSLocalizedString("items_format", comment: ""),
                             item.quantity.localizedNumber
                         ))
-//                        Text(item.price, format: .currency(code: Locale.current.currency?.identifier ?? "EGP"))
                         Text(String(format: NSLocalizedString("amount_only_format", comment: ""), item.totalPriceAfterDisccount.localizedDigits))
                             .foregroundColor(.primaryTeal)
                             .bold()
@@ -74,7 +68,6 @@ struct OrderCard: View {
 
                 HStack {
                     Spacer()
-//                    Text("Total : \(String(format: "%.2f",order.items.reduce(0) { $0 + $1.price })) EGP")
                     Text(String(format: NSLocalizedString("total_label", comment: ""), order.totalPrice.localizedDigits))
                     
                         .font(.callout)

@@ -13,10 +13,6 @@ struct OrdersScreen: View {
     
     @State private var isExpanded: Bool = false
     
-    //    var filteredOrders :[Order] {
-    //        orders.filter { $0.status == selectedStatus }
-    //    }
-    
     @ObservedObject var viewModel: OrdersViewModel
     
     init(viewModel: OrdersViewModel){

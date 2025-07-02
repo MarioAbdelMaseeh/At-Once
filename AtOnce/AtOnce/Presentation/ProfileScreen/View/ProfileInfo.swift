@@ -25,37 +25,37 @@ struct ProfileInfo: View {
             Color.primaryTeal
                 .edgesIgnoringSafeArea(.all)
             
-            VStack {
-                // Top bar
-                //                HStack {
-                //                    Button(action: {
-                //                        // handle back
-                //                    }) {
-                //                        Image(systemName: "chevron.left")
-                //                            .font(.title2)
-                //                            .foregroundColor(.white)
-                //                    }
-                //                    Spacer()
-                //                    Text("My Profile")
-                //                        .font(.title2)
-                //                        .fontWeight(.semibold)
-                //                        .foregroundColor(.white)
-                //                    Spacer()
-                //                    // spacer to balance the back button
-                //                    Spacer().frame(width: 24)
-                //                }
-                //                .padding(.horizontal)
-                //                .padding(.top, 50)
-                
-                Spacer()
-            }
+//            VStack {
+//                // Top bar
+//                //                HStack {
+//                //                    Button(action: {
+//                //                        // handle back
+//                //                    }) {
+//                //                        Image(systemName: "chevron.left")
+//                //                            .font(.title2)
+//                //                            .foregroundColor(.white)
+//                //                    }
+//                //                    Spacer()
+//                //                    Text("My Profile")
+//                //                        .font(.title2)
+//                //                        .fontWeight(.semibold)
+//                //                        .foregroundColor(.white)
+//                //                    Spacer()
+//                //                    // spacer to balance the back button
+//                //                    Spacer().frame(width: 24)
+//                //                }
+//                //                .padding(.horizontal)
+//                //                .padding(.top, 50)
+//                
+//                Spacer()
+//            }
             
             VStack {
-                Spacer().frame(height: 120) // push the card down
+                Spacer().frame(height: 150) // push the card down
                 
-                // White card with info
+               
                 VStack(spacing: 24) {
-                    Spacer().frame(height: 70) // leave space for image
+                    Spacer().frame(height: 50) // leave space for image
                     
                     Text(pharmacy.name)
                         .font(.headline)
@@ -69,29 +69,51 @@ struct ProfileInfo: View {
                     
                     Spacer()
                 }
-                .padding()
-                .frame(/*width: 350,*/ height: 500)
+               // .padding()
+                .frame(/*width: 350,*/ height: 450)
                 .background(Color(.customBackground))
                 .cornerRadius(20)
-                .padding(.horizontal)
+               .padding(.horizontal)
             }.padding(.horizontal)
-            //.padding(.bottom,50)//.frame(height: 150)
             
-            // Avatar image in circle, overlapping card
             VStack {
                 Spacer().frame(height: 90)
-                Image(.icon) // Add to Assets
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 120, height: 120)
-                    .clipShape(Circle())
-                    .overlay(
-                        Circle()
-                            .stroke(Color.primaryTeal, lineWidth: 5)
-                    )
-                    .background(Circle().fill(Color.white))
-                    .shadow(radius: 5)
+                
+                ZStack {
+                    // Circle with stroke and background
+                    Circle()
+                        .fill(Color.white.opacity(0.3))
+                        .frame(width: 120, height: 120) // Slightly larger than image
+                        .overlay(
+                            Circle().stroke(Color.primaryTeal, lineWidth: 5)
+                        )
+                        //.shadow(radius: 5)
+                    
+                    // Image inside the circle with padding
+                    Image(.profile)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100, height: 100) // Slightly smaller than the outer circle
+                        .clipShape(Circle())
+                }
             }
+
+            
+        
+//            VStack {
+//                Spacer().frame(height: 90)
+//                Image(.profile)
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fill)
+//                    .frame(width: 120, height: 120)
+//                    .clipShape(Circle())
+//                    .overlay(
+//                        Circle()
+//                            .stroke(Color.primaryTeal, lineWidth: 5)
+//                    )
+//                    .background(Circle().fill(Color.white.opacity(0.3)))
+//                    .shadow(radius: 5)
+//            }
         }
         
         .navigationBarTitleDisplayMode(.inline)

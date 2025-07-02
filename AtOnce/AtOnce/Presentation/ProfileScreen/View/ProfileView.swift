@@ -28,12 +28,6 @@ struct ProfileView: View {
         VStack{
             Spacer().frame(height: 20)
             
-//            if let pharmacy = viewModel.pharmacy {
-//                ProfileHeader(profileName: pharmacy.name) {
-//                    goToDetails = true
-//                }
-//            }
-            
             if let pharmacy = viewModel.pharmacy {
                 ProfileHeader(profileName: pharmacy.name) {
                     coordinator.mainPath.append(.profileInfo(pharmacy))
