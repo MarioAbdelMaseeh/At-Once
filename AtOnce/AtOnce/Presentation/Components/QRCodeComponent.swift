@@ -20,7 +20,8 @@ struct QRCodeComponent: View {
                 .fontWeight(.semibold)
             
             HStack {
-                Text(qrCode.isEmpty ? title : qrCode) // Show placeholder or value
+                Text(qrCode.isEmpty ? title : qrCode)
+                    .textContentType(.password)
                     .foregroundColor(qrCode.isEmpty ? .gray : .primary)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
