@@ -20,13 +20,12 @@ struct QRCodeComponent: View {
                 .fontWeight(.semibold)
             
             HStack {
-                Group {
-                    SecureField(title, text: $qrCode)
-                    
-                }
-                .textContentType(.password)
-                .foregroundColor(qrCode.isEmpty ? .gray : .primary)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                SecureField(title, text: $qrCode)
+                    .disabled(true)
+                    .textContentType(.password)
+                    .foregroundColor(qrCode.isEmpty ? .gray : .primary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Button(action: {
                     onScanTapped()
