@@ -57,7 +57,8 @@ struct CartScreen: View {
                                 activeAlert = .deleteConfirm(warehouseId: warehouseId, itemId: itemId, itemName: itemName)
                             }
                         )
-                    }else{
+                    }
+                    else{
                         Spacer().frame(height: 64)
                         Lottie(animationName: "Empty-Cart")
                             .frame(width: 250, height: 250)

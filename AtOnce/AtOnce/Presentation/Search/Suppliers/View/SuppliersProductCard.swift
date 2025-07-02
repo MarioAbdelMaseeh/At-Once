@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SuppliersProductCard: View {
     
-   // @EnvironmentObject var languageManager: LanguageManager
     
     let suppliersProduct: SuppliersProduct
     let isLoading: Bool
@@ -17,11 +16,11 @@ struct SuppliersProductCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment:.top) {
-//                Image(.icon)
-//                    .resizable()
-//                    .frame(width: 80, height: 80)
-//                    .clipShape(.circle)
-//                    .padding(.trailing, 8)
+                Image(.icon)
+                    .resizable()
+                    .frame(width: 80, height: 80)
+                    .clipShape(.circle)
+                    .padding(.trailing, 8)
                 
                 VStack(alignment:.leading, spacing: 8){
                     Text(suppliersProduct.warehHouseName)
@@ -48,23 +47,10 @@ struct SuppliersProductCard: View {
                 }
             }
             HStack {
-//                if !isSuppliers {
-//                    MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
-//                                 action: {}).padding(.trailing,4)
-//                    
-//                    MediumButton(buttonLabel: NSLocalizedString("suppliers", comment: ""), buttonIcon: "storefront",color: Color.darkGray, action: {
-//                        showSheet.toggle()
-//                    }).padding(.leading,4)
-//                    
-//                   
-//                }else{
+
                     
                     Spacer().frame(width:( UIScreen.main.bounds.width / 2)-30)
-                    
-//                    GeometryReader { geometry in
-//                        Spacer()
-//                            .frame(width: geometry.size.width / 2)
-//                    }
+
                     
                     MediumButton(
                         buttonLabel: NSLocalizedString("add_to_cart", comment: ""),
@@ -73,7 +59,6 @@ struct SuppliersProductCard: View {
                         addToCart(suppliersProduct)
                     },
                     isLoading: isLoading)
-               // }
                     
 
             }

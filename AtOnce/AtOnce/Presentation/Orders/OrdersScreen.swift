@@ -56,6 +56,10 @@ struct OrdersScreen: View {
                         Lottie(animationName: "Empty-Orders")
                             .frame(width: 250, height: 250)
                         Spacer()
+                    }else if let error = viewModel.errorMessage {
+                        Text(error)
+                            .foregroundColor(.red)
+                            .padding()
                     }
                     else {
                         ForEach(viewModel.orders) { order in
