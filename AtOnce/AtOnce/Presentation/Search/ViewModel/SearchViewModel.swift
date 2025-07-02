@@ -109,9 +109,11 @@ struct FilterOption: Identifiable, Equatable {
     let id: String
     let label: String
     
-    static let all: [FilterOption] = [
-        FilterOption(id: "", label: "filter_all".localized),
-        FilterOption(id: "0", label: "filter_drugs".localized),
-        FilterOption(id: "1", label: "filter_cosmetics".localized)
-    ]
+    static var all: [FilterOption] {
+        return [
+            FilterOption(id: "", label: "filter_all".localized),
+            FilterOption(id: "0", label: "filter_drugs".localized),
+            FilterOption(id: "1", label: "filter_cosmetics".localized)
+        ]
+    }
 }

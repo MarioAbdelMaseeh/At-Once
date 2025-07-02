@@ -76,7 +76,7 @@ struct CartCell: View {
                             
 //                            Text("\(order.quantity)")
                             TextField("", text: $text)
-                                .keyboardType(.numberPad)
+                                .keyboardType(.default)
                                 .frame(width: 20)
                                 .multilineTextAlignment(.center)
                                 .onSubmit {

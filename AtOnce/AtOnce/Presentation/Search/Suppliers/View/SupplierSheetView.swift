@@ -49,7 +49,7 @@ struct SupplierSheetView: View {
                     }else{
                         ForEach(viewModel.suppliersProduct) { product in
                             
-                            SuppliersProductCard(suppliersProduct: product, isLoading: viewModel.loadingProductIds.contains(product.medicineId)){ p in
+                            SuppliersProductCard(suppliersProduct: product, isLoading: viewModel.loadingProductIds.contains(product.warehouseId)){ p in
                                 viewModel.addToCart(p: p)
                             }
                         }

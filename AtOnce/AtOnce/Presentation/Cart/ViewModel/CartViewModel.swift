@@ -59,7 +59,6 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
         isLoading = true
         deleteCartUseCase.excute(pharmacyId: pharamcyId, warehouseId: warehouseId, itemId: itemId)
             .sink { [weak self] completion in
-            self?.isLoading = false
             if case let .failure(error) = completion {
                 self?.errorMessage = error.localizedDescription
              
