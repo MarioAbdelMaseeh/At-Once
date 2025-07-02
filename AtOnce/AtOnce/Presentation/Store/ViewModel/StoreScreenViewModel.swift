@@ -21,6 +21,7 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
     @Published var searchText: String = ""
     @Published var loadingProductIds: Set<Int> = []
     @Published var alert: StoreAlertType?
+    @Published var selectedCategory: String = FilterOption.all[0].id
     
     private(set) var currentWarehouseId: Int = 0
     private var currentPage = 1
@@ -50,7 +51,7 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
          guard !isLoading, hasMorePages else { return }
          isLoading = currentPage == 1
          isFetching = true
-         useCase.excute(warehouseId: warehouseId, page: currentPage, pageSize: pageSize, search: searchText  )
+         useCase.excute(warehouseId: warehouseId, page: currentPage, pageSize: pageSize, search: searchText  , type: selectedCategory)
             .sink { [weak self] completion in
                 self?.isLoading = false
                 self?.isFetching = false

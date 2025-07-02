@@ -44,7 +44,7 @@ struct CartCell: View {
 
                     HStack(alignment: .bottom) {
                         VStack(alignment: .leading) {
-//                            let localizedDiscount = NumberFormatter.localizedString(from: NSNumber(value: order.discount), number: .none)
+
 
                             Text(String(format: NSLocalizedString("discount_format", comment: ""), order.discount.localizedDigits))
                                 .font(.caption)
@@ -73,10 +73,9 @@ struct CartCell: View {
                                     .padding(8)
                                     .background(Color(.customBackground))
                             }
-                            
-//                            Text("\(order.quantity)")
+
                             TextField("", text: $text)
-                                .keyboardType(.numberPad)
+                                .keyboardType(.default)
                                 .frame(width: 20)
                                 .multilineTextAlignment(.center)
                                 .onSubmit {

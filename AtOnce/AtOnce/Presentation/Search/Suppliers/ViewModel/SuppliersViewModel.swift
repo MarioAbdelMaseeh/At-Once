@@ -47,7 +47,7 @@ class SuppliersScreenViewModel: SuppliersScreenViewModelProtocol, ObservableObje
         
     }
     func addToCart(p: SuppliersProduct){
-        let productId = p.medicineId
+        let productId = p.warehouseId
             loadingProductIds.insert(productId)
         let cartBody = CartBodyDTO(warehouseId: p.warehouseId, pharmacyId: userDefaultsUseCase.getCachedUser()?.id ?? 0, medicineId: p.medicineId, englishMedicineName: p.medicineName, arabicMedicineName:p.medicineName, medicineUrl: p.warehouseImageUrl, warehouseUrl: p.warehouseImageUrl, price: p.finalPrice, quantity: 1, discount: p.discount)
         addToCartUseCase.excute(cartBody: cartBody).sink {[weak self] completion in

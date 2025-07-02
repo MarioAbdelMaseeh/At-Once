@@ -4,7 +4,6 @@ struct StoreCell: View {
     
     var warehouse: Warehouse
     
-   // @EnvironmentObject var languageManager: LanguageManager
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -19,14 +18,14 @@ struct StoreCell: View {
                     case .success(let image):
                         image.resizable()
                             .scaledToFill()
-                            .frame(width: 80, height: 80)
-                            .clipShape(Circle())
+                            .frame(width: 100, height: 100)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                             .padding(.trailing, 12)
                     case .failure:
-                        Image(.icon).resizable()
+                        Image(.warehouse).resizable()
                             .scaledToFill()
-                            .frame(width: 80, height: 80)
-                            .clipShape(Circle())
+                            .frame(width: 100, height: 100)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                             .padding(.trailing, 12)
                     @unknown default:
                         EmptyView()

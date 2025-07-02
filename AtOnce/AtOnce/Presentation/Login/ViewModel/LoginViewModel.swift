@@ -12,21 +12,7 @@ protocol LoginScreenViewModelProtocol{
 }
 
 class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
-//    @Published var email: String = "" {
-//            didSet {
-//                validateEmail()
-//            }
-//        }
-//
-//        @Published var password: String = "" {
-//            didSet {
-//                validatePassword()
-//            }
-//        }
-    
-    
-    
-    
+
     @Published var loginResponse: LoginResponse?
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
@@ -36,25 +22,14 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
     @Published var emailError : String?
     
     @Published var loginSuccess: Bool?
-    
-   // var pharmacyName: CachedPharmacy?
-    
-    
-    
-   private let useCase : LoginUseCase
+  
+    private let useCase : LoginUseCase
     let cachePharmacyUseCase: CachePharmacyUseCase
     private var cancellables = Set<AnyCancellable>()
     
     init(useCase: LoginUseCase ,cachePharmacyUseCase: CachePharmacyUseCase) {
         self.useCase = useCase
         self.cachePharmacyUseCase = cachePharmacyUseCase
-        
-//        guard let pharmacyName = cachePharmacyUseCase.getCachedUser() else {
-//            return
-//        }
-//     
-//        self.pharmacyName = pharmacyName
-//        print(pharmacyName)
         
         
     }
@@ -63,11 +38,11 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
         
         validateEmail(email: email)
         validatePassword(password: password)
-
+        
         guard emailError == nil, passwordError == nil else {
             return
         }
-               
+        
         isLoading = true
         errorMessage = nil
         
@@ -84,41 +59,39 @@ class LoginScreenViewModel:LoginScreenViewModelProtocol, ObservableObject {
                     self?.loginSuccess = true
                     self?.successMessage = response.message
                     self?.cachePharmacy(loginResponse: response)
-                  //  self?.savePharmacy(response.pharmacy)
                 } else {
                     self?.errorMessage = response.message
                     self?.loginSuccess = false
                 }
-                                   
-                print(response)
+                
             }
             .store(in: &cancellables)
     }
     
     
     private func validateEmail(email:String) {
-            if email.trimmingCharacters(in: .whitespaces).isEmpty {
-                emailError = NSLocalizedString("email_required", comment: "")
-            } else {
-                emailError = nil
-            }
+        if email.trimmingCharacters(in: .whitespaces).isEmpty {
+            emailError = NSLocalizedString("email_required", comment: "")
+        } else {
+            emailError = nil
         }
-
+    }
+    
     private func validatePassword(password:String) {
-            if password.trimmingCharacters(in: .whitespaces).isEmpty {
-                passwordError = NSLocalizedString("password_required", comment: "")
-            } else {
-                passwordError = nil
-            }
+        if password.trimmingCharacters(in: .whitespaces).isEmpty {
+            passwordError = NSLocalizedString("password_required", comment: "")
+        } else {
+            passwordError = nil
         }
+    }
     
     func cachePharmacy(loginResponse:LoginResponse){
         let cachedUser = CachedPharmacy(user: loginResponse.pharmacy, token: loginResponse.token ?? "")
         cachePharmacyUseCase.cacheUser(user: cachedUser)
     }
     
-
+    
     
 }
 
-   
+

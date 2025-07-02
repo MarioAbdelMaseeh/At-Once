@@ -13,10 +13,6 @@ struct OrdersScreen: View {
     
     @State private var isExpanded: Bool = false
     
-    //    var filteredOrders :[Order] {
-    //        orders.filter { $0.status == selectedStatus }
-    //    }
-    
     @ObservedObject var viewModel: OrdersViewModel
     
     init(viewModel: OrdersViewModel){
@@ -53,9 +49,13 @@ struct OrdersScreen: View {
                         }
                     }else if viewModel.orders.isEmpty {
                         Spacer().frame(height: 64)
-                        Lottie(animationName: "Empty-Cart")
+                        Lottie(animationName: "Empty-Orders")
                             .frame(width: 250, height: 250)
                         Spacer()
+                    }else if let error = viewModel.errorMessage {
+                        Text(error)
+                            .foregroundColor(.red)
+                            .padding()
                     }
                     else {
                         ForEach(viewModel.orders) { order in

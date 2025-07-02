@@ -89,7 +89,7 @@ enum AuthAPI: APIRequest {
             ]
         case .getAllGovernorates:
             nil
-        case .getAllAreasByGovernorateId(governorateId: let governorateId):
+        case .getAllAreasByGovernorateId(governorateId: _):
             nil
         }
     }

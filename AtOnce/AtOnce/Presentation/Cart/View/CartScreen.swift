@@ -57,7 +57,7 @@ struct CartScreen: View {
                                 activeAlert = .deleteConfirm(warehouseId: warehouseId, itemId: itemId, itemName: itemName)
                             }
                         )
-                    }else{
+                    }else if (viewModel.cartWarehousesList.isEmpty){
                         Spacer().frame(height: 64)
                         Lottie(animationName: "Empty-Cart")
                             .frame(width: 250, height: 250)
@@ -136,7 +136,11 @@ struct CartScreen: View {
                         title: Text("confirm_deletion_title".localized),
                         message: Text(String(format: NSLocalizedString("confirm_deletion_message", comment: ""), itemName)),
                         primaryButton: .destructive(Text("delete_button".localized)) {
+                            if selectedIndex == viewModel.cartWarehousesList.count - 1 {
+                                selectedIndex -= 1
+                            }
                             viewModel.deleteItem(warehouseId: warehouseId, itemId: itemId)
+                            
                         },
                         secondaryButton: .cancel(Text("cancel".localized))
                     )

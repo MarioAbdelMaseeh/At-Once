@@ -11,7 +11,7 @@ import SwiftUI
 import SwiftUI
 
 struct AdCarouselView: View {
-    let images = Array(1...5).map { "ad_\($0)" } // Replace with your image names
+    let images = Array(1...5).map { "ad_\($0)" }
 
     @State private var currentIndex = 0
     let timer = Timer.publish(every: 6, on: .main, in: .common).autoconnect()
@@ -21,17 +21,17 @@ struct AdCarouselView: View {
             TabView(selection: $currentIndex) {
                 ForEach(images.indices, id: \.self) { index in
 //                    Image(images[index])
-                    Image(.icon)
+                    Image(.ad)
                         .resizable()
                         .scaledToFill()
-                        .frame(maxWidth: .infinity, minHeight: 180, maxHeight: 180)
+                        .frame(maxWidth: .infinity, minHeight: 210, maxHeight: 210)
                         .clipped()
                         .cornerRadius(12)
                         .tag(index)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never)) // hide default dots
-            .frame(height: 180)
+            .frame(height: 210)
             .onReceive(timer) { _ in
                 withAnimation {
                     currentIndex = (currentIndex + 1) % images.count
