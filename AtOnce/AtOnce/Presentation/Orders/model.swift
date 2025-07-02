@@ -45,28 +45,3 @@ extension OrderStatus {
         }
     }
 }
-
-
-//struct OrderItem: Identifiable {
-//    let id : String
-//    let name: String
-//    let quantity: Int
-//    let price: Double
-//    
-//    var totalPrice: Double {
-//        Double(quantity) * price
-//    }
-//}
-//
-//struct Order: Identifiable {
-//    let id : String
-//    let pharmacyName: String
-//    let date: String
-//    let location: String
-//    let items: [OrderItem]
-//    let status: OrderStatus
-//    
-//    var total: Double {
-//        items.reduce(0) { $0 + $1.totalPrice }
-//    }
-//}

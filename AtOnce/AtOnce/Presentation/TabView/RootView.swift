@@ -22,7 +22,7 @@ struct RootView: View {
                         viewModel: coordinator.container.resolve(LoginScreenViewModelProtocol.self)! as! LoginScreenViewModel,
                         onLoginSuccess: {
                             withAnimation {
-                                coordinator.loginPath = [] // reset before switching
+                                coordinator.loginPath = [] 
                                 coordinator.flow = .main
                             }
                         }

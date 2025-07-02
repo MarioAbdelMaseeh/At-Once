@@ -9,8 +9,6 @@ import SwiftUI
 
 
 struct CartItemListView: View {
-    
-    
     @Binding var warehouse: CartWarehouse
     
     var viewModel: CartViewModel

@@ -46,7 +46,7 @@ struct HomeScreen: View {
                             LoadingCell()
                         }
                     } else if viewModel.warehouses.isEmpty {
-                        Text("No warehouses available.")
+                        Text("no_warehouses_available".localized)
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity, alignment: .center)
                             .padding()
@@ -69,10 +69,14 @@ struct HomeScreen: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
-                        if let url = URL(string: "tel://\(viewModel.getRepresentativePhone())"),
-                           UIApplication.shared.canOpenURL(url) {
-                            UIApplication.shared.open(url)
-                        }
+                        let phoneNumber = viewModel.getRepresentativePhone().filter("0123456789".contains)
+                            if let url = URL(string: "tel://\(phoneNumber)"),
+                               UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url)
+                            } else {
+                                print(viewModel.getRepresentativePhone())
+                                print("Invalid or unsupported phone number")
+                            }
                     } label: {
                         Image(systemName: "phone.fill")
                             .resizable()

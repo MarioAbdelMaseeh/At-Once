@@ -36,7 +36,7 @@ struct SearchScreen: View {
                 Text(error)
                     .foregroundColor(.red)
                     .padding()
-            } else {
+            } else if !viewModel.products.isEmpty {
                 ScrollView {
                     LazyVStack(spacing: 16) {
                         ForEach(viewModel.products, id: \.id) { product in
@@ -56,6 +56,8 @@ struct SearchScreen: View {
                     }
                     .padding(.horizontal)
                 }
+            }else{
+                Lottie(animationName: "Fly")
             }
             Spacer()
         }
@@ -63,13 +65,13 @@ struct SearchScreen: View {
             Alert(
                 title: Text(alert.title),
                 message: Text(alert.message),
-                dismissButton: .default(Text("OK")) {
+                dismissButton: .default(Text("OK".localized)) {
                     viewModel.alert = nil
                 }
             )
         }
-        .onChange(of: viewModel.alert) { newValue in
-            currentAlert = newValue
+        .onChange(of: viewModel.alert) {
+            currentAlert = viewModel.alert
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -83,13 +85,13 @@ struct SearchScreen: View {
         .onAppear {
             viewModel.fetchProducts(areaId: viewModel.cachedPharmacy?.areaId ?? 2, text: viewModel.searchText, type: selectedFilter.id)
         }
-        .onChange(of: selectedFilter) { newFilter in
-            viewModel.selectedCategory = newFilter.id
+        .onChange(of: selectedFilter) {
+            viewModel.selectedCategory = selectedFilter.id
             viewModel.reset()
             viewModel.fetchProducts(
                 areaId: viewModel.cachedPharmacy?.areaId ?? 2,
                 text: viewModel.searchText,
-                type: newFilter.id
+                type: selectedFilter.id
             )
         }
     }

@@ -19,8 +19,8 @@ enum StoreAlertType: Identifiable, Equatable {
     
     var title: String {
         switch self {
-        case .success: return "Success"
-        case .error: return "Error"
+        case .success: return "success_title".localized
+        case .error: return "error_title".localized
         }
     }
     

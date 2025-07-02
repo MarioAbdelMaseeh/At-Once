@@ -127,3 +127,11 @@
 "confirm_deletion_message" = "هل أنت متأكد أنك تريد حذف %@؟";
 "delete_button" = "حذف";
 
+"filter_all" = "الكل";
+"filter_drugs" = "أدوية";
+"filter_cosmetics" = "مستحضرات تجميل";
+
+"no_internet_title" = "لا يوجد اتصال بالإنترنت";
+"no_internet_message" = "يرجى التحقق من الشبكة والمحاولة مرة أخرى.";
+
+"no_warehouses_available" = "لا توجد مستودعات متاحة.";
