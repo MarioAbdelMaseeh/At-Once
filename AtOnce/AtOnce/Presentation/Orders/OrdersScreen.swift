@@ -53,7 +53,7 @@ struct OrdersScreen: View {
                         }
                     }else if viewModel.orders.isEmpty {
                         Spacer().frame(height: 64)
-                        Lottie(animationName: "Empty-Cart")
+                        Lottie(animationName: "Empty-Orders")
                             .frame(width: 250, height: 250)
                         Spacer()
                     }
