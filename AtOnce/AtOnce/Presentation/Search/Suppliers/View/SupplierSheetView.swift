@@ -44,10 +44,14 @@ struct SupplierSheetView: View {
 
             ScrollView {
                 VStack(spacing: 16) {
-                    ForEach(viewModel.suppliersProduct) { product in
-                        
-                        SuppliersProductCard(suppliersProduct: product, isLoading: viewModel.loadingProductIds.contains(product.medicineId)){ p in
-                            viewModel.addToCart(p: p)
+                    if viewModel.isLoading{
+                        ProgressView()
+                    }else{
+                        ForEach(viewModel.suppliersProduct) { product in
+                            
+                            SuppliersProductCard(suppliersProduct: product, isLoading: viewModel.loadingProductIds.contains(product.medicineId)){ p in
+                                viewModel.addToCart(p: p)
+                            }
                         }
                     }
                 }

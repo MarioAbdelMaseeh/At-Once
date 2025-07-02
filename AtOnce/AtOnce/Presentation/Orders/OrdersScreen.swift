@@ -13,40 +13,51 @@ struct OrdersScreen: View {
     
     @State private var isExpanded: Bool = false
     
-//    var filteredOrders :[Order] {
-//        orders.filter { $0.status == selectedStatus }
-//    }
+    //    var filteredOrders :[Order] {
+    //        orders.filter { $0.status == selectedStatus }
+    //    }
     
     @ObservedObject var viewModel: OrdersViewModel
     
     init(viewModel: OrdersViewModel){
         self.viewModel = viewModel
     }
-
+    
     var body: some View {
         
-            VStack(spacing: 16) {
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 12) {
-                        ForEach(OrderStatus.allCases, id: \.self) { status in
-                            
-                            OrdersChip(title: status.localizedValue, isSelected: selectedStatus == status)
-                                .onTapGesture {
-                                    withAnimation {
-                                        selectedStatus = status
-                                        viewModel.fetchOrders(status: status, pharmacyId: viewModel.cachedPharmacy?.id ?? 2)
-                                    }
-                                   
+        VStack(spacing: 16) {
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(OrderStatus.allCases, id: \.self) { status in
+                        
+                        OrdersChip(title: status.localizedValue, isSelected: selectedStatus == status)
+                            .onTapGesture {
+                                withAnimation {
+                                    selectedStatus = status
+                                    viewModel.fetchOrders(status: status, pharmacyId: viewModel.cachedPharmacy?.id ?? 2)
                                 }
-                            
-                        }
+                                
+                            }
+                        
                     }
-                    .padding()
                 }
-                
-                ScrollView {
-                    VStack(spacing: 16) {
+                .padding()
+            }
+            
+            ScrollView {
+                VStack(spacing: 16) {
+                    if viewModel.isLoading {
+                        ForEach(0..<5, id: \.self) { _ in
+                            ShimmerOrderCard()
+                        }
+                    }else if viewModel.orders.isEmpty {
+                        Spacer().frame(height: 64)
+                        Lottie(animationName: "Empty-Cart")
+                            .frame(width: 250, height: 250)
+                        Spacer()
+                    }
+                    else {
                         ForEach(viewModel.orders) { order in
                             OrderCard(
                                 order: order,
@@ -66,19 +77,20 @@ struct OrdersScreen: View {
                             )
                         }
                     }
-                    .padding(.horizontal)
                 }
-                
-                Spacer()
+                .padding(.horizontal)
             }
             
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("orders".localized)
-                        .font(.title)
-                        .fontWeight(.semibold)
-                }
+            Spacer()
+        }
+        
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("orders".localized)
+                    .font(.title)
+                    .fontWeight(.semibold)
+            }
         }.padding(.top)
     }
 }
