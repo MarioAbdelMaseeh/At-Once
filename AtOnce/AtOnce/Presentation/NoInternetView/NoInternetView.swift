@@ -10,18 +10,15 @@ import SwiftUI
 
 struct NoInternetView: View {
     var body: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "wifi.slash")
-                .resizable()
-                .frame(width: 100, height: 80)
-                .foregroundColor(.red)
-
-            Text("No Internet Connection")
+        VStack {
+            Text("no_internet_title".localized)
                 .font(.title)
                 .fontWeight(.bold)
 
-            Text("Please check your network and try again.")
+            Text("no_internet_message".localized)
                 .foregroundColor(.secondary)
+
+            Lottie(animationName: "No-Internet")
         }
         .multilineTextAlignment(.center)
         .padding()

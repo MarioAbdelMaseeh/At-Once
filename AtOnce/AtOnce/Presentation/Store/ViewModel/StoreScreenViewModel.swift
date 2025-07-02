@@ -21,22 +21,8 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
     @Published var searchText: String = ""
     @Published var loadingProductIds: Set<Int> = []
     @Published var alert: StoreAlertType?
+    
     private(set) var currentWarehouseId: Int = 0
-    
-
-    
-//    var filteredProducts: [ProductOrder] {
-//        if searchText.isEmpty {
-//            return products
-//        } else {
-//            return products.filter {
-//                $0.arName.localizedCaseInsensitiveContains(searchText)
-//            }
-//        }
-//    }
-
-    
-
     private var currentPage = 1
     private let pageSize = 10
     private var isFetching = false
@@ -62,9 +48,6 @@ class StoreScreenViewModel: StoreScreenViewModelProtocol , ObservableObject{
 
      func loadProducts(warehouseId: Int) {
          guard !isLoading, hasMorePages else { return }
-         
-        // isLoading = true
-
          isLoading = currentPage == 1
          isFetching = true
          useCase.excute(warehouseId: warehouseId, page: currentPage, pageSize: pageSize, search: searchText  )

@@ -50,7 +50,6 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
             }
         } receiveValue: { [weak self] cartResponse in
             self?.cartResponse = cartResponse
-            
             self?.cartWarehousesList = cartResponse.data?.warehouses ?? []
             
         }.store(in: &cancellables)
@@ -69,7 +68,6 @@ class CartViewModel: CartViewModelProtocol, ObservableObject {
             if response.success {
                 self?.successMessage = response.message
                 self?.fetchCartByPharmacyId()
-                
             }
             else {
                 self?.errorMessage = response.message

@@ -110,8 +110,8 @@ struct FilterOption: Identifiable, Equatable {
     let label: String
     
     static let all: [FilterOption] = [
-        FilterOption(id: "", label: "All".localized),
-        FilterOption(id: "0", label: "Drugs".localized),
-        FilterOption(id: "1", label: "Cosmetics".localized)
+        FilterOption(id: "", label: "filter_all".localized),
+        FilterOption(id: "0", label: "filter_drugs".localized),
+        FilterOption(id: "1", label: "filter_cosmetics".localized)
     ]
 }

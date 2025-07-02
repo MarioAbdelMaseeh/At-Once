@@ -125,3 +125,11 @@
 "confirm_deletion_message" = "Are you sure you want to delete %@?";
 "delete_button" = "Delete";
 
+"filter_all" = "All";
+"filter_drugs" = "Drugs";
+"filter_cosmetics" = "Cosmetics";
+
+"no_internet_title" = "No Internet Connection";
+"no_internet_message" = "Please check your network and try again.";
+
+"no_warehouses_available" = "No warehouses available.";
