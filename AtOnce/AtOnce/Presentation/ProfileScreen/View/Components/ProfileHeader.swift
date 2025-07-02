@@ -15,7 +15,7 @@ struct ProfileHeader: View {
     
     var body: some View {
         HStack(spacing: 16) {
-            Image(.icon)
+            Image(.profile)
                 .resizable()
                 .frame(width: 70, height: 70)
                 .clipShape(.circle)
@@ -32,7 +32,7 @@ struct ProfileHeader: View {
             Spacer()
             
             Button {
-                // handle action
+             
                 onTap()
             } label: {
                 Image(systemName: layoutDirection == .rightToLeft ? "arrow.left" : "arrow.right")

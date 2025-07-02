@@ -4,6 +4,7 @@ struct StoreCell: View {
     
     var warehouse: Warehouse
     
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {

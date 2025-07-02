@@ -7,7 +7,7 @@
 import Combine
 
 protocol FetchProductByWarehouseIdUseCase{
-    func excute(warehouseId: Int, page: Int, pageSize: Int, search: String)-> AnyPublisher<[WarehouseProduct],Error>
+    func excute(warehouseId: Int, page: Int, pageSize: Int, search: String, type: String)-> AnyPublisher<[WarehouseProduct],Error>
 }
 
 class FetchProductByWarehouseIdUseCaseImpl: FetchProductByWarehouseIdUseCase{
@@ -16,8 +16,8 @@ class FetchProductByWarehouseIdUseCaseImpl: FetchProductByWarehouseIdUseCase{
     init(productRepository: ProductRepository) {
         self.productRepository = productRepository
     }
-    func excute(warehouseId: Int, page: Int, pageSize: Int, search: String) -> AnyPublisher<[WarehouseProduct],Error> {
-        return productRepository.getProductsByWarehouseId(warehouseId: warehouseId, page: page, pageSize: pageSize, search: search)
+    func excute(warehouseId: Int, page: Int, pageSize: Int, search: String,type: String) -> AnyPublisher<[WarehouseProduct],Error> {
+        return productRepository.getProductsByWarehouseId(warehouseId: warehouseId, page: page, pageSize: pageSize, search: search, type: type)
     }
     
 }

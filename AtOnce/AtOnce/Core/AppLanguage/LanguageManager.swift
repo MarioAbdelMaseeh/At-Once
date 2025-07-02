@@ -44,35 +44,3 @@ class LanguageManager: ObservableObject {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//final class AppLanguageManager: ObservableObject {
-//    @Published var currentLanguage: AppLanguage {
-//        didSet {
-//            Bundle.setLanguage(currentLanguage)
-//            useCase.set(currentLanguage)
-//        }
-//    }
-//
-//    private let useCase: LanguageUseCase
-//
-//    init(useCase: LanguageUseCase) {
-//        self.useCase = useCase
-//        let saved = useCase.get()
-//        self.currentLanguage = saved
-//        Bundle.setLanguage(saved)
-//    }
-//}
-

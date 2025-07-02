@@ -67,14 +67,16 @@ struct StoreScreen: View {
                     }
                 }
                 .padding(.horizontal)
+                .onChange(of: selectedFilter) { /*newFilter in*/
+                    viewModel.selectedCategory = selectedFilter.id
+                    viewModel.reset(warehouseId: warehouseId)
+                }
                 .onAppear {
-                    //                        if viewModel.products.isEmpty {
-                    //                                viewModel.loadProducts(warehouseId: 2)
-                    //                            }
+                    selectedFilter = filterOptions.first(where: { $0.id == viewModel.selectedCategory }) ?? filterOptions[0]
                     viewModel.reset(warehouseId: warehouseId)
                     
-                    // viewModel.loadProducts(warehouseId: 2, page: 1, pageSize: 10)
                 }
+                
             }
         }
         .alert(item: $currentAlert) { alert in
@@ -86,8 +88,8 @@ struct StoreScreen: View {
                 }
             )
         }
-        .onChange(of: viewModel.alert) { newAlert in
-            currentAlert = newAlert
+        .onChange(of: viewModel.alert) { /*newAlert in*/
+            currentAlert = viewModel.alert
         }
 
         .navigationBarTitleDisplayMode(.inline)

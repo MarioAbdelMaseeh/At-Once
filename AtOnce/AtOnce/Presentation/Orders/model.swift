@@ -37,11 +37,11 @@ extension OrderStatus {
     var toInt: Int {
         switch self {
         case .ordered: return 0
-        case .preparing: return 1
-        case .delivering: return 2
-        case .delivered: return 3
-        case .canceled: return 4
-        case .returned: return 5
+        case .preparing: return 4
+        case .delivering: return 5
+        case .delivered: return 1
+        case .canceled: return 2
+        case .returned: return 3
         }
     }
 }
