@@ -29,7 +29,7 @@ struct LoginView: View {
 
     var body: some View {
             VStack {
-                Image(.icon)
+                Image(.logo)
                     .resizable()
                     .frame(width: 120, height: 120)
                     .clipShape(.circle)
