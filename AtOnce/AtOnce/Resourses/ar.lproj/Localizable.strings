@@ -75,6 +75,7 @@
 "email_required" = "يجب إدخال البريد الإلكتروني";
 "password_required" = "يجب إدخال كلمة المرور";
 "min_order_limit" = "الحد الأدنى لإتمام الطلب هو";
+"min_order_limit_full" = "الحد الأدنى للطلب هو %@ جم";
 
 "login_successful" = "تم تسجيل الدخول بنجاح";
 "welcome_back" = "مرحبًا بعودتك!";
@@ -88,7 +89,49 @@
 
 "back" = "رجوع";
 
+"internet_title_connected" = "اتصال بالإنترنت!";
+"internet_title_disconnected" = "لا يوجد إنترنت!";
+"internet_message_connected" = "أنت متصل بالإنترنت.";
+"internet_message_disconnected" = "يرجى التحقق من الاتصال.";
+"ok_button" = "حسناً";
 
+"forget_password_title" = "نسيت كلمة المرور";
+"forget_password_subtitle" = "يرجى إدخال بريدك الإلكتروني لإعادة تعيين كلمة المرور";
+"email_placeholder" = "بريدك الإلكتروني";
+"reset_password_button" = "إعادة تعيين كلمة المرور";
+"error_title" = "خطأ";
+"success_title" = "نجاح";
 
+"otp_check_title" = "تحقق من بريدك الإلكتروني";
+"otp_check_subtitle" = "لقد أرسلنا رابط إعادة التعيين إلى %@\nأدخل الرمز المكون من 5 أرقام المذكور في البريد الإلكتروني";
+"verify_code_button" = "تحقق من الرمز";
+"otp_not_received" = "لم يصلك البريد الإلكتروني؟";
+"resend_email_button" = "إعادة الإرسال";
+"otp_alert_title" = "التحقق";
+"otp_success" = "تم التحقق من الرمز بنجاح!";
+"otp_invalid" = "رمز غير صالح. حاول مرة أخرى.";
 
+"reset_password_title" = "قم بتعيين كلمة مرور جديدة";
+"reset_password_subtitle" = "يرجى إدخال كلمة مرور جديدة";
+"password_field_label" = "كلمة المرور";
+"confirm_password_field_label" = "تأكيد كلمة المرور";
+"update_password_button" = "تحديث كلمة المرور";
 
+"validation_error_title" = "خطأ في التحقق";
+
+"error_fill_fields" = "يرجى ملء جميع الحقول.";
+"error_password_length" = "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.";
+"error_passwords_mismatch" = "كلمتا المرور غير متطابقتين.";
+
+"confirm_deletion_title" = "تأكيد الحذف";
+"confirm_deletion_message" = "هل أنت متأكد أنك تريد حذف %@؟";
+"delete_button" = "حذف";
+
+"filter_all" = "الكل";
+"filter_drugs" = "أدوية";
+"filter_cosmetics" = "مستحضرات تجميل";
+
+"no_internet_title" = "لا يوجد اتصال بالإنترنت";
+"no_internet_message" = "يرجى التحقق من الشبكة والمحاولة مرة أخرى.";
+
+"no_warehouses_available" = "لا توجد مستودعات متاحة.";

@@ -15,6 +15,7 @@ struct SupplierSheetView: View {
     let productId : Int
     let productImage : String
     let productName : String
+    @State private var activeAlert: SupplierAlert?
     
     init(productId : Int, productImage : String, productName : String) {
         self.productId = productId
@@ -22,10 +23,7 @@ struct SupplierSheetView: View {
         self.productName = productName
         _viewModel = StateObject(wrappedValue: AppDIContainer.shared.container.resolve(SuppliersScreenViewModelProtocol.self)! as! SuppliersScreenViewModel)
     }
-    
-    
-    
-    
+   
     var body: some View {
         VStack(spacing: 8) {
 
@@ -46,15 +44,32 @@ struct SupplierSheetView: View {
 
             ScrollView {
                 VStack(spacing: 16) {
-                    ForEach(viewModel.suppliersProduct) { product in
-                        SuppliersProductCard(suppliersProduct: product){ p in
-                            viewModel.addToCart(p: p)
+                    if viewModel.isLoading{
+                        ProgressView()
+                    }else{
+                        ForEach(viewModel.suppliersProduct) { product in
+                            
+                            SuppliersProductCard(suppliersProduct: product, isLoading: viewModel.loadingProductIds.contains(product.medicineId)){ p in
+                                viewModel.addToCart(p: p)
+                            }
                         }
                     }
                 }
                 .padding()
             }
             
+        }
+        .alert(item: $activeAlert) { alert in
+            switch alert {
+            case .message(let msg):
+                return Alert(title: Text(msg))
+            }
+        }
+        .onReceive(viewModel.$errorMessage.compactMap { $0 }) { msg in
+            activeAlert = .message(msg)
+        }
+        .onReceive(viewModel.$successMessage.compactMap { $0 }) { msg in
+            activeAlert = .message(msg)
         }
         .background(Color(.systemBackground))
         .cornerRadius(20)

@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchScreen: View {
     @ObservedObject private var viewModel: SearchViewModel
     @State private var selectedFilter = FilterOption.all[0]
-    
+    @State private var currentAlert: SearchAlertType?
     let filterOptions = FilterOption.all
     init(viewModel: SearchViewModel) {
         self.viewModel = viewModel
@@ -36,11 +36,12 @@ struct SearchScreen: View {
                 Text(error)
                     .foregroundColor(.red)
                     .padding()
-            } else {
+            } else if !viewModel.products.isEmpty {
                 ScrollView {
                     LazyVStack(spacing: 16) {
                         ForEach(viewModel.products, id: \.id) { product in
-                            ProductCardView(product: product){
+                            ProductCardView(product: product,
+                            isLoading: viewModel.loadingProductIds.contains(product.medicineId)){
                                 viewModel.addToCart(p: product)
                             }
                                 .onAppear {
@@ -55,27 +56,42 @@ struct SearchScreen: View {
                     }
                     .padding(.horizontal)
                 }
+            }else{
+                Lottie(animationName: "Fly")
             }
             Spacer()
+        }
+        .alert(item: $currentAlert) { alert in
+            Alert(
+                title: Text(alert.title),
+                message: Text(alert.message),
+                dismissButton: .default(Text("OK".localized)) {
+                    viewModel.alert = nil
+                }
+            )
+        }
+        .onChange(of: viewModel.alert) {
+            currentAlert = viewModel.alert
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("Search".localized)
+                Text("search".localized)
                     .font(.title)
                     .fontWeight(.semibold)
             }
         }
+        
         .onAppear {
             viewModel.fetchProducts(areaId: viewModel.cachedPharmacy?.areaId ?? 2, text: viewModel.searchText, type: selectedFilter.id)
         }
-        .onChange(of: selectedFilter) { newFilter in
-            viewModel.selectedCategory = newFilter.id
+        .onChange(of: selectedFilter) {
+            viewModel.selectedCategory = selectedFilter.id
             viewModel.reset()
             viewModel.fetchProducts(
                 areaId: viewModel.cachedPharmacy?.areaId ?? 2,
                 text: viewModel.searchText,
-                type: newFilter.id
+                type: selectedFilter.id
             )
         }
     }

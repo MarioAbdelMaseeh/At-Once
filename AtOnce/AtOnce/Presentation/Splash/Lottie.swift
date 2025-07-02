@@ -11,7 +11,7 @@ import Lottie
 
 struct Lottie: UIViewRepresentable {
     let animationName: String
-    let loopMode: LottieLoopMode = .loop
+    let loopMode: LottieLoopMode = .playOnce
 
     func makeUIView(context: Context) -> some UIView {
         let view = UIView()

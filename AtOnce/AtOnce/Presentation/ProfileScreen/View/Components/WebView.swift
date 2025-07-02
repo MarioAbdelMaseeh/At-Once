@@ -10,11 +10,10 @@ import WebKit
 
 struct WebView: UIViewRepresentable {
     let url: URL
-
     func makeUIView(context: Context) -> WKWebView {
         return WKWebView()
     }
-
+    
     func updateUIView(_ webView: WKWebView, context: Context) {
         let request = URLRequest(url: url)
         webView.load(request)
@@ -24,19 +23,34 @@ struct WebView: UIViewRepresentable {
 struct WebViewScreen: View {
     var url:String
     var title: String
+    @EnvironmentObject var coordinator: AppCoordinator
     var body: some View {
-        NavigationStack{
-            VStack{
-                WebView(url: URL(string: url )!)
-            }.navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .principal){
-                        Text(title)
-                            .font(.title3)
-                            .fontWeight(.semibold)
+        
+        VStack{
+            WebView(url: URL(string: url )!)
+        }.navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        coordinator.mainPath.removeLast()
+                    }) {
+                        HStack {
+                            Image(systemName: "chevron.backward")
+                            Text(NSLocalizedString("back", comment: ""))
+                        }
                     }
                 }
-        }
+                ToolbarItem(placement: .principal){
+                    Text(title)
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                }
+            }
+            .toolbar {
+                
+            }
+        
         
     }
 }

@@ -40,7 +40,7 @@
 
 
 "discount_format" = "Discount: %@%%";
-"cost_per_item_label" = "Cost per item: %@ EGP";
+"cost_per_item_label" = "item: %@ EGP";
 "total_label" = "Total: %@ EGP";
 
 "egp_currency" = "EGP";
@@ -49,6 +49,7 @@
 "total" = "Total";
 "checkout_with_total" = "Checkout %@";
 "cart" = "Cart";
+"min_order_limit_full" = "Minimum order is %@ EGP";
 
 "profile" = "Profile";
 "common_questions" = "Common Questions";
@@ -85,10 +86,50 @@
 "cancel" = "Cancel";
 "back" = "Back";
 
+"internet_title_connected" = "Internet!";
+"internet_title_disconnected" = "No Internet!";
+"internet_message_connected" = "You're connected to the internet.";
+"internet_message_disconnected" = "Please check your connection.";
+"ok_button" = "OK";
+
+"forget_password_title" = "Forget Password";
+"forget_password_subtitle" = "Please enter your email to reset password";
+"email_placeholder" = "Your Email";
+"reset_password_button" = "Reset Password";
+"error_title" = "Error";
+"success_title" = "Success";
+
+"otp_check_title" = "Check your email";
+"otp_check_subtitle" = "We sent a reset link to %@\nEnter 5 digit code that was mentioned in the email";
+"verify_code_button" = "Verify Code";
+"otp_not_received" = "Haven’t got the email yet?";
+"resend_email_button" = "Resend email";
+"otp_alert_title" = "Verification";
+"otp_success" = "OTP Verified Successfully!";
+"otp_invalid" = "Invalid OTP. Please try again.";
 
 
+"reset_password_title" = "Set a new password";
+"reset_password_subtitle" = "Please enter your new password";
+"password_field_label" = "Password";
+"confirm_password_field_label" = "Confirm Password";
+"update_password_button" = "Update Password";
 
+"validation_error_title" = "Validation Error";
 
+"error_fill_fields" = "Please fill in all fields.";
+"error_password_length" = "Password must be at least 8 characters.";
+"error_passwords_mismatch" = "Passwords do not match.";
 
+"confirm_deletion_title" = "Confirm Deletion";
+"confirm_deletion_message" = "Are you sure you want to delete %@?";
+"delete_button" = "Delete";
 
+"filter_all" = "All";
+"filter_drugs" = "Drugs";
+"filter_cosmetics" = "Cosmetics";
 
+"no_internet_title" = "No Internet Connection";
+"no_internet_message" = "Please check your network and try again.";
+
+"no_warehouses_available" = "No warehouses available.";

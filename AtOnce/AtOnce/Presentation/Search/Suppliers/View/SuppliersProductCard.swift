@@ -9,8 +9,10 @@ import SwiftUI
 
 struct SuppliersProductCard: View {
     
+   // @EnvironmentObject var languageManager: LanguageManager
     
     let suppliersProduct: SuppliersProduct
+    let isLoading: Bool
     let addToCart: (_ p: SuppliersProduct)->Void
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -43,21 +45,7 @@ struct SuppliersProductCard: View {
                                     .strikethrough()
                         
                     }
-
-                 //   Text("Price : \(String(format: "%.2f", price)) EGP")
-//                    Text(String(format: NSLocalizedString("price_format", comment: ""), suppliersProduct.finalPrice.localizedDigits))
-//                    
-//                       // .padding(.bottom, 4)
-//                        .font(.subheadline)
-                        
-                       
-                
-                    
-                    
                 }
-                
-
-                
             }
             HStack {
 //                if !isSuppliers {
@@ -78,10 +66,13 @@ struct SuppliersProductCard: View {
 //                            .frame(width: geometry.size.width / 2)
 //                    }
                     
-                    MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
+                    MediumButton(
+                        buttonLabel: NSLocalizedString("add_to_cart", comment: ""),
+                        buttonIcon: "cart",color: Color.primaryTeal,
                                  action: {
                         addToCart(suppliersProduct)
-                    })
+                    },
+                    isLoading: isLoading)
                // }
                     
 

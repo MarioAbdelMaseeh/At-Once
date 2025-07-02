@@ -36,28 +36,27 @@ struct ProfileView: View {
             
             if let pharmacy = viewModel.pharmacy {
                 ProfileHeader(profileName: pharmacy.name) {
-                    coordinator.path.append(.profileInfo(pharmacy))
+                    coordinator.mainPath.append(.profileInfo(pharmacy))
                 }
             }
             
             Spacer().frame(height: 80)
             VStack(alignment: .leading, spacing: 16) {
-                NavigationLink {
-                    WebViewScreen(
+                Button {
+                    coordinator.mainPath.append(.webView(
                         url: "https://atonce2025.blogspot.com/2025/06/frequently-asked-questions-body-font.html",
                         title: "common_questions".localized
-                    )
+                    ))
                 } label: {
                     ProfileOption(icon: "questionmark.circle.fill", title: "common_questions".localized)
                 }
+
                 
                 Divider()
-                
-                NavigationLink {
-                    WebViewScreen(
+                Button {
+                    coordinator.mainPath.append(.webView(
                         url: "https://atonce2025.blogspot.com/2025/06/frequently-asked-questions-body-font.html",
-                        title: NSLocalizedString("privacy_policy", comment: "")
-                    )
+                        title: NSLocalizedString("privacy_policy", comment: "")))
                 } label: {
                     ProfileOption(icon: "shield.fill", title: NSLocalizedString("privacy_policy", comment: ""))
                 }
@@ -85,15 +84,6 @@ struct ProfileView: View {
                 .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
             Spacer()
             
-//            NavigationLink(
-//                destination: viewModel.pharmacy.map { pharmacy in
-//                    ProfileInfo(pharmacy: pharmacy)
-//                },
-//                isActive: $goToDetails
-//            ) {
-//                EmptyView()
-//            }
-//            .hidden()
         }
         .padding()
         .navigationBarTitleDisplayMode(.inline)
@@ -107,7 +97,7 @@ struct ProfileView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         // Pop view manually
-                        coordinator.path.removeLast()
+                        coordinator.mainPath.removeLast()
                     }) {
                         HStack {
                             Image(systemName: "chevron.backward")

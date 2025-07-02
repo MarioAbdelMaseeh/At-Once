@@ -11,10 +11,15 @@ enum AppFlow {
     case main
 }
 
-enum OutOfTabDestination: Hashable, Equatable {
+enum OutOfTabDestination: Hashable, Equatable, Codable {
 
     case profile
     case store(id: Int)
+    case register
     case profileInfo(CachedPharmacy)
+    case webView(url: String, title: String)
     case noInternet
+    case forgetPassword
+    case verifyOPT(email: String, generatedOTP: String)
+    case resetPassword(email: String, generatedOTP: String)
 }

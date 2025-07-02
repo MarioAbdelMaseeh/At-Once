@@ -7,12 +7,12 @@
 
 import Foundation
 
-
-struct WarehouseOrder: Identifiable {
-    var id = UUID()
-    var name: String
-    var orders: [WarehouseProduct]
-}
+//
+//struct WarehouseOrder: Identifiable {
+//    var id = UUID()
+//    var name: String
+//    var orders: [WarehouseProduct]
+//}
 struct WarehouseProduct: Identifiable {
     var id = UUID()
     let medicineId : Int

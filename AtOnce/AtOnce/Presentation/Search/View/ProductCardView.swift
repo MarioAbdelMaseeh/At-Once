@@ -14,6 +14,7 @@ struct ProductCardView: View {
     var hasSuppliers: Bool{
         product.distributorsCount != 0
     }
+    var isLoading: Bool = false
     var addToCart: ()-> Void
     var isSuppliersSheeet = false
     @State private var showSheet = false
@@ -32,7 +33,7 @@ struct ProductCardView: View {
                     Text(languageManager.currentLanguage == .arabic ? product.arabicMedicineName : product.medicineName)
                         .font(.headline)
                         .lineLimit(2)
-    
+                    
                     Text(String(format: NSLocalizedString("discount_format", comment: ""), product.maximumDiscount.localizedDigits))
                         .foregroundColor(.primaryTeal)
                         .font(.subheadline)
@@ -46,32 +47,38 @@ struct ProductCardView: View {
                         Text(String(format: NSLocalizedString("amount_only_format", comment: ""), product.price.localizedDigits))
                             .font(.subheadline)
                             .foregroundColor(Color(.red))
-                                    .strikethrough()
+                            .strikethrough()
                         
                     }
-               //     Text(String(format: NSLocalizedString("price_format", comment: ""), product.finalPrice.localizedDigits))
+                    //     Text(String(format: NSLocalizedString("price_format", comment: ""), product.finalPrice.localizedDigits))
                     
                     
                     // .padding(.bottom, 4)
-                      //  .font(.subheadline)
+                    //  .font(.subheadline)
                 }
             }
             HStack {
-               
+                
                 if hasSuppliers {
                     
-                    MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
+                    MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""),
+                                 buttonIcon: "cart",color: Color.primaryTeal,
                                  action: {
-                        addToCart()
-                    }).padding(.trailing,4)
+                                    addToCart()
+                                    },
+                                 isLoading: isLoading
+                    ).padding(.trailing,4)
                     MediumButton(buttonLabel: NSLocalizedString("suppliers", comment: ""), buttonIcon: "storefront",color: Color.darkGray, action: {
                         showSheet.toggle()
                     }).padding(.leading,4)
                 }else{
-                    MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""), buttonIcon: "cart",color: Color.primaryTeal,
+                    MediumButton(buttonLabel: NSLocalizedString("add_to_cart", comment: ""),
+                                 buttonIcon: "cart",color: Color.primaryTeal,
                                  action: {
-                        addToCart()
-                    })
+                                    addToCart()
+                                },
+                                 isLoading: isLoading
+                    )
                     Spacer().frame(width:( UIScreen.main.bounds.width / 2)-30)
                 }
             }

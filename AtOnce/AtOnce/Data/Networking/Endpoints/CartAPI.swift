@@ -15,7 +15,7 @@ enum CartAPI: APIRequest{
     case updateCartItem(pharmacyID: Int, warehouseId: Int, medicineId: Int, quantity: Int)
     case placeOrder(pharmacyId: Int, warehouseId: Int)
     var baseURL: String{
-        "http://www.pharmaatoncepredeploy.somee.com/"
+        Constants.baseURL
     }
     
     var path: String{

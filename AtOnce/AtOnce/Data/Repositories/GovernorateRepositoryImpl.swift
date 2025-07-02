@@ -17,7 +17,7 @@ class GovernorateRepositoryImpl: GovernorateRepository{
     }
     
     func getAllGovernorates()-> AnyPublisher<[Governorate],Error>{
-        return networkService.request(_request: GovernorateAPI.getAllGovernorates, responseType: [GovernorateDTO].self)
+        return networkService.request(_request: AuthAPI.getAllGovernorates, responseType: [GovernorateDTO].self)
             .map { $0.map { $0.toEntity() } }
             .eraseToAnyPublisher()
     }

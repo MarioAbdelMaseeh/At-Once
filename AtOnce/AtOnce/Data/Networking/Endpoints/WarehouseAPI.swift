@@ -8,7 +8,7 @@ import Alamofire
 enum WarehouseAPI: APIRequest{
     case getWarehousesByArea(areaId: Int, page: Int, pageSize: Int)
     var baseURL: String{
-        "http://www.pharmaatoncepredeploy.somee.com/"
+        Constants.baseURL
     }
     
     var path: String{

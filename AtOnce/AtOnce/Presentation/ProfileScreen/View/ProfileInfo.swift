@@ -8,13 +8,16 @@ import SwiftUI
 
 struct ProfileInfo: View {
     
-    var pharmacy: CachedPharmacy
+    let pharmacy: CachedPharmacy
     @EnvironmentObject var coordinator: AppCoordinator
     
 //    init(pharmacy: CachedPharmacy) {
 //        self.pharmacy = pharmacy
 //    }
     
+    init(pharmacy: CachedPharmacy) {
+        self.pharmacy = pharmacy
+    }
     var body: some View {
         
         
@@ -102,7 +105,7 @@ struct ProfileInfo: View {
             
             ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        coordinator.path.removeLast()
+                        coordinator.mainPath.removeLast()
                     }) {
                         HStack {
                             Image(systemName: "chevron.backward")

@@ -24,11 +24,21 @@ class AuthRepositoryImpl: AuthRepository {
         .eraseToAnyPublisher()
     }
     
-    func registerRequest(request: RegisterRequestDTO) -> AnyPublisher<RegisterResponse, any Error> {
+    func registerRequest(request: RegisterRequestDTO) -> AnyPublisher<UniversalResponse, any Error> {
         return networkService.request(
-            _request: RegisterRequestAPI.registerRequest(request: request), responseType: RegisterResponseDTO.self)
+            _request: AuthAPI.registerRequest(request: request), responseType: UniversalResponseDTO.self)
         .map { $0.toEntity() }
         .eraseToAnyPublisher()
     }
+    
+    func forgetPassword(email: String, OTP: String) -> AnyPublisher<UniversalResponse, any Error> {
+        return networkService.request(_request: AuthAPI.forgetPassword(email: email, OTP: OTP), responseType: UniversalResponseDTO.self).map { $0.toEntity()}.eraseToAnyPublisher()
+    }
+    
+    func restPassword(email: String, OTP: String, newPassword: String, confirmPassword: String) -> AnyPublisher<UniversalResponse, any Error> {
+        return networkService.request(_request: AuthAPI.restPassword(email: email, OTP: OTP, newPassword: newPassword, confirmPassword: confirmPassword), responseType: UniversalResponseDTO.self)
+            .map { $0.toEntity()}.eraseToAnyPublisher()
+    }
+    
     
 }

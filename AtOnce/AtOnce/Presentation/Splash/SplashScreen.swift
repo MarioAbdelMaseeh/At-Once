@@ -11,10 +11,12 @@ import SwiftUICore
 struct SplashScreen: View {
     @State private var isActive: Bool = false
     let languageManager = AppDIContainer.shared.container.resolve(LanguageManager.self)!
-
+    @StateObject private var coordinator = AppCoordinator()
     var body: some View {
         if isActive {
             RootView()
+                .environmentObject(coordinator)
+                .environmentObject(coordinator.connectivityObserver)
                 .environmentObject(languageManager)
         } else {
             VStack {
