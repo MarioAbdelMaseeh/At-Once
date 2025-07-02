@@ -9,9 +9,6 @@ import Foundation
 import Combine
 
 protocol OrdersViewModelProtocol {
-//    var orders: [Order] { get }
-//    var isLoading: Bool { get }
-//    var errorMessage: String? { get }
     
     func fetchOrders(status: OrderStatus, pharmacyId: Int)
 }
