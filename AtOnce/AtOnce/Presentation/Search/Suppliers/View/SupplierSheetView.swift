@@ -28,7 +28,7 @@ struct SupplierSheetView: View {
         VStack(spacing: 8) {
 
             HStack {
-                Image(.icon)
+                Image(.medicine)
                     .resizable()
                     .frame(width: 60, height: 60)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
