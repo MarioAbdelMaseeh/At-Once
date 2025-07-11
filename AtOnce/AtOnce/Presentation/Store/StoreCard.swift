@@ -72,7 +72,7 @@ struct StoreCard: View {
             HStack{
                 Text(String(format: NSLocalizedString("price_format", comment: ""), product.pricePerItem.localizedDigits))
                     .font(.caption)
-                Text(String(format: NSLocalizedString("amount_only_format", comment: ""), product.prePrice.localizedDigits))
+                Text(product.prePrice.localizedDigits)
                     .font(.caption)
                     .foregroundColor(Color(.red))
                             .strikethrough()

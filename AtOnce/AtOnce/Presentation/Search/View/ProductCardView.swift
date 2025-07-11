@@ -23,7 +23,7 @@ struct ProductCardView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment:.top) {
-                Image(.icon)
+                Image(.medicine)
                     .resizable()
                     .frame(width: 80, height: 80)
                     .clipShape(.circle)
